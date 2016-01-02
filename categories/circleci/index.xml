@@ -41,31 +41,31 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&#34;&gt;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;machine&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;timezone&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;Asia/Tokyo&lt;/span&gt;
 
-machine:
-  timezone: Asia/Tokyo
+&lt;span style=&#34;color: #ae81ff&#34;&gt;checkout&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;post&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git submodule update --init --recursive&lt;/span&gt;
 
-checkout:
-  post:
-    - git submodule update --init --recursive
+&lt;span style=&#34;color: #ae81ff&#34;&gt;dependencies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;pre&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;go get -v github.com/spf13/hugo&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git config --global user.name &amp;quot;awm labs&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git config --global user.email &amp;quot;labs@awm.jp&amp;quot;&lt;/span&gt;
 
-dependencies:
-  pre:
-    - go get -v github.com/spf13/hugo
-    - git config --global user.name &#34;awm labs&#34;
-    - git config --global user.email &#34;labs@awm.jp&#34;
+&lt;span style=&#34;color: #ae81ff&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;override&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+   &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;echo&lt;/span&gt;
 
-test:
-  override:
-   - echo
-
-deployment:
-  master:
-    branch: master
-    commands:
-      - git clone git@github.com:awmlabs/awmlabs.github.io.git public
-      - hugo
-      - cd public &amp;&amp; git add . &amp;&amp; git commit -m &#34;[ci skip] publish&#34;; if [ $? -eq 0 ]; then git push origin master; else :; fi
+&lt;span style=&#34;color: #ae81ff&#34;&gt;deployment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;master&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;branch&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;master&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;commands&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git clone git@github.com:awmlabs/awmlabs.github.io.git public&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;hugo&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;cd public &amp;amp;&amp;amp; git add . &amp;amp;&amp;amp; git commit -m &amp;quot;[ci skip] publish&amp;quot;; if [ $? -eq 0 ]; then git push origin master; else :; fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;ありがとう、ありがとう。&lt;/p&gt;

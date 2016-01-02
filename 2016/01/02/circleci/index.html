@@ -81,31 +81,31 @@
 <li><a href="https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml">https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml</a></li>
 </ul>
 
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #ae81ff">machine</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #ae81ff">timezone</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">Asia/Tokyo</span>
 
-machine:
-  timezone: Asia/Tokyo
+<span style="color: #ae81ff">checkout</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #ae81ff">post</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">git submodule update --init --recursive</span>
 
-checkout:
-  post:
-    - git submodule update --init --recursive
+<span style="color: #ae81ff">dependencies</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #ae81ff">pre</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">go get -v github.com/spf13/hugo</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">git config --global user.name &quot;awm labs&quot;</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">git config --global user.email &quot;labs@awm.jp&quot;</span>
 
-dependencies:
-  pre:
-    - go get -v github.com/spf13/hugo
-    - git config --global user.name "awm labs"
-    - git config --global user.email "labs@awm.jp"
+<span style="color: #ae81ff">test</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #ae81ff">override</span><span style="color: #f8f8f2">:</span>
+   <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">echo</span>
 
-test:
-  override:
-   - echo
-
-deployment:
-  master:
-    branch: master
-    commands:
-      - git clone git@github.com:awmlabs/awmlabs.github.io.git public
-      - hugo
-      - cd public && git add . && git commit -m "[ci skip] publish"; if [ $? -eq 0 ]; then git push origin master; else :; fi
+<span style="color: #ae81ff">deployment</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #ae81ff">master</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #ae81ff">branch</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">master</span>
+    <span style="color: #ae81ff">commands</span><span style="color: #f8f8f2">:</span>
+      <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">git clone git@github.com:awmlabs/awmlabs.github.io.git public</span>
+      <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">hugo</span>
+      <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">cd public &amp;&amp; git add . &amp;&amp; git commit -m &quot;[ci skip] publish&quot;; if [ $? -eq 0 ]; then git push origin master; else :; fi</span>
+</pre></div>
 
 
 <p>ありがとう、ありがとう。</p>
