@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm TechNotes">
+<title>Hugo のサマリーが大きすぎる件 - awm TechNotes</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="http://blog.awm.jp/">[awm TechNotes]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-02">January 02, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/categories/hugo">Hugo</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/tags/blog">Blog</a>
+
+        <a href="http://blog.awm.jp/tags/hugo">Hugo</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Hugo のサマリーが大きすぎる件</h1>
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="はじめに:32ab7241d48fcc174c877413a917f8cf">はじめに</h1>
+
+<p>Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。</p>
+
+<ul>
+<li>config.toml の頭に hasCJKLanguage = true を入れる</li>
+<li>もしくは、 各々の markdown ファイルの先頭で isCJKLanguage = true を入れる</li>
+</ul>
+
+<p>そこまで辿り着くまでの話。ドキュメントに明記されてました。恥ずかしいっ (*ノノ</p>
+
+<ul>
+<li><a href="https://gohugo.io/overview/configuration">https://gohugo.io/overview/configuration</a></li>
+</ul>
+
+<pre><code># if true, auto-detect Chinese/Janapese/Korean Languages in the content. (.Summary and .WordCount can work properly in CJKLanguage)
+hasCJKLanguage              false
+</code></pre>
+
+<ul>
+<li><a href="https://gohugo.io/content/front-matter">https://gohugo.io/content/front-matter</a></li>
+</ul>
+
+<pre><code>**isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
+</code></pre>
+
+<p>ドキュメントもちゃんとあります。</p>
+
+<h1 id="hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf">Hugo のサマリーの実例</h1>
+
+<p>デフォルトだと以下のように、サマリーが巨大になります。
+<center> <img src="/2016/01/02/ss1_h.png" title="figure-1" > </center></p>
+
+<p>hasCJK 又は isCJK の設定を入れると以下のように自然なサイズになります。</p>
+
+<p><center> <img src="/2016/01/02/ss2_h.png" title="figure-2"/> </center></p>
+
+<h1 id="サマリーの仕様:32ab7241d48fcc174c877413a917f8cf">サマリーの仕様</h1>
+
+<ul>
+<li><a href="https://gohugo.io/content/summaries/">https://gohugo.io/content/summaries/</a></li>
+</ul>
+
+<pre><code>By default, Hugo automatically takes the first 70 words of your content as its
+summary and stores it into the .Summary variable, which you may use in your
+templates.
+</code></pre>
+
+<p>単語70個だけ表示するそうです。</p>
+
+<h1 id="実装:32ab7241d48fcc174c877413a917f8cf">実装</h1>
+
+<ul>
+<li>github.com/spf13/hugo/hugolib/page.go</li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">PlainWords</span><span style="color: #f8f8f2">(),</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">SummaryLength</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsToWholeSentence</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">PlainWords</span><span style="color: #f8f8f2">(),</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">SummaryLength</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+
+<p>削る処理では helper で定義している SummaryLength を参照しています。</p>
+
+<ul>
+<li>github.com/spf13/hugo/helpers/content.go</li>
+</ul>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">// Length of the summary that Hugo extracts from a content.</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">SummaryLength</span> <span style="color: #f8f8f2">=</span> <span style="color: #ae81ff">70</span>
+</pre></div>
+</p>
+
+<p>この SummaryLength を上書きする場所が無いので、単語数を減らすという戦術は使えません。(そもそもやるの間違えてる)
+よくよく見返すと、
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span>
+</pre></div>
+</p>
+
+<p>CJK (中国語、日本語、韓国語をひっくるめた総称) と判定した場合に、文字ごとに分割してます。そうでない場合はアルファベット等なので、空白で分割でしょう。</p>
+
+<p>日本語は空白をあまり挟まないので単語数として少なく数えてしまっているようです。
+さて、この isCJKLanguage は何処で設定されるのでしょう。</p>
+
+<ul>
+<li>github.com/spf13/hugo/hugolib/page.go</li>
+</ul>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">case</span> <span style="color: #e6db74">&quot;iscjklanguage&quot;</span><span style="color: #f8f8f2">:</span>
+	<span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">new(</span><span style="color: #66d9ef">bool</span><span style="color: #f8f8f2">)</span>
+	<span style="color: #f92672">*</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">cast</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">ToBool</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">v</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #f92672">*</span><span style="color: #a6e22e">isCJKLanguage</span>
+<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">viper</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">GetBool</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;HasCJKLanguage&quot;</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #66d9ef">if</span> <span style="color: #a6e22e">cjk</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Match</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">rawContent</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+		<span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">true</span>
+	<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
+		<span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">false</span>
+	<span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+</p>
+
+<p>面倒なので、後はドキュメントを検索しました。</p>
+
+<pre><code>$ cd github.com/spf13/hugo
+$ grep -ri iscjklanguage docs
+docs/content/content/front-matter.md:* **isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
+$ grep -ri hascjklanguage  docs
+docs/content/overview/configuration.md:    hasCJKLanguage              false
+</code></pre>
+
+<p>後は対応する URL を開いて確認するだけです。</p>
+
+<ul>
+<li><a href="https://gohugo.io/overview/configuration">https://gohugo.io/overview/configuration</a></li>
+<li><a href="https://gohugo.io/content/front-matter">https://gohugo.io/content/front-matter</a></li>
+</ul>
+
+<p>以上、 同じ罠にハマった方のお役に立てれば幸いです。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm TechNotes - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
