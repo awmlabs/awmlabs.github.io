@@ -104,7 +104,7 @@ $ hugo new 2016/01/01/blog.md
 
 <p>にテンプレートの md ファイルが出来るので、そこに文章を記述して、blog.awm.jp フォルダのトップで、</p>
 
-<pre><code>$ hugo 
+<pre><code>$ hugo
 </code></pre>
 
 <p>を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。</p>
@@ -134,6 +134,18 @@ Web Server is available at http://127.0.0.1:1313/
 md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)</p>
 
 <p>尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。</p>
+
+<h2 id="syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae">Syntax Highlight</h2>
+
+<pre><code>pip install Pygments
+</code></pre>
+
+<p>で、Pygments を入れて。config.toml に</p>
+
+<pre><code>pygmentsuseclasses = true
+</code></pre>
+
+<p>を入れるだけで OK です。</p>
 
 <h2 id="テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae">テーマの文字</h2>
 
@@ -172,6 +184,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 <li>Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。</li>
 <li>当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてました。早とちり。</li>
 <li>色々なテーマを試そうとするとエラーがよく出ます。テーマ毎に md ファイルの先頭で必要な定義が違うみたいで、ちゃんとテーマの README を読んで設定しましょう。</li>
+<li>new 〜.md で作ったテンプレファイルでは draft = true になっているので、これを消すか false にしないと記事を表示しません。</li>
 </ul>
 
 <h1 id="参考-url:e95c7dc8eefee7d0e25121cd7f0007ae">参考 URL</h1>
