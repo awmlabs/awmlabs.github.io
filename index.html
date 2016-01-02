@@ -55,7 +55,7 @@
 
   </div>
   <section class="summary">
-    Blog の Deploy で Circle CI 昨日の時点では Markdown ファイルの編集後に、make install する事でブログサイトに HTML をデプロイしますが、今回、Markdown を git commit したら自動でデプロイされるべく、Circle CI に連携の設定を入れました。 はじめに 前回は、awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。 × https://github.com/awmcorp/blog.awm.jp ○ https://github.com/awmlabs/blog.awm.jp blog のソース https://github.com/awmlabs/awmlabs.github.io blog の公開ファイル circle.yaml 連携時にどういうコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに書き換えました。 https://github.com/nobu666/nobu666.com/blob/master/circle.yml https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml machine: timezone: Asia/Tokyo checkout: post: - git submodule update --init --recursive dependencies: pre: - go get -v github.com/spf13/hugo - git config --global user.name &quot;awm labs&quot; - git config --global user.email &quot;labs@awm.jp&quot; test: override: - echo deployment: master: branch: master commands: - git clone git@github.com:awmlabs/awmlabs.github.io.git public - pip install Pygments --user - hugo - cd public &amp;&amp; git add .  <a href="/2016/01/02/circleci/">Read More...</a>
+    Blog の Deploy で Circle CI 昨日の時点では Markdown ファイルの編集後に、make install する事でブログサイトに HTML をデプロイしますが、今回、Markdown を git commit したら自動  <a href="/2016/01/02/circleci/">Read More...</a>
   </section>
 </article>
 
@@ -70,7 +70,7 @@
 
   </div>
   <section class="summary">
-    Blog はじめました WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。 https://twitter.com/nobu666/status/680683739534393344 CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。 https://github.com/awmcorp/blog.awm.jp https://github.com/awmlabs/blog.awm.jp (CircleCI連携の都合で、レポジトリを移動しました) Github.io github.com で &lt;ユーザ名&gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。 https://github.com/awmlabs/awmlabs.github.io =&gt; https://awmlabs.github.io/ ここにブログを表示する静的なHTMLを入れていけば良い訳です。 Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。 blog.awm.jp を公開URLにしたい =&gt; https://blog.awm.jp/ (awmlabs.github.io を指します) DNS の CNAME で blog.awm.jp =&gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。 Hugo $ hugo new site blog.awm.jp $ cd blog.awm.jp $ hugo new 2016/01/01/blog.md のようにすると blog.awm.jp/content/2016/01/01/blog.md にテンプレートの md ファイルが出来るので、そこに文章を記述して、blog.awm.jp フォルダのトップで、  <a href="/2016/01/01/blog/">Read More...</a>
+    Blog はじめました WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。 https://twitter.com/nobu666/status/680683739534393344 CircleCI 対応は時間かかりそうなので、デプ  <a href="/2016/01/01/blog/">Read More...</a>
   </section>
 </article>
 
