@@ -41,6 +41,35 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&#34;&gt;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+
+machine:
+  timezone: Asia/Tokyo
+
+checkout:
+  post:
+    - git submodule update --init --recursive
+
+dependencies:
+  pre:
+    - go get -v github.com/spf13/hugo
+    - git config --global user.name &#34;awm labs&#34;
+    - git config --global user.email &#34;labs@awm.jp&#34;
+
+test:
+  override:
+   - echo
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - git clone git@github.com:awmlabs/awmlabs.github.io.git public
+      - hugo
+      - cd public &amp;&amp; git add . &amp;&amp; git commit -m &#34;[ci skip] publish&#34;; if [ $? -eq 0 ]; then git push origin master; else :; fi
+
+
+&lt;p&gt;ありがとう、ありがとう。&lt;/p&gt;
+
 &lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
 &lt;p&gt;連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。
