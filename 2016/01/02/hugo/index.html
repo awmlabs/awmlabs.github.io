@@ -82,11 +82,9 @@ hasCJKLanguage              false
 <pre><code>**isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
 </code></pre>
 
-<p>ドキュメントもちゃんとあります。</p>
-
 <h1 id="hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf">Hugo のサマリーの実例</h1>
 
-<p>デフォルトだと以下のように、サマリーが巨大になります。
+<p>デフォルトだと以下のようにサマリーが巨大になります。
 <center> <img src="/2016/01/02/ss1_h.png" title="figure-1" > </center></p>
 
 <p>hasCJK 又は isCJK の設定を入れると以下のように自然なサイズになります。</p>
@@ -104,7 +102,7 @@ summary and stores it into the .Summary variable, which you may use in your
 templates.
 </code></pre>
 
-<p>単語70個だけ表示するそうです。</p>
+<p>単語を70個だけ表示するそうです。(By default と書いてるので、値を 70 以外に変える方法があるのかな。と思って遠回りしちゃいました)</p>
 
 <h1 id="実装:32ab7241d48fcc174c877413a917f8cf">実装</h1>
 
@@ -131,9 +129,11 @@ templates.
 </pre></div>
 </p>
 
-<p>この SummaryLength を上書きする場所が無いので、単語数を減らすという戦術は使えません。(そもそもやるの間違えてる)
-よくよく見返すと、
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+<p>この SummaryLength を上書きする場所が無いので、単語数を減らすという戦術は使えません。(そもそもやるの間違えてる)</p>
+
+<p>よくよく見返すと、</p>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span>
 </pre></div>
 </p>
@@ -173,14 +173,14 @@ $ grep -ri hascjklanguage  docs
 docs/content/overview/configuration.md:    hasCJKLanguage              false
 </code></pre>
 
-<p>後は対応する URL を開いて確認するだけです。</p>
+<p>後は対応する URL を開いて確認するだけです。(冒頭で紹介した URL)</p>
 
 <ul>
 <li><a href="https://gohugo.io/overview/configuration">https://gohugo.io/overview/configuration</a></li>
 <li><a href="https://gohugo.io/content/front-matter">https://gohugo.io/content/front-matter</a></li>
 </ul>
 
-<p>以上、 同じ罠にハマった方のお役に立てれば幸いです。</p>
+<p>以上、 同じ罠にハマった方のお役に立てれば幸いです！</p>
 
   </section>
 </article>
