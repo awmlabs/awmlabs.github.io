@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Blog をはじめる為の準備もろもろ">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="TechNotes">
+<title>Blogはじめました - TechNotes</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="http://blog.awm.jp/">[TechNotes]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-01">January 01, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/categories/blog">Blog</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/tags/blog">Blog</a>
+
+        <a href="http://blog.awm.jp/tags/github">Github</a>
+
+        <a href="http://blog.awm.jp/tags/hugo">Hugo</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Blogはじめました</h1>
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae">Blog はじめました</h1>
+
+<p>WordPressを試したり色々と迷いましたが、神のお告げに従い Github.io + Hugo + CircleCI の構成にしました。</p>
+
+<ul>
+<li><a href="https://twitter.com/nobu666/status/680683739534393344">https://twitter.com/nobu666/status/680683739534393344</a></li>
+</ul>
+
+<h1 id="github-io:e95c7dc8eefee7d0e25121cd7f0007ae">Github.io</h1>
+
+<p>github.com で &lt;ユーザ名&gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。</p>
+
+<ul>
+<li><a href="https://github.com/awmlabs/awmlabs.github.io">https://github.com/awmlabs/awmlabs.github.io</a></li>
+<li>=&gt; <a href="https://awmlabs.github.io/">https://awmlabs.github.io/</a></li>
+</ul>
+
+<p>CNAME をつけて awm.jp からアクセスできるようにしました。</p>
+
+<ul>
+<li>=&gt; <a href="https://blog.awm.jp/">https://blog.awm.jp/</a> (awmlabs.github.io を指します)</li>
+</ul>
+
+<p>ここにブログのHTMLを入れていけば良い訳です。
+md ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。</p>
+
+<h1 id="hugo:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo</h1>
+
+<pre><code>$ hugo new site blog.awm.jp
+$ cd blog.awm.jp
+$ hugo new 2016/01/01/blog.md
+</code></pre>
+
+<p>のようにすると</p>
+
+<pre><code>blog.awm.jp/content/2016/01/01/blog.md
+</code></pre>
+
+<p>にテンプレートの md ファイルが出来るので、そこに文章を記述して、blog.awm.jp フォルダのトップで、</p>
+
+<pre><code>$ hugo 
+</code></pre>
+
+<p>を実行します。すると public 以下に表示用の HTMLファイルが生成されます。
+実際に表示する為には、テーマが必要です。</p>
+
+<h2 id="hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo themes</h2>
+
+<ul>
+<li><a href="http://themes.gohugo.io/">http://themes.gohugo.io/</a></li>
+</ul>
+
+<p>ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。</p>
+
+<ul>
+<li><a href="http://themes.gohugo.io/base16/">http://themes.gohugo.io/base16/</a></li>
+</ul>
+
+<p>弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。</p>
+
+<pre><code>git submodule add git@github.com:awmcorp/hugo-base16-theme.git themes/base16
+</code></pre>
+
+<p>として持ってきます。また、</p>
+
+<p>後は、先ほど hugo を実行したのと同じ要領で、</p>
+
+<pre><code>$ hugo  server --watch -t base16
+＜略＞
+Web Server is available at http://127.0.0.1:1313/
+</code></pre>
+
+<p>とオプションを付けて実行すると、</p>
+
+<h2 id="テーマのフォント:e95c7dc8eefee7d0e25121cd7f0007ae">テーマのフォント</h2>
+
+<p>文字が読み辛いので自分好みに変更しました。</p>
+
+<ul>
+<li><p>記事の背景色 (少し明るくした)
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">article</span><span class="nc">.single</span> <span class="nt">section</span><span class="o">,</span>
+<span class="nc">.article-list</span> <span class="nt">article</span> <span class="p">{</span>
+<span class="p">;</span>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#f2f0ec</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fcf8f0</span><span class="p">;</span>
+</code></pre></div>
+</p></li>
+
+<li><p>文字フォント (Windows で見た時に MS ゴシックが使われないように)
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">body</span> <span class="p">{</span>
+   <span class="err">＜略＞</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="s2">&quot;Hiragino Kaku Gothic ProN&quot;</span><span class="o">,</span> <span class="n">Meiryo</span><span class="o">,</span> <span class="n">Tahoma</span><span class="o">,</span> <span class="n">Verdana</span><span class="o">,</span> <span class="n">Arial</span><span class="o">,</span> <span class="k">sans-serif</span><span class="p">;</span>
+<span class="p">;</span>  <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Source Code Pro&#39;</span><span class="o">,</span> <span class="k">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</p></li>
+</ul>
+
+<h1 id="circleci:e95c7dc8eefee7d0e25121cd7f0007ae">CircleCI</h1>
+
+<p>間に合わなかったので、明日に。</p>
+
+<h1 id="備考:e95c7dc8eefee7d0e25121cd7f0007ae">備考</h1>
+
+<ul>
+<li>Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にした。</li>
+<li>当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてた</li>
+</ul>
+
+<h1 id="参考-url:e95c7dc8eefee7d0e25121cd7f0007ae">参考 URL</h1>
+
+<ul>
+<li><a href="https://github.com/nobu666/nobu666.com">https://github.com/nobu666/nobu666.com</a></li>
+<li><a href="http://qiita.com/eichann/items/4fe61b8b9bbafcfbe847">http://qiita.com/eichann/items/4fe61b8b9bbafcfbe847</a></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  TechNotes - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

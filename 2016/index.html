@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="TechNotes">
+<title>2016s - TechNotes</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="http://blog.awm.jp/">[TechNotes]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+<main role="main" class="article-list">
+  <h1 class="list-title">2016s</h1>
+  
+    
+<article class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="/2016/01/01/blog/">Blogはじめました</a></h2>
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-01">January 01, 2016</time></span>
+
+  </div>
+  <section class="summary">
+    Blog はじめました WordPressを試したり色々と迷いましたが、神のお告げに従い Github.io + Hugo + CircleCI の構成にしました。 https://twitter.com/nobu666/status/680683739534393344 Github.io github.com で &lt;ユーザ名&gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。 https://github.com/awmlabs/awmlabs.github.io =&gt; https://awmlabs.github.io/ CNAME をつけて awm.jp からアクセスできるようにしました。 =&gt; https://blog.awm.jp/ (awmlabs.github.io を指します) ここにブログのHTMLを入れていけば良い訳です。 md ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。 Hugo $ hugo new site blog.awm.jp $ cd blog.awm.jp $ hugo new 2016/01/01/blog.md のようにすると blog.awm.jp/content/2016/01/01/blog.md にテンプレートの md ファイルが出来るので、そこに文章を記述して、blog.awm.jp フォルダのトップで、 $ hugo を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。 Hugo themes http://themes.gohugo.io/ ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。 http://themes.gohugo.io/base16/ 弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。 git  <a href="/2016/01/01/blog/">Read More...</a>
+  </section>
+</article>
+
+  
+</main>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  TechNotes - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
