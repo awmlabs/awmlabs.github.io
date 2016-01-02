@@ -60,11 +60,11 @@
 
 <h1 id="blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79">Blog の Deploy で Circle CI</h1>
 
-<p>昨日の時点では Markdown ファイルの編集後に、make install する事でブログサイトに HTML をデプロイしますが、今回、Markdown を git commit したら自動でデプロイされるべく、Circle CI に連携の設定を入れました。</p>
+<p>昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。</p>
 
 <h1 id="はじめに:74a620a9653e59d29d4e0cbb59ac7a79">はじめに</h1>
 
-<p>前回は、awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。</p>
+<p>前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。</p>
 
 <ul>
 <li>× <a href="https://github.com/awmcorp/blog.awm.jp">https://github.com/awmcorp/blog.awm.jp</a></li>
@@ -74,7 +74,7 @@
 
 <h1 id="circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79">circle.yaml</h1>
 
-<p>連携時にどういうコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに書き換えました。</p>
+<p>連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。</p>
 
 <ul>
 <li><a href="https://github.com/nobu666/nobu666.com/blob/master/circle.yml">https://github.com/nobu666/nobu666.com/blob/master/circle.yml</a></li>
@@ -109,7 +109,7 @@
 </pre></div>
 
 
-<p>ありがとう、ありがとう。</p>
+<p>神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)</p>
 
 <h2 id="pygments:74a620a9653e59d29d4e0cbb59ac7a79">Pygments</h2>
 
@@ -118,19 +118,19 @@
 <pre><code>pip install Pygments
 </code></pre>
 
-<p>だと、/usr/ 以下に入れようとして権限的にエラーになるので &ndash;user を後ろにつけてます。</p>
+<p>を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &ndash;user を後ろにつけてます。</p>
 
 <h1 id="circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI アカウント作成</h1>
 
-<p>連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れます。</p>
+<p>連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。</p>
 
 <ul>
 <li><a href="https://circleci.com/">https://circleci.com/</a></li>
 </ul>
 
-<p>Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良さそう。</p>
+<p>Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するアカウントでの連携は避けたい。という人は新しい Github アカウントを作って設定すると良さそうです。</p>
 
-<p>Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証だし仕方なさそう) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。</p>
+<p>Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。</p>
 
 <h1 id="circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI での連携設定</h1>
 
@@ -144,14 +144,14 @@
 
 <h1 id="異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79">異なる Github アカウントでの連携 (推測)</h1>
 
-<p>同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id<em>rsa</em>(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。</p>
+<p>同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id<em>rsa</em>(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。</p>
 
 <ul>
 <li><a href="https://circleci.com/gh/">https://circleci.com/gh/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名&gt;/edit#ssh</li>
 <li><a href="https://github.com/">https://github.com/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名/settings/keys</li>
 </ul>
 
-<p>そのうち必要に迫られたら、もう少し試行錯誤します。</p>
+<p>必要に迫られた時にでも、もう少し試行錯誤してみます。</p>
 
 <h1 id="備考:74a620a9653e59d29d4e0cbb59ac7a79">備考</h1>
 

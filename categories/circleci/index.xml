@@ -20,11 +20,11 @@
 
 &lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
 
-&lt;p&gt;昨日の時点では Markdown ファイルの編集後に、make install する事でブログサイトに HTML をデプロイしますが、今回、Markdown を git commit したら自動でデプロイされるべく、Circle CI に連携の設定を入れました。&lt;/p&gt;
+&lt;p&gt;昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。&lt;/p&gt;
 
 &lt;h1 id=&#34;はじめに:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;前回は、awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
+&lt;p&gt;前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;× &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt;&lt;/li&gt;
@@ -34,7 +34,7 @@
 
 &lt;h1 id=&#34;circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;circle.yaml&lt;/h1&gt;
 
-&lt;p&gt;連携時にどういうコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに書き換えました。&lt;/p&gt;
+&lt;p&gt;連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/nobu666/nobu666.com/blob/master/circle.yml&#34;&gt;https://github.com/nobu666/nobu666.com/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
@@ -69,7 +69,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;ありがとう、ありがとう。&lt;/p&gt;
+&lt;p&gt;神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)&lt;/p&gt;
 
 &lt;h2 id=&#34;pygments:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Pygments&lt;/h2&gt;
 
@@ -78,19 +78,19 @@
 &lt;pre&gt;&lt;code&gt;pip install Pygments
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;だと、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
+&lt;p&gt;を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
 
 &lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
-&lt;p&gt;連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
+&lt;p&gt;連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://circleci.com/&#34;&gt;https://circleci.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良さそう。&lt;/p&gt;
+&lt;p&gt;Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するアカウントでの連携は避けたい。という人は新しい Github アカウントを作って設定すると良さそうです。&lt;/p&gt;
 
-&lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証だし仕方なさそう) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
+&lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
 
 &lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
 
@@ -104,14 +104,14 @@
 
 &lt;h1 id=&#34;異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
 
-&lt;p&gt;同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
+&lt;p&gt;同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://circleci.com/gh/&#34;&gt;https://circleci.com/gh/&lt;/a&gt;&amp;lt;ユーザor組織名&amp;gt;/&amp;lt;リポジトリ名&amp;gt;/edit#ssh&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/&#34;&gt;https://github.com/&lt;/a&gt;&amp;lt;ユーザor組織名&amp;gt;/&amp;lt;リポジトリ名/settings/keys&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;そのうち必要に迫られたら、もう少し試行錯誤します。&lt;/p&gt;
+&lt;p&gt;必要に迫られた時にでも、もう少し試行錯誤してみます。&lt;/p&gt;
 
 &lt;h1 id=&#34;備考:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;備考&lt;/h1&gt;
 
