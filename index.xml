@@ -82,15 +82,15 @@
 
 &lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
-&lt;p&gt;連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。&lt;/p&gt;
+&lt;p&gt;連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://circleci.com/&#34;&gt;https://circleci.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;尚、Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良いかも。&lt;/p&gt;
+&lt;p&gt;Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良さそう。&lt;/p&gt;
 
-&lt;p&gt;Github API 的に組織ごとのオンオフ出来ないそうで。アカウント単位での認証だし仕方なさそう。あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういう手もあるそうです。&lt;/p&gt;
+&lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証だし仕方なさそう) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
 
 &lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
 
