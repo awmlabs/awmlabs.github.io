@@ -26,6 +26,12 @@
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/nobu666/status/680683739534393344&#34;&gt;https://twitter.com/nobu666/status/680683739534393344&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果がこれです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
 
 &lt;p&gt;github.com で &amp;lt;ユーザ名&amp;gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。&lt;/p&gt;
@@ -126,6 +132,7 @@ Web Server is available at http://127.0.0.1:1313/
 &lt;ul&gt;
 &lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にした。&lt;/li&gt;
 &lt;li&gt;当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてた&lt;/li&gt;
+&lt;li&gt;色々なテーマを試そうとするとエラーがよく出ます。テーマ毎に md ファイルの先頭で必要な定義が違うみたいで、ちゃんとテーマの README を読んで設定しましょう。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;参考-url:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;参考 URL&lt;/h1&gt;
