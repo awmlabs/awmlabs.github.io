@@ -103,6 +103,7 @@
     <span style="color: #ae81ff">branch</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">master</span>
     <span style="color: #ae81ff">commands</span><span style="color: #f8f8f2">:</span>
       <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">git clone git@github.com:awmlabs/awmlabs.github.io.git public</span>
+      <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">pip install Pygments --user</span>
       <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">hugo</span>
       <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">cd public &amp;&amp; git add . &amp;&amp; git commit -m &quot;[ci skip] publish&quot;; if [ $? -eq 0 ]; then git push origin master; else :; fi</span>
 </pre></div>
@@ -110,10 +111,22 @@
 
 <p>ありがとう、ありがとう。</p>
 
+<h2 id="pygments:74a620a9653e59d29d4e0cbb59ac7a79">Pygments</h2>
+
+<p>Syntax Highlight を使いたいので、Pygments を入れたいけど、</p>
+
+<pre><code>pip install Pygments
+</code></pre>
+
+<p>だと、/usr/ 以下に入れようとして権限的にエラーになるので &ndash;user を後ろにつけてます。</p>
+
 <h1 id="circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI アカウント作成</h1>
 
-<p>連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。
- * <a href="https://circleci.com/">https://circleci.com/</a></p>
+<p>連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。</p>
+
+<ul>
+<li><a href="https://circleci.com/">https://circleci.com/</a></li>
+</ul>
 
 <p>尚、Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良いかも。</p>
 
@@ -124,16 +137,19 @@
 <ul>
 <li>Add Project で監視するレポジトリを選択します。</li>
 <li>Project Settings の Permissions (SSH, API, AWS のでなく、唯の Permissions) から Authorize ＞ Create and add とボタンを押してく。</li>
-<li><a href="https://github.com/settings/applications">https://github.com/settings/applications</a> で連携を確認 (revoke 押すと面倒なので気をつけて)</li>
+<li><a href="https://github.com/settings/applications">https://github.com/settings/applications</a> で連携を確認 (revoke 押すと戻すのが少し面倒なので気をつけて)</li>
 </ul>
 
 <p>(あと一手間あった気がするので、思い出したら後で追記します)</p>
 
 <h1 id="異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79">異なる Github アカウントでの連携 (推測)</h1>
 
-<p>同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id<em>rsa</em>(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気もしますが、気のせいでした。
- * <a href="https://circleci.com/gh/">https://circleci.com/gh/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名&gt;/edit#ssh
- * <a href="https://github.com/">https://github.com/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名/settings/keys</p>
+<p>同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id<em>rsa</em>(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。</p>
+
+<ul>
+<li><a href="https://circleci.com/gh/">https://circleci.com/gh/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名&gt;/edit#ssh</li>
+<li><a href="https://github.com/">https://github.com/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名/settings/keys</li>
+</ul>
 
 <p>そのうち必要に迫られたら、もう少し試行錯誤します。</p>
 
@@ -142,6 +158,13 @@
 <ul>
 <li>当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。</li>
 <li>別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。</li>
+</ul>
+
+<h1 id="参考url:74a620a9653e59d29d4e0cbb59ac7a79">参考URL</h1>
+
+<ul>
+<li><a href="http://qiita.com/xlune/items/f5248a6cdddfb011c2ac">http://qiita.com/xlune/items/f5248a6cdddfb011c2ac</a></li>
+<li><a href="http://tdoc.info/blog/2014/01/15/pip.html">http://tdoc.info/blog/2014/01/15/pip.html</a></li>
 </ul>
 
   </section>

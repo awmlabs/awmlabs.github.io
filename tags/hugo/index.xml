@@ -100,6 +100,12 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 &lt;h2 id=&#34;syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Syntax Highlight&lt;/h2&gt;
 
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://gohugo.io/extras/highlighting/&#34;&gt;http://gohugo.io/extras/highlighting/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これの通りに作業します。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;pip install Pygments
 &lt;/code&gt;&lt;/pre&gt;
 
