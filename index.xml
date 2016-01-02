@@ -146,7 +146,8 @@
 &lt;li&gt;もしくは、 各々の markdown ファイルの先頭で isCJKLanguage = true を入れる&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;そこまで辿り着くまでの話。ドキュメントに明記されてました。恥ずかしいっ (*ノノ&lt;/p&gt;
+&lt;p&gt;そこまで辿り着くまでの話です。
+尚、ドキュメントに明記されてました。恥ずかしいっ (*ノノ&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io/overview/configuration&#34;&gt;https://gohugo.io/overview/configuration&lt;/a&gt;&lt;/li&gt;
@@ -183,7 +184,14 @@ summary and stores it into the .Summary variable, which you may use in your
 templates.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;単語を70個だけ表示するそうです。(By default と書いてるので、値を 70 以外に変える方法があるのかな。と思って遠回りしちゃいました)&lt;/p&gt;
+&lt;p&gt;単語を70個だけ表示するそうです。
+By default と書いてるので、値を 70 以外に変える方法があるのかなとドキュメントを漁りましたが見つかりません。&lt;/p&gt;
+
+&lt;p&gt;仕方ないので、実装を見る事にします。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/hugo&#34;&gt;https://github.com/spf13/hugo&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&#34;実装:32ab7241d48fcc174c877413a917f8cf&#34;&gt;実装&lt;/h1&gt;
 
