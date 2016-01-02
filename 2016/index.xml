@@ -153,7 +153,8 @@
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io/overview/configuration&#34;&gt;https://gohugo.io/overview/configuration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;# if true, auto-detect Chinese/Janapese/Korean Languages in the content. (.Summary and .WordCount can work properly in CJKLanguage)
+&lt;pre&gt;&lt;code&gt;# if true, auto-detect Chinese/Janapese/Korean Languages in the content.
+ (.Summary and .WordCount can work properly in CJKLanguage)
 hasCJKLanguage              false
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -161,7 +162,8 @@ hasCJKLanguage              false
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io/content/front-matter&#34;&gt;https://gohugo.io/content/front-matter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;**isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
+&lt;pre&gt;&lt;code&gt;**isCJKLanguage** If true, explicitly treat the content as CJKLanguage
+ (.Summary and .WordCount can work properly in CJKLanguage)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Hugo のサマリーの実例&lt;/h1&gt;
