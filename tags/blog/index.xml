@@ -34,14 +34,17 @@
 &lt;li&gt;=&amp;gt; &lt;a href=&#34;https://awmlabs.github.io/&#34;&gt;https://awmlabs.github.io/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;CNAME をつけて awm.jp からアクセスできるようにしました。&lt;/p&gt;
+&lt;p&gt;ここにブログのHTMLを入れていけば良い訳です。
+md ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。&lt;/p&gt;
+
+&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;=&amp;gt; &lt;a href=&#34;https://blog.awm.jp/&#34;&gt;https://blog.awm.jp/&lt;/a&gt; (awmlabs.github.io を指します)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ここにブログのHTMLを入れていけば良い訳です。
-md ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。&lt;/p&gt;
+&lt;p&gt;DNS の CNAME で blog.awm.jp =&amp;gt; awmlabs.github.io
+を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。&lt;/p&gt;
 
 &lt;h1 id=&#34;hugo:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo&lt;/h1&gt;
 
