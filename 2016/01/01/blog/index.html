@@ -2,21 +2,21 @@
 <html lang="en-us">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Blog をはじめる為の準備もろもろ">
+<meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="">
 <meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
-<link rel="alternate" href="/index.xml" type="application/rss+xml" title="TechNotes">
-<title>Blogはじめました - TechNotes</title>
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="AWM TechNotes">
+<title>blog - AWM TechNotes</title>
 </head>
 <body>
 
 <header>
   <div class="container">
-    <a class="path" href="http://blog.awm.jp/">[TechNotes]</a>
+    <a class="path" href="http://blog.awm.jp/">[AWM TechNotes]</a>
     <span class="caret"># _</span>
   </div>
 </header>
@@ -33,28 +33,9 @@
     <span class="val"><time itemprop="datePublished" datetime="2016-01-01">January 01, 2016</time></span>
 
 
-    <span class="key">in</span>
-    <span class="val">
-
-        <a href="http://blog.awm.jp/categories/blog">Blog</a>
-
-    </span>
-
-
-    <br>
-    <span class="key">tags:</span>
-    <span class="val">
-
-        <a href="http://blog.awm.jp/tags/blog">Blog</a>
-
-        <a href="http://blog.awm.jp/tags/github">Github</a>
-
-        <a href="http://blog.awm.jp/tags/hugo">Hugo</a>
-
-    </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">Blogはじめました</h1>
+  <h1 class="headline" itemprop="headline">blog</h1>
   <section class="body" itemprop="articleBody">
     
 
@@ -75,8 +56,7 @@
 <li>=&gt; <a href="https://awmlabs.github.io/">https://awmlabs.github.io/</a></li>
 </ul>
 
-<p>ここにブログのHTMLを入れていけば良い訳です。
-md ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。</p>
+<p>ここにブログのHTMLを入れていけば良い訳です。 Markdown ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。</p>
 
 <h2 id="blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae">blog.awm.jp を公開URLにしたい</h2>
 
@@ -84,8 +64,7 @@ md ファイルからBlogサイトのHTMLを生成するツール Hugo を使っ
 <li>=&gt; <a href="https://blog.awm.jp/">https://blog.awm.jp/</a> (awmlabs.github.io を指します)</li>
 </ul>
 
-<p>DNS の CNAME で blog.awm.jp =&gt; awmlabs.github.io
-を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。</p>
+<p>DNS の CNAME で blog.awm.jp =&gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。</p>
 
 <h1 id="hugo:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo</h1>
 
@@ -104,59 +83,60 @@ $ hugo new 2016/01/01/blog.md
 <pre><code>$ hugo 
 </code></pre>
 
-<p>を実行します。すると public 以下に表示用の HTMLファイルが生成されます。
-実際に表示する為には、テーマが必要です。</p>
+<p>を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。</p>
 
 <h2 id="hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo themes</h2>
 
 <ul>
-<li><a href="http://themes.gohugo.io/">http://themes.gohugo.io/</a></li>
+<li><p><a href="http://themes.gohugo.io/">http://themes.gohugo.io/</a>
+ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。</p></li>
+
+<li><p><a href="http://themes.gohugo.io/base16/">http://themes.gohugo.io/base16/</a>
+弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。</p></li>
 </ul>
-
-<p>ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。</p>
-
-<ul>
-<li><a href="http://themes.gohugo.io/base16/">http://themes.gohugo.io/base16/</a></li>
-</ul>
-
-<p>弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。</p>
 
 <pre><code>git submodule add git@github.com:awmcorp/hugo-base16-theme.git themes/base16
 </code></pre>
 
 <p>として持ってきます。また、</p>
 
-<p>後は、先ほど hugo を実行したのと同じ要領で、</p>
+<p>後は、先ほど hugo を実行したのと同じ要領で、更に server -watch オプションをつけると、</p>
 
 <pre><code>$ hugo  server --watch -t base16
 ＜略＞
 Web Server is available at http://127.0.0.1:1313/
 </code></pre>
 
-<p>とオプションを付けて実行すると、</p>
+<p>このように <a href="http://127.0.0.1:1313/">http://127.0.0.1:1313/</a> で表示が確認できます。md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)</p>
 
-<h2 id="テーマのフォント:e95c7dc8eefee7d0e25121cd7f0007ae">テーマのフォント</h2>
+<p>尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 も不要です。</p>
 
-<p>文字が読み辛いので自分好みに変更しました。</p>
+<h2 id="テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae">テーマの文字</h2>
+
+<p>base16 は文字が読み辛いので自分好みに変更しました。</p>
 
 <ul>
-<li><p>記事の背景色 (少し明るくした)
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">article</span><span class="nc">.single</span> <span class="nt">section</span><span class="o">,</span>
-<span class="nc">.article-list</span> <span class="nt">article</span> <span class="p">{</span>
-<span class="p">;</span>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#f2f0ec</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fcf8f0</span><span class="p">;</span>
-</code></pre></div>
-</p></li>
-
-<li><p>文字フォント (Windows で見た時に MS ゴシックが使われないように)
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">body</span> <span class="p">{</span>
-   <span class="err">＜略＞</span>
-  <span class="k">font-family</span><span class="o">:</span> <span class="s2">&quot;Hiragino Kaku Gothic ProN&quot;</span><span class="o">,</span> <span class="n">Meiryo</span><span class="o">,</span> <span class="n">Tahoma</span><span class="o">,</span> <span class="n">Verdana</span><span class="o">,</span> <span class="n">Arial</span><span class="o">,</span> <span class="k">sans-serif</span><span class="p">;</span>
-<span class="p">;</span>  <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Source Code Pro&#39;</span><span class="o">,</span> <span class="k">monospace</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-</p></li>
+<li>記事の背景色 (少し明るくした)</li>
 </ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">article</span><span style="color: #a6e22e">.single</span> <span style="color: #f92672">section,</span>
+<span style="color: #a6e22e">.article-list</span> <span style="color: #f92672">article</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #f8f8f2">;</span>  <span style="color: #66d9ef">background-color</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">#f2f0ec</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #66d9ef">background-color</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">#fcf8f0</span><span style="color: #f8f8f2">;</span>
+</pre></div>
+
+
+<ul>
+<li>文字フォント (Windows で見た時に MS ゴシックが使われないように)</li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">body</span> <span style="color: #f8f8f2">{</span>
+   <span style="color: #960050; background-color: #1e0010">＜略＞</span>
+  <span style="color: #66d9ef">font-family</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Hiragino Kaku Gothic ProN&quot;</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Meiryo</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Tahoma</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Verdana</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Arial</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">sans-serif</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">;</span>  <span style="color: #66d9ef">font-family</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;Source Code Pro&#39;</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">monospace</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
 
 <h1 id="circleci:e95c7dc8eefee7d0e25121cd7f0007ae">CircleCI</h1>
 
@@ -186,7 +166,7 @@ Web Server is available at http://127.0.0.1:1313/
 
 <footer>
   <div class="container">
-    <span class="copyright">&copy; 2016  TechNotes - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+    <span class="copyright">&copy; 2016  AWM TechNotes - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
   </div>
 </footer>
 
