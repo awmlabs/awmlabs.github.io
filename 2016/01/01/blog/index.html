@@ -62,7 +62,8 @@
 <li>=&gt; <a href="https://awmlabs.github.io/">https://awmlabs.github.io/</a></li>
 </ul>
 
-<p>ここにブログのHTMLを入れていけば良い訳です。 Markdown ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。</p>
+<p>ここにブログを表示する静的なHTMLを入れていけば良い訳です。
+Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。</p>
 
 <h2 id="blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae">blog.awm.jp を公開URLにしたい</h2>
 
@@ -95,16 +96,15 @@ $ hugo new 2016/01/01/blog.md
 
 <ul>
 <li><p><a href="http://themes.gohugo.io/">http://themes.gohugo.io/</a>
-ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。</p></li>
+ここで色々なテーマが確認できます。一目惚れした base16 を適用しました。</p></li>
 
-<li><p><a href="http://themes.gohugo.io/base16/">http://themes.gohugo.io/base16/</a>
-弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。</p></li>
+<li><p><a href="http://themes.gohugo.io/base16/">http://themes.gohugo.io/base16/</a></p></li>
 </ul>
 
-<pre><code>git submodule add git@github.com:awmcorp/hugo-base16-theme.git themes/base16
+<pre><code>git submodule add git@github.com:htdvisser/hugo-base16-theme.git themes/base16
 </code></pre>
 
-<p>として持ってきます。また、</p>
+<p>として持ってきます。尚、大抵のカスタマイズはトップのlayouts や static/css 以下で弄れるので、fork しなくても良さそうです。</p>
 
 <p>後は、先ほど hugo を実行したのと同じ要領で、更に server -watch オプションをつけると、</p>
 
@@ -113,9 +113,10 @@ $ hugo new 2016/01/01/blog.md
 Web Server is available at http://127.0.0.1:1313/
 </code></pre>
 
-<p>このように <a href="http://127.0.0.1:1313/">http://127.0.0.1:1313/</a> で表示が確認できます。md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)</p>
+<p>このように <a href="http://127.0.0.1:1313/">http://127.0.0.1:1313/</a> で表示が確認できます。
+md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)</p>
 
-<p>尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 も不要です。</p>
+<p>尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。</p>
 
 <h2 id="テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae">テーマの文字</h2>
 
@@ -146,13 +147,13 @@ Web Server is available at http://127.0.0.1:1313/
 
 <h1 id="circleci:e95c7dc8eefee7d0e25121cd7f0007ae">CircleCI</h1>
 
-<p>間に合わなかったので、また今度。</p>
+<p>間に合わなかったので、また今度。。</p>
 
 <h1 id="備考:e95c7dc8eefee7d0e25121cd7f0007ae">備考</h1>
 
 <ul>
-<li>Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にした。</li>
-<li>当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてた</li>
+<li>Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。</li>
+<li>当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてました。早とちり。</li>
 <li>色々なテーマを試そうとするとエラーがよく出ます。テーマ毎に md ファイルの先頭で必要な定義が違うみたいで、ちゃんとテーマの README を読んで設定しましょう。</li>
 </ul>
 

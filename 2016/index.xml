@@ -41,7 +41,8 @@
 &lt;li&gt;=&amp;gt; &lt;a href=&#34;https://awmlabs.github.io/&#34;&gt;https://awmlabs.github.io/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ここにブログのHTMLを入れていけば良い訳です。 Markdown ファイルからBlogサイトのHTMLを生成するツール Hugo を使ってみました。&lt;/p&gt;
+&lt;p&gt;ここにブログを表示する静的なHTMLを入れていけば良い訳です。
+Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。&lt;/p&gt;
 
 &lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
 
@@ -74,16 +75,15 @@ $ hugo new 2016/01/01/blog.md
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;http://themes.gohugo.io/&lt;/a&gt;
-ここで色々なテーマが確認できます。base16 に一目惚れしたので、これを適用しました。&lt;/p&gt;&lt;/li&gt;
+ここで色々なテーマが確認できます。一目惚れした base16 を適用しました。&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/base16/&#34;&gt;http://themes.gohugo.io/base16/&lt;/a&gt;
-弄るファイルがあるのでまず自分のアカウント(awmcorp) に fork して。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/base16/&#34;&gt;http://themes.gohugo.io/base16/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;git submodule add git@github.com:awmcorp/hugo-base16-theme.git themes/base16
+&lt;pre&gt;&lt;code&gt;git submodule add git@github.com:htdvisser/hugo-base16-theme.git themes/base16
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;として持ってきます。また、&lt;/p&gt;
+&lt;p&gt;として持ってきます。尚、大抵のカスタマイズはトップのlayouts や static/css 以下で弄れるので、fork しなくても良さそうです。&lt;/p&gt;
 
 &lt;p&gt;後は、先ほど hugo を実行したのと同じ要領で、更に server -watch オプションをつけると、&lt;/p&gt;
 
@@ -92,9 +92,10 @@ $ hugo new 2016/01/01/blog.md
 Web Server is available at http://127.0.0.1:1313/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;このように &lt;a href=&#34;http://127.0.0.1:1313/&#34;&gt;http://127.0.0.1:1313/&lt;/a&gt; で表示が確認できます。md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)&lt;/p&gt;
+&lt;p&gt;このように &lt;a href=&#34;http://127.0.0.1:1313/&#34;&gt;http://127.0.0.1:1313/&lt;/a&gt; で表示が確認できます。
+md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)&lt;/p&gt;
 
-&lt;p&gt;尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 も不要です。&lt;/p&gt;
+&lt;p&gt;尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。&lt;/p&gt;
 
 &lt;h2 id=&#34;テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;テーマの文字&lt;/h2&gt;
 
@@ -125,13 +126,13 @@ Web Server is available at http://127.0.0.1:1313/
 
 &lt;h1 id=&#34;circleci:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;CircleCI&lt;/h1&gt;
 
-&lt;p&gt;間に合わなかったので、また今度。&lt;/p&gt;
+&lt;p&gt;間に合わなかったので、また今度。。&lt;/p&gt;
 
 &lt;h1 id=&#34;備考:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にした。&lt;/li&gt;
-&lt;li&gt;当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてた&lt;/li&gt;
+&lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。&lt;/li&gt;
+&lt;li&gt;当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてました。早とちり。&lt;/li&gt;
 &lt;li&gt;色々なテーマを試そうとするとエラーがよく出ます。テーマ毎に md ファイルの先頭で必要な定義が違うみたいで、ちゃんとテーマの README を読んで設定しましょう。&lt;/li&gt;
 &lt;/ul&gt;
 
