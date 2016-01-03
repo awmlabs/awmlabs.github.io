@@ -106,7 +106,7 @@ templates.
 </code></pre>
 
 <p>単語を70個だけ表示するそうです。
-By default と書いてるので、値を 70 以外に変える方法があるのかなとドキュメントを漁りましたが見つかりません。</p>
+By default と書 いてるので、値を 70 以外に変える方法があるのかなとドキュメントを漁りましたが見つかりません。</p>
 
 <p>仕方ないので、実装を見る事にします。</p>
 
@@ -134,12 +134,12 @@ By default と書いてるので、値を 70 以外に変える方法がある�
 <li>github.com/spf13/hugo/helpers/content.go</li>
 </ul>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">// Length of the summary that Hugo extracts from a content.</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">// Length of the summary that Hugo extracts from a content.</span>
 <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">SummaryLength</span> <span style="color: #f8f8f2">=</span> <span style="color: #ae81ff">70</span>
 </pre></div>
-</p>
 
-<p>この SummaryLength を上書きする場所が無いので、単語数を減らすという戦術は使えません。(そもそもやるの間違えてる)</p>
+
+<p>この SummaryLength を上書きする処理が何処にも無いので、設定で単語数を減らす事は出来なさそうです。(結論からいうと、そもそも数を減らす対策は間違えてる)</p>
 
 <p>よくよく見返すと、</p>
 
@@ -150,7 +150,7 @@ By default と書いてるので、値を 70 以外に変える方法がある�
 
 <p>CJK (中国語、日本語、韓国語をひっくるめた総称) と判定した場合に、マルチバイト文字を意識して単語毎に分割してます。それ以外だとアルファベット等として空白で分割でしょう。</p>
 
-<p>日本語は単語の間に空白を挟まないので単語数として少なく数えてしまっているようです。
+<p>日本語は単語の間に空白を挟みません。単語が連結して見えて少なく数えてしまっているようです。
 さて、この isCJKLanguage は何処で設定されるのでしょう。</p>
 
 <ul>
@@ -174,7 +174,7 @@ By default と書いてるので、値を 70 以外に変える方法がある�
 </pre></div>
 </p>
 
-<p>面倒なので、後はドキュメントを検索しました。</p>
+<p>設定キーワードらしい文字列が見つかりましたし、これ以上ソースを見るのは面倒なので、後はドキュメントを検索しました。</p>
 
 <pre><code>$ cd github.com/spf13/hugo
 $ grep -ri iscjklanguage docs
