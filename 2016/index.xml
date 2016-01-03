@@ -7,8 +7,74 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2016 22:03:24 +0900</lastBuildDate>
     <atom:link href="http://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hugo の post テンプレートのカスタマイズ</title>
+      <link>http://blog.awm.jp/2016/01/03/hugo/</link>
+      <pubDate>Sun, 03 Jan 2016 22:03:24 +0900</pubDate>
+      
+      <guid>http://blog.awm.jp/2016/01/03/hugo/</guid>
+      <description>
+
+&lt;h1 id=&#34;hugo-の記事テンプレート:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Hugo の記事テンプレート&lt;/h1&gt;
+
+&lt;p&gt;hugo new &lt;path&gt; を実行すると Markdown ファイルが作られます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo new 2016/01/03/hugo.md
+/yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;しかしデフォルトの記事テンプレートが&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;date = &amp;quot;2016-01-03T22:12:24+09:00&amp;quot;
+title = &amp;quot;test&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;のように date と title だけで、出来ればもう少し欲しい所です。&lt;/p&gt;
+
+&lt;p&gt;そこで archetypes の出番！&lt;/p&gt;
+
+&lt;h1 id=&#34;archetypes-post-md:32ab7241d48fcc174c877413a917f8cf&#34;&gt;archetypes/post.md&lt;/h1&gt;
+
+&lt;p&gt;archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post &lt;path&gt; を実行します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat archetypes/post.md
++++
+categories = []
+tags = []
+draft = false
++++
+
+#
+$ hugo new -k post test.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;結果:32ab7241d48fcc174c877413a917f8cf&#34;&gt;結果&lt;/h1&gt;
+
+&lt;p&gt;元々の date, title に加えて post.md の中身が追加されました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat content/test.md
++++
+categories = []
+date = &amp;quot;2016-01-03T22:14:22+09:00&amp;quot;
+draft = false
+tags = []
+title = &amp;quot;test3&amp;quot;
+
++++
+
+#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで少し書き始める手間が減りますね。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参考 &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f&#34;&gt;https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Blog の Deploy で Circle CI</title>

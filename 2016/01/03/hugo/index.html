@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>Hugo の post テンプレートのカスタマイズ - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="http://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-03">January 03, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/categories/hugo">Hugo</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/tags/hugo">Hugo</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Hugo の post テンプレートのカスタマイズ</h1>
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="hugo-の記事テンプレート:32ab7241d48fcc174c877413a917f8cf">Hugo の記事テンプレート</h1>
+
+<p>hugo new <path> を実行すると Markdown ファイルが作られます。</p>
+
+<pre><code>$ hugo new 2016/01/03/hugo.md
+/yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created
+</code></pre>
+
+<p>しかしデフォルトの記事テンプレートが</p>
+
+<pre><code>date = &quot;2016-01-03T22:12:24+09:00&quot;
+title = &quot;test&quot;
+</code></pre>
+
+<p>のように date と title だけで、出来ればもう少し欲しい所です。</p>
+
+<p>そこで archetypes の出番！</p>
+
+<h1 id="archetypes-post-md:32ab7241d48fcc174c877413a917f8cf">archetypes/post.md</h1>
+
+<p>archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</p>
+
+<pre><code>$ cat archetypes/post.md
++++
+categories = []
+tags = []
+draft = false
++++
+
+#
+$ hugo new -k post test.md
+</code></pre>
+
+<h1 id="結果:32ab7241d48fcc174c877413a917f8cf">結果</h1>
+
+<p>元々の date, title に加えて post.md の中身が追加されました。</p>
+
+<pre><code>$ cat content/test.md
++++
+categories = []
+date = &quot;2016-01-03T22:14:22+09:00&quot;
+draft = false
+tags = []
+title = &quot;test3&quot;
+
++++
+
+#
+</code></pre>
+
+<p>これで少し書き始める手間が減りますね。</p>
+
+<ul>
+<li>参考 <a href="https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f">https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f</a></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
