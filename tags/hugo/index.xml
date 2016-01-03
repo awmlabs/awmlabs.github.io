@@ -44,7 +44,7 @@ title = &amp;quot;test&amp;quot;
 
 &lt;p&gt;&lt;del&gt; archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post &lt;path&gt; を実行します。&lt;/del&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;archetypes-default-md-に追加したいテンプレートを入れます:32ab7241d48fcc174c877413a917f8cf&#34;&gt;archetypes/default.md に追加したいテンプレートを入れます。&lt;/h1&gt;
+&lt;p&gt;archetypes/default.md に追加したいテンプレートを入れます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ cat archetypes/default.md
 +++
@@ -94,7 +94,7 @@ draft = false
 
 &lt;p&gt;のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。&lt;/p&gt;
 
-&lt;h1 id=&#34;追記:32ab7241d48fcc174c877413a917f8cf&#34;&gt;追記&lt;/h1&gt;
+&lt;h1 id=&#34;ソース巡り:32ab7241d48fcc174c877413a917f8cf&#34;&gt;ソース巡り&lt;/h1&gt;
 
 &lt;p&gt;英語のドキュメントが苦手なので、ソースコードを追って見つけました。&lt;/p&gt;
 
