@@ -76,11 +76,13 @@ title = &quot;test&quot;
 
 <p>何となく、この ContentTypes の archetype が使えそうです。</p>
 
-<h1 id="archetypes-post-md:32ab7241d48fcc174c877413a917f8cf">archetypes/post.md</h1>
+<h1 id="archetypes:32ab7241d48fcc174c877413a917f8cf">archetypes</h1>
 
-<p>archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</p>
+<p><del> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</del></p>
 
-<pre><code>$ cat archetypes/post.md
+<h1 id="archetypes-default-md-に追加したいテンプレートを入れます:32ab7241d48fcc174c877413a917f8cf">archetypes/default.md に追加したいテンプレートを入れます。</h1>
+
+<pre><code>$ cat archetypes/default.md
 +++
 categories = []
 tags = []
@@ -88,7 +90,7 @@ draft = false
 +++
 
 #
-$ hugo new -k post test.md
+$ hugo new test.md
 </code></pre>
 
 <h1 id="結果:32ab7241d48fcc174c877413a917f8cf">結果</h1>
