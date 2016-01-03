@@ -73,6 +73,20 @@ title = &amp;quot;test3&amp;quot;
 &lt;ul&gt;
 &lt;li&gt;参考 &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f&#34;&gt;https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&#34;思う所:32ab7241d48fcc174c877413a917f8cf&#34;&gt;思う所&lt;/h1&gt;
+
+&lt;p&gt;メタデータの並びは、出来れば&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;title = &amp;quot;Hugo の post テンプレートのカスタマイズ&amp;quot;
+date = &amp;quot;2016-01-03T22:03:24+09:00&amp;quot;
+categories = [&amp;quot;Hugo&amp;quot;]
+tags = [&amp;quot;Hugo&amp;quot;]
+draft = false
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。&lt;/p&gt;
 </description>
     </item>
     
