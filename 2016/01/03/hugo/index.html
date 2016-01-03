@@ -70,7 +70,11 @@ title = &quot;test&quot;
 
 <p>のように date と title だけで、出来ればもう少し欲しい所です。</p>
 
-<p>そこで archetypes の出番！</p>
+<ul>
+<li><a href="https://gohugo.io/content/types/">https://gohugo.io/content/types/</a></li>
+</ul>
+
+<p>何となく、この ContentTypes の archetype が使えそうです。</p>
 
 <h1 id="archetypes-post-md:32ab7241d48fcc174c877413a917f8cf">archetypes/post.md</h1>
 
@@ -123,6 +127,60 @@ draft = false
 </code></pre>
 
 <p>のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。</p>
+
+<h1 id="追記:32ab7241d48fcc174c877413a917f8cf">追記</h1>
+
+<p>英語のドキュメントが苦手なので、ソースコードを追って見つけました。</p>
+
+<ul>
+<li>github.com/spf13/hugo</li>
+</ul>
+
+<pre><code>$ cd github.com/spf13/hugo
+$ grep -r &quot;title =&quot; . | head -3
+./commands/import_jekyll.go:	       	 title = str
+./create/content.go:			       by = []byte(&quot;+++\n title = \&quot;title\&quot;\n draft = true \n+++\n&quot;)
+./docs/config.toml:title = &quot;Hugo: A Fast and Flexible Website Generator&quot;
+</code></pre>
+
+<ul>
+<li>create/content.go</li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">func</span> <span style="color: #a6e22e">NewContent</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">kind</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">name</span> <span style="color: #66d9ef">string</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">err</span> <span style="color: #66d9ef">error</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">location</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">FindArchetype</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">kind</span><span style="color: #f8f8f2">)</span>
+	<span style="color: #66d9ef">if</span> <span style="color: #a6e22e">location</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&quot;&quot;</span> <span style="color: #f92672">||</span> <span style="color: #a6e22e">err</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f8f8f2">{</span>
+		<span style="color: #a6e22e">by</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">[]byte(</span><span style="color: #e6db74">&quot;+++\n title = \&quot;title\&quot;\n draft = true \n+++\n&quot;</span><span style="color: #f8f8f2">)</span>
+	<span style="color: #f8f8f2">}</span>
+	<span style="color: #a6e22e">psr</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">err</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">parser</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">ReadFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bytes</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">NewReader</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">by</span><span style="color: #f8f8f2">))</span>
+	<span style="color: #a6e22e">metadata</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">err</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">psr</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Metadata</span><span style="color: #f8f8f2">()</span>
+</pre></div>
+
+
+<p>archetype にファイルを置いてカスタムするのが分かります。kind で指定しているようです。</p>
+
+<ul>
+<li>command/new.go</li>
+</ul>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #a6e22e">newCmd</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Flags</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">StringVarP</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">&amp;</span><span style="color: #a6e22e">contentType</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;kind&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;k&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Content type to create&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #960050; background-color: #1e0010">＜</span><span style="color: #a6e22e">略</span><span style="color: #960050; background-color: #1e0010">＞</span>
+<span style="color: #66d9ef">if</span> <span style="color: #a6e22e">contentType</span> <span style="color: #f92672">!=</span> <span style="color: #e6db74">&quot;&quot;</span> <span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">kind</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">contentType</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #66d9ef">return</span> <span style="color: #a6e22e">create</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">NewContent</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">kind</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">createpath</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+</p>
+
+<p>これで、-k オプションで指定する事が分かります。</p>
+
+<p>あとはドキュメントを検索すると、</p>
+
+<ul>
+<li><a href="https://gohugo.io/content/types/">https://gohugo.io/content/types/</a></li>
+</ul>
+
+<p>が出てきて、hugo new <path> は post と呼ばれるので、-k post だなと推測できる訳です。</p>
 
   </section>
 </article>
