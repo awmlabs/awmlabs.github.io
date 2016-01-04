@@ -209,6 +209,18 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;h1 id=&#34;参考-url:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;wikipedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;碧色工房 〜 PNM ( PPM / PGM / PBM ) ファイルフォーマット
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mm2d.net/main/prog/c/image_io-01.html&#34;&gt;http://www.mm2d.net/main/prog/c/image_io-01.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&#34;&gt;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 
 &lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
