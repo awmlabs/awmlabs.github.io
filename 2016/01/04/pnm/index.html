@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>PNM と ImageMagick で画像ファイルを手作業生成 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="http://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-04">January 04, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/categories/graphics">Graphics</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="http://blog.awm.jp/tags/pnm">PNM</a>
+
+        <a href="http://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="http://blog.awm.jp/tags/pbm">PBM</a>
+
+        <a href="http://blog.awm.jp/tags/pgm">PGM</a>
+
+        <a href="http://blog.awm.jp/tags/ppm">PPM</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">PNM と ImageMagick で画像ファイルを手作業生成</h1>
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="pnm-と-imagemagick-で画像ファイルを手作業生成:c3c49ecad8577b50a243cb7525433ac2">PNM と ImageMagick で画像ファイルを手作業生成</h1>
+
+<p>何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が可能です。</p>
+
+<h1 id="pnm-とは:c3c49ecad8577b50a243cb7525433ac2">PNM とは</h1>
+
+<p>古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来る事が大きな特徴です、尚、圧縮はいたしません。</p>
+
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)">PNM (画像フォーマット)</a></li>
+</ul>
+
+<p>PNM は 以下の３つのフォーマットをまとめた呼び方です。</p>
+
+<ul>
+<li>PBM (portable bitmap format)
+
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pbm.html">http://netpbm.sourceforge.net/doc/pbm.html</a></li>
+</ul></li>
+<li>PGM (portable graymap format)
+
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pgm.html">http://netpbm.sourceforge.net/doc/pgm.html</a></li>
+</ul></li>
+<li>PPM (portable pixmap format)
+
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/ppm.html">http://netpbm.sourceforge.net/doc/ppm.html</a></li>
+</ul></li>
+</ul>
+
+<h1 id="フォーマット概要:c3c49ecad8577b50a243cb7525433ac2">フォーマット概要</h1>
+
+<p>ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf もありますが、今回は省きます。</p>
+
+<table>
+<thead>
+<tr>
+<th>ファイル先頭</th>
+<th>フォーマット</th>
+<th>データ表現</th>
+<th>画像表現</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>P1</td>
+<td>PBM</td>
+<td>ASCII</td>
+<td>白黒画像</td>
+</tr>
+
+<tr>
+<td>P2</td>
+<td>PGM</td>
+<td>ASCII</td>
+<td>グレー画像</td>
+</tr>
+
+<tr>
+<td>P3</td>
+<td>PPM</td>
+<td>ASCII</td>
+<td>カラー画像(RGB)</td>
+</tr>
+
+<tr>
+<td>P4</td>
+<td>PGM</td>
+<td>Binary</td>
+<td>白黒画像</td>
+</tr>
+
+<tr>
+<td>P5</td>
+<td>PGM</td>
+<td>Binary</td>
+<td>グレー画像</td>
+</tr>
+
+<tr>
+<td>P6</td>
+<td>PPM</td>
+<td>Binary</td>
+<td>カラー画像(RGB)</td>
+</tr>
+</tbody>
+</table>
+
+<p>ASCII の場合は以下のようなフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。</p>
+
+<pre><code>&lt;フォーマット種別&gt; # P1〜P6のいずれか。
+横サイズ 縦サイズ
+最大値             # P1 の時は省略 (1固定なので)
+画像データ .....
+</code></pre>
+
+<h1 id="pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2">PBM (portable bitmap format)</h1>
+
+<p>画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)</p>
+
+<ul>
+<li>batsu.pbm</li>
+</ul>
+
+<pre><code>P1
+7 7
+P1
+7 7
+1 0 0 0 0 0 1
+0 1 0 0 0 1 0
+0 0 1 0 1 0 0
+0 0 0 1 0 0 0
+0 0 1 0 1 0 0
+0 1 0 0 0 1 0
+1 0 0 0 0 0 1
+</code></pre>
+
+<p>ImageMagick の convert で変換します。ついでに8倍に拡大したものも。</p>
+
+<pre><code>$ convert batsu.pbm batsu.png
+$ convert -resize 800% -filter point batsu.png batsu_8.png
+</code></pre>
+
+<p><center> <img src="/2016/01/04/batsu.png" title="batsu" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_8.png" title="batsu_8" > </center></p>
+
+<h1 id="pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2">PGM (portable graymap format)</h1>
+
+<p>白と黒の間で濃淡をつけられます。以下のは4段階にしてます。</p>
+
+<ul>
+<li>batsu_gray.pgm</li>
+</ul>
+
+<pre><code>P2
+7 7
+4
+4 0 0 0 0 0 4
+0 3 0 0 0 3 0
+0 0 2 0 2 0 0
+0 0 0 1 0 0 0
+0 0 2 0 2 0 0
+0 3 0 0 0 3 0
+4 0 0 0 0 0 4
+</code></pre>
+
+<p>convert で変換 &amp; 8倍画像</p>
+
+<pre><code>$ convert batsu_gray.pgm batsu_gray.png
+$ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
+</code></pre>
+
+<p><center> <img src="/2016/01/04/batsu_gray.png" title="batsu_gray" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_gray_8.png" title="batsu_gray_8" > </center></p>
+
+<h1 id="ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2">PPM (portable pixmap format)</h1>
+
+<p>RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すれば皆さんお馴染みの RGB 表現になります。</p>
+
+<ul>
+<li>batsu_rgb.ppm</li>
+</ul>
+
+<pre><code>P3
+7 7
+4
+4 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 4
+0 0 0  3 0 0  0 0 0  0 0 0  0 0 0  0 0 3  0 0 0
+0 0 0  0 0 0  2 0 0  0 0 0  0 0 3  0 0 0  0 0 0
+0 0 0  0 0 0  0 0 0  1 1 1  0 0 0  0 0 0  0 0 0
+0 0 0  0 0 0  0 2 0  0 0 0  2 2 0  0 0 0  0 0 0
+0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
+0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
+</code></pre>
+
+<p>convert で変換</p>
+
+<pre><code>convert  batsu_rgb.ppm batsu_rgb.png
+ convert  -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
+</code></pre>
+
+<p><center> <img src="/2016/01/04/batsu_rgb.png" title="batsu_rgb" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_rgb_8.png" title="batsu_rgb_8" > </center></p>
+
+<h1 id="以上:c3c49ecad8577b50a243cb7525433ac2">以上</h1>
+
+<p>エディタで任意のビットマップ画像を作りたい時にご活用下さい。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

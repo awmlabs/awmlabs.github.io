@@ -7,8 +7,212 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sun, 03 Jan 2016 22:03:24 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 Jan 2016 19:38:39 +0900</lastBuildDate>
     <atom:link href="http://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PNM と ImageMagick で画像ファイルを手作業生成</title>
+      <link>http://blog.awm.jp/2016/01/04/pnm/</link>
+      <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
+      
+      <guid>http://blog.awm.jp/2016/01/04/pnm/</guid>
+      <description>
+
+&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作業生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作業生成&lt;/h1&gt;
+
+&lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が可能です。&lt;/p&gt;
+
+&lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
+
+&lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来る事が大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;PNM は 以下の３つのフォーマットをまとめた呼び方です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PBM (portable bitmap format)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pbm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pbm.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;PGM (portable graymap format)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pgm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pgm.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;PPM (portable pixmap format)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/ppm.html&#34;&gt;http://netpbm.sourceforge.net/doc/ppm.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
+
+&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf もありますが、今回は省きます。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ファイル先頭&lt;/th&gt;
+&lt;th&gt;フォーマット&lt;/th&gt;
+&lt;th&gt;データ表現&lt;/th&gt;
+&lt;th&gt;画像表現&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;P1&lt;/td&gt;
+&lt;td&gt;PBM&lt;/td&gt;
+&lt;td&gt;ASCII&lt;/td&gt;
+&lt;td&gt;白黒画像&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;P2&lt;/td&gt;
+&lt;td&gt;PGM&lt;/td&gt;
+&lt;td&gt;ASCII&lt;/td&gt;
+&lt;td&gt;グレー画像&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;P3&lt;/td&gt;
+&lt;td&gt;PPM&lt;/td&gt;
+&lt;td&gt;ASCII&lt;/td&gt;
+&lt;td&gt;カラー画像(RGB)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;P4&lt;/td&gt;
+&lt;td&gt;PGM&lt;/td&gt;
+&lt;td&gt;Binary&lt;/td&gt;
+&lt;td&gt;白黒画像&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;P5&lt;/td&gt;
+&lt;td&gt;PGM&lt;/td&gt;
+&lt;td&gt;Binary&lt;/td&gt;
+&lt;td&gt;グレー画像&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;P6&lt;/td&gt;
+&lt;td&gt;PPM&lt;/td&gt;
+&lt;td&gt;Binary&lt;/td&gt;
+&lt;td&gt;カラー画像(RGB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;ASCII の場合は以下のようなフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;フォーマット種別&amp;gt; # P1〜P6のいずれか。
+横サイズ 縦サイズ
+最大値             # P1 の時は省略 (1固定なので)
+画像データ .....
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
+
+&lt;p&gt;画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;batsu.pbm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;P1
+7 7
+P1
+7 7
+1 0 0 0 0 0 1
+0 1 0 0 0 1 0
+0 0 1 0 1 0 0
+0 0 0 1 0 0 0
+0 0 1 0 1 0 0
+0 1 0 0 0 1 0
+1 0 0 0 0 0 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ImageMagick の convert で変換します。ついでに8倍に拡大したものも。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert batsu.pbm batsu.png
+$ convert -resize 800% -filter point batsu.png batsu_8.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
+&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
+
+&lt;p&gt;白と黒の間で濃淡をつけられます。以下のは4段階にしてます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;batsu_gray.pgm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;P2
+7 7
+4
+4 0 0 0 0 0 4
+0 3 0 0 0 3 0
+0 0 2 0 2 0 0
+0 0 0 1 0 0 0
+0 0 2 0 2 0 0
+0 3 0 0 0 3 0
+4 0 0 0 0 0 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;convert で変換 &amp;amp; 8倍画像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert batsu_gray.pgm batsu_gray.png
+$ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
+&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
+
+&lt;p&gt;RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すれば皆さんお馴染みの RGB 表現になります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;batsu_rgb.ppm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;P3
+7 7
+4
+4 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 4
+0 0 0  3 0 0  0 0 0  0 0 0  0 0 0  0 0 3  0 0 0
+0 0 0  0 0 0  2 0 0  0 0 0  0 0 3  0 0 0  0 0 0
+0 0 0  0 0 0  0 0 0  1 1 1  0 0 0  0 0 0  0 0 0
+0 0 0  0 0 0  0 2 0  0 0 0  2 2 0  0 0 0  0 0 0
+0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
+0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;convert で変換&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;convert  batsu_rgb.ppm batsu_rgb.png
+ convert  -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
+&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;以上:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;以上&lt;/h1&gt;
+
+&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hugo の post テンプレートのカスタマイズ</title>
