@@ -11,14 +11,14 @@
     <atom:link href="http://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>PNM と ImageMagick で画像ファイルを手作業生成</title>
+      <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
       <link>http://blog.awm.jp/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
       
       <guid>http://blog.awm.jp/2016/01/04/pnm/</guid>
       <description>
 
-&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作業生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作業生成&lt;/h1&gt;
+&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
 
 &lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。&lt;/p&gt;
 
