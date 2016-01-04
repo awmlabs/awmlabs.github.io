@@ -69,7 +69,7 @@
 
 &lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
 
-&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf (PFM形式) もありますが、今回は省きます。&lt;/p&gt;
+&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。(尚、PAM形式は P7 で、PFM形式は PF, Pf です)&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -126,7 +126,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;データ表現が ASCII の場合は以下のフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。&lt;/p&gt;
+&lt;p&gt;データ表現が ASCII の場合は以下のフォーマットをとります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;フォーマット種別 # P1〜P6のいずれか。
 横サイズ 縦サイズ
