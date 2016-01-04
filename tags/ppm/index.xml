@@ -50,7 +50,9 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;今回解説しませんが、広義には以下のフォーマットも含むかもしれません。透明度が表現できます。&lt;/p&gt;
+&lt;h2 id=&#34;拡張フォーマット:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;拡張フォーマット&lt;/h2&gt;
+
+&lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float 表現です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PAM (portable arbitrary map)
@@ -58,11 +60,16 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pam.html&#34;&gt;http://netpbm.sourceforge.net/doc/pam.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;PFM (portable float map)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pfm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pfm.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
 
-&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf もありますが、今回は省きます。&lt;/p&gt;
+&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf (PFM形式) もありますが、今回は省きます。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
