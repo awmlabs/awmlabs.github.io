@@ -64,7 +64,7 @@
 
 <h1 id="pnm-と-imagemagick-で画像ファイルを手作業生成:c3c49ecad8577b50a243cb7525433ac2">PNM と ImageMagick で画像ファイルを手作業生成</h1>
 
-<p>何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が可能です。</p>
+<p>何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。</p>
 
 <h1 id="pnm-とは:c3c49ecad8577b50a243cb7525433ac2">PNM とは</h1>
 
@@ -153,12 +153,13 @@
 </tbody>
 </table>
 
-<p>ASCII の場合は以下のようなフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。</p>
+<p>データ表現が ASCII の場合は以下のフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。</p>
 
 <pre><code>&lt;フォーマット種別&gt; # P1〜P6のいずれか。
 横サイズ 縦サイズ
-最大値             # P1 の時は省略 (1固定なので)
-画像データ .....
+最大値             # P1 の時は実質1固定なので省略
+画像データの並び
+.....
 </code></pre>
 
 <h1 id="pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2">PBM (portable bitmap format)</h1>
@@ -252,9 +253,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 <center> 8倍に ↓ 拡大 </center>
 <center> <img src="/2016/01/04/batsu_rgb_8.png" title="batsu_rgb_8" > </center></p>
 
-<h1 id="以上:c3c49ecad8577b50a243cb7525433ac2">以上</h1>
+<h1 id="さいごに:c3c49ecad8577b50a243cb7525433ac2">さいごに</h1>
 
-<p>エディタで任意のビットマップ画像を作りたい時にご活用下さい。</p>
+<p>エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。</p>
 
   </section>
 </article>

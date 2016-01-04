@@ -20,7 +20,7 @@
 
 &lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作業生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作業生成&lt;/h1&gt;
 
-&lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が可能です。&lt;/p&gt;
+&lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。&lt;/p&gt;
 
 &lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
 
@@ -109,12 +109,13 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;ASCII の場合は以下のようなフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。&lt;/p&gt;
+&lt;p&gt;データ表現が ASCII の場合は以下のフォーマットをとります。Binary も大差ないですが今回は説明をはしょります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;フォーマット種別&amp;gt; # P1〜P6のいずれか。
 横サイズ 縦サイズ
-最大値             # P1 の時は省略 (1固定なので)
-画像データ .....
+最大値             # P1 の時は実質1固定なので省略
+画像データの並び
+.....
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
@@ -208,9 +209,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;以上:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;以上&lt;/h1&gt;
+&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 
-&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。&lt;/p&gt;
+&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
 </description>
     </item>
     
