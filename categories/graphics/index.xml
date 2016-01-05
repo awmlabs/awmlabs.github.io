@@ -70,9 +70,9 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;余白を埋める:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白を埋める&lt;/h2&gt;
+&lt;h2 id=&#34;余白をつける:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白をつける&lt;/h2&gt;
 
-&lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白を適当な色で埋めれば可能です。&lt;/p&gt;
+&lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;convert saitama.jpg -thumbnail 100x100 -gravity center -extent 100x100 saitama_100x100extent.jpg
 &lt;/code&gt;&lt;/pre&gt;
