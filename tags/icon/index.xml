@@ -36,7 +36,7 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うと思います。&lt;/p&gt;
+&lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ identify saitama_100x100.jpg
 saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
@@ -61,9 +61,9 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;h2 id=&#34;削っちゃう:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;削っちゃう&lt;/h2&gt;
 
-&lt;p&gt;先程の 100x100 指定では大きい方の辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。&lt;/p&gt;
+&lt;p&gt;先程の 100x100 指定では縦と横のうち大きい辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。&lt;/p&gt;
 
-&lt;p&gt;その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな方の辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。&lt;/p&gt;
+&lt;p&gt;その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_100x100crop.jpg
 &lt;/code&gt;&lt;/pre&gt;
@@ -88,16 +88,16 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;h1 id=&#34;丸くクリップする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸くクリップする&lt;/h1&gt;
 
-&lt;p&gt;最後にサムネールとは少し異なりますが、丸いアイコンの作り方も紹介します。&lt;/p&gt;
+&lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコンの作り方も紹介します。&lt;/p&gt;
 
-&lt;p&gt;円の縁の外側は透明にしたいので、png を生成します。&lt;/p&gt;
+&lt;p&gt;尚、円の縁の外側は透明にしたいので、今回は png を生成します。&lt;/p&gt;
 
-&lt;p&gt;convert の -draw オプションで丸の画像を作ってみます。&lt;/p&gt;
+&lt;p&gt;まずは、convert の -draw オプションで丸のクリップ用画像を作ります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; circle_mask.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;-compose CopyOpacity を使うとクリップ出来ます。&lt;/p&gt;
+&lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 &lt;/code&gt;&lt;/pre&gt;
@@ -114,6 +114,10 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;画像は同じ結果なので省略します。&lt;/p&gt;
+
+&lt;h1 id=&#34;最後に:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;最後に&lt;/h1&gt;
+
+&lt;p&gt;リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった事へのケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明します。&lt;/p&gt;
 
 &lt;h1 id=&#34;参考-url:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;参考 URL&lt;/h1&gt;
 
