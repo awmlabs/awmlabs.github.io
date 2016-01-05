@@ -29,7 +29,7 @@
 
 &lt;h1 id=&#34;とりあえず小さくする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;とりあえず小さくする&lt;/h1&gt;
 
-&lt;p&gt;手始めに適当なサイズを指定してサムネールを作ります。&lt;/p&gt;
+&lt;p&gt;手始めに適当なサイズ 100x100 を指定してサムネールを作ります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
 &lt;/code&gt;&lt;/pre&gt;
@@ -44,20 +44,20 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;単純に 100x100 を指定すると、アスペクト比(縦と横の比率)が変わらないよう調整される為です。&lt;/p&gt;
 
-&lt;h1 id=&#34;リサイズ後のサイズを固定する:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;リサイズ後のサイズを固定する&lt;/h1&gt;
+&lt;h1 id=&#34;リサイズ後のサイズを-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;リサイズ後のサイズを 100x100 にする&lt;/h1&gt;
 
-&lt;p&gt;確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。&lt;/p&gt;
+&lt;p&gt;アスペクト比を無視して、確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;しかしアスペクト比が変わっているので、恐らく望む結果ではないでしょう。&lt;/p&gt;
+&lt;p&gt;しかしこれは、恐らく望む結果ではないでしょう。&lt;/p&gt;
 
 &lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
 
-&lt;p&gt;そんな矛盾した要求を。。。と一瞬思いますが、２つ方法が考えられます。&lt;/p&gt;
+&lt;p&gt;そんな矛盾した要求を。。。と一瞬怯みますが、２つ方法が思いつきます。&lt;/p&gt;
 
 &lt;h2 id=&#34;削っちゃう:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;削っちゃう&lt;/h2&gt;
 
@@ -86,16 +86,18 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;丸くクリップする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸くクリップする&lt;/h1&gt;
+&lt;h1 id=&#34;丸いアイコン風画像の作り方:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
 
-&lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコンの作り方も紹介します。&lt;/p&gt;
+&lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコン風画像の作り方も紹介します。&lt;/p&gt;
 
-&lt;p&gt;尚、円の縁の外側は透明にしたいので、今回は png を生成します。&lt;/p&gt;
+&lt;p&gt;尚、円の外側は透明にしたいので、今回は png を生成します。&lt;/p&gt;
 
 &lt;p&gt;まずは、convert の -draw オプションで丸のクリップ用画像を作ります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; circle_mask.png
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
 
