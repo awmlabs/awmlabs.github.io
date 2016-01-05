@@ -65,7 +65,8 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_100x100crop.jpg
+&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100^ -gravity center \
+	-extent 100x100 saitama_100x100crop.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
@@ -74,14 +75,16 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;convert saitama.jpg -thumbnail 100x100 -gravity center -extent 100x100 saitama_100x100extent.jpg
+&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -gravity center \
+	-extent 100x100 saitama_100x100extent.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;余白の色が白で見えにくいので、-background で黒を指定してみます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent 100x100 saitama_100x100black.jpg
+&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background black \
+	-gravity center -extent 100x100 saitama_100x100black.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
@@ -94,14 +97,16 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;まずは、convert の -draw オプションで丸のクリップ用画像を作ります。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; circle_mask.png
+&lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; \
+	circle_mask.png
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
+&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
+	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
