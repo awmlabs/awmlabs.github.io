@@ -345,6 +345,10 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
+
+&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
+
 &lt;h1 id=&#34;参考-url:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -356,10 +360,6 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&#34;&gt;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
-
-&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
 </description>
     </item>
     
