@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Imagemagick on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/imagemagick/</link>
+    <link>http://blog.awm.jp/tags/imagemagick/</link>
     <description>Recent content in Imagemagick on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Wed, 06 Jan 2016 16:27:11 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>グレーJPEGをPNGにすると暗くなる件</title>
-      <link>https://blog.awm.jp/2016/01/06/gray/</link>
+      <link>http://blog.awm.jp/2016/01/06/gray/</link>
       <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
+      <guid>http://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
 &lt;h1 id=&#34;グレーjpegをpngにすると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレーJPEGをPNGにすると暗くなる件&lt;/h1&gt;
@@ -193,10 +193,10 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
     
     <item>
       <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
+      <link>http://blog.awm.jp/2016/01/05/thumbnail/</link>
       <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
+      <guid>http://blog.awm.jp/2016/01/05/thumbnail/</guid>
       <description>
 
 &lt;h1 id=&#34;imagemagick-でサムネール画像生成:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
@@ -206,7 +206,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;p&gt;ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自分は -resize を使う事が多いですが、今回は余計なメタデータを削除してくれる -thumbnail を使ってみます。&lt;/p&gt;
 
 &lt;p&gt;オリジナル画像はこちらをを使います。
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;とりあえず小さくする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;とりあえず小さくする&lt;/h1&gt;
 
@@ -215,7 +215,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。&lt;/p&gt;
 
@@ -232,7 +232,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
 
@@ -250,7 +250,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-extent 100x100 saitama_100x100crop.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;余白をつける:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白をつける&lt;/h2&gt;
 
@@ -260,7 +260,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-extent 100x100 saitama_100x100extent.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;余白の色が白で見えにくいので、-background で黒を指定してみます。&lt;/p&gt;
 
@@ -268,7 +268,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-gravity center -extent 100x100 saitama_100x100black.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;丸いアイコン風画像の作り方:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
 
@@ -282,7 +282,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	circle_mask.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
 
@@ -290,7 +290,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;一行にまとめる:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;一行にまとめる&lt;/h2&gt;
 
@@ -328,10 +328,10 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
     
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>http://blog.awm.jp/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>http://blog.awm.jp/2016/01/04/pnm/</guid>
       <description>
 
 &lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
@@ -478,9 +478,9 @@ P1
 $ convert -resize 800% -filter point batsu.png batsu_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
 
@@ -508,9 +508,9 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
 
@@ -538,9 +538,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 
