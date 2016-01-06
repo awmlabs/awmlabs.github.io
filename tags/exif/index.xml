@@ -82,7 +82,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
 
-&lt;p&gt;実は手元の MacOSX で検証していて気づいたのですが、 . MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
+&lt;p&gt;実は手元の MacOSX で検証していて気づいたのですが、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
@@ -92,13 +92,13 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;自分でコンパイルしたもの
-&lt;code&gt;
-./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
-&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;自分でコンパイルしたもの&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;どうやら libpng 次第で挙動が変わる模様。バージョンのせいか Homebrew の libpng だからなのかは分かりませんが、調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
 </description>
     </item>
     
