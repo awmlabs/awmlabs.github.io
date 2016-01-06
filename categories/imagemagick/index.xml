@@ -30,7 +30,9 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、offset 情報がおかしくなります。
+&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。
+上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、
+offset 情報がおかしくなります。
 
 $ convert right-mirrored.jpg -auto-orient out.png
 $ identify out.png
@@ -63,7 +65,7 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;画像を単独で表示する場合は問題ないのですが、例えば HTML ドキュメントにレイアウトされる場合に、期待する場所より右上に配置されるかもしれません。(未確認)&lt;/p&gt;
+&lt;p&gt;画像を単独で表示する場合は問題ないのですが、例えば HTML ドキュメントにレイアウトされる場合に、期待する場所は左下で、実際んは右上に方に配置されるかもしれません。(未確認)&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -152,7 +154,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
 
-&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに寄ります。気まぐれですみません。&lt;/p&gt;
+&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
 
 &lt;p&gt;直近だとこんな対応。&lt;/p&gt;
 
@@ -274,6 +276,8 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;あれれ。。&lt;/p&gt;
 
 &lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式なのを確認したバージョンが違うのではないかなーと思います。&lt;/p&gt;
 </description>
