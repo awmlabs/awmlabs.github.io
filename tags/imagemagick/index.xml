@@ -62,7 +62,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
 
-&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに寄ります。気まぐれですみません。&lt;/p&gt;
+&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
 
 &lt;p&gt;直近だとこんな対応。&lt;/p&gt;
 
@@ -185,6 +185,8 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;p&gt;あれれ。。&lt;/p&gt;
+
 &lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式なのを確認したバージョンが違うのではないかなーと思います。&lt;/p&gt;
 </description>
     </item>
@@ -232,7 +234,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;しかしこれは、恐らく望む結果ではないでしょう。&lt;/p&gt;
+&lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
 
 &lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
 

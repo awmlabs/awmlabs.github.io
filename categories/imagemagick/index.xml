@@ -7,8 +7,98 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Wed, 06 Jan 2016 16:27:11 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Jan 2016 19:52:03 +0900</lastBuildDate>
     <atom:link href="http://blog.awm.jp/categories/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
+      <link>http://blog.awm.jp/2016/01/06/orient/</link>
+      <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
+      
+      <guid>http://blog.awm.jp/2016/01/06/orient/</guid>
+      <description>
+
+&lt;h1 id=&#34;auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
+
+&lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、offset 情報がおかしくなります。
+
+$ convert right-mirrored.jpg -auto-orient out.png
+$ identify out.png
+out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 0:00.000
+このケースは -auto-orient をつけて一度 JPEG に変換し、
+改めて PNG に変換すると正しい情報の画像が得られます。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。結論を先に言うと +repage を使ってみてはどうでしょうという提案です。&lt;/p&gt;
+
+&lt;h1 id=&#34;実装:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;実装&lt;/h1&gt;
+
+&lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AutoOrientImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;要するに汎用の Rotate ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient out.png
+$ identify out.png
+out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;画像を単独で表示する場合は問題ないのですが、例えば HTML ドキュメントにレイアウトされる場合に、期待する場所より右上に配置されるかもしれません。(未確認)&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;repage:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;+repage&lt;/h1&gt;
+
+&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがありますが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
+$ identify out-repage.png
+out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;という感じで、+repage で良いかもしれません。&lt;/p&gt;
+
+&lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
+
+&lt;p&gt;実は手元の MacOSX で検証していて気づいたのですが、 . MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;自分でコンパイルしたもの
+&lt;code&gt;
+./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;どうやら libpng 次第で挙動が変わる模様。バージョンのせいか Homebrew の libpng だからなのかは分かりませんが、追うのは少し面倒そうでした。気が向いたらもう少し追います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>グレーJPEGをPNGにすると暗くなる件</title>
@@ -62,7 +152,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
 
-&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに寄ります。気まぐれですみません。&lt;/p&gt;
+&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
 
 &lt;p&gt;直近だとこんな対応。&lt;/p&gt;
 
@@ -184,6 +274,8 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;あれれ。。&lt;/p&gt;
 
 &lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式なのを確認したバージョンが違うのではないかなーと思います。&lt;/p&gt;
 </description>
