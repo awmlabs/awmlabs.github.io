@@ -432,7 +432,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
 
-&lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来る事が大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
+&lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Wikiedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
@@ -460,7 +460,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;h2 id=&#34;拡張フォーマット:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;拡張フォーマット&lt;/h2&gt;
 
-&lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float 表現です。&lt;/p&gt;
+&lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PAM (portable arbitrary map)
@@ -494,42 +494,42 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;td&gt;P1&lt;/td&gt;
 &lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;白黒画像&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P2&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;グレー画像&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P3&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;カラー画像(RGB)&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P4&lt;/td&gt;
-&lt;td&gt;PGM&lt;/td&gt;
+&lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;白黒画像&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P5&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;グレー画像&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P6&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;カラー画像(RGB)&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
