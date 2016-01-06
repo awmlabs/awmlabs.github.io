@@ -7,8 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 05 Jan 2016 22:59:30 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Jan 2016 03:06:43 +0900</lastBuildDate>
     <atom:link href="http://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG Exif Orientation について</title>
+      <link>http://blog.awm.jp/2016/01/06/orientation/</link>
+      <pubDate>Wed, 06 Jan 2016 03:06:43 +0900</pubDate>
+      
+      <guid>http://blog.awm.jp/2016/01/06/orientation/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-exif-orientation:e47435f403187a034e5284df99b795cc&#34;&gt;JPEG Exif Orientation&lt;/h1&gt;
+
+&lt;h1 id=&#34;参考-url:e47435f403187a034e5284df99b795cc&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>ImageMagick でサムネール画像生成</title>
@@ -803,8 +821,8 @@ docs/content/overview/configuration.md:    hasCJKLanguage              false
 &lt;p&gt;CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; (CircleCI連携の都合で、レポジトリを移動しました)&lt;/ins&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt; (CircleCI連携の都合で、レポジトリを awmlabs に移動しました)&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
