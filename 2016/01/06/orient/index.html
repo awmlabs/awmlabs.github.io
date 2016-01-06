@@ -128,14 +128,14 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 <li>MacPorts の configure オプションをギリギリまで削ったもの</li>
 </ul>
 
-<pre><code>./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
+<pre><code>$ ./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
 </code></pre>
 
 <ul>
 <li>自分でコンパイルしたもの</li>
 </ul>
 
-<pre><code>./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
+<pre><code>$ ./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
 </code></pre>
 
 <p>libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。</p>
