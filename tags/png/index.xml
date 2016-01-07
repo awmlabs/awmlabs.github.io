@@ -134,6 +134,11 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;tbody&gt;
 &lt;tr&gt;
+&lt;td&gt;6.8.0-0&lt;/td&gt;
+&lt;td&gt;GRAY&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
 &lt;td&gt;6.8.0-1&lt;/td&gt;
 &lt;td&gt;GRAY&lt;/td&gt;
 &lt;/tr&gt;
@@ -185,9 +190,9 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;あれれ。。&lt;/p&gt;
+&lt;p&gt;あれれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 では GRAY 形式だ。&lt;/p&gt;
 
-&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式なのを確認したバージョンが違うのではないかなーと思います。&lt;/p&gt;
+&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思います。&lt;/p&gt;
 </description>
     </item>
     
