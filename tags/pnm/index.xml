@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pnm on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/pnm/</link>
+    <link>http://blog.awm.jp/tags/pnm/</link>
     <description>Recent content in Pnm on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Mon, 04 Jan 2016 19:38:39 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/pnm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.awm.jp/tags/pnm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>http://blog.awm.jp/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>http://blog.awm.jp/2016/01/04/pnm/</guid>
       <description>
 
 &lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
@@ -86,42 +86,42 @@
 &lt;td&gt;P1&lt;/td&gt;
 &lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P2&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P3&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P4&lt;/td&gt;
 &lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P5&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P6&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -162,9 +162,9 @@ P1
 $ convert -resize 800% -filter point batsu.png batsu_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
 
@@ -192,9 +192,9 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
 
@@ -222,9 +222,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 

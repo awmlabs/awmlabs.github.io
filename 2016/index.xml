@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2016s on awm-Tech</title>
-    <link>https://blog.awm.jp/2016/</link>
+    <link>http://blog.awm.jp/2016/</link>
     <description>Recent content in 2016s on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Wed, 06 Jan 2016 19:52:03 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
+      <link>http://blog.awm.jp/2016/01/06/orient/</link>
       <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
+      <guid>http://blog.awm.jp/2016/01/06/orient/</guid>
       <description>
 
 &lt;h1 id=&#34;auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
@@ -41,7 +41,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 改めて PNG に変換すると正しい情報の画像が得られます。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。結論を先に言うと +repage を使ってみてはどうでしょうという提案です。&lt;/p&gt;
+&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
 
 &lt;h1 id=&#34;実装:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;実装&lt;/h1&gt;
 
@@ -52,7 +52,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 &lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;要するに汎用の Rotate ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。&lt;/p&gt;
+&lt;p&gt;AutoOrientImage から RotateImage ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。(縦横変わるだけでもはみでますけど)&lt;/p&gt;
 
 &lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
 
@@ -63,26 +63,26 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置されるかもしれません。&lt;/p&gt;
+&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置される恐れがあります。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;repage:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;+repage&lt;/h1&gt;
 
-&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがありますが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
+&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
 $ identify out-repage.png
 out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;という感じで、+repage で良いのではという提案でした。&lt;/p&gt;
+&lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
 
 &lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
 
-&lt;p&gt;実は手元の MacOSX で検証していて気づいたのですが、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
+&lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
@@ -104,10 +104,10 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
     
     <item>
       <title>グレーJPEGをPNGにすると暗くなる件</title>
-      <link>https://blog.awm.jp/2016/01/06/gray/</link>
+      <link>http://blog.awm.jp/2016/01/06/gray/</link>
       <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
+      <guid>http://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
 &lt;h1 id=&#34;グレーjpegをpngにすると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレーJPEGをPNGにすると暗くなる件&lt;/h1&gt;
@@ -285,10 +285,10 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
     
     <item>
       <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
+      <link>http://blog.awm.jp/2016/01/05/thumbnail/</link>
       <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
+      <guid>http://blog.awm.jp/2016/01/05/thumbnail/</guid>
       <description>
 
 &lt;h1 id=&#34;imagemagick-でサムネール画像生成:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
@@ -298,7 +298,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;p&gt;ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自分は -resize を使う事が多いですが、今回は余計なメタデータを削除してくれる -thumbnail を使ってみます。&lt;/p&gt;
 
 &lt;p&gt;オリジナル画像はこちらをを使います。
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;とりあえず小さくする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;とりあえず小さくする&lt;/h1&gt;
 
@@ -307,7 +307,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。&lt;/p&gt;
 
@@ -324,9 +324,9 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;しかしこれは、恐らく望む結果ではないでしょう。&lt;/p&gt;
+&lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
 
 &lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
 
@@ -342,7 +342,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-extent 100x100 saitama_100x100crop.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;余白をつける:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白をつける&lt;/h2&gt;
 
@@ -352,7 +352,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-extent 100x100 saitama_100x100extent.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;余白の色が白で見えにくいので、-background で黒を指定してみます。&lt;/p&gt;
 
@@ -360,7 +360,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	-gravity center -extent 100x100 saitama_100x100black.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;丸いアイコン風画像の作り方:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
 
@@ -374,7 +374,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	circle_mask.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
 
@@ -382,7 +382,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;一行にまとめる:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;一行にまとめる&lt;/h2&gt;
 
@@ -420,10 +420,10 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
     
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>http://blog.awm.jp/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>http://blog.awm.jp/2016/01/04/pnm/</guid>
       <description>
 
 &lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
@@ -494,42 +494,42 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;td&gt;P1&lt;/td&gt;
 &lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P2&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P3&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P4&lt;/td&gt;
 &lt;td&gt;PBM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;白黒画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P5&lt;/td&gt;
 &lt;td&gt;PGM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;グレー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;P6&lt;/td&gt;
 &lt;td&gt;PPM&lt;/td&gt;
 &lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;カラー画像 &lt;img src=&#34;http://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -570,9 +570,9 @@ P1
 $ convert -resize 800% -filter point batsu.png batsu_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
 
@@ -600,9 +600,9 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
 
@@ -630,9 +630,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 
@@ -654,10 +654,10 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
     
     <item>
       <title>Hugo の post テンプレートのカスタマイズ</title>
-      <link>https://blog.awm.jp/2016/01/03/hugo/</link>
+      <link>http://blog.awm.jp/2016/01/03/hugo/</link>
       <pubDate>Sun, 03 Jan 2016 22:03:24 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/03/hugo/</guid>
+      <guid>http://blog.awm.jp/2016/01/03/hugo/</guid>
       <description>
 
 &lt;h1 id=&#34;hugo-の記事テンプレート:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Hugo の記事テンプレート&lt;/h1&gt;
@@ -794,10 +794,10 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
     
     <item>
       <title>Blog の Deploy で Circle CI</title>
-      <link>https://blog.awm.jp/2016/01/02/circleci/</link>
+      <link>http://blog.awm.jp/2016/01/02/circleci/</link>
       <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
+      <guid>http://blog.awm.jp/2016/01/02/circleci/</guid>
       <description>
 
 &lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
@@ -913,10 +913,10 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
     
     <item>
       <title>Hugo のサマリーが大きすぎる件</title>
-      <link>https://blog.awm.jp/2016/01/02/hugo/</link>
+      <link>http://blog.awm.jp/2016/01/02/hugo/</link>
       <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/02/hugo/</guid>
+      <guid>http://blog.awm.jp/2016/01/02/hugo/</guid>
       <description>
 
 &lt;h1 id=&#34;はじめに:32ab7241d48fcc174c877413a917f8cf&#34;&gt;はじめに&lt;/h1&gt;
@@ -951,11 +951,11 @@ hasCJKLanguage              false
 &lt;h1 id=&#34;hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Hugo のサマリーの実例&lt;/h1&gt;
 
 &lt;p&gt;デフォルトだと以下のようにサマリーが巨大になります。
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/02/ss1_h.png&#34; title=&#34;figure-1&#34; &gt; &lt;/center&gt;&lt;/p&gt;
+&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/02/ss1_h.png&#34; title=&#34;figure-1&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;hasCJK 又は isCJK の設定を入れると以下のように自然なサイズになります。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/02/ss2_h.png&#34; title=&#34;figure-2&#34;/&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/02/ss2_h.png&#34; title=&#34;figure-2&#34;/&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;サマリーの仕様:32ab7241d48fcc174c877413a917f8cf&#34;&gt;サマリーの仕様&lt;/h1&gt;
 
@@ -1059,10 +1059,10 @@ docs/content/overview/configuration.md:    hasCJKLanguage              false
     
     <item>
       <title>Blog はじめました</title>
-      <link>https://blog.awm.jp/2016/01/01/blog/</link>
+      <link>http://blog.awm.jp/2016/01/01/blog/</link>
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
+      <guid>http://blog.awm.jp/2016/01/01/blog/</guid>
       <description>
 
 &lt;h1 id=&#34;blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Blog はじめました&lt;/h1&gt;
@@ -1076,8 +1076,8 @@ docs/content/overview/configuration.md:    hasCJKLanguage              false
 &lt;p&gt;CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; (CircleCI連携の都合で、レポジトリを移動しました)&lt;/ins&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt; (CircleCI連携の都合で、レポジトリを awmlabs に移動しました)&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;

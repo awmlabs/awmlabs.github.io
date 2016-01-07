@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Orientation on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/orientation/</link>
+    <link>http://blog.awm.jp/tags/orientation/</link>
     <description>Recent content in Orientation on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Wed, 06 Jan 2016 19:52:03 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/orientation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.awm.jp/tags/orientation/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
+      <link>http://blog.awm.jp/2016/01/06/orient/</link>
       <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
+      <guid>http://blog.awm.jp/2016/01/06/orient/</guid>
       <description>
 
 &lt;h1 id=&#34;auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
@@ -41,7 +41,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 改めて PNG に変換すると正しい情報の画像が得られます。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。結論を先に言うと +repage を使ってみてはどうでしょうという提案です。&lt;/p&gt;
+&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
 
 &lt;h1 id=&#34;実装:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;実装&lt;/h1&gt;
 
@@ -52,7 +52,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 &lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;要するに汎用の Rotate ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。&lt;/p&gt;
+&lt;p&gt;AutoOrientImage から RotateImage ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。(縦横変わるだけでもはみでますけど)&lt;/p&gt;
 
 &lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
 
@@ -63,26 +63,26 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置されるかもしれません。&lt;/p&gt;
+&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置される恐れがあります。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;http://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;repage:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;+repage&lt;/h1&gt;
 
-&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがありますが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
+&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
 $ identify out-repage.png
 out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;という感じで、+repage で良いのではという提案でした。&lt;/p&gt;
+&lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
 
 &lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
 
-&lt;p&gt;実は手元の MacOSX で検証していて気づいたのですが、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
+&lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
