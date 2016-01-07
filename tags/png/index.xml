@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Png on awm-Tech</title>
-    <link>http://blog.awm.jp/tags/png/</link>
+    <link>https://blog.awm.jp/tags/png/</link>
     <description>Recent content in Png on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Wed, 06 Jan 2016 16:27:11 +0900</lastBuildDate>
-    <atom:link href="http://blog.awm.jp/tags/png/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.awm.jp/tags/png/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
-      <link>http://blog.awm.jp/2016/01/06/gray/</link>
+      <link>https://blog.awm.jp/2016/01/06/gray/</link>
       <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
       
-      <guid>http://blog.awm.jp/2016/01/06/gray/</guid>
+      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
 &lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;

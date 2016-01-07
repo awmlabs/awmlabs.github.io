@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Circleci on awm-Tech</title>
-    <link>http://blog.awm.jp/categories/circleci/</link>
+    <link>https://blog.awm.jp/categories/circleci/</link>
     <description>Recent content in Circleci on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://blog.awm.jp/categories/circleci/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.awm.jp/categories/circleci/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Blog の Deploy で Circle CI</title>
-      <link>http://blog.awm.jp/2016/01/02/circleci/</link>
+      <link>https://blog.awm.jp/2016/01/02/circleci/</link>
       <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.awm.jp/2016/01/02/circleci/</guid>
+      <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
       <description>
 
 &lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
