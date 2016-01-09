@@ -34,13 +34,13 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。
-(パフォーマンス的に問題ない処理量ならば、そういう考えもありです)&lt;/p&gt;
+(パフォーマンス的に問題ない処理量ならば、使わなくても良いとは思います)&lt;/p&gt;
 
 &lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
 &lt;h2 id=&#34;jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
 
-&lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG のdecode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
+&lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
 
 &lt;p&gt;(参考イメージ)
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
@@ -58,9 +58,19 @@
 
 &lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
 
-&lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG をDecode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
+&lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
 
 &lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
+
+&lt;p&gt;こちらに詳しいです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.mirakui.com/entry/20110123/1295795409&#34;&gt;http://blog.mirakui.com/entry/20110123/1295795409&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
 
