@@ -73,8 +73,7 @@
 現在このオプションは利用していません。
 </code></pre>
 
-<p>注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。
-(パフォーマンス的に問題ない処理量ならば、使わなくても良いとは思います)</p>
+<p>注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。</p>
 
 <h1 id="define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</h1>
 
@@ -136,13 +135,28 @@
 <center> <img src="/2016/01/08/resize4.png" /> </center></p></li>
 </ul>
 
-<p>動作を考えれば当たり前でメモリを沢山使います。</p>
+<p>という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。</p>
 
-<h1 id="ご提案:8297ce3a5ed4594f91a307954f292784">ご提案</h1>
+<h1 id="が-結論はまだ早い:8297ce3a5ed4594f91a307954f292784">が。。。結論はまだ早い</h1>
 
-<p>リサイズで大きくなる時にメモリを沢山使うのは別に不思議な現象ではない。
-サイズが小さくなる時だけ -define jpeg:size を使うよう注意すれば良いでしょう。
-但し、通常のリサイズアルゴリズムと違う処理になるので、画質については注意が必要です。</p>
+<p>小さくリサイズする時だけ -define jpeg:size をつけるよう気をつけよう。という結論に持っていくつもりでしたが、コード的にはまだ謎があります。</p>
+
+<ul>
+<li>ReadJPEGImage (coders/jpeg.c)
+
+<ul>
+<li><a href="http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105">http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105</a>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
+      <span style="color: #f8f8f2">jpeg_info.scale_denom</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">unsigned</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">scale_factor;</span>
+      <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
+</pre></div>
+</li>
+</ul></li>
+</ul>
+
+<p>拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずですが、縮小するケースしか対応してないように見えます。</p>
+
+<p>もう少し調べる必要がありそうです。</p>
 
   </section>
 </article>

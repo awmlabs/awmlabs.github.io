@@ -33,8 +33,7 @@
 現在このオプションは利用していません。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。
-(パフォーマンス的に問題ない処理量ならば、使わなくても良いとは思います)&lt;/p&gt;
+&lt;p&gt;注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
 &lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
@@ -96,13 +95,28 @@
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/resize4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;動作を考えれば当たり前でメモリを沢山使います。&lt;/p&gt;
+&lt;p&gt;という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。&lt;/p&gt;
 
-&lt;h1 id=&#34;ご提案:8297ce3a5ed4594f91a307954f292784&#34;&gt;ご提案&lt;/h1&gt;
+&lt;h1 id=&#34;が-結論はまだ早い:8297ce3a5ed4594f91a307954f292784&#34;&gt;が。。。結論はまだ早い&lt;/h1&gt;
 
-&lt;p&gt;リサイズで大きくなる時にメモリを沢山使うのは別に不思議な現象ではない。
-サイズが小さくなる時だけ -define jpeg:size を使うよう注意すれば良いでしょう。
-但し、通常のリサイズアルゴリズムと違う処理になるので、画質については注意が必要です。&lt;/p&gt;
+&lt;p&gt;小さくリサイズする時だけ -define jpeg:size をつけるよう気をつけよう。という結論に持っていくつもりでしたが、コード的にはまだ謎があります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ReadJPEGImage (coders/jpeg.c)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_factor;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずですが、縮小するケースしか対応してないように見えます。&lt;/p&gt;
+
+&lt;p&gt;もう少し調べる必要がありそうです。&lt;/p&gt;
 </description>
     </item>
     
