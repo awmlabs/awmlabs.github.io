@@ -45,7 +45,7 @@
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
 引用) &lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scale-factor-つきでデコード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scale factor つきでデコード&lt;/h2&gt;
+&lt;h2 id=&#34;scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
 
 &lt;p&gt;元のサイズの画像データに変換する場合と比べて、手間を増やさず &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。&lt;/p&gt;
 
@@ -137,7 +137,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
-&lt;h1 id=&#34;該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;該当コード&lt;/h1&gt;
+&lt;h1 id=&#34;scaling-の該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling の該当コード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;

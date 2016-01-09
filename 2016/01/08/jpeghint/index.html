@@ -85,7 +85,7 @@
 <center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
 引用) <a href="https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf">https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf</a></p>
 
-<h2 id="scale-factor-つきでデコード:8297ce3a5ed4594f91a307954f292784">scale factor つきでデコード</h2>
+<h2 id="scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784">scaling 指定で Decode</h2>
 
 <p>元のサイズの画像データに変換する場合と比べて、手間を増やさず <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>8</sub> サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。</p>
 
@@ -177,7 +177,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <p>拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。</p>
 
-<h1 id="該当コード:8297ce3a5ed4594f91a307954f292784">該当コード</h1>
+<h1 id="scaling-の該当コード:8297ce3a5ed4594f91a307954f292784">scaling の該当コード</h1>
 
 <ul>
 <li><a href="http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105">http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105</a>
