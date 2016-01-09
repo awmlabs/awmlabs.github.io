@@ -101,19 +101,47 @@
 
 &lt;p&gt;jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。&lt;/p&gt;
 
-&lt;h1 id=&#34;とりあえず結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;とりあえず結論&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;fprintf で表示させる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
+
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
+
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ZZZ: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;縮小では &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; まで scaling decode が効く&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert -define jpeg:size=8x8 -resize 8x8 8000x8000.jpg 8x8.jpg
+AAA: jpeg_info:image_width,height:8000,8000 output_width,height:8000,8000 scale_num:1 scale_denom:1000
+ZZZ: jpeg_info:image_width,height:8000,8000 output_width,height:1000,1000 scale_num:1 scale_denom:1000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;拡大では 2倍までしか効かない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert -define jpeg:size=8000x8000 -resize 8000x8000 8x8.jpg 8000x8000.jpg
+AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_denom:0
+ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;結論&lt;/h1&gt;
 
 &lt;p&gt;小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
-&lt;h1 id=&#34;課題が残ってる:8297ce3a5ed4594f91a307954f292784&#34;&gt;課題が残ってる&lt;/h1&gt;
-
-&lt;p&gt;コード的にはもやもやしてるので、もう少し追います。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ReadJPEGImage (coders/jpeg.c)
+&lt;h1 id=&#34;該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;該当コード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ReadJPEGImage (coders/jpeg.c)
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_factor;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
@@ -122,7 +150,38 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずで、縮小するケースしか対応してないように見えますね。。&lt;/p&gt;
+&lt;p&gt;ここだけ見ると、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/jpeg-8/S/85.html#L52&#34;&gt;http://gt.awm.jp/jpeg-8/S/85.html#L52&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jpeg_core_output_dimensions
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;/* Compute actual output image dimensions and DCT scaling choices. */&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_num&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_denom)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;/* Provide 1/block_size scaling */&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_width&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jdiv_round_up((&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_height&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jdiv_round_up((&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;min_DCT_h_scaled_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;min_DCT_v_scaled_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_num&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_denom&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;/* Provide 2/block_size scaling */&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_width&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jdiv_round_up((&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_width&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2L&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_height&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jdiv_round_up((&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_height&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2L&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;long&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;min_DCT_h_scaled_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;min_DCT_v_scaled_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_num&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_denom&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;この 2/block_size scaling の条件にマッチしたのかなと予想してます。&lt;/p&gt;
 </description>
     </item>
     

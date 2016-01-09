@@ -141,19 +141,47 @@
 
 <p>jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。</p>
 
-<h1 id="とりあえず結論:8297ce3a5ed4594f91a307954f292784">とりあえず結論</h1>
+<ul>
+<li>fprintf で表示させる</li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
+
+      <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
+
+      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;ZZZ: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
+</pre></div>
+
+
+<ul>
+<li>縮小では <sup>1</sup>&frasl;<sub>8</sub> まで scaling decode が効く</li>
+</ul>
+
+<pre><code>$ convert -define jpeg:size=8x8 -resize 8x8 8000x8000.jpg 8x8.jpg
+AAA: jpeg_info:image_width,height:8000,8000 output_width,height:8000,8000 scale_num:1 scale_denom:1000
+ZZZ: jpeg_info:image_width,height:8000,8000 output_width,height:1000,1000 scale_num:1 scale_denom:1000
+</code></pre>
+
+<ul>
+<li>拡大では 2倍までしか効かない</li>
+</ul>
+
+<pre><code>$ convert -define jpeg:size=8000x8000 -resize 8000x8000 8x8.jpg 8000x8000.jpg
+AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_denom:0
+ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
+</code></pre>
+
+<h1 id="結論:8297ce3a5ed4594f91a307954f292784">結論</h1>
 
 <p>小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。</p>
 
-<h1 id="課題が残ってる:8297ce3a5ed4594f91a307954f292784">課題が残ってる</h1>
-
-<p>コード的にはもやもやしてるので、もう少し追います。</p>
-
-<ul>
-<li>ReadJPEGImage (coders/jpeg.c)
+<h1 id="該当コード:8297ce3a5ed4594f91a307954f292784">該当コード</h1>
 
 <ul>
 <li><a href="http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105">http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105</a>
+
+<ul>
+<li>ReadJPEGImage (coders/jpeg.c)
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
       <span style="color: #f8f8f2">jpeg_info.scale_denom</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">unsigned</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">scale_factor;</span>
       <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
@@ -162,7 +190,38 @@
 </ul></li>
 </ul>
 
-<p>拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずで、縮小するケースしか対応してないように見えますね。。</p>
+<p>ここだけ見ると、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。</p>
+
+<ul>
+<li><a href="http://gt.awm.jp/jpeg-8/S/85.html#L52">http://gt.awm.jp/jpeg-8/S/85.html#L52</a>
+
+<ul>
+<li>jpeg_core_output_dimensions
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_num</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_denom)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">/* Provide 1/block_size scaling */</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_width</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>
+      <span style="color: #f8f8f2">jdiv_round_up((</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">image_width,</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size);</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_height</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>
+      <span style="color: #f8f8f2">jdiv_round_up((</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">image_height,</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size);</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">min_DCT_h_scaled_size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">min_DCT_v_scaled_size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_num</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_denom</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">/* Provide 2/block_size scaling */</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_width</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>
+      <span style="color: #f8f8f2">jdiv_round_up((</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">image_width</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">2L</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size);</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_height</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>
+      <span style="color: #f8f8f2">jdiv_round_up((</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">image_height</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">2L</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">long</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size);</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">min_DCT_h_scaled_size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">min_DCT_v_scaled_size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_num</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_denom</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #960050; background-color: #1e0010">＜略＞</span>
+</pre></div>
+</li>
+</ul></li>
+</ul>
+
+<p>この 2/block_size scaling の条件にマッチしたのかなと予想してます。</p>
 
   </section>
 </article>
