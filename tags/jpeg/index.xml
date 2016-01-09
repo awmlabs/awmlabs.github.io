@@ -24,14 +24,14 @@
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;
-&lt;code&gt;
-いつでもつければ良いというものではないので注意しましょう。弊社では、
-このオプションはサービスの安定運用のためには無用と判断し、
-現在このオプションは利用していません。
-&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;いつでもつければ良いというものではないので注意しましょう。弊社では、
+このオプションはサービスの安定運用のためには無用と判断し、
+現在このオプションは利用していません。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意する点ではありますが、この結論では誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
