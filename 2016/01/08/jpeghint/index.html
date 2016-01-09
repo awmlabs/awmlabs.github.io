@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>JPEG の size hinting について - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-08">January 08, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/resize">Resize</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG の size hinting について</h1>
+  <section class="body" itemprop="articleBody">
+    
+
+<p>しつこいですけど、以下の記事の -define jpeg:size への勝手な補足。</p>
+
+<ul>
+<li>もうサムネイルで泣かないための ImageMagick ノウハウ集
+
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/01/06/080000">http://blog.cybozu.io/entry/2016/01/06/080000</a>
+<code>
+いつでもつければ良いというものではないので注意しましょう。弊社では、
+このオプションはサービスの安定運用のためには無用と判断し、
+現在このオプションは利用していません。
+</code></li>
+</ul></li>
+</ul>
+
+<p>注意する点ではありますが、この結論では誤解する人が出そうなので勝手に補足します。</p>
+
+<h1 id="define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</h1>
+
+<h2 id="jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784">JPEG のデータの持ち方</h2>
+
+<p>JPEG は画像の周波数成分のデータを保持していて、JPEG のdecode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。</p>
+
+<p>(参考イメージ)
+<center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
+引用) <a href="https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf">https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf</a></p>
+
+<h2 id="scale-factor-つきでデコード:8297ce3a5ed4594f91a307954f292784">scale factor つきでデコード</h2>
+
+<p>元のサイズの画像データに変換する場合と比べて、手間を増やさず <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>8</sub> サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。</p>
+
+<p><center> <img src="/2016/01/08/dct8x8-4-1-600.png" /> </center></p>
+
+<p>大きなサイズの画像からサムネール画像を生成するのに、一般的なリサイズのアルゴリズムを使わずにいきなり <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>8</sub> の画像に変換、デコード出来ます。</p>
+
+<p>ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。</p>
+
+<h2 id="jpeg-size-hinting-の例:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の例</h2>
+
+<h3 id="小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784">小さくリサイズする場合</h3>
+
+<ul>
+<li><p>普通にリサイズ (-define jpeg:size 無し)
+<center> <img src="/2016/01/08/resize1.png" /> </center></p></li>
+
+<li><p>小さいサイズでデコードしてリサイズ (-define jpeg:size 有り)
+<center> <img src="/2016/01/08/resize2.png" /> </center></p></li>
+</ul>
+
+<p>処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。</p>
+
+<h3 id="大きくリサイズする場合:8297ce3a5ed4594f91a307954f292784">大きくリサイズする場合</h3>
+
+<p>問題にしているケースです。</p>
+
+<ul>
+<li><p>普通にリサイズ (-define jpeg:size 無し)
+<center> <img src="/2016/01/08/resize3.png" /> </center></p></li>
+
+<li><p>大きくリサイズする場合 (-define jpeg:size 有り)
+<center> <img src="/2016/01/08/resize4.png" /> </center></p></li>
+</ul>
+
+<p>動作を考えれば当たり前でメモリを沢山使います。</p>
+
+<h1 id="ご提案:8297ce3a5ed4594f91a307954f292784">ご提案</h1>
+
+<p>リサイズで大きくなる時にメモリを沢山使うのは別に不思議な現象ではない。
+メモリを沢山使うのは確かなので、サイズが小さくなる時だけ -define jpeg:size を使うよう注意すれば良いでしょう。
+但し、通常のリサイズアルゴリズムと違う処理になるので、画質については注意が必要です。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

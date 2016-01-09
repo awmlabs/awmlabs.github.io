@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resize on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/resize/</link>
+    <description>Recent content in Resize on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Fri, 08 Jan 2016 23:40:32 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/resize/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG の size hinting について</title>
+      <link>https://blog.awm.jp/2016/01/08/jpeghint/</link>
+      <pubDate>Fri, 08 Jan 2016 23:40:32 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
+      <description>
+
+&lt;p&gt;しつこいですけど、以下の記事の -define jpeg:size への勝手な補足。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;
+&lt;code&gt;
+いつでもつければ良いというものではないので注意しましょう。弊社では、
+このオプションはサービスの安定運用のためには無用と判断し、
+現在このオプションは利用していません。
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意する点ではありますが、この結論では誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
+
+&lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
+
+&lt;h2 id=&#34;jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
+
+&lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG のdecode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
+
+&lt;p&gt;(参考イメージ)
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
+引用) &lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;scale-factor-つきでデコード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scale factor つきでデコード&lt;/h2&gt;
+
+&lt;p&gt;元のサイズの画像データに変換する場合と比べて、手間を増やさず &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-4-1-600.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;大きなサイズの画像からサムネール画像を生成するのに、一般的なリサイズのアルゴリズムを使わずにいきなり &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; の画像に変換、デコード出来ます。&lt;/p&gt;
+
+&lt;p&gt;ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;jpeg-size-hinting-の例:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の例&lt;/h2&gt;
+
+&lt;h3 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;普通にリサイズ (-define jpeg:size 無し)
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/resize1.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;小さいサイズでデコードしてリサイズ (-define jpeg:size 有り)
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/resize2.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。&lt;/p&gt;
+
+&lt;h3 id=&#34;大きくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;大きくリサイズする場合&lt;/h3&gt;
+
+&lt;p&gt;問題にしているケースです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;普通にリサイズ (-define jpeg:size 無し)
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/resize3.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;大きくリサイズする場合 (-define jpeg:size 有り)
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/resize4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;動作を考えれば当たり前でメモリを沢山使います。&lt;/p&gt;
+
+&lt;h1 id=&#34;ご提案:8297ce3a5ed4594f91a307954f292784&#34;&gt;ご提案&lt;/h1&gt;
+
+&lt;p&gt;リサイズで大きくなる時にメモリを沢山使うのは別に不思議な現象ではない。
+メモリを沢山使うのは確かなので、サイズが小さくなる時だけ -define jpeg:size を使うよう注意すれば良いでしょう。
+但し、通常のリサイズアルゴリズムと違う処理になるので、画質については注意が必要です。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
