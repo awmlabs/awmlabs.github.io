@@ -95,7 +95,11 @@
 
 <p>ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。</p>
 
-<h2 id="jpeg-size-hinting-の例:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の例</h2>
+<h2 id="やっている事:8297ce3a5ed4594f91a307954f292784">やっている事</h2>
+
+<p>リサイズ後の大きさに近くなるよう scale factor を指定して JPEG をDecode し。そこからリサイズする事で、メモリやCPUを節約します。</p>
+
+<h1 id="jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の動作イメージ</h1>
 
 <h3 id="小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784">小さくリサイズする場合</h3>
 

@@ -55,7 +55,11 @@
 
 &lt;p&gt;ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;jpeg-size-hinting-の例:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の例&lt;/h2&gt;
+&lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
+
+&lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG をDecode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
+
+&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
 
 &lt;h3 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h3&gt;
 
@@ -88,6 +92,54 @@
 &lt;p&gt;リサイズで大きくなる時にメモリを沢山使うのは別に不思議な現象ではない。
 メモリを沢山使うのは確かなので、サイズが小さくなる時だけ -define jpeg:size を使うよう注意すれば良いでしょう。
 但し、通常のリサイズアルゴリズムと違う処理になるので、画質については注意が必要です。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exif Orientation の操作方法</title>
+      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <description>
+
+&lt;h1 id=&#34;exif-orientation-の操作方法:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Exif Orientation の操作方法&lt;/h1&gt;
+
+&lt;p&gt;スマートフォン等のカメラで撮影した時に、その向きを記録するメタデータです。&lt;/p&gt;
+
+&lt;p&gt;JPEG には画像データそのものと別に Exif という形式でメタデータ(日付とか撮影条件とか場所とか、写真をとった時の向きとか)を持つ事ができます。&lt;/p&gt;
+
+&lt;p&gt;Orientation はこのうち、写真をとった時の向きを指します。&lt;/p&gt;
+
+&lt;p&gt;(サンプル。iPhone の中に何か映ってる図、左右上下がわかるようなもの)&lt;/p&gt;
+
+&lt;p&gt;詳しくはこちら &amp;gt; &lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ImageMagick を使いたい所ですが ExifTool が便利なのでこっちを使う事にします。&lt;/p&gt;
+
+&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
+
+&lt;p&gt;MacOS なら&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ brew install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Debian Linux なら&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;でインストールできます。&lt;/p&gt;
+
+&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+
+&lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&#34;&gt;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -184,14 +236,14 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
     </item>
     
     <item>
-      <title>グレーJPEGをPNGにすると暗くなる件</title>
+      <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
       <link>https://blog.awm.jp/2016/01/06/gray/</link>
       <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
       
       <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
-&lt;h1 id=&#34;グレーjpegをpngにすると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレーJPEGをPNGにすると暗くなる件&lt;/h1&gt;
+&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
 
 &lt;p&gt;画像サムネール界隈で話題のエントリ&lt;/p&gt;
 
@@ -203,7 +255,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、一点。&lt;/p&gt;
+&lt;p&gt;-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、少し気になる事が。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;グレイスケール画像を考慮しよう
 
@@ -217,10 +269,11 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;h1 id=&#34;いつ頃のバグ:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;いつ頃のバグ&lt;/h1&gt;
 
 &lt;p&gt;6.8.0-0 〜 6.8.0-7 の間のバグです。
-6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。
-6.8.0-8 で修正済みです。&lt;/p&gt;
+6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。&lt;/p&gt;
 
-&lt;h1 id=&#34;不具合のコード:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;不具合のコード&lt;/h1&gt;
+&lt;p&gt;6.8.0-8 で修正済みです。&lt;/p&gt;
+
+&lt;h1 id=&#34;不具合修正のコード差分:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
 8305,8306c8305,8306
@@ -363,9 +416,9 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;あれれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 では GRAY 形式だ。&lt;/p&gt;
+&lt;p&gt;あれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 は GRAY 形式。&lt;/p&gt;
 
-&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思います。&lt;/p&gt;
+&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思ってます。&lt;/p&gt;
 </description>
     </item>
     
@@ -412,7 +465,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;しかしこれは、恐らく望む結果ではないでしょう。&lt;/p&gt;
+&lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
 
 &lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
 
@@ -1162,8 +1215,8 @@ docs/content/overview/configuration.md:    hasCJKLanguage              false
 &lt;p&gt;CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; (CircleCI連携の都合で、レポジトリを移動しました)&lt;/ins&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt; (CircleCI連携の都合で、レポジトリを awmlabs に移動しました)&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
