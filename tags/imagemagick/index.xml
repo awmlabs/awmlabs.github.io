@@ -114,9 +114,9 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずですが、縮小するケースしか対応してないように見えます。&lt;/p&gt;
+&lt;p&gt;拡大する場合は scale_num に数値を入れて scale_denom を 1 にする必要があるはずで、縮小するケースしか対応してないように見えます。&lt;/p&gt;
 
-&lt;p&gt;もう少し調べる必要がありそうです。&lt;/p&gt;
+&lt;p&gt;もう少し調べます。。&lt;/p&gt;
 </description>
     </item>
     
