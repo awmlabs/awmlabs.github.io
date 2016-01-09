@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>グレー形式JPEGをPNGに変換すると暗くなる件 - awm-Tech</title>
+<title>グレーJPEGをPNGにすると暗くなる件 - awm-Tech</title>
 </head>
 <body>
 
@@ -54,11 +54,11 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">グレー形式JPEGをPNGに変換すると暗くなる件</h1>
+  <h1 class="headline" itemprop="headline">グレーJPEGをPNGにすると暗くなる件</h1>
   <section class="body" itemprop="articleBody">
     
 
-<h1 id="グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9">グレー形式JPEGをPNGに変換すると暗くなる件</h1>
+<h1 id="グレーjpegをpngにすると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9">グレーJPEGをPNGにすると暗くなる件</h1>
 
 <p>画像サムネール界隈で話題のエントリ</p>
 
@@ -70,7 +70,7 @@
 </ul></li>
 </ul>
 
-<p>-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、少し気になる事が。</p>
+<p>-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、一点。</p>
 
 <pre><code>グレイスケール画像を考慮しよう
 
@@ -84,11 +84,10 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 <h1 id="いつ頃のバグ:4b97ec97268e2c8df1249bdff4ee48d9">いつ頃のバグ</h1>
 
 <p>6.8.0-0 〜 6.8.0-7 の間のバグです。
-6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。</p>
+6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。
+6.8.0-8 で修正済みです。</p>
 
-<p>6.8.0-8 で修正済みです。</p>
-
-<h1 id="不具合修正のコード差分:4b97ec97268e2c8df1249bdff4ee48d9">不具合修正のコード差分</h1>
+<h1 id="不具合のコード:4b97ec97268e2c8df1249bdff4ee48d9">不具合のコード</h1>
 
 <pre><code>$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
 8305,8306c8305,8306
@@ -231,9 +230,9 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 </tbody>
 </table>
 
-<p>あれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 は GRAY 形式。</p>
+<p>あれれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 では GRAY 形式だ。</p>
 
-<p>多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思ってます。</p>
+<p>多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思います。</p>
 
   </section>
 </article>
