@@ -197,6 +197,11 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://blog.mirakui.com/entry/20110123/1295795409&#34;&gt;http://blog.mirakui.com/entry/20110123/1295795409&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPEGヒント(scale denom)とは
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://kkoudev.github.io/blog/2014/06/15/imlib2/&#34;&gt;http://kkoudev.github.io/blog/2014/06/15/imlib2/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;JPEG ライブラリを試す
 
 &lt;ul&gt;
