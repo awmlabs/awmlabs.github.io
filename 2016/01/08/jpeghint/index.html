@@ -91,9 +91,7 @@
 
 <p><center> <img src="/2016/01/08/dct8x8-4-1-600.png" /> </center></p>
 
-<p>大きなサイズの画像からサムネール画像を生成するのに、一般的なリサイズのアルゴリズムを使わずにいきなり <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>8</sub> の画像に変換、デコード出来ます。</p>
-
-<p>ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。</p>
+<p>(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)</p>
 
 <h2 id="やっている事:8297ce3a5ed4594f91a307954f292784">やっている事</h2>
 
@@ -101,7 +99,7 @@
 
 <h1 id="jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の動作イメージ</h1>
 
-<p>こちらに詳しいです。</p>
+<p>詳しくはこちらを参照して下さい。</p>
 
 <ul>
 <li>本当は速いImageMagick: サムネイル画像生成を10倍速くする方法

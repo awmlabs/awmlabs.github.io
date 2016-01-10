@@ -51,9 +51,7 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-4-1-600.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;大きなサイズの画像からサムネール画像を生成するのに、一般的なリサイズのアルゴリズムを使わずにいきなり &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; の画像に変換、デコード出来ます。&lt;/p&gt;
-
-&lt;p&gt;ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。&lt;/p&gt;
+&lt;p&gt;(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)&lt;/p&gt;
 
 &lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
 
@@ -61,7 +59,7 @@
 
 &lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
 
-&lt;p&gt;こちらに詳しいです。&lt;/p&gt;
+&lt;p&gt;詳しくはこちらを参照して下さい。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
