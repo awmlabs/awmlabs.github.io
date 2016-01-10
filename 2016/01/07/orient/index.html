@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>Exif Orientation の操作方法 - awm-Tech</title>
+<title>JPEG Exif Orientation の操作 - awm-Tech</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
         fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href=" https://blog.awm.jp/2016/01/07/orient/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
-<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/07/orient/" class="hatena-bookmark-button" data-hatena-bookmark-title="Exif Orientation の操作方法" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/07/orient/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG Exif Orientation の操作" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
 をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/07/orient/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -72,46 +72,170 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">Exif Orientation の操作方法</h1>
+  <h1 class="headline" itemprop="headline">JPEG Exif Orientation の操作</h1>
 
   <section class="body" itemprop="articleBody">
     
 
-<h1 id="exif-orientation-の操作方法:5ebdf1d9c2e1c280f058e69d3b760785">Exif Orientation の操作方法</h1>
+<h1 id="jpeg-exif-orientation-について:5ebdf1d9c2e1c280f058e69d3b760785">JPEG Exif Orientation について</h1>
 
-<p>撮影した時のカメラの向きを記録するメタデータです。横倒しにして撮影しても向きを一緒に記録する事で、撮影した時の向きと表示する時の一致させます。</p>
+<p>JPEG には画像データそのものと別に Exif という形式で日付とか撮影条件とか場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。</p>
 
-<p>JPEG には画像データそのものと別に Exif という形式でメタデータ(日付とか撮影条件とか場所とか、写真をとった時の向きとか)を持つ事ができます。</p>
+<p>例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しになります。
+撮影した時のカメラの向きを元に、この Orientation タグを付与する事で、表示する時に向きを直す事ができます。
+<center> <img src="/2016/01/07/digicame.png" /> </center></p>
 
-<p>Orientation はこのうち、写真をとった時の向きを指します。</p>
+<p>ImageMagicl の identify コマンドを使うと Orientation が幾つに設定されているか分かります。</p>
 
-<p>(サンプル。iPhone の中に何か映ってる図、左右上下がわかるようなもの)</p>
+<pre><code>$ identify -verbose orient-6.jpg | grep Orient
+ Orientation: RightTop
+   exif:Orientation: 6
+</code></pre>
 
-<p>詳しくはこちら &gt; <a href="http://hackmylife.net/archives/7400448.html">http://hackmylife.net/archives/7400448.html</a></p>
+<h2 id="orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785">Orientation の数値の対応</h2>
 
-<p>ImageMagick を使いたい所ですが ExifTool が便利なのでこっちを使う事にします。</p>
+<p>Orientation に各数字を入れる事で、全て表示する時に 1 の向きに補正されます。</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1: <img src="/2016/01/07/orient-1-strip.jpg" /></td>
+<td>2: <img src="/2016/01/07/orient-2-strip.jpg" /></td>
+<td>3: <img src="/2016/01/07/orient-3-strip.jpg" /></td>
+<td>4: <img src="/2016/01/07/orient-4-strip.jpg" /></td>
+</tr>
+
+<tr>
+<td>5: <img src="/2016/01/07/orient-5-strip.jpg" /></td>
+<td>6: <img src="/2016/01/07/orient-6-strip.jpg" /></td>
+<td>7: <img src="/2016/01/07/orient-7-strip.jpg" /></td>
+<td>8: <img src="/2016/01/07/orient-8-strip.jpg" /></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>(回転する向きでない事に注意)</p>
+
+<h2 id="編集ツール:5ebdf1d9c2e1c280f058e69d3b760785">編集ツール</h2>
+
+<p>この Orientation タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。</p>
+
+<p>ImageMagick を使いたい所ですが ExifTool が便利なのでこちらを使う事にします。</p>
 
 <h1 id="exiftool:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool</h1>
 
-<p>MacOS なら</p>
+<ul>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/">http://www.sno.phy.queensu.ca/~phil/exiftool/</a></li>
+</ul>
+
+<h2 id="インストール:5ebdf1d9c2e1c280f058e69d3b760785">インストール</h2>
+
+<p>MacOS は</p>
 
 <pre><code>$ brew install exiftool
 </code></pre>
 
-<p>Debian Linux なら</p>
+<p>Debian Linux は</p>
 
 <pre><code>apt-get install exiftool
 </code></pre>
 
 <p>でインストールできます。</p>
 
+<p>Perl なので他のプラットフォームでも入れるのは難しくないでしょう。</p>
+
 <h2 id="exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool の使い方</h2>
 
 <p>Orientation は以下のコマンドで書き換えられます。</p>
 
+<pre><code>$ exiftool -Orientation=6 -n test.jpg
+test.jpg
+    1 image files updated
+</code></pre>
+
+<h2 id="まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785">まとめて 1〜8を設定する</h2>
+
+<p>ついでに表示の時に元の画像の向きを維持するようにします。</p>
+
+<ul>
+<li><a href="https://github.com/yoya/misc/blob/master/bash/severalorientation.sh">https://github.com/yoya/misc/blob/master/bash/severalorientation.sh</a></li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">#! /bin/bash</span>
+
+<span style="color: #f8f8f2">set</span> -u
+
+<span style="color: #f8f8f2">ORIGINAL_SUFFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;_original&quot;</span> <span style="color: #75715e"># exiftool の-delete-original が動かないので</span>
+<span style="color: #f8f8f2">SUFFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.jpg&quot;</span>
+
+<span style="color: #f8f8f2">FILE</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+<span style="color: #f8f8f2">PREFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">`</span>basename <span style="color: #f8f8f2">$FILE</span> <span style="color: #f8f8f2">$SUFFIX</span><span style="color: #e6db74">`</span>
+
+<span style="color: #66d9ef">for</span> i in <span style="color: #e6db74">`</span>seq <span style="color: #ae81ff">1</span> 8<span style="color: #e6db74">`</span> <span style="color: #f8f8f2">;</span>
+<span style="color: #66d9ef">do</span>
+  <span style="color: #f8f8f2">FILE_ORIENT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$PREFIX</span><span style="color: #e6db74">-</span><span style="color: #f8f8f2">$i$SUFFIX</span><span style="color: #e6db74">&quot;</span>
+  <span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  cp <span style="color: #f8f8f2">$FILE</span> <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  exiftool -Orientation<span style="color: #f92672">=</span><span style="color: #f8f8f2">$i</span> -n <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  rm <span style="color: #f8f8f2">$FILE_ORIENT$ORIGINAL_SUFFIX</span>
+  <span style="color: #66d9ef">case</span> <span style="color: #f8f8f2">$i</span> in
+    <span style="color: #e6db74">&quot;2&quot;</span><span style="color: #f92672">)</span> mogrify             -flop <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;3&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span>       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;4&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span> -flop <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;5&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90 -flip <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;6&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;7&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span> -flip <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;8&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span>       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+  <span style="color: #66d9ef">esac</span>
+<span style="color: #66d9ef">done</span>
+</pre></div>
+
+
+<ul>
+<li>実行</li>
+</ul>
+
+<pre><code>$ severalorientation.sh orient.jpg
+$ identify -verbose orient-?.jpg | grep Orient
+  Orientation: TopLeft
+    exif:Orientation: 1
+  Orientation: TopRight
+    exif:Orientation: 2
+  Orientation: BottomRight
+    exif:Orientation: 3
+  Orientation: BottomLeft
+    exif:Orientation: 4
+  Orientation: LeftTop
+    exif:Orientation: 5
+  Orientation: RightTop
+    exif:Orientation: 6
+  Orientation: RightBottom
+    exif:Orientation: 7
+  Orientation: LeftBottom
+    exif:Orientation: 8
+</code></pre>
+
 <h1 id="参考-url:5ebdf1d9c2e1c280f058e69d3b760785">参考 URL</h1>
 
 <ul>
+<li><a href="http://hackmylife.net/archives/7400448.html">http://hackmylife.net/archives/7400448.html</a></li>
 <li><a href="http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf">http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf</a></li>
 </ul>
 

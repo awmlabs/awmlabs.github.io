@@ -216,5 +216,177 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 </description>
     </item>
     
+    <item>
+      <title>JPEG Exif Orientation の操作</title>
+      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-exif-orientation-について:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation について&lt;/h1&gt;
+
+&lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付とか撮影条件とか場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
+
+&lt;p&gt;例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しになります。
+撮影した時のカメラの向きを元に、この Orientation タグを付与する事で、表示する時に向きを直す事ができます。
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/digicame.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;ImageMagicl の identify コマンドを使うと Orientation が幾つに設定されているか分かります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ identify -verbose orient-6.jpg | grep Orient
+ Orientation: RightTop
+   exif:Orientation: 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
+
+&lt;p&gt;Orientation に各数字を入れる事で、全て表示する時に 1 の向きに補正されます。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;2: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;3: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;4: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;6: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;7: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;8: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;(回転する向きでない事に注意)&lt;/p&gt;
+
+&lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
+
+&lt;p&gt;この Orientation タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
+
+&lt;p&gt;ImageMagick を使いたい所ですが ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
+
+&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;インストール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;MacOS は&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ brew install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Debian Linux は&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;でインストールできます。&lt;/p&gt;
+
+&lt;p&gt;Perl なので他のプラットフォームでも入れるのは難しくないでしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+
+&lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ exiftool -Orientation=6 -n test.jpg
+test.jpg
+    1 image files updated
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
+
+&lt;p&gt;ついでに表示の時に元の画像の向きを維持するようにします。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;ORIGINAL_SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_original&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# exiftool の-delete-original が動かないので&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.jpg&amp;quot;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; i in &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;seq &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; 8&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$PREFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT$ORIGINAL_SUFFIX&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; in
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;esac&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;実行&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ severalorientation.sh orient.jpg
+$ identify -verbose orient-?.jpg | grep Orient
+  Orientation: TopLeft
+    exif:Orientation: 1
+  Orientation: TopRight
+    exif:Orientation: 2
+  Orientation: BottomRight
+    exif:Orientation: 3
+  Orientation: BottomLeft
+    exif:Orientation: 4
+  Orientation: LeftTop
+    exif:Orientation: 5
+  Orientation: RightTop
+    exif:Orientation: 6
+  Orientation: RightBottom
+    exif:Orientation: 7
+  Orientation: LeftBottom
+    exif:Orientation: 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&#34;&gt;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
