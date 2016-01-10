@@ -150,7 +150,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ここだけ見ると、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。&lt;/p&gt;
+&lt;p&gt;(scale_num/scale_denom) 倍で変換するので、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/jpeg-8/S/85.html#L52&#34;&gt;http://gt.awm.jp/jpeg-8/S/85.html#L52&lt;/a&gt;
