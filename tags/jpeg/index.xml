@@ -228,14 +228,14 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
 
-&lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付とか撮影条件とか場所といった情報をタグ形式で入れる事が出来ます。
+&lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
 
 &lt;p&gt;例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しになります。
-撮影した時のカメラの向きを元に、この Orientation タグを付与する事で、表示する時に向きを直す事ができます。
+撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に向きを直す事ができます。
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/digicame.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;ImageMagicl の identify コマンドを使うと Orientation が幾つに設定されているか分かります。&lt;/p&gt;
+&lt;p&gt;ImageMagicl の identify コマンドで Orientation の値を参照出来ます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ identify -verbose orient-6.jpg | grep Orient
  Orientation: RightTop
@@ -280,13 +280,13 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;(回転する向きでない事に注意)&lt;/p&gt;
+&lt;p&gt;(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)&lt;/p&gt;
 
 &lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
 
-&lt;p&gt;この Orientation タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
+&lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
 
-&lt;p&gt;ImageMagick を使いたい所ですが ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
+&lt;p&gt;ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
 
 &lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
 
@@ -384,8 +384,16 @@ $ identify -verbose orient-?.jpg | grep Orient
 &lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Exif 2.3 規格書
+
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&#34;&gt;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ExifのOrientationを見て画像を回転させる
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
