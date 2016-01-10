@@ -238,8 +238,8 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;p&gt;ImageMagick の identify コマンドで Orientation の値を参照出来ます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ identify -verbose orient-6.jpg | grep Orient
- Orientation: RightTop
-   exif:Orientation: 6
+  Orientation: RightTop
+    exif:Orientation: 6
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
