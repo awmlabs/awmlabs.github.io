@@ -217,54 +217,6 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
     </item>
     
     <item>
-      <title>Exif Orientation の操作方法</title>
-      <link>https://blog.awm.jp/2016/01/07/orient/</link>
-      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
-      <description>
-
-&lt;h1 id=&#34;exif-orientation-の操作方法:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Exif Orientation の操作方法&lt;/h1&gt;
-
-&lt;p&gt;撮影した時のカメラの向きを記録するメタデータです。横倒しにして撮影しても向きを一緒に記録する事で、撮影した時の向きと表示する時の一致させます。&lt;/p&gt;
-
-&lt;p&gt;JPEG には画像データそのものと別に Exif という形式でメタデータ(日付とか撮影条件とか場所とか、写真をとった時の向きとか)を持つ事ができます。&lt;/p&gt;
-
-&lt;p&gt;Orientation はこのうち、写真をとった時の向きを指します。&lt;/p&gt;
-
-&lt;p&gt;(サンプル。iPhone の中に何か映ってる図、左右上下がわかるようなもの)&lt;/p&gt;
-
-&lt;p&gt;詳しくはこちら &amp;gt; &lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ImageMagick を使いたい所ですが ExifTool が便利なのでこっちを使う事にします。&lt;/p&gt;
-
-&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
-
-&lt;p&gt;MacOS なら&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ brew install exiftool
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Debian Linux なら&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;apt-get install exiftool
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;でインストールできます。&lt;/p&gt;
-
-&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
-
-&lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&#34;&gt;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
       <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
       <link>https://blog.awm.jp/2016/01/06/orient/</link>
       <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
