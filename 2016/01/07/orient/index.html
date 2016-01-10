@@ -26,8 +26,24 @@
 
 <main role="main" class="article">
   
+
 <article class="single" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/07/orient/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/ https://blog.awm.jp/2016/01/07/orient/" class="hatena-bookmark-button" data-hatena-bookmark-title="Exif Orientation の操作方法" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/07/orient/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
 
     <span class="key">published on</span>
     <span class="val"><time itemprop="datePublished" datetime="2016-01-07">January 07, 2016</time></span>
@@ -57,12 +73,13 @@
 
   </div>
   <h1 class="headline" itemprop="headline">Exif Orientation の操作方法</h1>
+
   <section class="body" itemprop="articleBody">
     
 
 <h1 id="exif-orientation-の操作方法:5ebdf1d9c2e1c280f058e69d3b760785">Exif Orientation の操作方法</h1>
 
-<p>スマートフォン等のカメラで撮影した時に、その向きを記録するメタデータです。</p>
+<p>撮影した時のカメラの向きを記録するメタデータです。横倒しにして撮影しても向きを一緒に記録する事で、撮影した時の向きと表示する時の一致させます。</p>
 
 <p>JPEG には画像データそのものと別に Exif という形式でメタデータ(日付とか撮影条件とか場所とか、写真をとった時の向きとか)を持つ事ができます。</p>
 
