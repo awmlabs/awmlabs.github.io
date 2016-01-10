@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
       <description>
 
-&lt;p&gt;何度もしつこいですけど、以下の記事の -define jpeg:size への勝手な補足。&lt;/p&gt;
+&lt;p&gt;何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -28,12 +28,12 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;いつでもつければ良いというものではないので注意しましょう。弊社では、
-このオプションはサービスの安定運用のためには無用と判断し、
+&lt;pre&gt;&lt;code&gt;いつでもつければ良いというものではないので注意しましょう。
+弊社では、このオプションはサービスの安定運用のためには無用と判断し、
 現在このオプションは利用していません。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
+&lt;p&gt;注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
 &lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
@@ -184,6 +184,26 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;/ul&gt;
 
 &lt;p&gt;この 2/block_size scaling の条件にマッチしたのかなと予想してます。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url:8297ce3a5ed4594f91a307954f292784&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Imlib2とImage::Imlib2のJPEGヒント対応版を作成しました
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://kkoudev.github.io/blog/2014/06/15/imlib2/&#34;&gt;http://kkoudev.github.io/blog/2014/06/15/imlib2/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.mirakui.com/entry/20110123/1295795409&#34;&gt;http://blog.mirakui.com/entry/20110123/1295795409&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPEG ライブラリを試す
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/&#34;&gt;http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

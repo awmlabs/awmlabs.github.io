@@ -58,7 +58,7 @@
   <section class="body" itemprop="articleBody">
     
 
-<p>何度もしつこいですけど、以下の記事の -define jpeg:size への勝手な補足。</p>
+<p>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。</p>
 
 <ul>
 <li>もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -68,12 +68,12 @@
 </ul></li>
 </ul>
 
-<pre><code>いつでもつければ良いというものではないので注意しましょう。弊社では、
-このオプションはサービスの安定運用のためには無用と判断し、
+<pre><code>いつでもつければ良いというものではないので注意しましょう。
+弊社では、このオプションはサービスの安定運用のためには無用と判断し、
 現在このオプションは利用していません。
 </code></pre>
 
-<p>注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。</p>
+<p>注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。</p>
 
 <h1 id="define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</h1>
 
@@ -224,6 +224,26 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 </ul>
 
 <p>この 2/block_size scaling の条件にマッチしたのかなと予想してます。</p>
+
+<h1 id="参考-url:8297ce3a5ed4594f91a307954f292784">参考 URL</h1>
+
+<ul>
+<li>Imlib2とImage::Imlib2のJPEGヒント対応版を作成しました
+
+<ul>
+<li><a href="http://kkoudev.github.io/blog/2014/06/15/imlib2/">http://kkoudev.github.io/blog/2014/06/15/imlib2/</a></li>
+</ul></li>
+<li>本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
+
+<ul>
+<li><a href="http://blog.mirakui.com/entry/20110123/1295795409">http://blog.mirakui.com/entry/20110123/1295795409</a></li>
+</ul></li>
+<li>JPEG ライブラリを試す
+
+<ul>
+<li><a href="http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/">http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/</a></li>
+</ul></li>
+</ul>
 
   </section>
 </article>
