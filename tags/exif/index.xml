@@ -29,7 +29,7 @@
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に向きを直す事ができます。
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/digicame.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;ImageMagicl の identify コマンドで Orientation の値を参照出来ます。&lt;/p&gt;
+&lt;p&gt;ImageMagick の identify コマンドで Orientation の値を参照出来ます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ identify -verbose orient-6.jpg | grep Orient
  Orientation: RightTop
@@ -75,6 +75,8 @@
 &lt;/table&gt;
 
 &lt;p&gt;(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)&lt;/p&gt;
+
+&lt;p&gt;尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]&lt;/p&gt;
 
 &lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
 
