@@ -18,7 +18,9 @@
       <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-exif-orientation-について:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation について&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
+
+&lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
 
 &lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付とか撮影条件とか場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
