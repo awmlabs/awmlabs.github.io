@@ -186,10 +186,11 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;h1 id=&#34;参考-url:8297ce3a5ed4594f91a307954f292784&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Imlib2とImage::Imlib2のJPEGヒント対応版を作成しました
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Libjpeg&#34;&gt;https://en.wikipedia.org/wiki/Libjpeg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;JPEG tutorial
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://kkoudev.github.io/blog/2014/06/15/imlib2/&#34;&gt;http://kkoudev.github.io/blog/2014/06/15/imlib2/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
 
@@ -205,12 +206,6 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://jpegclub.org/djpeg/&#34;&gt;http://jpegclub.org/djpeg/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Libjpeg&#34;&gt;https://en.wikipedia.org/wiki/Libjpeg&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;JPEG tutorial
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
