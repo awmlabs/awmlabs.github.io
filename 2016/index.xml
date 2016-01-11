@@ -244,7 +244,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
 
-&lt;p&gt;Orientation に各値を設定する事で、全て 1 の向きに補正されて表示されます。(古いビューアだと補正しない事もあります)&lt;/p&gt;
+&lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -258,17 +258,17 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;1: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;2: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;3: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;4: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;1: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;3: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;4: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;5: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;6: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;7: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt;&lt;/td&gt;
-&lt;td&gt;8: &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;5: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;6: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;7: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -280,7 +280,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)&lt;/p&gt;
+&lt;p&gt;(補正で行う回転する向きでない事に注意。これらはその真逆です)&lt;/p&gt;
 
 &lt;p&gt;尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]&lt;/p&gt;
 
@@ -382,6 +382,46 @@ $ identify -verbose orient-?.jpg | grep Orient
   Orientation: LeftBottom
     exif:Orientation: 8
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;結果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;3: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;4: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;6: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;7: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。&lt;/p&gt;
 
 &lt;p&gt;ちなみに、上記の表に貼り付けた画像は、更に&lt;/p&gt;
 

@@ -97,7 +97,7 @@
 
 <h2 id="orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785">Orientation の数値の対応</h2>
 
-<p>Orientation に各値を設定する事で、全て 1 の向きに補正されて表示されます。(古いビューアだと補正しない事もあります)</p>
+<p>以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)</p>
 
 <table>
 <thead>
@@ -111,17 +111,17 @@
 
 <tbody>
 <tr>
-<td>1: <img src="/2016/01/07/orient-1-strip.jpg" /></td>
-<td>2: <img src="/2016/01/07/orient-2-strip.jpg" /></td>
-<td>3: <img src="/2016/01/07/orient-3-strip.jpg" /></td>
-<td>4: <img src="/2016/01/07/orient-4-strip.jpg" /></td>
+<td>1: <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a></td>
+<td>2: <a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a></td>
+<td>3: <a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a></td>
+<td>4: <a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a></td>
 </tr>
 
 <tr>
-<td>5: <img src="/2016/01/07/orient-5-strip.jpg" /></td>
-<td>6: <img src="/2016/01/07/orient-6-strip.jpg" /></td>
-<td>7: <img src="/2016/01/07/orient-7-strip.jpg" /></td>
-<td>8: <img src="/2016/01/07/orient-8-strip.jpg" /></td>
+<td>5: <a href="/2016/01/07/orient-5-strip.jpg"> <img src="/2016/01/07/orient-5-strip.jpg" /> </a></td>
+<td>6: <a href="/2016/01/07/orient-6-strip.jpg"> <img src="/2016/01/07/orient-6-strip.jpg" /> </a></td>
+<td>7: <a href="/2016/01/07/orient-7-strip.jpg"> <img src="/2016/01/07/orient-7-strip.jpg" /> </a></td>
+<td>8: <a href="/2016/01/07/orient-8-strip.jpg"> <img src="/2016/01/07/orient-8-strip.jpg" /> </a></td>
 </tr>
 
 <tr>
@@ -133,7 +133,7 @@
 </tbody>
 </table>
 
-<p>(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)</p>
+<p>(補正で行う回転する向きでない事に注意。これらはその真逆です)</p>
 
 <p>尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]</p>
 
@@ -235,6 +235,46 @@ $ identify -verbose orient-?.jpg | grep Orient
   Orientation: LeftBottom
     exif:Orientation: 8
 </code></pre>
+
+<ul>
+<li>結果</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1: <a href="/2016/01/07/orient-1.jpg"> <img src="/2016/01/07/orient-1.jpg" /> </a></td>
+<td>2: <a href="/2016/01/07/orient-2.jpg"> <img src="/2016/01/07/orient-2.jpg" /> </a></td>
+<td>3: <a href="/2016/01/07/orient-3.jpg"> <img src="/2016/01/07/orient-3.jpg" /> </a></td>
+<td>4: <a href="/2016/01/07/orient-4.jpg"> <img src="/2016/01/07/orient-4.jpg" /> </a></td>
+</tr>
+
+<tr>
+<td>5: <a href="/2016/01/07/orient-5.jpg"> <img src="/2016/01/07/orient-5.jpg" /> </a></td>
+<td>6: <a href="/2016/01/07/orient-6.jpg"> <img src="/2016/01/07/orient-6.jpg" /> </a></td>
+<td>7: <a href="/2016/01/07/orient-7.jpg"> <img src="/2016/01/07/orient-7.jpg" /> </a></td>
+<td>8: <a href="/2016/01/07/orient-8.jpg"> <img src="/2016/01/07/orient-8.jpg" /> </a></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。</p>
 
 <p>ちなみに、上記の表に貼り付けた画像は、更に</p>
 
