@@ -421,7 +421,7 @@ $ identify -verbose orient-?.jpg | grep Orient
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。&lt;/p&gt;
+&lt;p&gt;テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。(テーブルに表示するのもクリックして表示されるのも同じ JPEG 画像です)&lt;/p&gt;
 
 &lt;p&gt;ちなみに、上記の表に貼り付けた画像は、更に&lt;/p&gt;
 
