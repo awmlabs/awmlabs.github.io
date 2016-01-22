@@ -7,8 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 08 Jan 2016 23:40:32 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 20 Jan 2016 17:54:27 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG 画像のバイナリフォーマット</title>
+      <link>https://blog.awm.jp/2016/01/20/jpegformat/</link>
+      <pubDate>Wed, 20 Jan 2016 17:54:27 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/20/jpegformat/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-画像のバイナリフォーマット:01a95b22acb36a9005492d4c6875587f&#34;&gt;JPEG 画像のバイナリフォーマット&lt;/h1&gt;
+
+&lt;p&gt;色んなサイトで解説されてますが、改めて復習の為にまとめてみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;jpeg-仕様:01a95b22acb36a9005492d4c6875587f&#34;&gt;JPEG 仕様&lt;/h1&gt;
+
+&lt;h1 id=&#34;参考-url:01a95b22acb36a9005492d4c6875587f&#34;&gt;参考 URL&lt;/h1&gt;
+</description>
+    </item>
     
     <item>
       <title>JPEG の size hinting について</title>
@@ -133,7 +151,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;h1 id=&#34;結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;結論&lt;/h1&gt;
 
-&lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
+&lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、2倍か3倍以上小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
 &lt;h1 id=&#34;scaling-の該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling の該当コード&lt;/h1&gt;
 
