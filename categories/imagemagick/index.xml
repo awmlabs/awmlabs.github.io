@@ -7,8 +7,232 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 08 Jan 2016 23:40:32 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 25 Jan 2016 02:01:09 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>透明度を含む画像を JPEG に変換する時の背景色</title>
+      <link>https://blog.awm.jp/2016/01/25/flatten/</link>
+      <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
+      <description>
+
+&lt;p&gt;#&lt;/p&gt;
+
+&lt;h2 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる？&lt;/h2&gt;
+
+&lt;pre&gt;
+$ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
+$ convert in.png -resize 200x200 -extent 200x200 out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;-extent は本来キャンバスの拡大命令。
+&lt;pre&gt;
+$ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../logowhiteExtent_hh.jpg&#34; /&gt;
+&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h2&gt;
+
+&lt;p&gt;-background も有効です。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert in.png -resize 200x200 –flatten out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;
+$ convert in.png -resize 200x200 -background red –flatten out.jpg &lt;img src=&#34;../logored_hh.jpg&#34; /&gt;
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ImageMagick で画像を比較する</title>
+      <link>https://blog.awm.jp/2016/01/25/diff/</link>
+      <pubDate>Mon, 25 Jan 2016 01:51:23 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/25/diff/</guid>
+      <description>
+
+&lt;p&gt;#
+絵の間違い探しを想像するに、人間は思った以上に注意力がありません。
+最終的な判断は人間の眼ですが、その前段階のサポートがないと問題を見逃します。&lt;/p&gt;
+
+&lt;p&gt;基本的には計算でなるべく違いのありそうな画像をあぶり出します。
+以下のサイトが分かりやすいです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2枚の画像のdiff(差分)を超簡単に調べる方法
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.mirakui.com/entry/20110326/1301111196&#34;&gt;http://blog.mirakui.com/entry/20110326/1301111196&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;画像の差分:943e202c7525f67778c9e3665dbf8092&#34;&gt;画像の差分&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;difference&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を調べられます。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert image.jpg image.gif
+$ composite &lt;u&gt;-compose difference&lt;/u&gt; image.jpg image.gif  diff.png
+$ mogrify -auto-level  diff.png  #差分画像を明るくする
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;全体的に画質の劣化が激しいですが、特に風鈴の色味が大きく変わっているのが分かります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;identify mean&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;difference と idenfity mean を組み合わせると画像の違いの度合いが分かります。&lt;/p&gt;
+
+&lt;pre&gt;
+$ for i in *-logo.gif ; do 
+composite -compose difference 6.9.3-0-logo.gif $i t.png ;
+identify -format &#34;%[mean]&#34; t.png  ; echo &#34; : $i&#34; ; done
+&lt;/pre&gt;
+のように実行すると、
+&lt;pre&gt;
+569.07 : 6.6.9-6-logo.gif
+569.07 : 6.6.9-7-logo.gif
+&lt;b&gt;9533.31&lt;/b&gt; : 6.6.9-8-logo.gif   &lt;=  差分の大きなバージョン発見
+569.07 : 6.6.9-9-logo.gif
+569.07 : 6.7.0-0-logo.gif
+&lt;/pre&gt;
+
+&lt;p&gt;尚、画像の違いを計算する方法に幾つか有名なものがあり、今回の方式は PSNR に近いのですが、人の目で見る違いと掛け離れるケースが多くあるので、SSIM 方式の方が主流です。&lt;/p&gt;
+
+&lt;h1 id=&#34;ssim:943e202c7525f67778c9e3665dbf8092&#34;&gt;SSIM&lt;/h1&gt;
+
+&lt;p&gt;SSIM の簡易版が ffmpeg で計算できます。&lt;/p&gt;
+
+&lt;pre&gt;
+
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</title>
+      <link>https://blog.awm.jp/2016/01/25/imagemagick/</link>
+      <pubDate>Mon, 25 Jan 2016 00:32:35 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
+      <description>
+
+&lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://speakerdeck.com/yoya/imagemagick-knowhow&#34;&gt;https://speakerdeck.com/yoya/imagemagick-knowhow&lt;/a&gt;
+スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;一部界隈で話題&lt;/h1&gt;
+
+&lt;p&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
+&lt;center&gt; &lt;img src=&#34;../cybozuinsideout.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;色んなノウハウが詰まっていて良い記事ですが、幾つか理解の違う場所があるので勝手に補足してみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;良いノウハウ&lt;/h1&gt;
+
+&lt;h2 id=&#34;リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;limit 大事 (特にユーザ投稿画像を扱う場合)
+&lt;pre&gt;
+$ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt; src.jpg dst.png
+&lt;/pre&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick は引数を先頭から順に命令実行する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以下のように、for ループで引数を先頭から順番に見て、該当するオプションを個別に実行します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(argc&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;option&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv[i];&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;switch&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(option&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+       &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+         &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(LocaleCompare(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;repage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,option&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;option&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;+&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ParseAbsoluteGeometry(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;0x0+0+0&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;page);&lt;/span&gt;
+                &lt;span style=&#34;color: #66d9ef&#34;&gt;break&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+              &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ResetImagePage(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,argv[i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]);&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;InheritException(exception,&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception);&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;break&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;なので順番で結果が変わります。
+逆にいうと順序次第で色んな操作が可能になるという事です。&lt;/p&gt;
+
+&lt;h1 id=&#34;補足したい項目:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;補足したい項目&lt;/h1&gt;
+
+&lt;p&gt;対応するブログのエントリを並べます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;画像比較は人間の眼で行うべし
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/diff/&#34;&gt;http://blog.awm.jp/2016/01/25/diff/&lt;/a&gt; ImageMagick で画像を比較する&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Orientation を考慮しよう
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/06/orient/&#34;&gt;http://blog.awm.jp/2016/01/06/orient/&lt;/a&gt; -auto-orient でオフセットがズレる件&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;透過画像を考慮しよう
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/flatten/&#34;&gt;http://blog.awm.jp/2016/01/25/flatten/&lt;/a&gt; 透明度を含む画像を JPEG に変換する時の背景色&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;グレイスケール画像を考慮しよう
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/06/gray/&#34;&gt;http://blog.awm.jp/2016/01/06/gray/&lt;/a&gt; グレー形式JPEGをPNGに変換すると暗くなる件&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;-define jpeg:size に注意
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/08/jpeghint/&#34;&gt;http://blog.awm.jp/2016/01/08/jpeghint/&lt;/a&gt; JPEG の size hinting について&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>JPEG の size hinting について</title>

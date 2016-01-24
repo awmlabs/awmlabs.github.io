@@ -7,8 +7,81 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 05 Jan 2016 22:59:30 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 25 Jan 2016 01:51:23 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/graphics/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ImageMagick で画像を比較する</title>
+      <link>https://blog.awm.jp/2016/01/25/diff/</link>
+      <pubDate>Mon, 25 Jan 2016 01:51:23 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/25/diff/</guid>
+      <description>
+
+&lt;p&gt;#
+絵の間違い探しを想像するに、人間は思った以上に注意力がありません。
+最終的な判断は人間の眼ですが、その前段階のサポートがないと問題を見逃します。&lt;/p&gt;
+
+&lt;p&gt;基本的には計算でなるべく違いのありそうな画像をあぶり出します。
+以下のサイトが分かりやすいです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2枚の画像のdiff(差分)を超簡単に調べる方法
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.mirakui.com/entry/20110326/1301111196&#34;&gt;http://blog.mirakui.com/entry/20110326/1301111196&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;画像の差分:943e202c7525f67778c9e3665dbf8092&#34;&gt;画像の差分&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;difference&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を調べられます。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert image.jpg image.gif
+$ composite &lt;u&gt;-compose difference&lt;/u&gt; image.jpg image.gif  diff.png
+$ mogrify -auto-level  diff.png  #差分画像を明るくする
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;全体的に画質の劣化が激しいですが、特に風鈴の色味が大きく変わっているのが分かります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;identify mean&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;difference と idenfity mean を組み合わせると画像の違いの度合いが分かります。&lt;/p&gt;
+
+&lt;pre&gt;
+$ for i in *-logo.gif ; do 
+composite -compose difference 6.9.3-0-logo.gif $i t.png ;
+identify -format &#34;%[mean]&#34; t.png  ; echo &#34; : $i&#34; ; done
+&lt;/pre&gt;
+のように実行すると、
+&lt;pre&gt;
+569.07 : 6.6.9-6-logo.gif
+569.07 : 6.6.9-7-logo.gif
+&lt;b&gt;9533.31&lt;/b&gt; : 6.6.9-8-logo.gif   &lt;=  差分の大きなバージョン発見
+569.07 : 6.6.9-9-logo.gif
+569.07 : 6.7.0-0-logo.gif
+&lt;/pre&gt;
+
+&lt;p&gt;尚、画像の違いを計算する方法に幾つか有名なものがあり、今回の方式は PSNR に近いのですが、人の目で見る違いと掛け離れるケースが多くあるので、SSIM 方式の方が主流です。&lt;/p&gt;
+
+&lt;h1 id=&#34;ssim:943e202c7525f67778c9e3665dbf8092&#34;&gt;SSIM&lt;/h1&gt;
+
+&lt;p&gt;SSIM の簡易版が ffmpeg で計算できます。&lt;/p&gt;
+
+&lt;pre&gt;
+
+&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>ImageMagick でサムネール画像生成</title>

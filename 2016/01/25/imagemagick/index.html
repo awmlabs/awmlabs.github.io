@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/25/imagemagick/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/25/imagemagick/" class="hatena-bookmark-button" data-hatena-bookmark-title="もうサムネイルで泣かないための ImageMagick ノウハウ集に一言" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/25/imagemagick/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-25">January 25, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/orientation">Orientation</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</h1>
+
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</h1>
+
+<ul>
+<li><p><a href="https://speakerdeck.com/yoya/imagemagick-knowhow">https://speakerdeck.com/yoya/imagemagick-knowhow</a>
+スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。</p></li>
+
+<li><p>Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。</p></li>
+</ul>
+
+<h1 id="一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15">一部界隈で話題</h1>
+
+<p>もうサムネイルで泣かないための ImageMagick ノウハウ集
+<center> <img src="../cybozuinsideout.png" /> </center></p>
+
+<p>色んなノウハウが詰まっていて良い記事ですが、幾つか理解の違う場所があるので勝手に補足してみます。</p>
+
+<h1 id="良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15">良いノウハウ</h1>
+
+<h2 id="リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15">リリース大量消費に注意</h2>
+
+<ul>
+<li><p>limit 大事 (特にユーザ投稿画像を扱う場合)
+<pre>
+$ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
+</pre></p></li>
+
+<li><p>画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。</p></li>
+</ul>
+
+<h2 id="imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</h2>
+
+<ul>
+<li>ImageMagick は引数を先頭から順に命令実行する</li>
+</ul>
+
+<p>以下のように、for ループで引数を先頭から順番に見て、該当するオプションを個別に実行します。</p>
+
+<ul>
+<li>wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)</li>
+</ul>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(i</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">ssize_t</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">(argc</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">);</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">option</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">argv[i];</span>
+<span style="color: #960050; background-color: #1e0010">＜略＞</span>
+<span style="color: #f8f8f2">WandExport</span> <span style="color: #f8f8f2">MagickBooleanType</span> <span style="color: #f8f8f2">MogrifyImage(ImageInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">image_info,</span><span style="color: #66d9ef">const</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">argc,</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">char</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">argv,Image</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">image,ExceptionInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">exception)</span>
+<span style="color: #960050; background-color: #1e0010">＜略＞</span>
+  <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(i</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">ssize_t</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">argc;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #f8f8f2">{</span>
+    <span style="color: #960050; background-color: #1e0010">＜略＞</span>
+    <span style="color: #66d9ef">switch</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(option</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">))</span>
+    <span style="color: #f8f8f2">{</span>
+       <span style="color: #960050; background-color: #1e0010">＜略＞</span>
+      <span style="color: #66d9ef">case</span> <span style="color: #e6db74">&#39;r&#39;</span><span style="color: #f92672">:</span>
+      <span style="color: #f8f8f2">{</span>
+         <span style="color: #960050; background-color: #1e0010">＜略＞</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(LocaleCompare(</span><span style="color: #e6db74">&quot;repage&quot;</span><span style="color: #f8f8f2">,option</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+          <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">option</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;+&#39;</span><span style="color: #f8f8f2">)</span>
+              <span style="color: #f8f8f2">{</span>
+                <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">void</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">ParseAbsoluteGeometry(</span><span style="color: #e6db74">&quot;0x0+0+0&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">image)</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">page);</span>
+                <span style="color: #66d9ef">break</span><span style="color: #f8f8f2">;</span>
+              <span style="color: #f8f8f2">}</span>
+            <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">void</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">ResetImagePage(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">image,argv[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]);</span>
+            <span style="color: #f8f8f2">InheritException(exception,</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">image)</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">exception);</span>
+            <span style="color: #66d9ef">break</span><span style="color: #f8f8f2">;</span>
+          <span style="color: #f8f8f2">}</span>
+</pre></div>
+
+
+<p>なので順番で結果が変わります。
+逆にいうと順序次第で色んな操作が可能になるという事です。</p>
+
+<h1 id="補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</h1>
+
+<p>対応するブログのエントリを並べます。</p>
+
+<ul>
+<li>画像比較は人間の眼で行うべし
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/25/diff/">http://blog.awm.jp/2016/01/25/diff/</a> ImageMagick で画像を比較する</li>
+</ul></li>
+<li>Orientation を考慮しよう
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/06/orient/">http://blog.awm.jp/2016/01/06/orient/</a> -auto-orient でオフセットがズレる件</li>
+</ul></li>
+<li>透過画像を考慮しよう
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/25/flatten/">http://blog.awm.jp/2016/01/25/flatten/</a> 透明度を含む画像を JPEG に変換する時の背景色</li>
+</ul></li>
+<li>グレイスケール画像を考慮しよう
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/06/gray/">http://blog.awm.jp/2016/01/06/gray/</a> グレー形式JPEGをPNGに変換すると暗くなる件</li>
+</ul></li>
+<li>-define jpeg:size に注意
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/08/jpeghint/">http://blog.awm.jp/2016/01/08/jpeghint/</a> JPEG の size hinting について</li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transparent on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/transparent/</link>
+    <description>Recent content in Transparent on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Mon, 25 Jan 2016 02:01:09 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/transparent/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>透明度を含む画像を JPEG に変換する時の背景色</title>
+      <link>https://blog.awm.jp/2016/01/25/flatten/</link>
+      <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
+      <description>
+
+&lt;p&gt;#&lt;/p&gt;
+
+&lt;h2 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる？&lt;/h2&gt;
+
+&lt;pre&gt;
+$ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
+$ convert in.png -resize 200x200 -extent 200x200 out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;-extent は本来キャンバスの拡大命令。
+&lt;pre&gt;
+$ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../logowhiteExtent_hh.jpg&#34; /&gt;
+&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h2&gt;
+
+&lt;p&gt;-background も有効です。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert in.png -resize 200x200 –flatten out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;
+$ convert in.png -resize 200x200 -background red –flatten out.jpg &lt;img src=&#34;../logored_hh.jpg&#34; /&gt;
+&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
