@@ -82,11 +82,7 @@
 <a href="https://speakerdeck.com/yoya/imagemagick-knowhow">https://speakerdeck.com/yoya/imagemagick-knowhow</a>
 </center></p>
 
-<p>スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。</p>
-
-<ul>
-<li>Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。</li>
-</ul>
+<p>発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。</p>
 
 <h1 id="一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15">一部界隈で話題</h1>
 
@@ -100,13 +96,13 @@
 <h2 id="リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15">リリース大量消費に注意</h2>
 
 <ul>
-<li><p>limit 大事 (特にユーザ投稿画像を扱う場合)
+<li>limit 大事 (特にユーザ投稿画像を扱う場合)
 <pre>
 $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
-</pre></p></li>
-
-<li><p>画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。</p></li>
+</pre></li>
 </ul>
+
+<p>画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。</p>
 
 <h2 id="imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</h2>
 
@@ -150,8 +146,7 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 </pre></div>
 
 
-<p>なので順番で結果が変わります。
-逆にいうと順序次第で色んな操作が可能になるという事です。</p>
+<p>逆にいうと順序次第で組み合わせ的に色んな操作が可能になるという事です。</p>
 
 <h1 id="補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</h1>
 
@@ -184,6 +179,8 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 <li><a href="http://blog.awm.jp/2016/01/08/jpeghint/">http://blog.awm.jp/2016/01/08/jpeghint/</a> JPEG の size hinting について</li>
 </ul></li>
 </ul>
+
+<p>以上です。もし、お役に立つ事があれば幸いです。</p>
 
   </section>
 </article>

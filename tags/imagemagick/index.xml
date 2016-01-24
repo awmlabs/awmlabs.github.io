@@ -186,11 +186,7 @@ $ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
 &lt;a href=&#34;https://speakerdeck.com/yoya/imagemagick-knowhow&#34;&gt;https://speakerdeck.com/yoya/imagemagick-knowhow&lt;/a&gt;
 &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;
 
 &lt;h1 id=&#34;一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;一部界隈で話題&lt;/h1&gt;
 
@@ -204,13 +200,13 @@ $ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
 &lt;h2 id=&#34;リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;limit 大事 (特にユーザ投稿画像を扱う場合)
+&lt;li&gt;limit 大事 (特にユーザ投稿画像を扱う場合)
 &lt;pre&gt;
 $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt; src.jpg dst.png
-&lt;/pre&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;&lt;/li&gt;
+&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;
 
 &lt;h2 id=&#34;imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
 
@@ -254,8 +250,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;なので順番で結果が変わります。
-逆にいうと順序次第で色んな操作が可能になるという事です。&lt;/p&gt;
+&lt;p&gt;逆にいうと順序次第で組み合わせ的に色んな操作が可能になるという事です。&lt;/p&gt;
 
 &lt;h1 id=&#34;補足したい項目:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;補足したい項目&lt;/h1&gt;
 
@@ -288,6 +283,8 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/08/jpeghint/&#34;&gt;http://blog.awm.jp/2016/01/08/jpeghint/&lt;/a&gt; JPEG の size hinting について&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;以上です。もし、お役に立つ事があれば幸いです。&lt;/p&gt;
 </description>
     </item>
     
