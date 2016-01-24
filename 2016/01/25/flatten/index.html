@@ -75,28 +75,63 @@
   <section class="body" itemprop="articleBody">
     
 
-<p>#</p>
+<h1 id="透明度を含む画像を-jpeg-に変換する時の背景色:84783e3316737bab6c31917cbcac1c95">透明度を含む画像を JPEG に変換する時の背景色</h1>
 
-<h2 id="extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95">-extent で背景を白にできる？</h2>
+<ul>
+<li>もうサムネイルで泣かないための ImageMagick ノウハウ集
+
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/01/06/080000">http://blog.cybozu.io/entry/2016/01/06/080000</a></li>
+</ul></li>
+</ul>
+
+<pre><code>透過画像をそのまま JPEG に変換すると背景色が黒になるので、
+白にしたい場合は同じサイズにリサイズしましょう。
+</code></pre>
+
+<h1 id="実際のところ:84783e3316737bab6c31917cbcac1c95">実際のところ</h1>
+
+<p>そのまま JPEG に変換すると背景色は白になります。</p>
+
+<pre>
+$ convert in.png out.jpg <img src="../logowhite_37p.jpg" />
+</pre>
+
+<p>-resize でサイズが変わった時に黒くなります。</p>
+
+<pre>
+$ identify in.png
+awmcorp_logo.png PNG 300x300 300x300+0+0 16-bit sRGB 21.1KB 0.000u 0:00.000
+$ convert in.png -resize 300x300 out.jpg <img src="../logowhite_37p.jpg" />
+$ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
+</pre>
+
+<p>詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)</p>
+
+<h1 id="extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95">-extent で背景を白にできる？</h1>
 
 <pre>
 $ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
 $ convert in.png -resize 200x200 -extent 200x200 out.jpg <img src="../logowhite_hh.jpg" />
 </pre>
 
-<ul>
-<li>-extent は本来キャンバスの拡大命令。
+<p>-extent は描画領域であるスクリーンを拡大する命令です。拡大された白いキャンバスと画像のレイヤーが別なので重ね合わせた結果、背景が白くなります。</p>
+
 <pre>
 $ convert in.png -resize 200x200 –extent 400x400 out.jpg <img src="../logowhiteExtent_hh.jpg" />
-</pre></li>
-</ul>
+</pre>
 
-<h2 id="flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95">-flatten (レイヤーを重ねる命令)が正しい</h2>
+<h1 id="flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95">-flatten (レイヤーを重ねる命令)が正しい</h1>
+
+<p>-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten で十分ですし意味的に正しい方法です。</p>
+
+<pre>
+$ convert in.png -resize 200x200 –flatten out.jpg <img src="../logowhite_hh.jpg" />
+</pre>
 
 <p>-background も有効です。</p>
 
 <pre>
-$ convert in.png -resize 200x200 –flatten out.jpg <img src="../logowhite_hh.jpg" />
 $ convert in.png -resize 200x200 -background red –flatten out.jpg <img src="../logored_hh.jpg" />
 </pre>
 
