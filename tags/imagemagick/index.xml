@@ -181,11 +181,15 @@ $ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
 
 &lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://speakerdeck.com/yoya/imagemagick-knowhow&#34;&gt;https://speakerdeck.com/yoya/imagemagick-knowhow&lt;/a&gt;
-スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;iframe allowfullscreen=&#34;true&#34; allowtransparency=&#34;true&#34; frameborder=&#34;0&#34; height=&#34;497&#34; mozallowfullscreen=&#34;true&#34; src=&#34;//speakerdeck.com/player/248da47aa52d48ae8d57e8656f117997&#34; style=&#34;border:0; padding:0; margin:0; background:transparent;&#34; webkitallowfullscreen=&#34;true&#34; width=&#34;578&#34;&gt;&lt;/iframe&gt;
+&lt;a href=&#34;https://speakerdeck.com/yoya/imagemagick-knowhow&#34;&gt;https://speakerdeck.com/yoya/imagemagick-knowhow&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;一部界隈で話題&lt;/h1&gt;
