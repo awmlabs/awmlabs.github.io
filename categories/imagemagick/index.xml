@@ -197,7 +197,7 @@ $ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
 &lt;p&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
 &lt;center&gt; &lt;img src=&#34;../cybozuinsideout.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;色んなノウハウが詰まっていて素晴らしい記事ですが、幾つか追加したい情報がありますので勝手に補足してみます。&lt;/p&gt;
+&lt;p&gt;色んなノウハウが詰まっていて素晴らしい記事です。便乗して幾つか勝手に補足してみます。&lt;/p&gt;
 
 &lt;h1 id=&#34;良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;良いノウハウ&lt;/h1&gt;
 
