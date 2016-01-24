@@ -51,7 +51,7 @@ $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#3
 
 &lt;p&gt;詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)&lt;/p&gt;
 
-&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる？&lt;/h1&gt;
+&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
@@ -66,7 +66,7 @@ $ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../l
 
 &lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
 
-&lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten で十分ですし意味的に正しい方法です。&lt;/p&gt;
+&lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 –flatten out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;

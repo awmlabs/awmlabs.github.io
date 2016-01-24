@@ -51,7 +51,7 @@ $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#3
 
 &lt;p&gt;詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)&lt;/p&gt;
 
-&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる？&lt;/h1&gt;
+&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
@@ -66,7 +66,7 @@ $ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../l
 
 &lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
 
-&lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten で十分ですし意味的に正しい方法です。&lt;/p&gt;
+&lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 –flatten out.jpg &lt;img src=&#34;../logowhite_hh.jpg&#34; /&gt;
@@ -103,11 +103,11 @@ $ convert in.png -resize 200x200 -background red –flatten out.jpg &lt;img src=
 頼れるのは人間の眼だけです。肉眼で確認しましょう。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;絵の間違い探しでの見落としを想像するに、画像認識の個人差は大きいです。
-最終的な判断は人間の眼ですが、その前段階のサポートがあると良いでしょう。&lt;/p&gt;
+&lt;p&gt;絵の間違い探しでの見落としを想像するに、画像認識の個人差はとても大きいです。
+最終的な判断は人間の眼とはいえ、その前段階のサポートがあると良いでしょう。&lt;/p&gt;
 
-&lt;p&gt;基本的には計算でなるべく違いのありそうな画像をあぶり出します。
-以下のサイトに分かりやすい例があります。&lt;/p&gt;
+&lt;p&gt;計算でなるべく違いのありそうな画像やその違いのある場所を炙り出します。
+以下のサイトの説明が分かりやすいです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;2枚の画像のdiff(差分)を超簡単に調べる方法
@@ -222,7 +222,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;MogrifyImage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
