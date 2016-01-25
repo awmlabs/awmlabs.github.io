@@ -49,7 +49,9 @@
 
 &lt;h2 id=&#34;画像の差分:943e202c7525f67778c9e3665dbf8092&#34;&gt;画像の差分&lt;/h2&gt;
 
-&lt;h3 id=&#34;compose-difference:943e202c7525f67778c9e3665dbf8092&#34;&gt;compose difference&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;difference&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
 以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。&lt;/p&gt;
@@ -65,7 +67,9 @@ $ mogrify -auto-level  diff.png  #差分画像を明るくする
 
 &lt;p&gt;全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。&lt;/p&gt;
 
-&lt;h3 id=&#34;identify-mean:943e202c7525f67778c9e3665dbf8092&#34;&gt;identify mean&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;identify mean&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。&lt;/p&gt;
 
