@@ -53,7 +53,8 @@
 &lt;li&gt;difference&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。&lt;/p&gt;
+&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
+以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert image.jpg image.gif
@@ -61,9 +62,10 @@ $ composite &lt;u&gt;-compose difference&lt;/u&gt; image.jpg image.gif  diff.png
 $ mogrify -auto-level  diff.png  #差分画像を明るくする
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;br /&gt;
+@Dinyc &lt;a href=&#34;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=13086025&#34;&gt;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=13086025&lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;全体的に画質の劣化が激しいですが、特に風鈴のハイライトの色味が変わっているのが分かります。&lt;/p&gt;
+&lt;p&gt;全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;identify mean&lt;/li&gt;

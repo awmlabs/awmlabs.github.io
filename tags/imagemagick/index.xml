@@ -123,7 +123,8 @@ $ convert in.png -resize 200x200 -background red –flatten out.jpg &lt;img src=
 &lt;li&gt;difference&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。&lt;/p&gt;
+&lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
+以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert image.jpg image.gif
@@ -131,9 +132,10 @@ $ composite &lt;u&gt;-compose difference&lt;/u&gt; image.jpg image.gif  diff.png
 $ mogrify -auto-level  diff.png  #差分画像を明るくする
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../image7p20.jpg&#34; /&gt; &lt;img src=&#34;../image8p20.gif&#34; /&gt; &lt;img src=&#34;../image9p20.png&#34; /&gt; &lt;br /&gt;
+@Dinyc &lt;a href=&#34;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=13086025&#34;&gt;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=13086025&lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;全体的に画質の劣化が激しいですが、特に風鈴のハイライトの色味が変わっているのが分かります。&lt;/p&gt;
+&lt;p&gt;全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;identify mean&lt;/li&gt;
@@ -228,7 +230,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;MogrifyImage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
