@@ -164,6 +164,11 @@ identify -format &#34;%[mean]&#34; t.png  ; echo &#34; : $i&#34; ; done
 
 &lt;h1 id=&#34;ssim:943e202c7525f67778c9e3665dbf8092&#34;&gt;SSIM&lt;/h1&gt;
 
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.m.wikipedia.org/wiki/Structural_similarity&#34;&gt;https://en.m.wikipedia.org/wiki/Structural_similarity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ece.uwaterloo.ca/~z70wang/research/ssim/&#34;&gt;https://ece.uwaterloo.ca/~z70wang/research/ssim/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;画質の劣化の指標でよく使われる値で、その簡易版が ffmpeg で計算できます。類似度なので 1.0 が最大値で、違いがある分減って 0 に近づきます。&lt;/p&gt;
 
 &lt;p&gt;2.6 系にはない機能です。2.8 系の ffmpeg でお試し下さい。&lt;/p&gt;
@@ -174,7 +179,15 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 [Parsed_ssim_0 @ 0x7fe623c00340] SSIM Y:0.886660 U:0.849172 V:0.840235 All:0.858689 (8.498241)
 &lt;/pre&gt;
 
-&lt;p&gt;１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB別になります。&lt;/p&gt;
+&lt;p&gt;１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB 別になります。&lt;/p&gt;
+
+&lt;p&gt;あと、未検証ですが、ImageMagick のフィルタを駆使して SSIM を算出するスクリプトがあります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.fmwconcepts.com/imagemagick/ssim/index.php&#34;&gt;http://www.fmwconcepts.com/imagemagick/ssim/index.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SSIM アルゴリズム実装は有名なのが沢山あるので、無理に ImageMagick を使わなくても良いのかなと思います。&lt;/p&gt;
 </description>
     </item>
     
@@ -233,7 +246,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;MogrifyImage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
