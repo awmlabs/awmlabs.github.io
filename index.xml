@@ -1970,5 +1970,76 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 </description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://blog.awm.jp/color/ycbcr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/color/ycbcr/</guid>
+      <description>&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt; YCbCr &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&#34;1&#34; width=&#34;500&#34;&gt;
+&lt;tr&gt;&lt;td colspan=&#34;3&#34;&gt;
+&lt;center&gt; &lt;canvas width=&#34;400&#34;, height=&#34;200&#34; id=&#34;paint&#34;&gt; &lt;/canvas&gt; &lt;/center&gt;
+&lt;/td&gt;
+&lt;tr&gt;
+  &lt;td width=&#34;33%&#34;&gt; &lt;div&gt; RED:   &lt;span id=&#34;red_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;red_paint&#34;&gt;   &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;red&#34;   min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+  &lt;td width=&#34;33%&#34;&gt; &lt;div&gt; GREEN: &lt;span id=&#34;green_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;green_paint&#34;&gt; &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;green&#34; min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+  &lt;td&gt; &lt;div&gt; BLUE:  &lt;span id=&#34;blue_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;blue_paint&#34;&gt;  &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;blue&#34;  min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt; &lt;div&gt; Y:  &lt;span id=&#34;y_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;y_paint&#34;&gt;  &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;y&#34;  min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+  &lt;td&gt; &lt;div&gt; Cb: &lt;span id=&#34;cb_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;cb_paint&#34;&gt; &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;cb&#34; min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+  &lt;td&gt; &lt;div&gt; Cr: &lt;span id=&#34;cr_num&#34;&gt; _ &lt;/span&gt;
+      &lt;canvas width=&#34;32&#34; height=&#34;16&#34; id=&#34;cr_paint&#34;&gt; &lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;input type=&#34;range&#34; id=&#34;cr&#34; min=&#34;0&#34; max=&#34;255&#34; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;pre border=&#34;1&#34;&gt;
+* RGB =&gt; YCbCr
+    var y  =  0.29891 * r + 0.58661 * g + 0.11448 * b;
+    var cb = -0.16874 * r - 0.33126 * g + 0.50000 * b + 128;
+    var cr =  0.50000 * r - 0.41869 * g - 0.08131 * b + 128;
+* YCbCr =&gt; RGB
+    var r = y + 1.40200 * (cr - 128);
+    var g = y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128);
+    var b = y + 1.77200 * (cb - 128);
+&lt;/pre&gt;
+ref) &lt;a href=&#34;http://www.technotype.net/tutorial/tutorial.php?fileId=%7BImage%20processing%7D&amp;sectionId=%7Bconverting-between-rgb-and-ycbcr-color-space%7D&#34;&gt; RGBとYCbCrの相互変換 @www.technotype.net &lt;/a&gt;
+
+&lt;script type=&#34;text/javascript&#34; src=&#34;./ycbcr.js&#34;&gt; &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
