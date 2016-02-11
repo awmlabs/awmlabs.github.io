@@ -11,10 +11,10 @@
     
     <item>
       <title></title>
-      <link>https://blog.awm.jp/color/ycbcr/</link>
+      <link>https://blog.awm.jp/color/ycbcrslider/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.awm.jp/color/ycbcr/</guid>
+      <guid>https://blog.awm.jp/color/ycbcrslider/</guid>
       <description>&lt;html&gt;
 &lt;head&gt;
 &lt;meta charset=&#34;utf-8&#34;&gt;
@@ -74,7 +74,7 @@
 &lt;/pre&gt;
 ref) &lt;a href=&#34;http://www.technotype.net/tutorial/tutorial.php?fileId=%7BImage%20processing%7D&amp;sectionId=%7Bconverting-between-rgb-and-ycbcr-color-space%7D&#34;&gt; RGBとYCbCrの相互変換 @www.technotype.net &lt;/a&gt;
 
-&lt;script type=&#34;text/javascript&#34; src=&#34;./ycbcr.js&#34;&gt; &lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;./ycbcrslider.js&#34;&gt; &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </description>
