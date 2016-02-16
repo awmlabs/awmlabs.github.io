@@ -142,7 +142,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;ul&gt;
 &lt;li&gt;白黒テレビの信号に後付けで色味を追加できる&lt;/li&gt;
-&lt;li&gt;人の目は感度は輝度(色の明るさ)に敏感、色味には鈍感&lt;/li&gt;
+&lt;li&gt;人の目は輝度(色の明るさ)に敏感、色味には鈍感&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリング方式でデータ量を節約します。尚、多くの動画形式は YCbCr でなく YUV で少し計算が異なります、概念的には似たものです。&lt;/p&gt;
