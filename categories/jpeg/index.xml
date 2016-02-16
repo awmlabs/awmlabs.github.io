@@ -26,7 +26,7 @@
 
 &lt;p&gt;RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。&lt;/p&gt;
 
-&lt;p&gt;色空間の CIE-XYZ [^1]で輝度を Y 軸にとるので Y をよく使います。Cb は Chroma(色度) の Blue, Cr は Red です。&lt;/p&gt;
+&lt;p&gt;Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。&lt;/p&gt;
 
 &lt;p&gt;大雑把にはこんなイメージ。
 &lt;center&gt; &lt;img src=&#34;../ycbcr.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
@@ -151,7 +151,17 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;h3 id=&#34;yuvxxx:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVxxx&lt;/h3&gt;
 
-&lt;p&gt;間引きかたによって YUV444、YUV422 といった表現があります。以下のページで詳しく説明します。&lt;/p&gt;
+&lt;p&gt;間引きかたによって YUV444、YUV422 といった表現があります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;YUV444
+&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;YUV422
+&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以下のページで詳しく説明します。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG のクロマサブサンプリングと YUVxxx について

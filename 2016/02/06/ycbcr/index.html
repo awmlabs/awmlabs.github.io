@@ -83,7 +83,7 @@
 
 <p>RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。</p>
 
-<p>色空間の CIE-XYZ [^1]で輝度を Y 軸にとるので Y をよく使います。Cb は Chroma(色度) の Blue, Cr は Red です。</p>
+<p>Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。</p>
 
 <p>大雑把にはこんなイメージ。
 <center> <img src="../ycbcr.jpg" /> </center></p>
@@ -208,7 +208,17 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 <h3 id="yuvxxx:6214a8feaba721e81b237a92198f5169">YUVxxx</h3>
 
-<p>間引きかたによって YUV444、YUV422 といった表現があります。以下のページで詳しく説明します。</p>
+<p>間引きかたによって YUV444、YUV422 といった表現があります。</p>
+
+<ul>
+<li><p>YUV444
+<center> <img src="../yuv444.png" /> </center></p></li>
+
+<li><p>YUV422
+<center> <img src="../yuv422.png" /> </center></p></li>
+</ul>
+
+<p>以下のページで詳しく説明します。</p>
 
 <ul>
 <li>JPEG のクロマサブサンプリングと YUVxxx について
