@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yuv on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/yuv/</link>
+    <description>Recent content in Yuv on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Wed, 10 Feb 2016 21:53:44 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG のクロマサブサンプリングと YUVxxx について</title>
+      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvxxx-について:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVxxx について&lt;/h1&gt;
+
+&lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG の YCbCr について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2016/02/06/ycbcr/&#34;&gt;http://localhost:1313/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。&lt;/p&gt;
+
+&lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
+
+&lt;h1 id=&#34;yuvxxx-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVxxx の種類&lt;/h1&gt;
+
+&lt;p&gt;よく見る表現として、YUV444 、YUV422 というのがあります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV444 の Y,Cb,Cr の並び&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YUVabc と見立てて a, b, c の番号は以下のように対応します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV422 の Y,Cb,Cr の並び&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422-onaji.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;間引く分の偶数番目の Cb, Cr はデータから省略できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;色々な-yuvxxx:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVxxx&lt;/h1&gt;
+
+&lt;p&gt;実際に表記を見たことのある YUVxxx を列挙します。(他で実例あれば教えて下さい)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV422 (再掲) : 横方向方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV440 : 縦方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv440.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV420 : 横方向に1/2、縦方向も1/2間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv420.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV411 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; になるよう間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Chrome subsampling notation
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&#34;&gt;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUV/YCbCr Chroma Subsampling Ratio
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://binglongx.com/tag/yuv444/&#34;&gt;http://binglongx.com/tag/yuv444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUVのサンプリング種類
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&#34;&gt;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Digital Color Coding
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&#34;&gt;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JPEG の YCbCr について</title>
+      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
+
+&lt;p&gt;JPEG で保存する色は RGB でなく YCbCr なので、その話。&lt;/p&gt;
+
+&lt;h1 id=&#34;rgb-ycbcr:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
+
+&lt;p&gt;RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。&lt;/p&gt;
+
+&lt;p&gt;色空間の CIE-XYZ [^1]で輝度を Y 軸にとるので Y をよく使います。Cb は Chroma(色度) の Blue, Cr は Red です。&lt;/p&gt;
+
+&lt;p&gt;大雑把にはこんなイメージ。
+&lt;center&gt; &lt;img src=&#34;../ycbcr.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;変換式:6214a8feaba721e81b237a92198f5169&#34;&gt;変換式&lt;/h2&gt;
+
+&lt;h3 id=&#34;rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Y&lt;/td&gt;
+&lt;td&gt;輝度信号&lt;/td&gt;
+&lt;td&gt;0.29891 * R + 0.58661 * G + 0.11448 * B&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Cb&lt;/td&gt;
+&lt;td&gt;青の色差 &lt;br&gt; (B-Y)&lt;/td&gt;
+&lt;td&gt;-0.16874 * R - 0.33126 * G + 0.50000 * B + 128&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Cr&lt;/td&gt;
+&lt;td&gt;赤の色差 &lt;br&gt; (R-Y)&lt;/td&gt;
+&lt;td&gt;0.50000 * R - 0.41869 * G - 0.08131 * B + 128&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;ycbcr-rgb:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;赤 &lt;br&gt; Y + Cr&amp;rsquo;&lt;/td&gt;
+&lt;td&gt;Y + 1.40200 * (Cr - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;G&lt;/td&gt;
+&lt;td&gt;緑 &lt;br&gt; Y - Cb&amp;rsquo; - Cr&amp;rsquo;&lt;/td&gt;
+&lt;td&gt;Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;青 &lt;br&gt; Y + Cb&amp;rsquo;&lt;/td&gt;
+&lt;td&gt;Y + 1.77200 * (Cb - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;rgb-との比較:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB との比較&lt;/h2&gt;
+
+&lt;h3 id=&#34;rgb-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB チャネル分解&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert logo.png -colorspace RGB -separate +append tmp.png
+$ convert logo.png +level-colors Red \
+	\( +clone +level-colors Green1 \) \
+	\( +clone +level-colors Blue \) +append \
+	tmp.png -compose Multiply -composite  logo_rgb.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注) Green1 を Green にすると緑の明るさが半分になるので注意
+&lt;center&gt; &lt;img src=&#34;../logo_rgb.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
+
+&lt;p&gt;こちらは Golang の image パッケージで変換。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/yoya/4fae336a34a8a5bf5d9c&#34;&gt;https://gist.github.com/yoya/4fae336a34a8a5bf5d9c&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ go build png_separate_ycbcr.go
+$ ./png_separate_ycbcr logo.png logo_ycbcr.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo_ycbcr.png&#34; /&gt; &lt;/center&gt;
+(YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)&lt;/p&gt;
+
+&lt;h2 id=&#34;メリット:6214a8feaba721e81b237a92198f5169&#34;&gt;メリット&lt;/h2&gt;
+
+&lt;p&gt;輝度信号と色差信号を分けるメリットですが。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;白黒テレビの信号に後付けで色味を追加できる&lt;/li&gt;
+&lt;li&gt;人の目は感度は輝度(色の明るさ)に敏感、色味には鈍感&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリングという方式でデータ量を節約します。尚、動画は YUV という少し計算の異なる方式を使っていますが、概念的には同様です。&lt;/p&gt;
+
+&lt;h3 id=&#34;クロマサブサンプリング:6214a8feaba721e81b237a92198f5169&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
+
+&lt;h3 id=&#34;yuvxxx:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVxxx&lt;/h3&gt;
+
+&lt;p&gt;間引きかたによって YUV444、YUV422 といった表現があります。以下のページで詳しく説明します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVxxx について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/02/10/yuv/&#34;&gt;http://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;デメリット:6214a8feaba721e81b237a92198f5169&#34;&gt;デメリット&lt;/h2&gt;
+
+&lt;p&gt;RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為に YCbCr は 0-255 の範囲をハミ出さないように狭めにとります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;大きな立体が RGB の空間で、中の小さい立体が YCbCr のとりうる空間の大きさを示します。
+&lt;center&gt; &lt;img src=&#34;../rgb2ycbcr_half.png&#34; /&gt; &lt;/center&gt;
+(奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;大小２つの立方体の間にある隙間が RGB&amp;lt;=&amp;gt;YCbCr で死ぬ無駄な空間で、YCbCr のビット数を RGB と同じにすると粒度が荒くなり表現できる色数が減ります。色数が1/4ほどまで減るとも言われます。&lt;/p&gt;
+
+&lt;p&gt;詳しくは以下のページを参照下さい。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ConvertToRGB
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://csbarn.blogspot.jp/2012/01/converttorgb.html&#34;&gt;http://csbarn.blogspot.jp/2012/01/converttorgb.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagickでHSLとHSV色空間を理解する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&#34;&gt;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;XYZ表色系
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.dic-color.com/knowledge/xyz.html&#34;&gt;http://www.dic-color.com/knowledge/xyz.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

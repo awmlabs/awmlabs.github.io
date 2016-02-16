@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>JPEG のクロマサブサンプリングと YUVxxx について - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/02/10/yuv/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/02/10/yuv/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG のクロマサブサンプリングと YUVxxx について" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/02/10/yuv/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-02-10">February 10, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/yuv">YUV</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/yuv">YUV</a>
+
+        <a href="https://blog.awm.jp/tags/sabsampling">SabSampling</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG のクロマサブサンプリングと YUVxxx について</h1>
+
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="jpeg-のクロマサブサンプリングと-yuvxxx-について:acf70381f9800b5605f8911f9c4c3d94">JPEG のクロマサブサンプリングと YUVxxx について</h1>
+
+<p>YCbCr については以下のページで紹介しました。</p>
+
+<ul>
+<li>JPEG の YCbCr について
+
+<ul>
+<li><a href="http://localhost:1313/2016/02/06/ycbcr/">http://localhost:1313/2016/02/06/ycbcr/</a></li>
+</ul></li>
+</ul>
+
+<p>YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。</p>
+
+<p>JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。</p>
+
+<h1 id="yuvxxx-の種類:acf70381f9800b5605f8911f9c4c3d94">YUVxxx の種類</h1>
+
+<p>よく見る表現として、YUV444 、YUV422 というのがあります。</p>
+
+<ul>
+<li>YUV444 の Y,Cb,Cr の並び</li>
+</ul>
+
+<p>YUVabc と見立てて a, b, c の番号は以下のように対応します。</p>
+
+<p><center> <img src="../yuv444.png" /> </center></p>
+
+<ul>
+<li>YUV422 の Y,Cb,Cr の並び</li>
+</ul>
+
+<p>YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。</p>
+
+<p><center> <img src="../yuv422-onaji.png" /> </center></p>
+
+<p>間引く分の偶数番目の Cb, Cr はデータから省略できます。</p>
+
+<p><center> <img src="../yuv422.png" /> </center></p>
+
+<h1 id="色々な-yuvxxx:acf70381f9800b5605f8911f9c4c3d94">色々な YUVxxx</h1>
+
+<p>実際に表記を見たことのある YUVxxx を列挙します。(他で実例あれば教えて下さい)</p>
+
+<ul>
+<li>YUV444 (再掲) : 間引かない</li>
+</ul>
+
+<p><center> <img src="../yuv444.png" /> </center></p>
+
+<ul>
+<li>YUV422 (再掲) : 横方向方向に <sup>1</sup>&frasl;<sub>2</sub> 間引く。</li>
+</ul>
+
+<p><center> <img src="../yuv422.png" /> </center></p>
+
+<ul>
+<li>YUV440 : 縦方向に <sup>1</sup>&frasl;<sub>2</sub> 間引く。</li>
+</ul>
+
+<p><center> <img src="../yuv440.png" /> </center></p>
+
+<ul>
+<li>YUV420 : 横方向に1/2、縦方向も1/2間引く。</li>
+</ul>
+
+<p><center> <img src="../yuv420.png" /> </center></p>
+
+<ul>
+<li>YUV411 : 横方向に <sup>1</sup>&frasl;<sub>4</sub> になるよう間引く。</li>
+</ul>
+
+<p><center> <img src="../yuv411.png" /> </center></p>
+
+<h1 id="参考:acf70381f9800b5605f8911f9c4c3d94">参考</h1>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Chroma_subsampling">https://en.wikipedia.org/wiki/Chroma_subsampling</a></li>
+<li>Chrome subsampling notation
+
+<ul>
+<li><a href="http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf">http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf</a></li>
+</ul></li>
+<li>YUV/YCbCr Chroma Subsampling Ratio
+
+<ul>
+<li><a href="http://binglongx.com/tag/yuv444/">http://binglongx.com/tag/yuv444/</a></li>
+</ul></li>
+<li>YUVのサンプリング種類
+
+<ul>
+<li><a href="http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html">http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html</a></li>
+</ul></li>
+<li>Digital Color Coding
+
+<ul>
+<li><a href="http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf">http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf</a></li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>JPEG の YCbCr について - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/02/06/ycbcr/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/02/06/ycbcr/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG の YCbCr について" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/02/06/ycbcr/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-02-06">February 06, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/jpeg">JPEG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/ycbcr">YCbCr</a>
+
+        <a href="https://blog.awm.jp/tags/yuv">YUV</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG の YCbCr について</h1>
+
+  <section class="body" itemprop="articleBody">
+    
+
+<h1 id="jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169">JPEG の YCbCr について</h1>
+
+<p>JPEG で保存する色は RGB でなく YCbCr なので、その話。</p>
+
+<h1 id="rgb-ycbcr:6214a8feaba721e81b237a92198f5169">RGB &lt;=&gt; YCbCr</h1>
+
+<p>RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。</p>
+
+<p>色空間の CIE-XYZ [^1]で輝度を Y 軸にとるので Y をよく使います。Cb は Chroma(色度) の Blue, Cr は Red です。</p>
+
+<p>大雑把にはこんなイメージ。
+<center> <img src="../ycbcr.jpg" /> </center></p>
+
+<h2 id="変換式:6214a8feaba721e81b237a92198f5169">変換式</h2>
+
+<h3 id="rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169">RGB =&gt; YCbCr</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Y</td>
+<td>輝度信号</td>
+<td>0.29891 * R + 0.58661 * G + 0.11448 * B</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Cb</td>
+<td>青の色差 <br> (B-Y)</td>
+<td>-0.16874 * R - 0.33126 * G + 0.50000 * B + 128</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Cr</td>
+<td>赤の色差 <br> (R-Y)</td>
+<td>0.50000 * R - 0.41869 * G - 0.08131 * B + 128</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="ycbcr-rgb:6214a8feaba721e81b237a92198f5169">YCbCr =&gt; RGB</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>R</td>
+<td>赤 <br> Y + Cr&rsquo;</td>
+<td>Y + 1.40200 * (Cr - 128)</td>
+<td></td>
+</tr>
+
+<tr>
+<td>G</td>
+<td>緑 <br> Y - Cb&rsquo; - Cr&rsquo;</td>
+<td>Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)</td>
+<td></td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>青 <br> Y + Cb&rsquo;</td>
+<td>Y + 1.77200 * (Cb - 128)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="rgb-との比較:6214a8feaba721e81b237a92198f5169">RGB との比較</h2>
+
+<h3 id="rgb-チャネル分解:6214a8feaba721e81b237a92198f5169">RGB チャネル分解</h3>
+
+<p><center> <img src="../logo.png" /> </center></p>
+
+<pre><code>$ convert logo.png -colorspace RGB -separate +append tmp.png
+$ convert logo.png +level-colors Red \
+	\( +clone +level-colors Green1 \) \
+	\( +clone +level-colors Blue \) +append \
+	tmp.png -compose Multiply -composite  logo_rgb.png
+</code></pre>
+
+<p>注) Green1 を Green にすると緑の明るさが半分になるので注意
+<center> <img src="../logo_rgb.png" /> </center></p>
+
+<h3 id="ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169">YCbCr チャネル分解</h3>
+
+<p>こちらは Golang の image パッケージで変換。</p>
+
+<ul>
+<li><a href="https://gist.github.com/yoya/4fae336a34a8a5bf5d9c">https://gist.github.com/yoya/4fae336a34a8a5bf5d9c</a></li>
+</ul>
+
+<pre><code>$ go build png_separate_ycbcr.go
+$ ./png_separate_ycbcr logo.png logo_ycbcr.png
+</code></pre>
+
+<p><center> <img src="../logo_ycbcr.png" /> </center>
+(YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)</p>
+
+<h2 id="メリット:6214a8feaba721e81b237a92198f5169">メリット</h2>
+
+<p>輝度信号と色差信号を分けるメリットですが。</p>
+
+<ul>
+<li>白黒テレビの信号に後付けで色味を追加できる</li>
+<li>人の目は感度は輝度(色の明るさ)に敏感、色味には鈍感</li>
+</ul>
+
+<p>JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリングという方式でデータ量を節約します。尚、動画は YUV という少し計算の異なる方式を使っていますが、概念的には同様です。</p>
+
+<h3 id="クロマサブサンプリング:6214a8feaba721e81b237a92198f5169">クロマサブサンプリング</h3>
+
+<h3 id="yuvxxx:6214a8feaba721e81b237a92198f5169">YUVxxx</h3>
+
+<p>間引きかたによって YUV444、YUV422 といった表現があります。以下のページで詳しく説明します。</p>
+
+<ul>
+<li>JPEG のクロマサブサンプリングと YUVxxx について
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/02/10/yuv/">http://blog.awm.jp/2016/02/10/yuv/</a></li>
+</ul></li>
+</ul>
+
+<h2 id="デメリット:6214a8feaba721e81b237a92198f5169">デメリット</h2>
+
+<p>RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為に YCbCr は 0-255 の範囲をハミ出さないように狭めにとります。</p>
+
+<ul>
+<li>大きな立体が RGB の空間で、中の小さい立体が YCbCr のとりうる空間の大きさを示します。
+<center> <img src="../rgb2ycbcr_half.png" /> </center>
+(奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)</li>
+</ul>
+
+<p>大小２つの立方体の間にある隙間が RGB&lt;=&gt;YCbCr で死ぬ無駄な空間で、YCbCr のビット数を RGB と同じにすると粒度が荒くなり表現できる色数が減ります。色数が1/4ほどまで減るとも言われます。</p>
+
+<p>詳しくは以下のページを参照下さい。</p>
+
+<ul>
+<li>ConvertToRGB
+
+<ul>
+<li><a href="http://csbarn.blogspot.jp/2012/01/converttorgb.html">http://csbarn.blogspot.jp/2012/01/converttorgb.html</a></li>
+</ul></li>
+</ul>
+
+<h1 id="参考ページ:6214a8feaba721e81b237a92198f5169">参考ページ</h1>
+
+<ul>
+<li>ImageMagickでHSLとHSV色空間を理解する
+
+<ul>
+<li><a href="http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html">http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html</a></li>
+</ul></li>
+<li>XYZ表色系
+
+<ul>
+<li><a href="http://www.dic-color.com/knowledge/xyz.html">http://www.dic-color.com/knowledge/xyz.html</a></li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

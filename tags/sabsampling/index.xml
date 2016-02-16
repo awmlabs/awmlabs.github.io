@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sabsampling on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/sabsampling/</link>
+    <description>Recent content in Sabsampling on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Wed, 10 Feb 2016 21:53:44 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/sabsampling/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG のクロマサブサンプリングと YUVxxx について</title>
+      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvxxx-について:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVxxx について&lt;/h1&gt;
+
+&lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG の YCbCr について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2016/02/06/ycbcr/&#34;&gt;http://localhost:1313/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。&lt;/p&gt;
+
+&lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
+
+&lt;h1 id=&#34;yuvxxx-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVxxx の種類&lt;/h1&gt;
+
+&lt;p&gt;よく見る表現として、YUV444 、YUV422 というのがあります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV444 の Y,Cb,Cr の並び&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YUVabc と見立てて a, b, c の番号は以下のように対応します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV422 の Y,Cb,Cr の並び&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422-onaji.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;間引く分の偶数番目の Cb, Cr はデータから省略できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;色々な-yuvxxx:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVxxx&lt;/h1&gt;
+
+&lt;p&gt;実際に表記を見たことのある YUVxxx を列挙します。(他で実例あれば教えて下さい)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV422 (再掲) : 横方向方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV440 : 縦方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv440.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV420 : 横方向に1/2、縦方向も1/2間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv420.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV411 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; になるよう間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Chrome subsampling notation
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&#34;&gt;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUV/YCbCr Chroma Subsampling Ratio
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://binglongx.com/tag/yuv444/&#34;&gt;http://binglongx.com/tag/yuv444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUVのサンプリング種類
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&#34;&gt;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Digital Color Coding
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&#34;&gt;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
