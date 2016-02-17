@@ -42,7 +42,7 @@
 &lt;li&gt;YUV444 の Y,Cb,Cr の並び&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;YUVabc と見立てて a, b, c の番号は以下のように対応します。&lt;/p&gt;
+&lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -69,7 +69,7 @@
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;YUV422 (再掲) : 横方向方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;li&gt;YUV422 (再掲) : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
