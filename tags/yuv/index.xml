@@ -11,14 +11,14 @@
     <atom:link href="https://blog.awm.jp/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>JPEG のクロマサブサンプリングと YUVxxx について</title>
+      <title>JPEG のクロマサブサンプリングと YUVabc について</title>
       <link>https://blog.awm.jp/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
       
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvxxx-について:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVxxx について&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc-について:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc について&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
@@ -34,9 +34,9 @@
 
 &lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
 
-&lt;h1 id=&#34;yuvxxx-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVxxx の種類&lt;/h1&gt;
+&lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
-&lt;p&gt;よく見る表現として、YUV444 、YUV422 というのがあります。&lt;/p&gt;
+&lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;YUV444 の Y,Cb,Cr の並び&lt;/li&gt;
@@ -58,9 +58,9 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;色々な-yuvxxx:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVxxx&lt;/h1&gt;
+&lt;h1 id=&#34;色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVabc&lt;/h1&gt;
 
-&lt;p&gt;実際に表記を見たことのある YUVxxx を列挙します。(他で実例あれば教えて下さい)&lt;/p&gt;
+&lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他で実例あれば教えて下さい)&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
@@ -268,9 +268,9 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;h3 id=&#34;クロマサブサンプリング:6214a8feaba721e81b237a92198f5169&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
 
-&lt;h3 id=&#34;yuvxxx:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVxxx&lt;/h3&gt;
+&lt;h3 id=&#34;yuvabc:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVabc&lt;/h3&gt;
 
-&lt;p&gt;間引きかたによって YUV444、YUV422 といった表現があります。&lt;/p&gt;
+&lt;p&gt;間引きかたによって YUV444、YUV422 のように表現します。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;YUV444
@@ -280,10 +280,10 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;以下のページで詳しく説明します。&lt;/p&gt;
+&lt;p&gt;より詳しくは以下のエントリをご参考ください。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;JPEG のクロマサブサンプリングと YUVxxx について
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVabc について
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/02/10/yuv/&#34;&gt;http://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;&lt;/li&gt;
