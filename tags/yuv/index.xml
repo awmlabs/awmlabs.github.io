@@ -172,21 +172,21 @@
 &lt;tr&gt;
 &lt;td&gt;Y&lt;/td&gt;
 &lt;td&gt;輝度信号&lt;/td&gt;
-&lt;td&gt;0.29891 * R + 0.58661 * G + 0.11448 * B&lt;/td&gt;
+&lt;td&gt;0.299  * R + 0.587  * G + 0.114  * B&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;Cb&lt;/td&gt;
-&lt;td&gt;青の色差 &lt;br&gt; (B-Y)&lt;/td&gt;
-&lt;td&gt;-0.16874 * R - 0.33126 * G + 0.50000 * B + 128&lt;/td&gt;
+&lt;td&gt;青の色差 &lt;br&gt; (B&amp;rsquo;-Y)&lt;/td&gt;
+&lt;td&gt;-0.1687 * R - 0.3313 * G + 0.5    * B + 128&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;Cr&lt;/td&gt;
-&lt;td&gt;赤の色差 &lt;br&gt; (R-Y)&lt;/td&gt;
-&lt;td&gt;0.50000 * R - 0.41869 * G - 0.08131 * B + 128&lt;/td&gt;
+&lt;td&gt;赤の色差 &lt;br&gt; (R&amp;rsquo;-Y)&lt;/td&gt;
+&lt;td&gt;0.5    * R - 0.4187 * G - 0.0813 * B + 128&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -207,22 +207,22 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;R&lt;/td&gt;
-&lt;td&gt;赤 &lt;br&gt; Y + Cr&amp;rsquo;&lt;/td&gt;
-&lt;td&gt;Y + 1.40200 * (Cr - 128)&lt;/td&gt;
+&lt;td&gt;赤 &lt;br&gt; (Y       + Cr&amp;rsquo;)&lt;/td&gt;
+&lt;td&gt;Y                        + 1.402   * (Cr - 128)&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;G&lt;/td&gt;
-&lt;td&gt;緑 &lt;br&gt; Y - Cb&amp;rsquo; - Cr&amp;rsquo;&lt;/td&gt;
+&lt;td&gt;緑 &lt;br&gt; (Y - Cb&amp;rsquo; - Cr&amp;rsquo;)&lt;/td&gt;
 &lt;td&gt;Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td&gt;B&lt;/td&gt;
-&lt;td&gt;青 &lt;br&gt; Y + Cb&amp;rsquo;&lt;/td&gt;
-&lt;td&gt;Y + 1.77200 * (Cb - 128)&lt;/td&gt;
+&lt;td&gt;青 &lt;br&gt; (Y + Cb&amp;rsquo;      )&lt;/td&gt;
+&lt;td&gt;Y + 1.772   * (Cb - 128)&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -327,20 +327,25 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
 
 &lt;ul&gt;
+&lt;li&gt;JPEG File Interchange Format
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/Graphics/JPEG/jfif3.pdf&#34;&gt;https://www.w3.org/Graphics/JPEG/jfif3.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;RGB⇔YCbCr変換
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&#34;&gt;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;ImageMagickでHSLとHSV色空間を理解する
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&#34;&gt;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;XYZ表色系
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.dic-color.com/knowledge/xyz.html&#34;&gt;http://www.dic-color.com/knowledge/xyz.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagickでHSLとHSV色空間を理解する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&#34;&gt;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>

@@ -114,21 +114,21 @@
 <tr>
 <td>Y</td>
 <td>輝度信号</td>
-<td>0.29891 * R + 0.58661 * G + 0.11448 * B</td>
+<td>0.299  * R + 0.587  * G + 0.114  * B</td>
 <td></td>
 </tr>
 
 <tr>
 <td>Cb</td>
-<td>青の色差 <br> (B-Y)</td>
-<td>-0.16874 * R - 0.33126 * G + 0.50000 * B + 128</td>
+<td>青の色差 <br> (B&rsquo;-Y)</td>
+<td>-0.1687 * R - 0.3313 * G + 0.5    * B + 128</td>
 <td></td>
 </tr>
 
 <tr>
 <td>Cr</td>
-<td>赤の色差 <br> (R-Y)</td>
-<td>0.50000 * R - 0.41869 * G - 0.08131 * B + 128</td>
+<td>赤の色差 <br> (R&rsquo;-Y)</td>
+<td>0.5    * R - 0.4187 * G - 0.0813 * B + 128</td>
 <td></td>
 </tr>
 </tbody>
@@ -149,22 +149,22 @@
 <tbody>
 <tr>
 <td>R</td>
-<td>赤 <br> Y + Cr&rsquo;</td>
-<td>Y + 1.40200 * (Cr - 128)</td>
+<td>赤 <br> (Y       + Cr&rsquo;)</td>
+<td>Y                        + 1.402   * (Cr - 128)</td>
 <td></td>
 </tr>
 
 <tr>
 <td>G</td>
-<td>緑 <br> Y - Cb&rsquo; - Cr&rsquo;</td>
+<td>緑 <br> (Y - Cb&rsquo; - Cr&rsquo;)</td>
 <td>Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)</td>
 <td></td>
 </tr>
 
 <tr>
 <td>B</td>
-<td>青 <br> Y + Cb&rsquo;</td>
-<td>Y + 1.77200 * (Cb - 128)</td>
+<td>青 <br> (Y + Cb&rsquo;      )</td>
+<td>Y + 1.772   * (Cb - 128)</td>
 <td></td>
 </tr>
 </tbody>
@@ -269,20 +269,25 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 <h1 id="参考ページ:6214a8feaba721e81b237a92198f5169">参考ページ</h1>
 
 <ul>
+<li>JPEG File Interchange Format
+
+<ul>
+<li><a href="https://www.w3.org/Graphics/JPEG/jfif3.pdf">https://www.w3.org/Graphics/JPEG/jfif3.pdf</a></li>
+</ul></li>
 <li>RGB⇔YCbCr変換
 
 <ul>
 <li><a href="http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html">http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html</a></li>
 </ul></li>
-<li>ImageMagickでHSLとHSV色空間を理解する
-
-<ul>
-<li><a href="http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html">http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html</a></li>
-</ul></li>
 <li>XYZ表色系
 
 <ul>
 <li><a href="http://www.dic-color.com/knowledge/xyz.html">http://www.dic-color.com/knowledge/xyz.html</a></li>
+</ul></li>
+<li>ImageMagickでHSLとHSV色空間を理解する
+
+<ul>
+<li><a href="http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html">http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html</a></li>
 </ul></li>
 </ul>
 
