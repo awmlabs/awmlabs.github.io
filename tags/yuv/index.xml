@@ -38,17 +38,13 @@
 
 &lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;YUV444 の Y,Cb,Cr の並び&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;YUV422 の Y,Cb,Cr の並び&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
 
@@ -60,7 +56,7 @@
 
 &lt;h1 id=&#34;色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVabc&lt;/h1&gt;
 
-&lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他で実例あれば教えて下さい)&lt;/p&gt;
+&lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
@@ -100,7 +96,7 @@
 &lt;ul&gt;
 &lt;li&gt;a は Y の横方向サンプル数で4固定&lt;/li&gt;
 &lt;li&gt;b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか&lt;/li&gt;
-&lt;li&gt;c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか。&lt;/li&gt;
+&lt;li&gt;c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
 &lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
@@ -323,6 +319,11 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
 
 &lt;ul&gt;
+&lt;li&gt;RGB⇔YCbCr変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&#34;&gt;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;ImageMagickでHSLとHSV色空間を理解する
 
 &lt;ul&gt;
