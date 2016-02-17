@@ -146,6 +146,14 @@
 &lt;p&gt;大雑把にはこんなイメージ。
 &lt;center&gt; &lt;img src=&#34;../ycbcr.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;ul&gt;
+&lt;li&gt;スライダーで色を調整するデモを作りました。お試し下さい。
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/color/ycbcrslider.html&#34;&gt;http://blog.awm.jp/color/ycbcrslider.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&#34;変換式:6214a8feaba721e81b237a92198f5169&#34;&gt;変換式&lt;/h2&gt;
 
 &lt;h3 id=&#34;rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
