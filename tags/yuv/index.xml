@@ -92,6 +92,20 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
+
+&lt;ul&gt;
+&lt;li&gt;a は Y の横方向サンプル数で4固定&lt;/li&gt;
+&lt;li&gt;b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか&lt;/li&gt;
+&lt;li&gt;c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
+&lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -297,6 +311,13 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://csbarn.blogspot.jp/2012/01/converttorgb.html&#34;&gt;http://csbarn.blogspot.jp/2012/01/converttorgb.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;まとめ:6214a8feaba721e81b237a92198f5169&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。&lt;/li&gt;
+&lt;li&gt;デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;

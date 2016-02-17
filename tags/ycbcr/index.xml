@@ -194,6 +194,13 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&#34;まとめ:6214a8feaba721e81b237a92198f5169&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。&lt;/li&gt;
+&lt;li&gt;デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
 
 &lt;ul&gt;

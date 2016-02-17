@@ -149,6 +149,20 @@
 
 <p><center> <img src="../yuv411.png" /> </center></p>
 
+<h1 id="まとめ:acf70381f9800b5605f8911f9c4c3d94">まとめ</h1>
+
+<ul>
+<li>YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
+
+<ul>
+<li>a は Y の横方向サンプル数で4固定</li>
+<li>b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか</li>
+<li>c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか。</li>
+</ul></li>
+<li>YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ</li>
+<li>YUV422 は Cb,Cr を横方向で <sup>1</sup>&frasl;<sub>2</sub> で間引く。JPEG や動画でよく使われる</li>
+</ul>
+
 <h1 id="参考:acf70381f9800b5605f8911f9c4c3d94">参考</h1>
 
 <ul>
