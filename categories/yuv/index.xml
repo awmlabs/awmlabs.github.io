@@ -11,14 +11,14 @@
     <atom:link href="https://blog.awm.jp/categories/yuv/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>JPEG のクロマサブサンプリングと YUVabc について</title>
+      <title>JPEG のクロマサブサンプリングと YUVabc</title>
       <link>https://blog.awm.jp/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
       
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc-について:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc について&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
