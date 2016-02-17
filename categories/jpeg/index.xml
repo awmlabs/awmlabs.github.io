@@ -340,7 +340,7 @@ test.jpg
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
 
@@ -348,23 +348,23 @@ test.jpg
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.jpg&amp;quot;&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE $SUFFIX&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
 
 &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; i in &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;seq &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; 8&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$PREFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
-  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
-  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
-  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT$ORIGINAL_SUFFIX&lt;/span&gt;
-  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; in
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;PREFIX-&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;i&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;SUFFIX&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
+  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
+  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;$i -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
+  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT$ORIGINAL_SUFFIX
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; $i in
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;esac&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
