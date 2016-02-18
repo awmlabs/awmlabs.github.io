@@ -24,6 +24,13 @@
 
 &lt;h2 id=&#34;プログレッシブjpeg:51b8d3349056accb3067af132947c35a&#34;&gt;プログレッシブJPEG&lt;/h2&gt;
 
+&lt;p&gt;インターレースの DCT 版です。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-interlace-1.jpg&#34;&gt; =&amp;gt; &lt;img src=&#34;../Opaopa-interlace-2.jpg&#34;&gt; =&amp;gt;&lt;img src=&#34;../Opaopa-interlace-3.jpg&#34;&gt; =&amp;gt;  &lt;img src=&#34;../Opaopa-interlace.jpg&#34;&gt; &lt;/center&gt;
+画像元) &lt;a href=&#34;http://dic.nicovideo.jp/a/%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%BE%E3%83%BC%E3%83%B3&#34;&gt;ニコニコ大百科(仮) ファンタジーゾーン&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;マクロブロック内の周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で、、読み込み始めは粗い画像を表示して、読み込みながら高画質に更新するような表示が出来ます。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;$ convert orig.jpg -interlace JPEG progressive.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -50,6 +57,9 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x2,1x1,1x1&amp;quot; yuv410.jpg
 
 &lt;h2 id=&#34;depth-又は-quantize:51b8d3349056accb3067af132947c35a&#34;&gt;Depth (又は Quantize)&lt;/h2&gt;
 
+&lt;p&gt;色の階調を何段階で持つかです。depth 8 は R, G, B, 各々 8bitずつ。
+合計24bit で 16,777,216色の表現が可能です。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;$ convert orig.jpg -depth 8 depth8.jpg
 $ convert orig.jpg -depth 16 depth16.jpg
 &lt;/code&gt;&lt;/pre&gt;
@@ -67,6 +77,9 @@ $ convert orig.jpg -depth 16 depth16.jpg
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient/&#34;&gt;https://blog.awm.jp/2016/01/07/orient/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。
+Exiftool を使うと追加出来ます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
 &lt;/code&gt;&lt;/pre&gt;
