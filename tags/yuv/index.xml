@@ -296,12 +296,13 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;h2 id=&#34;デメリット:6214a8feaba721e81b237a92198f5169&#34;&gt;デメリット&lt;/h2&gt;
 
-&lt;p&gt;RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為に YCbCr は 0-255 の範囲をハミ出さないように狭めにとります。&lt;/p&gt;
+&lt;p&gt;RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為 YCbCr は 0-255 の範囲をハミ出さないように大きめの空間になります。(同じ 0-255 で RGB より YCbCr の方が大きなスケールを表現)&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;大きな立体が RGB の空間で、中の小さい立体が YCbCr のとりうる空間の大きさを示します。
-&lt;center&gt; &lt;img src=&#34;../rgb2ycbcr_half.png&#34; /&gt; &lt;/center&gt; (&lt;a href=&#34;../RGB2YCbCr.gcx&#34;&gt; Grapher ファイル&lt;/a&gt; | &lt;a href=&#34;../makeVert.phps&#34;&gt; プロット生成スクリプト  &lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;大きな立体が YCbCr の空間で、中の小さい立体が RGB の収まる範囲です。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../rgb2ycbcr_half.png&#34; /&gt; &lt;/center&gt; (&lt;a href=&#34;../RGB2YCbCr.gcx&#34;&gt; Grapher ファイル&lt;/a&gt; | &lt;a href=&#34;../makeVert.phps&#34;&gt; プロット生成スクリプト  &lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;(奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)&lt;/p&gt;
 
