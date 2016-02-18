@@ -238,7 +238,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 <h2 id="デメリット:6214a8feaba721e81b237a92198f5169">デメリット</h2>
 
-<p>RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為 YCbCr は 0-255 の範囲をハミ出さないように大きめの空間になります。(同じ 0-255 で RGB より YCbCr の方が大きなスケールを表現)</p>
+<p>RGB と YCbCr は色空間が斜めの関係にあり、YCbCr は RGB を全部カバーする為、同じ 0-255 でも RGB より YCbCr の方が大きなスケールを表現します。</p>
 
 <ul>
 <li>大きな立体が YCbCr の空間で、中の小さい立体が RGB の収まる範囲です。</li>

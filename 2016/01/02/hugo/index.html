@@ -137,7 +137,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 <li>github.com/spf13/hugo/hugolib/page.go</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">PlainWords</span><span style="color: #f8f8f2">(),</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">SummaryLength</span><span style="color: #f8f8f2">)</span>
 <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsToWholeSentence</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">PlainWords</span><span style="color: #f8f8f2">(),</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">SummaryLength</span><span style="color: #f8f8f2">)</span>
@@ -151,7 +151,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 <li>github.com/spf13/hugo/helpers/content.go</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// Length of the summary that Hugo extracts from a content.</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">// Length of the summary that Hugo extracts from a content.</span>
 <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">SummaryLength</span> <span style="color: #f8f8f2">=</span> <span style="color: #ae81ff">70</span>
 </pre></div>
 
@@ -160,7 +160,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 
 <p>よくよく見返すと、</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span>
 </pre></div>
 </p>
@@ -174,12 +174,12 @@ By default なので値を 70 以外に変える方法があると推測し、�
 <li>github.com/spf13/hugo/hugolib/page.go</li>
 </ul>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">case</span> <span style="color: #e6db74">&quot;iscjklanguage&quot;</span><span style="color: #f8f8f2">:</span>
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">case</span> <span style="color: #e6db74">&quot;iscjklanguage&quot;</span><span style="color: #f8f8f2">:</span>
 	<span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">new(</span><span style="color: #66d9ef">bool</span><span style="color: #f8f8f2">)</span>
 	<span style="color: #f92672">*</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">cast</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">ToBool</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">v</span><span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f8f8f2">{</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">=</span> <span style="color: #f92672">*</span><span style="color: #a6e22e">isCJKLanguage</span>
 <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">viper</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">GetBool</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;HasCJKLanguage&quot;</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #66d9ef">if</span> <span style="color: #a6e22e">cjk</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Match</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">rawContent</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
