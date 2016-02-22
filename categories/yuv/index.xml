@@ -34,6 +34,10 @@
 
 &lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
 
+&lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvabc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
 &lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
 &lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
