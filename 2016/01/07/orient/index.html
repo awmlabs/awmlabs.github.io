@@ -208,7 +208,7 @@ test.jpg
 <li><a href="https://github.com/yoya/misc/blob/master/bash/severalorientation.sh">https://github.com/yoya/misc/blob/master/bash/severalorientation.sh</a></li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#! /bin/bash</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">#! /bin/bash</span>
 
 <span style="color: #f8f8f2">set</span> -u
 
@@ -216,23 +216,23 @@ test.jpg
 <span style="color: #f8f8f2">SUFFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.jpg&quot;</span>
 
 <span style="color: #f8f8f2">FILE</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
-<span style="color: #f8f8f2">PREFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">`</span>basename <span style="color: #f8f8f2">$F</span>ILE $SUFFIX<span style="color: #e6db74">`</span>
+<span style="color: #f8f8f2">PREFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">`</span>basename <span style="color: #f8f8f2">$FILE</span> <span style="color: #f8f8f2">$SUFFIX</span><span style="color: #e6db74">`</span>
 
 <span style="color: #66d9ef">for</span> i in <span style="color: #e6db74">`</span>seq <span style="color: #ae81ff">1</span> 8<span style="color: #e6db74">`</span> <span style="color: #f8f8f2">;</span>
 <span style="color: #66d9ef">do</span>
-  <span style="color: #f8f8f2">FILE_ORIENT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;</span>$<span style="color: #e6db74">PREFIX-</span>$<span style="color: #e6db74">i</span>$<span style="color: #e6db74">SUFFIX&quot;</span>
-  <span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$F</span>ILE_ORIENT
-  cp <span style="color: #f8f8f2">$F</span>ILE <span style="color: #f8f8f2">$F</span>ILE_ORIENT
-  exiftool -Orientation<span style="color: #f92672">=</span>$i -n <span style="color: #f8f8f2">$F</span>ILE_ORIENT
-  rm <span style="color: #f8f8f2">$F</span>ILE_ORIENT$ORIGINAL_SUFFIX
-  <span style="color: #66d9ef">case</span> $i in
-    <span style="color: #e6db74">&quot;2&quot;</span><span style="color: #f92672">)</span> mogrify             -flop <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;3&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span>       <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;4&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span> -flop <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;5&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90 -flip <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;6&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90       <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;7&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span> -flip <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
-    <span style="color: #e6db74">&quot;8&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span>       <span style="color: #f8f8f2">$F</span>ILE_ORIENT <span style="color: #f8f8f2">;;</span>
+  <span style="color: #f8f8f2">FILE_ORIENT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$PREFIX</span><span style="color: #e6db74">-</span><span style="color: #f8f8f2">$i$SUFFIX</span><span style="color: #e6db74">&quot;</span>
+  <span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  cp <span style="color: #f8f8f2">$FILE</span> <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  exiftool -Orientation<span style="color: #f92672">=</span><span style="color: #f8f8f2">$i</span> -n <span style="color: #f8f8f2">$FILE_ORIENT</span>
+  rm <span style="color: #f8f8f2">$FILE_ORIENT$ORIGINAL_SUFFIX</span>
+  <span style="color: #66d9ef">case</span> <span style="color: #f8f8f2">$i</span> in
+    <span style="color: #e6db74">&quot;2&quot;</span><span style="color: #f92672">)</span> mogrify             -flop <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;3&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span>       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;4&quot;</span><span style="color: #f92672">)</span> mogrify -rotate <span style="color: #ae81ff">180</span> -flop <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;5&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90 -flip <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;6&quot;</span><span style="color: #f92672">)</span> mogrify -rotate -90       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;7&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span> -flip <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
+    <span style="color: #e6db74">&quot;8&quot;</span><span style="color: #f92672">)</span> mogrify -rotate  <span style="color: #ae81ff">90</span>       <span style="color: #f8f8f2">$FILE_ORIENT</span> <span style="color: #f8f8f2">;;</span>
   <span style="color: #66d9ef">esac</span>
 <span style="color: #66d9ef">done</span>
 </pre></div>
