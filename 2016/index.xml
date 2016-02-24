@@ -363,6 +363,185 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
     </item>
     
     <item>
+      <title>ImageMagick で JPEG の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick-で-jpeg-の形式を変換:51b8d3349056accb3067af132947c35a&#34;&gt;ImageMagick で JPEG の形式を変換&lt;/h1&gt;
+
+&lt;p&gt;JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;プログレッシブjpeg:51b8d3349056accb3067af132947c35a&#34;&gt;プログレッシブJPEG&lt;/h1&gt;
+
+&lt;p&gt;読み込み始めは粗い画像を表示して、読み込みながら高画質に更新するような表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
+周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で実現します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../progressive.png&#34;&gt; &lt;/center&gt;
+画像元) &lt;a href=&#34;http://dic.nicovideo.jp/a/%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%BE%E3%83%BC%E3%83%B3&#34;&gt;ニコニコ大百科(仮) ファンタジーゾーン&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プログレッシブJPEGの作り方&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert orig.jpg -interlace JPEG progressive.jpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;クロマサブサンプリング:51b8d3349056accb3067af132947c35a&#34;&gt;クロマサブサンプリング&lt;/h1&gt;
+
+&lt;p&gt;基本的に &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:51b8d3349056accb3067af132947c35a:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:51b8d3349056accb3067af132947c35a:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVxxx について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/02/10/yuv/&#34;&gt;http://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvabc.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;クロマサブサンプリングの作り方&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert orig.jpg -sampling-factor &amp;quot;1x1,1x1,1x1&amp;quot; yuv444.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;2x1,1x1,1x1&amp;quot; yuv422.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;4x1,1x1,1x1&amp;quot; yuv411.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;1x2,1x1,1x1&amp;quot; yuv440.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;2x2,1x1,1x1&amp;quot; yuv420.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;4x2,1x1,1x1&amp;quot; yuv410.jpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;profile:51b8d3349056accb3067af132947c35a&#34;&gt;Profile&lt;/h1&gt;
+
+&lt;h2 id=&#34;icc-profile:51b8d3349056accb3067af132947c35a&#34;&gt;ICC Profile&lt;/h2&gt;
+
+&lt;p&gt;ICC プロファイルの詳細は以下のスライドが分かり易いので、参照下さい。(英語)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ICC color management for print production
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.color.org/craigrevie.pdf&#34;&gt;http://www.color.org/craigrevie.pdf&lt;/a&gt; &amp;copy; FujiFilm 2002&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ポイントとしては、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;撮影や表示のデバイスによって R,G,B の値と実際の色との対応が微妙に違うのを補正する
+
+&lt;ul&gt;
+&lt;li&gt;特に新し目のデバイスでは性能があがって表現できる色域が広がっているので、それと既存のデバイスとの辻褄合わせが要る&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;全デバイス同士で直接変換すると組み合わせ爆発して辛いので、共通の色空間経由で変換する
+
+&lt;ul&gt;
+&lt;li&gt;その中心の空間を PCS (Profile Connection Space) と呼ぶ。CIE の Lab 又は XYZ を使う。
+&lt;center&gt; &lt;img src=&#34;../craigrevie_13_25per.png&#34;&gt;  &lt;img src=&#34;../craigrevie_14_25per.png&#34;&gt; &lt;br /&gt; (上記スライドからの引用)&lt;/center&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ImageMagick では -profile オプションで ICC プロファイルを適用できます。変換元の JPEG に ICC プロファイルが入っているか否かによって動作が異なります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;変換元 JPEG に ICC プロファイルが無い場合
+
+&lt;ul&gt;
+&lt;li&gt;ICC プロファイルのメタデータを追加するだけ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;変換元 JPEG に ICC プロファイルが入っている場合&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ICC プロファイルのメタデータを書き換えると同時に、ICCプロファイル対応ビューアでの表示の色が変わらないよう実データのピクセルの色を補正する&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;変換元 JPEG に ICC プロファイルが無い場合&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert noicc.jpg -profile sRGB.icc srgb.icc # 見た目変わらない
+$ convert noicc.jpg -profile  GBR.icc  gbr.icc # 見た目変わる
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../icc-profile1.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;変換元 JPEG に ICC プロファイルが入っている場合&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert srgb.jpg -profile sRGB.icc srgb.icc # 見た目変わらない
+$ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../icc-profile2.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;exif-exittool-で変換:51b8d3349056accb3067af132947c35a&#34;&gt;Exif (Exittool で変換)&lt;/h1&gt;
+
+&lt;h2 id=&#34;orientation:51b8d3349056accb3067af132947c35a&#34;&gt;Orientation&lt;/h2&gt;
+
+&lt;p&gt;Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../exif_orientation.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Exif Orientation の向きについては以下の記事をどうぞ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient/&#34;&gt;https://blog.awm.jp/2016/01/07/orient/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../orient-half.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ exiftool orig.jpgt -Orientation=0 -n orient0.jpg
+$ exiftool orig.jpgt -Orientation=1 -n orient1.jpg
+$ exiftool orig.jpgt -Orientation=2 -n orient2.jpg
+$ exiftool orig.jpgt -Orientation=3 -n orient3.jpg
+$ exiftool orig.jpgt -Orientation=4 -n orient4.jpg
+$ exiftool orig.jpgt -Orientation=5 -n orient5.jpg
+$ exiftool orig.jpgt -Orientation=6 -n orient6.jpg
+$ exiftool orig.jpgt -Orientation=7 -n orient7.jpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;グレイjpeg:51b8d3349056accb3067af132947c35a&#34;&gt;グレイJPEG&lt;/h1&gt;
+
+&lt;p&gt;JPEG 形式のタイプとして Grayscale が存在しますので、一応作り方を紹介。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa.jpg&#34; align=&#34;middle&#34;&gt; =&amp;gt; &lt;img src=&#34;../Opaopa-gray.jpg&#34; align=&#34;middle&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert orig.jpg -type grayscale gray.jpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;最後に:51b8d3349056accb3067af132947c35a&#34;&gt;最後に&lt;/h1&gt;
+
+&lt;p&gt;他にもこんな形式を知っているという方がいましたら、ご指摘頂けると幸いです。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url:51b8d3349056accb3067af132947c35a&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Exiftool
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:51b8d3349056accb3067af132947c35a:1&#34;&gt;CMYK の値で持つ事もできます。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:51b8d3349056accb3067af132947c35a:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>透明度を含む画像を JPEG に変換する時の背景色</title>
       <link>https://blog.awm.jp/2016/01/25/flatten/</link>
       <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
@@ -598,7 +777,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;MogrifyImage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
@@ -758,7 +937,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;fprintf で表示させる&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
 
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
 
@@ -795,7 +974,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;ul&gt;
 &lt;li&gt;ReadJPEGImage (coders/jpeg.c)
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_factor;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -810,7 +989,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;ul&gt;
 &lt;li&gt;jpeg_core_output_dimensions
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;/* Compute actual output image dimensions and DCT scaling choices. */&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;/* Compute actual output image dimensions and DCT scaling choices. */&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_num&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_denom)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color: #75715e&#34;&gt;/* Provide 1/block_size scaling */&lt;/span&gt;
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_width&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;
@@ -991,7 +1170,7 @@ test.jpg
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
 
@@ -999,23 +1178,23 @@ test.jpg
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.jpg&amp;quot;&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE $SUFFIX&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
 
 &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; i in &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;seq &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; 8&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;PREFIX-&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;i&lt;/span&gt;$&lt;span style=&#34;color: #e6db74&#34;&gt;SUFFIX&amp;quot;&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
-  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
-  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;$i -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT
-  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT$ORIGINAL_SUFFIX
-  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; $i in
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$F&lt;/span&gt;ILE_ORIENT &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$PREFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT$ORIGINAL_SUFFIX&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; in
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flip &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;esac&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1863,7 +2042,7 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
 &lt;li&gt;create/content.go&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;NewContent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;NewContent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;FindArchetype&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
 	&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 		&lt;span style=&#34;color: #a6e22e&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]byte(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;+++\n title = \&amp;quot;title\&amp;quot;\n draft = true \n+++\n&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
@@ -1879,7 +2058,7 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
 &lt;li&gt;command/new.go&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;newCmd&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Flags&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;StringVarP&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;contentType&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;kind&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Content type to create&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;newCmd&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Flags&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;StringVarP&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;contentType&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;kind&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Content type to create&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;略&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＞&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;contentType&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;kind&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;contentType&lt;/span&gt;
@@ -1931,7 +2110,7 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&#34;&gt;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;machine&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;machine&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
   &lt;span style=&#34;color: #ae81ff&#34;&gt;timezone&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;Asia/Tokyo&lt;/span&gt;
 
 &lt;span style=&#34;color: #ae81ff&#34;&gt;checkout&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
@@ -2091,7 +2270,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 &lt;li&gt;github.com/spf13/hugo/hugolib/page.go&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;summary&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;truncated&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;TruncateWordsByRune&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;PlainWords&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;SummaryLength&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;summary&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;truncated&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;TruncateWordsToWholeSentence&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;PlainWords&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;SummaryLength&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
@@ -2105,7 +2284,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 &lt;li&gt;github.com/spf13/hugo/helpers/content.go&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// Length of the summary that Hugo extracts from a content.&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// Length of the summary that Hugo extracts from a content.&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SummaryLength&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;70&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2114,7 +2293,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 
 &lt;p&gt;よくよく見返すと、&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;summary&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;truncated&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;TruncateWordsByRune&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
@@ -2128,12 +2307,12 @@ By default なので値を 70 以外に変える方法があると推測し、�
 &lt;li&gt;github.com/spf13/hugo/hugolib/page.go&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;iscjklanguage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;iscjklanguage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;new(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;bool&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
 	&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;cast&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ToBool&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;viper&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;GetBool&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;HasCJKLanguage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;cjk&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Match&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;rawContent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
@@ -2162,163 +2341,6 @@ docs/content/overview/configuration.md:    hasCJKLanguage              false
 &lt;/ul&gt;
 
 &lt;p&gt;以上、 同じ罠にハマった方のお役に立てれば幸いです！&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Blog はじめました</title>
-      <link>https://blog.awm.jp/2016/01/01/blog/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
-      <description>
-
-&lt;h1 id=&#34;blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Blog はじめました&lt;/h1&gt;
-
-&lt;p&gt;WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://twitter.com/nobu666/status/680683739534393344&#34;&gt;https://twitter.com/nobu666/status/680683739534393344&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;del&gt; &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt; &lt;/del&gt; (CircleCI連携の都合で、レポジトリを awmlabs に移動しました)&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
-
-&lt;p&gt;github.com で &amp;lt;ユーザ名&amp;gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/awmlabs.github.io&#34;&gt;https://github.com/awmlabs/awmlabs.github.io&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;=&amp;gt; &lt;a href=&#34;https://awmlabs.github.io/&#34;&gt;https://awmlabs.github.io/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ここにブログを表示する静的なHTMLを入れていけば良い訳です。
-Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。&lt;/p&gt;
-
-&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;=&amp;gt; &lt;a href=&#34;https://blog.awm.jp/&#34;&gt;https://blog.awm.jp/&lt;/a&gt; (awmlabs.github.io を指します)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;DNS の CNAME で blog.awm.jp =&amp;gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。&lt;/p&gt;
-
-&lt;h1 id=&#34;hugo:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;$ hugo new site blog.awm.jp
-$ cd blog.awm.jp
-$ hugo new 2016/01/01/blog.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;のようにすると&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;blog.awm.jp/content/2016/01/01/blog.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;にテンプレートの md ファイルが出来るので、そこに文章を記述して、blog.awm.jp フォルダのトップで、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ hugo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。&lt;/p&gt;
-
-&lt;h2 id=&#34;hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo themes&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;http://themes.gohugo.io/&lt;/a&gt;
-ここで色々なテーマが確認できます。一目惚れした base16 を適用しました。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/base16/&#34;&gt;http://themes.gohugo.io/base16/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;git submodule add git@github.com:htdvisser/hugo-base16-theme.git themes/base16
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;として持ってきます。尚、大抵のカスタマイズはトップのlayouts や static/css 以下で弄れるので、fork しなくても良さそうです。&lt;/p&gt;
-
-&lt;p&gt;後は、先ほど hugo を実行したのと同じ要領で、更に server -watch オプションをつけると、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ hugo  server --watch -t base16
-＜略＞
-Web Server is available at http://127.0.0.1:1313/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;このように &lt;a href=&#34;http://127.0.0.1:1313/&#34;&gt;http://127.0.0.1:1313/&lt;/a&gt; で表示が確認できます。
-md ファイルを編集するとリアルタイムに反映してくれて便利です。(これが出来なかったら hugo を使おうとしなかった位、大事な機能)&lt;/p&gt;
-
-&lt;p&gt;尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。&lt;/p&gt;
-
-&lt;h2 id=&#34;syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Syntax Highlight&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://gohugo.io/extras/highlighting/&#34;&gt;http://gohugo.io/extras/highlighting/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;これの通りに作業します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pip install Pygments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;で、Pygments を入れて。config.toml に&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pygmentsuseclasses = true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;を入れるだけで OK です。&lt;/p&gt;
-
-&lt;h2 id=&#34;テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;テーマの文字&lt;/h2&gt;
-
-&lt;p&gt;base16 は文字が読み辛いので自分好みに変更しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;記事の背景色 (少し明るくした)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;article&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;.single&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;section,&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;.article-list&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;article&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;background-color&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;#f2f0ec&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;background-color&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;#fcf8f0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;文字フォント (Windows で見た時に MS ゴシックが使われないように)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;body&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-   &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;font-family&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Hiragino Kaku Gothic ProN&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Meiryo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Tahoma&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Verdana&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Arial&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sans-serif;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;font-family&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Source Code Pro&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;monospace;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1 id=&#34;circleci:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;CircleCI&lt;/h1&gt;
-
-&lt;p&gt;間に合わなかったので、また今度。。&lt;/p&gt;
-
-&lt;p&gt;(2016/01/02 追記) &amp;gt; &lt;a href=&#34;http://blog.awm.jp/2016/01/02/circleci/&#34;&gt;http://blog.awm.jp/2016/01/02/circleci/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;備考:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;備考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。&lt;/li&gt;
-&lt;li&gt;当初、改行がされないと思ったけど、サマリーの方は改行無しで、記事のページに飛んだらちゃんと改行されてました。早とちり。&lt;/li&gt;
-&lt;li&gt;色々なテーマを試そうとするとエラーがよく出ます。テーマ毎に md ファイルの先頭で必要な定義が違うみたいで、ちゃんとテーマの README を読んで設定しましょう。&lt;/li&gt;
-&lt;li&gt;new 〜.md で作ったテンプレファイルでは draft = true になっているので、これを消すか false にしないと記事を表示しません。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;参考-url:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;参考 URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/nobu666/nobu666.com&#34;&gt;https://github.com/nobu666/nobu666.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/eichann/items/4fe61b8b9bbafcfbe847&#34;&gt;http://qiita.com/eichann/items/4fe61b8b9bbafcfbe847&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

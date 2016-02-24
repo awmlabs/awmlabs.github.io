@@ -73,6 +73,27 @@
   <h1 class="headline" itemprop="headline">JPEG の size hinting について</h1>
 
   <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</a>
+<ul>
+<li><a href="#jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784">JPEG のデータの持ち方</a></li>
+<li><a href="#scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784">scaling 指定で Decode</a></li>
+<li><a href="#やっている事:8297ce3a5ed4594f91a307954f292784">やっている事</a></li>
+</ul></li>
+<li><a href="#jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の動作イメージ</a>
+<ul>
+<li><a href="#小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784">小さくリサイズする場合</a></li>
+<li><a href="#大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784">大きくリサイズする場合 (予想)</a>
+<ul>
+<li><a href="#実際の動き:8297ce3a5ed4594f91a307954f292784">実際の動き</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#結論:8297ce3a5ed4594f91a307954f292784">結論</a></li>
+<li><a href="#scaling-の該当コード:8297ce3a5ed4594f91a307954f292784">scaling の該当コード</a></li>
+<li><a href="#参考-url:8297ce3a5ed4594f91a307954f292784">参考 URL</a></li>
+</ul>
+</nav>
     
 
 <p>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。</p>
@@ -162,7 +183,7 @@
 <li>fprintf で表示させる</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
 
       <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
 
@@ -199,7 +220,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <ul>
 <li>ReadJPEGImage (coders/jpeg.c)
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
       <span style="color: #f8f8f2">jpeg_info.scale_denom</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">unsigned</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">scale_factor;</span>
       <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
 </pre></div>
@@ -214,7 +235,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <ul>
 <li>jpeg_core_output_dimensions
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>  <span style="color: #75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
   <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_num</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_denom)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #75715e">/* Provide 1/block_size scaling */</span>
     <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_width</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>

@@ -73,6 +73,18 @@
   <h1 class="headline" itemprop="headline">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</h1>
 
   <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</a></li>
+<li><a href="#一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15">一部界隈で話題</a></li>
+<li><a href="#良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15">良いノウハウ</a>
+<ul>
+<li><a href="#リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15">リリース大量消費に注意</a></li>
+<li><a href="#imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</a></li>
+</ul></li>
+<li><a href="#補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</a></li>
+</ul>
+</nav>
     
 
 <h1 id="もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</h1>
@@ -122,7 +134,7 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 <li>wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">WandExport</span> <span style="color: #f8f8f2">MagickBooleanType</span> <span style="color: #a6e22e">MogrifyImage</span><span style="color: #f8f8f2">(ImageInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">image_info,</span><span style="color: #66d9ef">const</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">argc,</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">WandExport</span> <span style="color: #f8f8f2">MagickBooleanType</span> <span style="color: #f8f8f2">MogrifyImage(ImageInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">image_info,</span><span style="color: #66d9ef">const</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">argc,</span>
   <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">char</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">argv,Image</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">image,ExceptionInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">exception)</span>
 <span style="color: #960050; background-color: #1e0010">＜略＞</span>
   <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(i</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">ssize_t</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">argc;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">)</span>
