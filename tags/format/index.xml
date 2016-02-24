@@ -141,7 +141,7 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 &lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient/&#34;&gt;https://blog.awm.jp/2016/01/07/orient/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../orient-half.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../orient-38per.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。&lt;/p&gt;
 
