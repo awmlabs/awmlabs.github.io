@@ -183,7 +183,7 @@
 <li>fprintf で表示させる</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">fprintf(stderr,</span> <span style="color: #e6db74">&quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">jpeg_info.image_width,</span> <span style="color: #f8f8f2">jpeg_info.image_height,</span> <span style="color: #f8f8f2">jpeg_info.output_width,</span> <span style="color: #f8f8f2">jpeg_info.output_height,</span> <span style="color: #f8f8f2">jpeg_info.scale_num,</span> <span style="color: #f8f8f2">jpeg_info.scale_denom);</span>
 
       <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
 
@@ -220,7 +220,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <ul>
 <li>ReadJPEGImage (coders/jpeg.c)
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">      <span style="color: #f8f8f2">jpeg_info.scale_num</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1U</span><span style="color: #f8f8f2">;</span>
       <span style="color: #f8f8f2">jpeg_info.scale_denom</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">unsigned</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">scale_factor;</span>
       <span style="color: #f8f8f2">jpeg_calc_output_dimensions(</span><span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">jpeg_info);</span>
 </pre></div>
@@ -235,7 +235,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <ul>
 <li>jpeg_core_output_dimensions
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>  <span style="color: #75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
   <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_num</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">block_size</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">scale_denom)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #75715e">/* Provide 1/block_size scaling */</span>
     <span style="color: #f8f8f2">cinfo</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">output_width</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(JDIMENSION)</span>
