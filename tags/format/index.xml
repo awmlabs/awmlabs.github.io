@@ -81,15 +81,17 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x2,1x1,1x1&amp;quot; yuv410.jpg
 
 &lt;p&gt;既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ exiftool orig.jpgt -Orientation=0 -n orient0.jpg
-$ exiftool orig.jpgt -Orientation=1 -n orient1.jpg
-$ exiftool orig.jpgt -Orientation=2 -n orient2.jpg
-$ exiftool orig.jpgt -Orientation=3 -n orient3.jpg
-$ exiftool orig.jpgt -Orientation=4 -n orient4.jpg
-$ exiftool orig.jpgt -Orientation=5 -n orient5.jpg
-$ exiftool orig.jpgt -Orientation=6 -n orient6.jpg
-$ exiftool orig.jpgt -Orientation=7 -n orient7.jpg
+&lt;pre&gt;&lt;code&gt;$ exiftool orig.jpg -Orientation=0 -n -o orient0.jpg
+$ exiftool orig.jpg -Orientation=1 -n -o orient1.jpg
+$ exiftool orig.jpg -Orientation=2 -n -o orient2.jpg
+$ exiftool orig.jpg -Orientation=3 -n -o orient3.jpg
+$ exiftool orig.jpg -Orientation=4 -n -o orient4.jpg
+$ exiftool orig.jpg -Orientation=5 -n -o orient5.jpg
+$ exiftool orig.jpg -Orientation=6 -n -o orient6.jpg
+$ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;※ -o をつけ忘れると orig.jpg を上書きしてしまうので注意&lt;/p&gt;
 
 &lt;h1 id=&#34;profile:51b8d3349056accb3067af132947c35a&#34;&gt;Profile&lt;/h1&gt;
 
