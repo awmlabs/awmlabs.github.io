@@ -7,8 +7,257 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 26 Jan 2016 14:55:39 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2016 14:55:42 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ImageMagick で PNG の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/png/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:42 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/26/png/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf&#34;&gt;ImageMagick で PNG の形式を変換&lt;/h1&gt;
+
+&lt;p&gt;PNG は同じように見える画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;カラータイプ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;カラータイプ&lt;/h1&gt;
+
+&lt;p&gt;PNG は以下の5種類のカラータイプがあります。仕様書からコピペします。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Color  Type&lt;/th&gt;
+&lt;th&gt;Allowed Bit Depths&lt;/th&gt;
+&lt;th&gt;Interpretation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1,2,4,8,16&lt;/td&gt;
+&lt;td&gt;Each pixel is a grayscale sample.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;Each pixel is an R,G,B triple.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;1,2,4,8&lt;/td&gt;
+&lt;td&gt;Each pixel is a palette index; a PLTE chunk must appear.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;Each pixel is a grayscale sample, followed by an alpha sample.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;Each pixel is an R,G,B triple, followed by an alpha sample.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;日本語に訳しつつ、いくつか情報を追記してみます。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;カラー型&lt;/th&gt;
+&lt;th&gt;ビット&lt;br /&gt;深度&lt;/th&gt;
+&lt;th&gt;PLTE&lt;/th&gt;
+&lt;th&gt;tRNS&lt;/th&gt;
+&lt;th&gt;ピクセル値の解釈&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1,2,4,8,16&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../png-pixel-type0.png&#34; /&gt; グレースケール&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../png-pixel-type2.png&#34; /&gt; R,G,B (PNG24)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;1,2,4,8&lt;/td&gt;
+&lt;td&gt;必須○&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../png-pixel-type3.png&#34; /&gt; インデックスカラー。(PNG8)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../png-pixel-type4.png&#34; /&gt; グレースケールの後ろにアルファ値。つまり YA&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;8,16&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../png-pixel-type6.png&#34; /&gt; R,G,B の後ろにアルファ値。つまり RGBA　(PNG32)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:0 グレースケール&lt;/h2&gt;
+
+&lt;p&gt;黒:0〜白:2^(bit数)の範囲の値を並べるだけの形式です。
+bit数は 1,2,4,8,16 から選択できます。
+&lt;center&gt; &lt;img src=&#34;../png-type0.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -type Grayscale Opaopa-type0.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;尚、tRNS チャンクをつける事で透明ピクセルも表現できます。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:2 RGB (PNG24)&lt;/h2&gt;
+
+&lt;p&gt;ピクセルの R,G,B をそのまま展開します。
+&lt;center&gt; &lt;img src=&#34;../png-type2.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png png24:Opaopa-png24.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tRNS チャンクをつける事で透明ピクセルも表現できます。但し、0 か 255 のどちらかで半透明は表現できません。大人しく Type 6 の RGBA 形式を使いましょう。&lt;/li&gt;
+&lt;li&gt;PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:3 パレット (PNG8)&lt;/h2&gt;
+
+&lt;p&gt;色のパレットを持ち、そこへのインデックス値を並べて画像を表現します。
+&lt;center&gt; &lt;img src=&#34;../png-type3.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png  png8:Opaopa-png8.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;tRNS チャンクをつける事で透明度も表現できます。&lt;/p&gt;
+
+&lt;h2 id=&#34;type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:4 透明度つきグレースケール&lt;/h2&gt;
+
+&lt;p&gt;グレースケールの値と透明度のセットで表現します。
+&lt;center&gt; &lt;img src=&#34;../png-type4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -type GrayscaleMatte  Opaopa-type4.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:6 RGBA (PNG32)&lt;/h2&gt;
+
+&lt;p&gt;ピクセルの R,G,B,A を展開します。
+&lt;center&gt; &lt;img src=&#34;../png-type6.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png  png32:Opaopa-png32.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;メタデータ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;メタデータ&lt;/h1&gt;
+
+&lt;h2 id=&#34;gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf&#34;&gt;gAMA (ガンマ補正)&lt;/h2&gt;
+
+&lt;p&gt;単純にガンマ値を指定します。&lt;/p&gt;
+
+&lt;h2 id=&#34;chrm-基本色度:418c06c92c8215b52bf45f50bda544bf&#34;&gt;cHRM (基本色度)&lt;/h2&gt;
+
+&lt;p&gt;基本色度やホワイトバランスを指定します。
+尚、sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。&lt;/p&gt;
+
+&lt;h2 id=&#34;icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf&#34;&gt;iCPP (ICC プロファイル)&lt;/h2&gt;
+
+&lt;p&gt;ICC プロファイルを埋め込めます。 (JPEG と同じ要領です)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -profile sRGB.icc Opaopa-sRGB.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-sRGB.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -profile GBR.icc Opaopa-GBR.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-GBR.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-sRGB.png -profile GBR.icc Opaopa-sRGB-GBR.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-sRGB-GBR.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-sRGB-GBR.png -strip Opaopa-sRGB-GBR-strip.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-sRGB-GBR-strip.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;JPEG の時と同じのようです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;元画像ファイルに ICC プロファイルがない場合
+
+&lt;ul&gt;
+&lt;li&gt;=&amp;gt; 単に ICC プロファイルを付けるだけ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ICC プロファイルがあった場合 =&amp;gt; 見た目の色が変わらないよう画像データのRGBを書き換えつつ ICCプロファイルを上書きする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;bkgd-背景色:418c06c92c8215b52bf45f50bda544bf&#34;&gt;bKGD (背景色)&lt;/h2&gt;
+
+&lt;p&gt;背景色を指定します。画像が貼られた時に埋まらなかったピクセルを埋める色です。&lt;/p&gt;
+
+&lt;h1 id=&#34;メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;メタデータ (おまけ)&lt;/h1&gt;
+
+&lt;h2 id=&#34;phys:418c06c92c8215b52bf45f50bda544bf&#34;&gt;pHYs&lt;/h2&gt;
+
+&lt;p&gt;DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。&lt;/p&gt;
+
+&lt;h2 id=&#34;sbit:418c06c92c8215b52bf45f50bda544bf&#34;&gt;sBIT&lt;/h2&gt;
+
+&lt;p&gt;元画像データの Bit深度を記録します。
+恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えるようです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味ないので。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url:418c06c92c8215b52bf45f50bda544bf&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PNG (Portable Network Graphics) Specification, Version 1.2
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf&#34;&gt;http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;PNGについて
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://homepage2.nifty.com/sophia0/png.html&#34;&gt;http://homepage2.nifty.com/sophia0/png.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPG ファイルフォーマット
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>ImageMagick で JPEG の形式を変換</title>
@@ -432,7 +681,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;MogrifyImage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WandExport&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickBooleanType&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MogrifyImage(ImageInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image_info,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc,&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;argv,Image&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;image,ExceptionInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;exception)&lt;/span&gt;
 &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ssize_t&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;argc;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
@@ -592,7 +841,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;li&gt;fprintf で表示させる&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;fprintf(stderr,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.image_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_width,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.output_height,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom);&lt;/span&gt;
 
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
 
@@ -629,7 +878,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;ul&gt;
 &lt;li&gt;ReadJPEGImage (coders/jpeg.c)
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_num&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1U&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info.scale_denom&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_factor;&lt;/span&gt;
       &lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_calc_output_dimensions(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;jpeg_info);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -644,7 +893,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;ul&gt;
 &lt;li&gt;jpeg_core_output_dimensions
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;/* Compute actual output image dimensions and DCT scaling choices. */&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;/* Compute actual output image dimensions and DCT scaling choices. */&lt;/span&gt;
   &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_num&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;block_size&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scale_denom)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color: #75715e&#34;&gt;/* Provide 1/block_size scaling */&lt;/span&gt;
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;cinfo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;output_width&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(JDIMENSION)&lt;/span&gt;

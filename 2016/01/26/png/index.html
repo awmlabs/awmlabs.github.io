@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>ImageMagick で PNG の形式を変換 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/26/png/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/26/png/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で PNG の形式を変換" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/26/png/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-26">January 26, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/png">PNG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/png">PNG</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/format">Format</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で PNG の形式を変換</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf">ImageMagick で PNG の形式を変換</a></li>
+<li><a href="#カラータイプ:418c06c92c8215b52bf45f50bda544bf">カラータイプ</a>
+<ul>
+<li><a href="#type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf">Type:0 グレースケール</a></li>
+<li><a href="#type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf">Type:2 RGB (PNG24)</a></li>
+<li><a href="#type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf">Type:3 パレット (PNG8)</a></li>
+<li><a href="#type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf">Type:4 透明度つきグレースケール</a></li>
+<li><a href="#type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf">Type:6 RGBA (PNG32)</a></li>
+</ul></li>
+<li><a href="#メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</a>
+<ul>
+<li><a href="#gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</a></li>
+<li><a href="#chrm-基本色度:418c06c92c8215b52bf45f50bda544bf">cHRM (基本色度)</a></li>
+<li><a href="#icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf">iCPP (ICC プロファイル)</a></li>
+<li><a href="#bkgd-背景色:418c06c92c8215b52bf45f50bda544bf">bKGD (背景色)</a></li>
+</ul></li>
+<li><a href="#メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf">メタデータ (おまけ)</a>
+<ul>
+<li><a href="#phys:418c06c92c8215b52bf45f50bda544bf">pHYs</a></li>
+<li><a href="#sbit:418c06c92c8215b52bf45f50bda544bf">sBIT</a></li>
+</ul></li>
+<li><a href="#参考-url:418c06c92c8215b52bf45f50bda544bf">参考 URL</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf">ImageMagick で PNG の形式を変換</h1>
+
+<p>PNG は同じように見える画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
+
+<h1 id="カラータイプ:418c06c92c8215b52bf45f50bda544bf">カラータイプ</h1>
+
+<p>PNG は以下の5種類のカラータイプがあります。仕様書からコピペします。</p>
+
+<table>
+<thead>
+<tr>
+<th>Color  Type</th>
+<th>Allowed Bit Depths</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>1,2,4,8,16</td>
+<td>Each pixel is a grayscale sample.</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>8,16</td>
+<td>Each pixel is an R,G,B triple.</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>1,2,4,8</td>
+<td>Each pixel is a palette index; a PLTE chunk must appear.</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>8,16</td>
+<td>Each pixel is a grayscale sample, followed by an alpha sample.</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>8,16</td>
+<td>Each pixel is an R,G,B triple, followed by an alpha sample.</td>
+</tr>
+</tbody>
+</table>
+
+<p>日本語に訳しつつ、いくつか情報を追記してみます。</p>
+
+<table>
+<thead>
+<tr>
+<th>カラー型</th>
+<th>ビット<br />深度</th>
+<th>PLTE</th>
+<th>tRNS</th>
+<th>ピクセル値の解釈</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>1,2,4,8,16</td>
+<td>×</td>
+<td>○</td>
+<td><img src="../png-pixel-type0.png" /> グレースケール</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>8,16</td>
+<td>○</td>
+<td>○</td>
+<td><img src="../png-pixel-type2.png" /> R,G,B (PNG24)</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>1,2,4,8</td>
+<td>必須○</td>
+<td>○</td>
+<td><img src="../png-pixel-type3.png" /> インデックスカラー。(PNG8)</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>8,16</td>
+<td>×</td>
+<td>×</td>
+<td><img src="../png-pixel-type4.png" /> グレースケールの後ろにアルファ値。つまり YA</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>8,16</td>
+<td>○</td>
+<td>×</td>
+<td><img src="../png-pixel-type6.png" /> R,G,B の後ろにアルファ値。つまり RGBA　(PNG32)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf">Type:0 グレースケール</h2>
+
+<p>黒:0〜白:2^(bit数)の範囲の値を並べるだけの形式です。
+bit数は 1,2,4,8,16 から選択できます。
+<center> <img src="../png-type0.png" /> </center></p>
+
+<pre><code>$ convert Opaopa.png -type Grayscale Opaopa-type0.png
+</code></pre>
+
+<ul>
+<li>尚、tRNS チャンクをつける事で透明ピクセルも表現できます。</li>
+</ul>
+
+<h2 id="type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf">Type:2 RGB (PNG24)</h2>
+
+<p>ピクセルの R,G,B をそのまま展開します。
+<center> <img src="../png-type2.png" /> </center></p>
+
+<pre><code>$ convert Opaopa.png png24:Opaopa-png24.png
+</code></pre>
+
+<ul>
+<li>tRNS チャンクをつける事で透明ピクセルも表現できます。但し、0 か 255 のどちらかで半透明は表現できません。大人しく Type 6 の RGBA 形式を使いましょう。</li>
+<li>PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)</li>
+</ul>
+
+<h2 id="type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf">Type:3 パレット (PNG8)</h2>
+
+<p>色のパレットを持ち、そこへのインデックス値を並べて画像を表現します。
+<center> <img src="../png-type3.png" /> </center></p>
+
+<pre><code>$ convert Opaopa.png  png8:Opaopa-png8.png
+</code></pre>
+
+<p>tRNS チャンクをつける事で透明度も表現できます。</p>
+
+<h2 id="type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf">Type:4 透明度つきグレースケール</h2>
+
+<p>グレースケールの値と透明度のセットで表現します。
+<center> <img src="../png-type4.png" /> </center></p>
+
+<pre><code>$ convert Opaopa.png -type GrayscaleMatte  Opaopa-type4.png
+</code></pre>
+
+<h2 id="type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf">Type:6 RGBA (PNG32)</h2>
+
+<p>ピクセルの R,G,B,A を展開します。
+<center> <img src="../png-type6.png" /> </center></p>
+
+<pre><code>$ convert Opaopa.png  png32:Opaopa-png32.png
+</code></pre>
+
+<h1 id="メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</h1>
+
+<h2 id="gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</h2>
+
+<p>単純にガンマ値を指定します。</p>
+
+<h2 id="chrm-基本色度:418c06c92c8215b52bf45f50bda544bf">cHRM (基本色度)</h2>
+
+<p>基本色度やホワイトバランスを指定します。
+尚、sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。</p>
+
+<h2 id="icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf">iCPP (ICC プロファイル)</h2>
+
+<p>ICC プロファイルを埋め込めます。 (JPEG と同じ要領です)</p>
+
+<pre><code>$ convert Opaopa.png -profile sRGB.icc Opaopa-sRGB.png
+</code></pre>
+
+<p><center> <img src="../Opaopa-sRGB.png"> </center></p>
+
+<pre><code>$ convert Opaopa.png -profile GBR.icc Opaopa-GBR.png
+</code></pre>
+
+<p><center> <img src="../Opaopa-GBR.png"> </center></p>
+
+<pre><code>$ convert Opaopa-sRGB.png -profile GBR.icc Opaopa-sRGB-GBR.png
+</code></pre>
+
+<p><center> <img src="../Opaopa-sRGB-GBR.png"> </center></p>
+
+<pre><code>$ convert Opaopa-sRGB-GBR.png -strip Opaopa-sRGB-GBR-strip.png
+</code></pre>
+
+<p><center> <img src="../Opaopa-sRGB-GBR-strip.png"> </center></p>
+
+<p>JPEG の時と同じのようです。</p>
+
+<ul>
+<li>元画像ファイルに ICC プロファイルがない場合
+
+<ul>
+<li>=&gt; 単に ICC プロファイルを付けるだけ</li>
+</ul></li>
+<li>ICC プロファイルがあった場合 =&gt; 見た目の色が変わらないよう画像データのRGBを書き換えつつ ICCプロファイルを上書きする</li>
+</ul>
+
+<h2 id="bkgd-背景色:418c06c92c8215b52bf45f50bda544bf">bKGD (背景色)</h2>
+
+<p>背景色を指定します。画像が貼られた時に埋まらなかったピクセルを埋める色です。</p>
+
+<h1 id="メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf">メタデータ (おまけ)</h1>
+
+<h2 id="phys:418c06c92c8215b52bf45f50bda544bf">pHYs</h2>
+
+<p>DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。</p>
+
+<h2 id="sbit:418c06c92c8215b52bf45f50bda544bf">sBIT</h2>
+
+<p>元画像データの Bit深度を記録します。
+恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えるようです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味ないので。</p>
+
+<h1 id="参考-url:418c06c92c8215b52bf45f50bda544bf">参考 URL</h1>
+
+<ul>
+<li>PNG (Portable Network Graphics) Specification, Version 1.2
+
+<ul>
+<li><a href="http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf">http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf</a></li>
+</ul></li>
+<li>PNGについて
+
+<ul>
+<li><a href="http://homepage2.nifty.com/sophia0/png.html">http://homepage2.nifty.com/sophia0/png.html</a></li>
+</ul></li>
+<li>JPG ファイルフォーマット
+
+<ul>
+<li><a href="http://www.setsuki.com/hsp/ext/jpg.htm">http://www.setsuki.com/hsp/ext/jpg.htm</a></li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
