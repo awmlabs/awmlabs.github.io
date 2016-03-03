@@ -263,7 +263,7 @@ bit数は 1,2,4,8,16 から選択できます。
 
 <h2 id="gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</h2>
 
-<p>単純にガンマ値を指定します。</p>
+<p>単純にガンマ値を指定します。BigEndian の4byteで表現していて、ガンマ値を100000倍した値を格納します。逆にいうと、バイナリを整数として読み出し、1/100000 した値がガンマ値です。</p>
 
 <h2 id="chrm-基本色度:418c06c92c8215b52bf45f50bda544bf">cHRM (基本色度)</h2>
 
@@ -313,12 +313,12 @@ bit数は 1,2,4,8,16 から選択できます。
 
 <h2 id="phys:418c06c92c8215b52bf45f50bda544bf">pHYs</h2>
 
-<p>DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。</p>
+<p>DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。単位がインチでなくメートルなので少し計算が面倒です。</p>
 
 <h2 id="sbit:418c06c92c8215b52bf45f50bda544bf">sBIT</h2>
 
 <p>元画像データの Bit深度を記録します。
-恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えるようです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味ないので。</p>
+恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えそうです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味がないので。</p>
 
 <h1 id="参考-url:418c06c92c8215b52bf45f50bda544bf">参考 URL</h1>
 
@@ -326,7 +326,8 @@ bit数は 1,2,4,8,16 から選択できます。
 <li>PNG (Portable Network Graphics) Specification, Version 1.2
 
 <ul>
-<li><a href="http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf">http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf</a></li>
+<li>(PDF版) <a href="http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf">http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf</a></li>
+<li>(HTML版) <a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html">http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html</a></li>
 </ul></li>
 <li>PNGについて
 
