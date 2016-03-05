@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Index on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/index/</link>
+    <description>Recent content in Index on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 26 Jan 2016 18:09:45 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/index/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>目次</title>
+      <link>https://blog.awm.jp/contents/</link>
+      <pubDate>Tue, 26 Jan 2016 18:09:45 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/contents/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick:c86ddc2258670691520613695335adcd&#34;&gt;ImageMagick&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/imagemagick/&#34;&gt;http://blog.awm.jp/2016/01/25/imagemagick/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;jpeg:c86ddc2258670691520613695335adcd&#34;&gt;JPEG&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で JPEG の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2016/01/26/jpeg/&#34;&gt;http://localhost:1313/2016/01/26/jpeg/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;orientation:c86ddc2258670691520613695335adcd&#34;&gt;Orientation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG Exif Orientation の操作
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/07/orient/&#34;&gt;http://blog.awm.jp/2016/01/07/orient/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;png:c86ddc2258670691520613695335adcd&#34;&gt;PNG&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で PNG の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2016/01/26/png/&#34;&gt;http://localhost:1313/2016/01/26/png/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;hugo:c86ddc2258670691520613695335adcd&#34;&gt;Hugo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Blog はじめました
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/01/blog/&#34;&gt;https://blog.awm.jp/2016/01/01/blog/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hugo のサマリーが大きすぎる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/02/hugo/&#34;&gt;https://blog.awm.jp/2016/01/02/hugo/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hugo の post テンプレートのカスタマイズ
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/03/hugo/&#34;&gt;https://blog.awm.jp/2016/01/03/hugo/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
