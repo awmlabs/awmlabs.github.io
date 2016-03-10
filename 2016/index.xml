@@ -1050,6 +1050,29 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;
 
+&lt;h2 id=&#34;cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;CMYK 画像を考慮しよう&lt;/h2&gt;
+
+&lt;p&gt;画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、この&amp;rdquo;リニア&amp;rdquo;RGB というのが曲者で、画像は sRGB で入っている事が多くガンマ補正がかかっているので、実は微妙に明るさが期待したものより暗くなる事があります。
+補間の問題なのでドットが疎らに入っている画像で特に暗くなる傾向があります。
+&lt;!-- 色数少なめでディザをかけた画像で実験すると顕著に差が出ます。 --&gt;&lt;/p&gt;
+
+&lt;p&gt;厳密に処理したい場合は RGB にしてから処理すると良いでしょう。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Resizing with Colorspace Correction
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/resize/#resize_colorspace&#34;&gt;http://www.imagemagick.org/Usage/resize/#resize_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert earth_lights_4800.tif \
+          -colorspace RGB -resize 500 --colorspace sRGB \
+          earth_lights_colorspace.png
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
 
 &lt;ul&gt;

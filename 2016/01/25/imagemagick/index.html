@@ -80,6 +80,7 @@
 <li><a href="#良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15">良いノウハウ</a>
 <ul>
 <li><a href="#リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15">リリース大量消費に注意</a></li>
+<li><a href="#cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">CMYK 画像を考慮しよう</a></li>
 <li><a href="#imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</a></li>
 </ul></li>
 <li><a href="#補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</a></li>
@@ -121,6 +122,29 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 </ul>
 
 <p>画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。</p>
+
+<h2 id="cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">CMYK 画像を考慮しよう</h2>
+
+<p>画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。</p>
+
+<p>ちなみに、この&rdquo;リニア&rdquo;RGB というのが曲者で、画像は sRGB で入っている事が多くガンマ補正がかかっているので、実は微妙に明るさが期待したものより暗くなる事があります。
+補間の問題なのでドットが疎らに入っている画像で特に暗くなる傾向があります。
+<!-- 色数少なめでディザをかけた画像で実験すると顕著に差が出ます。 --></p>
+
+<p>厳密に処理したい場合は RGB にしてから処理すると良いでしょう。</p>
+
+<ul>
+<li>Resizing with Colorspace Correction
+
+<ul>
+<li><a href="http://www.imagemagick.org/Usage/resize/#resize_colorspace">http://www.imagemagick.org/Usage/resize/#resize_colorspace</a></li>
+</ul></li>
+</ul>
+
+<pre><code>$ convert earth_lights_4800.tif \
+          -colorspace RGB -resize 500 --colorspace sRGB \
+          earth_lights_colorspace.png
+</code></pre>
 
 <h2 id="imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</h2>
 
