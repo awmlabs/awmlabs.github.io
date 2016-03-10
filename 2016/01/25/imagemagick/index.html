@@ -83,7 +83,15 @@
 <li><a href="#cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">CMYK 画像を考慮しよう</a></li>
 <li><a href="#imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15">ImageMagick のオプションの順序に注意</a></li>
 </ul></li>
-<li><a href="#補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</a></li>
+<li><a href="#補足したい項目:a5dbf9f090c2c436a165e06d8b799a15">補足したい項目</a>
+<ul>
+<li><a href="#画像比較は人間の眼で行うべし:a5dbf9f090c2c436a165e06d8b799a15">画像比較は人間の眼で行うべし</a></li>
+<li><a href="#orientation-を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">Orientation を考慮しよう</a></li>
+<li><a href="#透過画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">透過画像を考慮しよう</a></li>
+<li><a href="#グレイスケール画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">グレイスケール画像を考慮しよう</a></li>
+<li><a href="#define-jpeg-size-に注意:a5dbf9f090c2c436a165e06d8b799a15">-define jpeg:size に注意</a></li>
+</ul></li>
+<li><a href="#さいごに:a5dbf9f090c2c436a165e06d8b799a15">さいごに</a></li>
 </ul>
 </nav>
     
@@ -191,35 +199,70 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 
 <p>対応するブログのエントリを並べます。</p>
 
-<ul>
-<li>画像比較は人間の眼で行うべし
+<h2 id="画像比較は人間の眼で行うべし:a5dbf9f090c2c436a165e06d8b799a15">画像比較は人間の眼で行うべし</h2>
+
+<p>ある程度、計算で差分の多い画像や領域を自動抽出できます。</p>
 
 <ul>
-<li><a href="http://blog.awm.jp/2016/01/25/diff/">http://blog.awm.jp/2016/01/25/diff/</a> ImageMagick で画像を比較する</li>
-</ul></li>
-<li>Orientation を考慮しよう
+<li>ImageMagick で画像を比較する
 
 <ul>
-<li><a href="http://blog.awm.jp/2016/01/06/orient/">http://blog.awm.jp/2016/01/06/orient/</a> -auto-orient でオフセットがズレる件</li>
-</ul></li>
-<li>透過画像を考慮しよう
-
-<ul>
-<li><a href="http://blog.awm.jp/2016/01/25/flatten/">http://blog.awm.jp/2016/01/25/flatten/</a> 透明度を含む画像を JPEG に変換する時の背景色</li>
-</ul></li>
-<li>グレイスケール画像を考慮しよう
-
-<ul>
-<li><a href="http://blog.awm.jp/2016/01/06/gray/">http://blog.awm.jp/2016/01/06/gray/</a> グレー形式JPEGをPNGに変換すると暗くなる件</li>
-</ul></li>
-<li>-define jpeg:size に注意
-
-<ul>
-<li><a href="http://blog.awm.jp/2016/01/08/jpeghint/">http://blog.awm.jp/2016/01/08/jpeghint/</a> JPEG の size hinting について</li>
+<li><a href="http://blog.awm.jp/2016/01/25/diff/">http://blog.awm.jp/2016/01/25/diff/</a></li>
 </ul></li>
 </ul>
 
-<p>以上です。もし、お役に立つ事があれば幸いです。</p>
+<h2 id="orientation-を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">Orientation を考慮しよう</h2>
+
+<p>わざわざ JPEG を経由しなくても +repage で対処出来る。かもしれません。</p>
+
+<ul>
+<li>-auto-orient でオフセットがズレる件
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/06/orient/">http://blog.awm.jp/2016/01/06/orient/</a></li>
+</ul></li>
+</ul>
+
+<h2 id="透過画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">透過画像を考慮しよう</h2>
+
+<p>-extent は副作用的に対処出来るだけで、実際の処理は -flatten です。が、結果はおそらく同じなので重箱の隅付きです。</p>
+
+<ul>
+<li>透明度を含む画像を JPEG に変換する時の背景色
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/25/flatten/">http://blog.awm.jp/2016/01/25/flatten/</a></li>
+</ul></li>
+</ul>
+
+<h2 id="グレイスケール画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15">グレイスケール画像を考慮しよう</h2>
+
+<p>6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。それ以降のバージョンでは問題ないはずです。あと回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。</p>
+
+<ul>
+<li>グレー形式JPEGをPNGに変換すると暗くなる件
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/06/gray/">http://blog.awm.jp/2016/01/06/gray/</a></li>
+</ul></li>
+</ul>
+
+<h2 id="define-jpeg-size-に注意:a5dbf9f090c2c436a165e06d8b799a15">-define jpeg:size に注意</h2>
+
+<p>大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の <sup>1</sup>&frasl;<sub>2</sub> 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。</p>
+
+<ul>
+<li>JPEG の size hinting について
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/01/08/jpeghint/">http://blog.awm.jp/2016/01/08/jpeghint/</a></li>
+</ul></li>
+</ul>
+
+<h1 id="さいごに:a5dbf9f090c2c436a165e06d8b799a15">さいごに</h1>
+
+<p>以上です。誤りや物足りない所があればご指摘ください。
+もし、お役に立つ事があれば幸いです。</p>
 
   </section>
 </article>
