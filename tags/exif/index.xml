@@ -132,7 +132,7 @@ test.jpg
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
 
