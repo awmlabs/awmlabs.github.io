@@ -1222,7 +1222,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;結果はおそらく同じなので重箱の隅付きですが、-extent は副作用的に対処出来るだけで、目的の処理 -flatten です。&lt;/p&gt;
+&lt;p&gt;結果は恐らく変わらないので重箱の隅付きですが、-extent は副作用的に対処出来るだけで、-flatten がズバリの処理です。&lt;/p&gt;
 
 &lt;h2 id=&#34;グレイスケール画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;グレイスケール画像を考慮しよう&lt;/h2&gt;
 
@@ -1234,11 +1234,10 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。それ以降のバージョンでは問題ないはずです。回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。&lt;/p&gt;
+&lt;p&gt;6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。
+&lt;!-- (もしかして Colorspace を明示的に指定するとうまくいくかも？) --&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;define-jpeg-size-に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;-define jpeg:size に注意&lt;/h2&gt;
-
-&lt;p&gt;大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG の size hinting について
@@ -1248,10 +1247,13 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。&lt;/p&gt;
+
 &lt;h1 id=&#34;さいごに:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;さいごに&lt;/h1&gt;
 
-&lt;p&gt;以上です。誤りや物足りない所があればご指摘ください。
-もし、お役に立つ事があれば幸いです。&lt;/p&gt;
+&lt;p&gt;以上です。誤りや物足りない所があればご指摘ください。&lt;/p&gt;
+
+&lt;p&gt;もし、お役に立つ事があれば幸いです。&lt;/p&gt;
 </description>
     </item>
     
