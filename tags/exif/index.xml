@@ -40,6 +40,8 @@
 
 &lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
+&lt;h3 id=&#34;早見表1:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表1&lt;/h3&gt;
+
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -87,6 +89,70 @@
 
 &lt;p&gt;となっていて、右回転、左回転の定義が不要なのが面白いです。&lt;/p&gt;
 
+&lt;h3 id=&#34;早見表2:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表2&lt;/h3&gt;
+
+&lt;p&gt;変換の方向がわかりやすい図もつけます。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Orient&lt;/th&gt;
+&lt;th&gt;画像の実データ&lt;/th&gt;
+&lt;th&gt;Exif-Orient を解釈して表示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
 
 &lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
@@ -132,7 +198,7 @@ test.jpg
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
 
