@@ -390,7 +390,22 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;orientation:c86ddc2258670691520613695335adcd&#34;&gt;Orientation&lt;/h2&gt;
+&lt;h2 id=&#34;ycbcr:c86ddc2258670691520613695335adcd&#34;&gt;YCbCr&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG の YCbCr について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/06/ycbcr/&#34;&gt;https://blog.awm.jp/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/10/yuv/&#34;&gt;https://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;exif:c86ddc2258670691520613695335adcd&#34;&gt;Exif&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG Exif Orientation の操作
