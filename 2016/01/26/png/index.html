@@ -84,7 +84,13 @@
 <li><a href="#type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf">Type:4 透明度つきグレースケール</a></li>
 <li><a href="#type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf">Type:6 RGBA (PNG32)</a></li>
 </ul></li>
-<li><a href="#インターレース:418c06c92c8215b52bf45f50bda544bf">インターレース</a></li>
+<li><a href="#インターレース:418c06c92c8215b52bf45f50bda544bf">インターレース</a>
+<ul>
+<li><a href="#インターレース方式-adam7:418c06c92c8215b52bf45f50bda544bf">インターレース方式 Adam7</a>
+<ul>
+<li><a href="#ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf">ピクセルの並ぶ順番</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</a>
 <ul>
 <li><a href="#gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</a></li>
@@ -283,10 +289,69 @@ bit数は 1,2,4,8,16 から選択できます。
 
 <p>PNG のインターレースは独特で、Adam7 アルゴリズムを使います。</p>
 
+<h2 id="インターレース方式-adam7:418c06c92c8215b52bf45f50bda544bf">インターレース方式 Adam7</h2>
+
 <pre><code>$ convert Opaopa.png -interlace PNG Opaopa-adam7.png
 </code></pre>
 
 <p><center> <img src="../Opaopa-adam7.png" /> </center></p>
+
+<h3 id="ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf">ピクセルの並ぶ順番</h3>
+
+<table>
+<thead>
+<tr>
+<th>ピクセル</th>
+<th>実際の表示</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="../Opaopa-dot1-adam7-1.png" /> <img src="../Opaopa-dot8-adam7-1.png" /></td>
+<td><img src="../Opaopa-dot1-adam7-1-cmpl.png" /> <img src="../Opaopa-dot8-adam7-1-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1-adam7-2.png" /> <img src="../Opaopa-dot8-adam7-2.png" /></td>
+<td><img src="../Opaopa-dot1-adam7-2-cmpl.png" /> <img src="../Opaopa-dot8-adam7-2-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1-adam7-3.png" /> <img src="../Opaopa-dot8-adam7-3.png" /></td>
+<td><img src="../Opaopa-dot1-adam7-3-cmpl.png" /> <img src="../Opaopa-dot8-adam7-3-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1.png" /> <img src="../Opaopa-dot8.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)</p>
+
+<ul>
+<li><p>インターレースのフェーズ別画像</p>
+
+<pre><code>$ convert Opaopa-dot1.png -filter Point -fx &quot;!(i%8)*!(j%8)*u&quot; Opaopa-dot1-adam7-1.png
+$ convert Opaopa-dot1.png -filter Point -fx &quot;!(i%4)*!(j%4)*u&quot; Opaopa-dot1-adam7-2.png
+$ convert Opaopa-dot1.png -filter Point -fx &quot;!(i%2)*!(j%2)*u&quot; Opaopa-dot1-adam7-3.png
+</code></pre></li>
+
+<li><p>フェーズ別画像ピクセル補完あり</p>
+
+<pre><code>$ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%8,j-j%8}&quot; Opaopa-dot1-adam7-1-cmpl.png
+$ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%4,j-j%4}&quot; Opaopa-dot1-adam7-2-cmpl.png
+$ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%2,j-j%2}&quot; Opaopa-dot1-adam7-3-cmpl.png
+</code></pre></li>
+
+<li><p>ドット絵の拡大風画像</p>
+
+<pre><code>$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &quot;(i%8!=0)*(j%8!=0)*u&quot; Opaopa-dot8-adam7-1.png
+＜略＞
+</code></pre></li>
+</ul>
 
 <h1 id="メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</h1>
 
