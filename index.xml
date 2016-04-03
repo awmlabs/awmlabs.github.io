@@ -789,6 +789,11 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The Fx Special Effects Image Operator
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/script/fx.php&#34;&gt;http://www.imagemagick.org/script/fx.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
