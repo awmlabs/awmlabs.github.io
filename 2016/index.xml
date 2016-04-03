@@ -560,6 +560,15 @@ bit数は 1,2,4,8,16 から選択できます。
 
 &lt;h3 id=&#34;ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
 
+&lt;ul&gt;
+&lt;li&gt;8x8 のブロックで左上のを１つ&lt;/li&gt;
+&lt;li&gt;4x4 のブロックで左上を１つ&lt;/li&gt;
+&lt;li&gt;2x2 のブロックで左上を１つ&lt;/li&gt;
+&lt;li&gt;残り全部&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という順でピクセルを保存します。&lt;/p&gt;
+
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
