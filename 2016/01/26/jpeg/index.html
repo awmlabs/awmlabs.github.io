@@ -75,29 +75,29 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#imagemagick-で-jpeg-の形式を変換">ImageMagick で JPEG の形式を変換</a></li>
-<li><a href="#プログレッシブjpeg">プログレッシブJPEG</a></li>
-<li><a href="#クロマサブサンプリング">クロマサブサンプリング</a></li>
-<li><a href="#exif-exittool-で変換">Exif (Exittool で変換)</a>
+<li><a href="#imagemagick-で-jpeg-の形式を変換:51b8d3349056accb3067af132947c35a">ImageMagick で JPEG の形式を変換</a></li>
+<li><a href="#プログレッシブjpeg:51b8d3349056accb3067af132947c35a">プログレッシブJPEG</a></li>
+<li><a href="#クロマサブサンプリング:51b8d3349056accb3067af132947c35a">クロマサブサンプリング</a></li>
+<li><a href="#exif-exittool-で変換:51b8d3349056accb3067af132947c35a">Exif (Exittool で変換)</a>
 <ul>
-<li><a href="#orientation">Orientation</a></li>
+<li><a href="#orientation:51b8d3349056accb3067af132947c35a">Orientation</a></li>
 </ul></li>
-<li><a href="#profile">Profile</a>
+<li><a href="#profile:51b8d3349056accb3067af132947c35a">Profile</a>
 <ul>
-<li><a href="#icc-profile">ICC Profile</a></li>
+<li><a href="#icc-profile:51b8d3349056accb3067af132947c35a">ICC Profile</a></li>
 </ul></li>
-<li><a href="#グレイjpeg">グレイJPEG</a></li>
-<li><a href="#最後に">最後に</a></li>
-<li><a href="#参考-url">参考 URL</a></li>
+<li><a href="#グレイjpeg:51b8d3349056accb3067af132947c35a">グレイJPEG</a></li>
+<li><a href="#最後に:51b8d3349056accb3067af132947c35a">最後に</a></li>
+<li><a href="#参考-url:51b8d3349056accb3067af132947c35a">参考 URL</a></li>
 </ul>
 </nav>
     
 
-<h1 id="imagemagick-で-jpeg-の形式を変換">ImageMagick で JPEG の形式を変換</h1>
+<h1 id="imagemagick-で-jpeg-の形式を変換:51b8d3349056accb3067af132947c35a">ImageMagick で JPEG の形式を変換</h1>
 
 <p>JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
 
-<h1 id="プログレッシブjpeg">プログレッシブJPEG</h1>
+<h1 id="プログレッシブjpeg:51b8d3349056accb3067af132947c35a">プログレッシブJPEG</h1>
 
 <p>読みはじめに粗い画像を表示して、読み進めるにつれて画質に更新する表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
 周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で実現します。</p>
@@ -112,9 +112,9 @@
 <pre><code>$ convert orig.jpg -interlace JPEG progressive.jpg
 </code></pre>
 
-<h1 id="クロマサブサンプリング">クロマサブサンプリング</h1>
+<h1 id="クロマサブサンプリング:51b8d3349056accb3067af132947c35a">クロマサブサンプリング</h1>
 
-<p>基本的に <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。</p>
+<p>基本的に <sup class="footnote-ref" id="fnref:51b8d3349056accb3067af132947c35a:1"><a rel="footnote" href="#fn:51b8d3349056accb3067af132947c35a:1">1</a></sup> JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。</p>
 
 <ul>
 <li>JPEG の YCbCr について
@@ -143,9 +143,9 @@ $ convert orig.jpg -sampling-factor &quot;2x2,1x1,1x1&quot; yuv420.jpg
 $ convert orig.jpg -sampling-factor &quot;4x2,1x1,1x1&quot; yuv410.jpg
 </code></pre>
 
-<h1 id="exif-exittool-で変換">Exif (Exittool で変換)</h1>
+<h1 id="exif-exittool-で変換:51b8d3349056accb3067af132947c35a">Exif (Exittool で変換)</h1>
 
-<h2 id="orientation">Orientation</h2>
+<h2 id="orientation:51b8d3349056accb3067af132947c35a">Orientation</h2>
 
 <p>Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)</p>
 
@@ -173,9 +173,9 @@ $ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 
 <p>※ -o をつけ忘れると orig.jpg を上書きしてしまうので注意</p>
 
-<h1 id="profile">Profile</h1>
+<h1 id="profile:51b8d3349056accb3067af132947c35a">Profile</h1>
 
-<h2 id="icc-profile">ICC Profile</h2>
+<h2 id="icc-profile:51b8d3349056accb3067af132947c35a">ICC Profile</h2>
 
 <p>ICC プロファイルの詳細は以下のスライドが分かり易いので、参照下さい。(英語)</p>
 
@@ -237,7 +237,7 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 
 <p><center> <img src="../icc-profile2.png"> </center></p>
 
-<h1 id="グレイjpeg">グレイJPEG</h1>
+<h1 id="グレイjpeg:51b8d3349056accb3067af132947c35a">グレイJPEG</h1>
 
 <p>JPEG 形式のタイプとして Grayscale が存在しますので、一応作り方を紹介。</p>
 
@@ -246,11 +246,11 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 <pre><code>$ convert orig.jpg -type grayscale gray.jpg
 </code></pre>
 
-<h1 id="最後に">最後に</h1>
+<h1 id="最後に:51b8d3349056accb3067af132947c35a">最後に</h1>
 
 <p>他にもこんな形式を知っているという方がいましたら、ご指摘頂けると幸いです。</p>
 
-<h1 id="参考-url">参考 URL</h1>
+<h1 id="参考-url:51b8d3349056accb3067af132947c35a">参考 URL</h1>
 
 <ul>
 <li>Exiftool
@@ -258,14 +258,19 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 <ul>
 <li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/">http://www.sno.phy.queensu.ca/~phil/exiftool/</a></li>
 </ul></li>
+<li>JPG ファイルフォーマット
+
+<ul>
+<li><a href="http://www.setsuki.com/hsp/ext/jpg.htm">http://www.setsuki.com/hsp/ext/jpg.htm</a></li>
+</ul></li>
 </ul>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:1">Grayscale や CMYK の値で持つ事もできます。
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:51b8d3349056accb3067af132947c35a:1">Grayscale や CMYK の値で持つ事もできます。
+ <a class="footnote-return" href="#fnref:51b8d3349056accb3067af132947c35a:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

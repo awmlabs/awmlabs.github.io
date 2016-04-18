@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>JPEG のクロマサブサンプリングと YUV Y:a:b - awm-Tech</title>
+<title>JPEG のクロマサブサンプリングと YUVabc - awm-Tech</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
         fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href=" https://blog.awm.jp/2016/02/10/yuv/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
-<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/02/10/yuv/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG のクロマサブサンプリングと YUV Y:a:b" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/02/10/yuv/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG のクロマサブサンプリングと YUVabc" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
 をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/02/10/yuv/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -70,26 +70,26 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">JPEG のクロマサブサンプリングと YUV Y:a:b</h1>
+  <h1 class="headline" itemprop="headline">JPEG のクロマサブサンプリングと YUVabc</h1>
 
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-のクロマサブサンプリングと-yuv-y-a-b">JPEG のクロマサブサンプリングと YUV Y:a:b</a></li>
-<li><a href="#はじめに早見表">はじめに早見表</a></li>
-<li><a href="#yuvabc-の種類">YUVabc の種類</a>
+<li><a href="#jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94">JPEG のクロマサブサンプリングと YUVabc</a></li>
+<li><a href="#はじめに早見表:acf70381f9800b5605f8911f9c4c3d94">はじめに早見表</a></li>
+<li><a href="#yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94">YUVabc の種類</a>
 <ul>
-<li><a href="#yuv444-の-y-cb-cr-の並び">YUV444 の Y,Cb,Cr の並び</a></li>
-<li><a href="#yuv422-の-y-cb-cr-の並び">YUV422 の Y,Cb,Cr の並び</a></li>
+<li><a href="#yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV444 の Y,Cb,Cr の並び</a></li>
+<li><a href="#yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV422 の Y,Cb,Cr の並び</a></li>
 </ul></li>
-<li><a href="#色々な-yuvabc">色々な YUVabc</a></li>
-<li><a href="#まとめ">まとめ</a></li>
-<li><a href="#参考">参考</a></li>
+<li><a href="#色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94">色々な YUVabc</a></li>
+<li><a href="#まとめ:acf70381f9800b5605f8911f9c4c3d94">まとめ</a></li>
+<li><a href="#参考:acf70381f9800b5605f8911f9c4c3d94">参考</a></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-のクロマサブサンプリングと-yuv-y-a-b">JPEG のクロマサブサンプリングと YUV Y:a:b</h1>
+<h1 id="jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94">JPEG のクロマサブサンプリングと YUVabc</h1>
 
 <p>YCbCr については以下のページで紹介しました。</p>
 
@@ -105,23 +105,23 @@
 
 <p>JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。</p>
 
-<h1 id="はじめに早見表">はじめに早見表</h1>
+<h1 id="はじめに早見表:acf70381f9800b5605f8911f9c4c3d94">はじめに早見表</h1>
 
 <p><center> <img src="../yuvyab.png" /> </center></p>
 
 <p>※ YUV410 だけ変則的です</p>
 
-<h1 id="yuvabc-の種類">YUVabc の種類</h1>
+<h1 id="yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94">YUVabc の種類</h1>
 
 <p>よく見る表現として、YUV444 、YUV422 の２つがあります。</p>
 
-<h2 id="yuv444-の-y-cb-cr-の並び">YUV444 の Y,Cb,Cr の並び</h2>
+<h2 id="yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV444 の Y,Cb,Cr の並び</h2>
 
 <p>YUVabc と見立てると a, b, c の番号は以下のように対応します。</p>
 
 <p><center> <img src="../yuv444.png" /> </center></p>
 
-<h2 id="yuv422-の-y-cb-cr-の並び">YUV422 の Y,Cb,Cr の並び</h2>
+<h2 id="yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV422 の Y,Cb,Cr の並び</h2>
 
 <p>YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。</p>
 
@@ -131,7 +131,7 @@
 
 <p><center> <img src="../yuv422.png" /> </center></p>
 
-<h1 id="色々な-yuvabc">色々な YUVabc</h1>
+<h1 id="色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94">色々な YUVabc</h1>
 
 <p>実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)</p>
 
@@ -175,7 +175,7 @@
 
 <p><center> <img src="../yuv410-4x4.png" /> </center></p>
 
-<h1 id="まとめ">まとめ</h1>
+<h1 id="まとめ:acf70381f9800b5605f8911f9c4c3d94">まとめ</h1>
 
 <ul>
 <li>YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
@@ -187,10 +187,10 @@
 </ul></li>
 <li>YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ</li>
 <li>YUV422 は Cb,Cr を横方向で <sup>1</sup>&frasl;<sub>2</sub> で間引く。JPEG や動画でよく使われる</li>
-<li>YUV410 は Y:a:b の法則から例外</li>
+<li>YUV410 は abc の法則から例外</li>
 </ul>
 
-<h1 id="参考">参考</h1>
+<h1 id="参考:acf70381f9800b5605f8911f9c4c3d94">参考</h1>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Chroma_subsampling">https://en.wikipedia.org/wiki/Chroma_subsampling</a></li>
