@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gif on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/gif/</link>
+    <description>Recent content in Gif on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 26 Jan 2016 14:55:40 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/gif/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ImageMagick で GIF の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ImageMagick で GIF の形式を変換&lt;/h1&gt;
+
+&lt;p&gt;GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;インターレースgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;インターレースGIF&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-interlace.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;8行ごとに1行&lt;/li&gt;
+&lt;li&gt;4行ごとに1行&lt;/li&gt;
+&lt;li&gt;2行ごとに1行&lt;/li&gt;
+&lt;li&gt;残り全部&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という順でピクセルを保存します。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ピクセル&lt;/th&gt;
+&lt;th&gt;実際の表示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-1.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-1.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-1-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-1-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-2.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-2.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-2-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-2-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-3.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-3.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-3-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-3-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;インターレースのフェーズ別画像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%8)*u&amp;quot; Opaopa-dot1-interlace-1.png
+$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%4)*u&amp;quot; Opaopa-dot1-interlace-2.png
+$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%2)*u&amp;quot; Opaopa-dot1-interlace-3.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;フェーズ別画像ピクセル補完あり&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%8}&amp;quot; Opaopa-dot1-interlace-1-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%4}&amp;quot; Opaopa-dot1-interlace-2-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%2}&amp;quot; Opaopa-dot1-interlace-3-cmpl.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ドット絵風の拡大画像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-interlace-1.png -filter Point -resize 800% -fx &amp;quot;(i%8&amp;gt;0)*(j%8&amp;gt;0)*u&amp;quot; Opaopa-dot8-interlace-1.png
+＜略＞
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;ポジション指定:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ポジション指定&lt;/h1&gt;
+
+&lt;h1 id=&#34;透明色:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;透明色&lt;/h1&gt;
+
+&lt;p&gt;インデックスの一つを透明色として扱えます。尚、半透明は扱えません。&lt;/p&gt;
+
+&lt;h1 id=&#34;アニメーションgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;アニメーションGIF&lt;/h1&gt;
+
+&lt;h2 id=&#34;delay:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Delay&lt;/h2&gt;
+
+&lt;h2 id=&#34;local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Local Descriptor Table&lt;/h2&gt;
+
+&lt;h2 id=&#34;dispose:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;dispose&lt;/h2&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -265,9 +265,9 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%4,j-j%4}&amp;quot; 
 $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; Opaopa-dot1-adam7-3-cmpl.png
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;ドット絵の拡大風画像&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;ドット絵風の拡大画像&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &amp;quot;(i%8!=0)*(j%8!=0)*u&amp;quot; Opaopa-dot8-adam7-1.png
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &amp;quot;(i%8&amp;gt;0)*(j%8&amp;gt;0)*u&amp;quot; Opaopa-dot8-adam7-1.png
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -346,11 +346,6 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://homepage2.nifty.com/sophia0/png.html&#34;&gt;http://homepage2.nifty.com/sophia0/png.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;JPG ファイルフォーマット
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;The Fx Special Effects Image Operator
 

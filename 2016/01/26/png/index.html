@@ -355,9 +355,9 @@ $ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%4,j-j%4}&quot; Opaopa-d
 $ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%2,j-j%2}&quot; Opaopa-dot1-adam7-3-cmpl.png
 </code></pre></li>
 
-<li><p>ドット絵の拡大風画像</p>
+<li><p>ドット絵風の拡大画像</p>
 
-<pre><code>$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &quot;(i%8!=0)*(j%8!=0)*u&quot; Opaopa-dot8-adam7-1.png
+<pre><code>$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &quot;(i%8&gt;0)*(j%8&gt;0)*u&quot; Opaopa-dot8-adam7-1.png
 ＜略＞
 </code></pre></li>
 </ul>
@@ -436,11 +436,6 @@ $ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%2,j-j%2}&quot; Opaopa-d
 
 <ul>
 <li><a href="http://homepage2.nifty.com/sophia0/png.html">http://homepage2.nifty.com/sophia0/png.html</a></li>
-</ul></li>
-<li>JPG ファイルフォーマット
-
-<ul>
-<li><a href="http://www.setsuki.com/hsp/ext/jpg.htm">http://www.setsuki.com/hsp/ext/jpg.htm</a></li>
 </ul></li>
 <li>The Fx Special Effects Image Operator
 

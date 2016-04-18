@@ -410,6 +410,11 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPG ファイルフォーマット
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 

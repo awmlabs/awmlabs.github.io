@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>ImageMagick で GIF の形式を変換 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/26/gif/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/26/gif/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で GIF の形式を変換" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/26/gif/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-26">January 26, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/gif">GIF</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/gif">GIF</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/format">Format</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で GIF の形式を変換</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d">ImageMagick で GIF の形式を変換</a></li>
+<li><a href="#インターレースgif:c77f8b7f9d2990e1e09002496bca152d">インターレースGIF</a>
+<ul>
+<li>
+<ul>
+<li><a href="#ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d">ピクセルの並ぶ順番</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ポジション指定:c77f8b7f9d2990e1e09002496bca152d">ポジション指定</a></li>
+<li><a href="#透明色:c77f8b7f9d2990e1e09002496bca152d">透明色</a></li>
+<li><a href="#アニメーションgif:c77f8b7f9d2990e1e09002496bca152d">アニメーションGIF</a>
+<ul>
+<li><a href="#delay:c77f8b7f9d2990e1e09002496bca152d">Delay</a></li>
+<li><a href="#local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d">Local Descriptor Table</a></li>
+<li><a href="#dispose:c77f8b7f9d2990e1e09002496bca152d">dispose</a></li>
+</ul></li>
+</ul>
+</nav>
+    
+
+<h1 id="imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d">ImageMagick で GIF の形式を変換</h1>
+
+<p>GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
+
+<h1 id="インターレースgif:c77f8b7f9d2990e1e09002496bca152d">インターレースGIF</h1>
+
+<pre><code>$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
+</code></pre>
+
+<p><center> <img src="../Opaopa-interlace.gif" /> </center></p>
+
+<h3 id="ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d">ピクセルの並ぶ順番</h3>
+
+<ul>
+<li>8行ごとに1行</li>
+<li>4行ごとに1行</li>
+<li>2行ごとに1行</li>
+<li>残り全部</li>
+</ul>
+
+<p>という順でピクセルを保存します。</p>
+
+<table>
+<thead>
+<tr>
+<th>ピクセル</th>
+<th>実際の表示</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="../Opaopa-dot1-interlace-1.png" /> <img src="../Opaopa-dot8-interlace-1.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-1-cmpl.png" /> <img src="../Opaopa-dot8-interlace-1-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1-interlace-2.png" /> <img src="../Opaopa-dot8-interlace-2.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-2-cmpl.png" /> <img src="../Opaopa-dot8-interlace-2-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1-interlace-3.png" /> <img src="../Opaopa-dot8-interlace-3.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-3-cmpl.png" /> <img src="../Opaopa-dot8-interlace-3-cmpl.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../Opaopa-dot1.png" /> <img src="../Opaopa-dot8.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)</p>
+
+<ul>
+<li><p>インターレースのフェーズ別画像</p>
+
+<pre><code>$ convert Opaopa-dot1.png -filter Point -fx &quot;!(j%8)*u&quot; Opaopa-dot1-interlace-1.png
+$ convert Opaopa-dot1.png -filter Point -fx &quot;!(j%4)*u&quot; Opaopa-dot1-interlace-2.png
+$ convert Opaopa-dot1.png -filter Point -fx &quot;!(j%2)*u&quot; Opaopa-dot1-interlace-3.png
+</code></pre></li>
+
+<li><p>フェーズ別画像ピクセル補完あり</p>
+
+<pre><code>convert Opaopa-dot1.png -filter Point -fx &quot;p{i,j-j%8}&quot; Opaopa-dot1-interlace-1-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &quot;p{i,j-j%4}&quot; Opaopa-dot1-interlace-2-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &quot;p{i,j-j%2}&quot; Opaopa-dot1-interlace-3-cmpl.png
+</code></pre></li>
+
+<li><p>ドット絵風の拡大画像</p>
+
+<pre><code>$ convert Opaopa-dot1-interlace-1.png -filter Point -resize 800% -fx &quot;(i%8&gt;0)*(j%8&gt;0)*u&quot; Opaopa-dot8-interlace-1.png
+＜略＞
+</code></pre></li>
+</ul>
+
+<h1 id="ポジション指定:c77f8b7f9d2990e1e09002496bca152d">ポジション指定</h1>
+
+<h1 id="透明色:c77f8b7f9d2990e1e09002496bca152d">透明色</h1>
+
+<p>インデックスの一つを透明色として扱えます。尚、半透明は扱えません。</p>
+
+<h1 id="アニメーションgif:c77f8b7f9d2990e1e09002496bca152d">アニメーションGIF</h1>
+
+<h2 id="delay:c77f8b7f9d2990e1e09002496bca152d">Delay</h2>
+
+<h2 id="local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d">Local Descriptor Table</h2>
+
+<h2 id="dispose:c77f8b7f9d2990e1e09002496bca152d">dispose</h2>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

@@ -11,14 +11,14 @@
     <atom:link href="https://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>JPEG のクロマサブサンプリングと YUVabc</title>
+      <title>JPEG のクロマサブサンプリングと YUV Y:a:b</title>
       <link>https://blog.awm.jp/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
       
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuv-y-a-b:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUV Y:a:b&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
@@ -36,7 +36,9 @@
 
 &lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvabc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
 
 &lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
@@ -98,6 +100,10 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;p&gt;と言いたい所ですが、実際には 4x4 として使われるようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
 &lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -110,6 +116,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
 &lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
+&lt;li&gt;YUV410 は Y:a:b の法則から例外&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
@@ -617,9 +624,9 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%4,j-j%4}&amp;quot; 
 $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; Opaopa-dot1-adam7-3-cmpl.png
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;ドット絵の拡大風画像&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;ドット絵風の拡大画像&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &amp;quot;(i%8!=0)*(j%8!=0)*u&amp;quot; Opaopa-dot8-adam7-1.png
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx &amp;quot;(i%8&amp;gt;0)*(j%8&amp;gt;0)*u&amp;quot; Opaopa-dot8-adam7-1.png
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -699,17 +706,113 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://homepage2.nifty.com/sophia0/png.html&#34;&gt;http://homepage2.nifty.com/sophia0/png.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;JPG ファイルフォーマット
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;The Fx Special Effects Image Operator
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/script/fx.php&#34;&gt;http://www.imagemagick.org/script/fx.php&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ImageMagick で GIF の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ImageMagick で GIF の形式を変換&lt;/h1&gt;
+
+&lt;p&gt;GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
+
+&lt;h1 id=&#34;インターレースgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;インターレースGIF&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-interlace.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;8行ごとに1行&lt;/li&gt;
+&lt;li&gt;4行ごとに1行&lt;/li&gt;
+&lt;li&gt;2行ごとに1行&lt;/li&gt;
+&lt;li&gt;残り全部&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という順でピクセルを保存します。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ピクセル&lt;/th&gt;
+&lt;th&gt;実際の表示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-1.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-1.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-1-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-1-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-2.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-2.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-2-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-2-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-3.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-3.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1-interlace-3-cmpl.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8-interlace-3-cmpl.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-dot1.png&#34; /&gt; &lt;img src=&#34;../Opaopa-dot8.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;インターレースのフェーズ別画像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%8)*u&amp;quot; Opaopa-dot1-interlace-1.png
+$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%4)*u&amp;quot; Opaopa-dot1-interlace-2.png
+$ convert Opaopa-dot1.png -filter Point -fx &amp;quot;!(j%2)*u&amp;quot; Opaopa-dot1-interlace-3.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;フェーズ別画像ピクセル補完あり&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%8}&amp;quot; Opaopa-dot1-interlace-1-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%4}&amp;quot; Opaopa-dot1-interlace-2-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%2}&amp;quot; Opaopa-dot1-interlace-3-cmpl.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ドット絵風の拡大画像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-dot1-interlace-1.png -filter Point -resize 800% -fx &amp;quot;(i%8&amp;gt;0)*(j%8&amp;gt;0)*u&amp;quot; Opaopa-dot8-interlace-1.png
+＜略＞
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;ポジション指定:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ポジション指定&lt;/h1&gt;
+
+&lt;h1 id=&#34;透明色:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;透明色&lt;/h1&gt;
+
+&lt;p&gt;インデックスの一つを透明色として扱えます。尚、半透明は扱えません。&lt;/p&gt;
+
+&lt;h1 id=&#34;アニメーションgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;アニメーションGIF&lt;/h1&gt;
+
+&lt;h2 id=&#34;delay:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Delay&lt;/h2&gt;
+
+&lt;h2 id=&#34;local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Local Descriptor Table&lt;/h2&gt;
+
+&lt;h2 id=&#34;dispose:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;dispose&lt;/h2&gt;
 </description>
     </item>
     
@@ -885,6 +988,11 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPG ファイルフォーマット
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.setsuki.com/hsp/ext/jpg.htm&#34;&gt;http://www.setsuki.com/hsp/ext/jpg.htm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
@@ -2566,125 +2674,6 @@ $ grep -r &amp;quot;title =&amp;quot; . | head -3
 &lt;/ul&gt;
 
 &lt;p&gt;が出てきて、hugo new &lt;path&gt; は post と呼ばれるので、-k post だなと推測できる訳です。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Blog の Deploy で Circle CI</title>
-      <link>https://blog.awm.jp/2016/01/02/circleci/</link>
-      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
-      <description>
-
-&lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
-
-&lt;p&gt;昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。&lt;/p&gt;
-
-&lt;h1 id=&#34;はじめに:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;はじめに&lt;/h1&gt;
-
-&lt;p&gt;前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;× &lt;a href=&#34;https://github.com/awmcorp/blog.awm.jp&#34;&gt;https://github.com/awmcorp/blog.awm.jp&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;○ &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; blog のソース&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/awmlabs.github.io&#34;&gt;https://github.com/awmlabs/awmlabs.github.io&lt;/a&gt; blog の公開ファイル&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;circle.yaml&lt;/h1&gt;
-
-&lt;p&gt;連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/nobu666/nobu666.com/blob/master/circle.yml&#34;&gt;https://github.com/nobu666/nobu666.com/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&#34;&gt;https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;machine&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;timezone&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;Asia/Tokyo&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;checkout&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;post&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git submodule update --init --recursive&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;dependencies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;pre&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;go get -v github.com/spf13/hugo&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git config --global user.name &amp;quot;awm labs&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git config --global user.email &amp;quot;labs@awm.jp&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;override&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-   &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;echo&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;deployment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;master&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;branch&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;master&lt;/span&gt;
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;commands&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;git clone git@github.com:awmlabs/awmlabs.github.io.git public&lt;/span&gt;
-      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;pip install Pygments --user&lt;/span&gt;
-      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;hugo&lt;/span&gt;
-      &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;cd public &amp;amp;&amp;amp; git add . &amp;amp;&amp;amp; git commit -m &amp;quot;[ci skip] publish&amp;quot;; if [ $? -eq 0 ]; then git push origin master; else :; fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)&lt;/p&gt;
-
-&lt;h2 id=&#34;pygments:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Pygments&lt;/h2&gt;
-
-&lt;p&gt;Syntax Highlight を使いたいので、Pygments を入れたいけど、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pip install Pygments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
-
-&lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
-
-&lt;p&gt;連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://circleci.com/&#34;&gt;https://circleci.com/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するアカウントでの連携は避けたい。という人は新しい Github アカウントを作って設定すると良さそうです。&lt;/p&gt;
-
-&lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
-
-&lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add Project で監視するレポジトリを選択します。&lt;/li&gt;
-&lt;li&gt;Project Settings の Permissions (SSH, API, AWS のでなく、唯の Permissions) から Authorize ＞ Create and add とボタンを押してく。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/settings/applications&#34;&gt;https://github.com/settings/applications&lt;/a&gt; で連携を確認 (revoke 押すと戻すのが少し面倒なので気をつけて)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;(あと一手間あった気がするので、思い出したら後で追記します)&lt;/p&gt;
-
-&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
-
-&lt;p&gt;同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://circleci.com/gh/&#34;&gt;https://circleci.com/gh/&lt;/a&gt;&amp;lt;ユーザor組織名&amp;gt;/&amp;lt;リポジトリ名&amp;gt;/edit#ssh&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/&#34;&gt;https://github.com/&lt;/a&gt;&amp;lt;ユーザor組織名&amp;gt;/&amp;lt;リポジトリ名/settings/keys&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;必要に迫られた時にでも、もう少し試行錯誤してみます。&lt;/p&gt;
-
-&lt;h1 id=&#34;備考:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;備考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。&lt;/li&gt;
-&lt;li&gt;別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;参考url:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;参考URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&#34;&gt;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://tdoc.info/blog/2014/01/15/pip.html&#34;&gt;http://tdoc.info/blog/2014/01/15/pip.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

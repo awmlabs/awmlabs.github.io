@@ -11,14 +11,14 @@
     <atom:link href="https://blog.awm.jp/categories/yuv/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>JPEG のクロマサブサンプリングと YUVabc</title>
+      <title>JPEG のクロマサブサンプリングと YUV Y:a:b</title>
       <link>https://blog.awm.jp/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
       
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuv-y-a-b:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUV Y:a:b&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
@@ -36,7 +36,9 @@
 
 &lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvabc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
 
 &lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
@@ -98,6 +100,10 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;p&gt;と言いたい所ですが、実際には 4x4 として使われるようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
 &lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -110,6 +116,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
 &lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
+&lt;li&gt;YUV410 は Y:a:b の法則から例外&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
