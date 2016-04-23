@@ -75,38 +75,38 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d">ImageMagick で GIF の形式を変換</a></li>
-<li><a href="#インターレースgif:c77f8b7f9d2990e1e09002496bca152d">インターレースGIF</a>
+<li><a href="#imagemagick-で-gif-の形式を変換">ImageMagick で GIF の形式を変換</a></li>
+<li><a href="#インターレースgif">インターレースGIF</a>
 <ul>
 <li>
 <ul>
-<li><a href="#ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d">ピクセルの並ぶ順番</a></li>
+<li><a href="#ピクセルの並ぶ順番">ピクセルの並ぶ順番</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#ポジション指定:c77f8b7f9d2990e1e09002496bca152d">ポジション指定</a></li>
-<li><a href="#透明色:c77f8b7f9d2990e1e09002496bca152d">透明色</a></li>
-<li><a href="#アニメーションgif:c77f8b7f9d2990e1e09002496bca152d">アニメーションGIF</a>
+<li><a href="#ポジション指定">ポジション指定</a></li>
+<li><a href="#透明色">透明色</a></li>
+<li><a href="#アニメーションgif">アニメーションGIF</a>
 <ul>
-<li><a href="#delay:c77f8b7f9d2990e1e09002496bca152d">Delay</a></li>
-<li><a href="#local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d">Local Descriptor Table</a></li>
-<li><a href="#dispose:c77f8b7f9d2990e1e09002496bca152d">dispose</a></li>
+<li><a href="#delay">Delay</a></li>
+<li><a href="#local-descriptor-table">Local Descriptor Table</a></li>
+<li><a href="#dispose">dispose</a></li>
 </ul></li>
 </ul>
 </nav>
     
 
-<h1 id="imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d">ImageMagick で GIF の形式を変換</h1>
+<h1 id="imagemagick-で-gif-の形式を変換">ImageMagick で GIF の形式を変換</h1>
 
 <p>GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
 
-<h1 id="インターレースgif:c77f8b7f9d2990e1e09002496bca152d">インターレースGIF</h1>
+<h1 id="インターレースgif">インターレースGIF</h1>
 
 <pre><code>$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
 </code></pre>
 
 <p><center> <img src="../Opaopa-interlace.gif" /> </center></p>
 
-<h3 id="ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d">ピクセルの並ぶ順番</h3>
+<h3 id="ピクセルの並ぶ順番">ピクセルの並ぶ順番</h3>
 
 <ul>
 <li>8行ごとに1行</li>
@@ -172,19 +172,38 @@ convert Opaopa-dot1.png -filter Point -fx &quot;p{i,j-j%2}&quot; Opaopa-dot1-int
 </code></pre></li>
 </ul>
 
-<h1 id="ポジション指定:c77f8b7f9d2990e1e09002496bca152d">ポジション指定</h1>
+<h1 id="ポジション指定">ポジション指定</h1>
 
-<h1 id="透明色:c77f8b7f9d2990e1e09002496bca152d">透明色</h1>
+<p>GIF は描画場所の Screen と実際に描画する Image の位置を別に持るので、その描画場所を指定できます。</p>
+
+<pre><code>$ convert Opaopa.png -page +50+30 Opaopa-posi.gif
+$ identify Opaopa-posi.gif
+Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
+</code></pre>
+
+<table><tr><td>
+<img src="../Opaopa-posi.gif" style="background-color: black" />
+</td></tr>
+</table>
+
+<p>上記の画像は table タグの中に入れてますが、(50,30) から描画されます。(ブラウザによって微妙に表示が変わります)</p>
+
+<h1 id="透明色">透明色</h1>
 
 <p>インデックスの一つを透明色として扱えます。尚、半透明は扱えません。</p>
 
-<h1 id="アニメーションgif:c77f8b7f9d2990e1e09002496bca152d">アニメーションGIF</h1>
+<pre><code>$ convert Opaopa.png -transparent &quot;#00d342&quot; Opaopa-transparent.gif
+</code></pre>
 
-<h2 id="delay:c77f8b7f9d2990e1e09002496bca152d">Delay</h2>
+<p><center> <img src="../Opaopa-transparent.gif" /> </center></p>
 
-<h2 id="local-descriptor-table:c77f8b7f9d2990e1e09002496bca152d">Local Descriptor Table</h2>
+<h1 id="アニメーションgif">アニメーションGIF</h1>
 
-<h2 id="dispose:c77f8b7f9d2990e1e09002496bca152d">dispose</h2>
+<h2 id="delay">Delay</h2>
+
+<h2 id="local-descriptor-table">Local Descriptor Table</h2>
+
+<h2 id="dispose">dispose</h2>
 
   </section>
 </article>
