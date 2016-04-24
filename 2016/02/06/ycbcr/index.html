@@ -75,37 +75,37 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169">JPEG の YCbCr について</a></li>
-<li><a href="#rgb-ycbcr:6214a8feaba721e81b237a92198f5169">RGB &lt;=&gt; YCbCr</a>
+<li><a href="#jpeg-の-ycbcr-について">JPEG の YCbCr について</a></li>
+<li><a href="#rgb-ycbcr">RGB &lt;=&gt; YCbCr</a>
 <ul>
-<li><a href="#変換式:6214a8feaba721e81b237a92198f5169">変換式</a>
+<li><a href="#変換式">変換式</a>
 <ul>
-<li><a href="#rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169">RGB =&gt; YCbCr</a></li>
-<li><a href="#ycbcr-rgb:6214a8feaba721e81b237a92198f5169">YCbCr =&gt; RGB</a></li>
+<li><a href="#rgb-ycbcr-1">RGB =&gt; YCbCr</a></li>
+<li><a href="#ycbcr-rgb">YCbCr =&gt; RGB</a></li>
 </ul></li>
-<li><a href="#rgb-との比較:6214a8feaba721e81b237a92198f5169">RGB との比較</a>
+<li><a href="#rgb-との比較">RGB との比較</a>
 <ul>
-<li><a href="#rgb-チャネル分解:6214a8feaba721e81b237a92198f5169">RGB チャネル分解</a></li>
-<li><a href="#ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169">YCbCr チャネル分解</a></li>
+<li><a href="#rgb-チャネル分解">RGB チャネル分解</a></li>
+<li><a href="#ycbcr-チャネル分解">YCbCr チャネル分解</a></li>
 </ul></li>
-<li><a href="#メリット:6214a8feaba721e81b237a92198f5169">メリット</a>
+<li><a href="#メリット">メリット</a>
 <ul>
-<li><a href="#クロマサブサンプリング:6214a8feaba721e81b237a92198f5169">クロマサブサンプリング</a></li>
-<li><a href="#yuvabc:6214a8feaba721e81b237a92198f5169">YUVabc</a></li>
+<li><a href="#クロマサブサンプリング">クロマサブサンプリング</a></li>
+<li><a href="#yuvabc">YUVabc</a></li>
 </ul></li>
-<li><a href="#デメリット:6214a8feaba721e81b237a92198f5169">デメリット</a></li>
+<li><a href="#デメリット">デメリット</a></li>
 </ul></li>
-<li><a href="#まとめ:6214a8feaba721e81b237a92198f5169">まとめ</a></li>
-<li><a href="#参考ページ:6214a8feaba721e81b237a92198f5169">参考ページ</a></li>
+<li><a href="#まとめ">まとめ</a></li>
+<li><a href="#参考ページ">参考ページ</a></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169">JPEG の YCbCr について</h1>
+<h1 id="jpeg-の-ycbcr-について">JPEG の YCbCr について</h1>
 
 <p>JPEG で保存する色は RGB でなく YCbCr なので、その話。</p>
 
-<h1 id="rgb-ycbcr:6214a8feaba721e81b237a92198f5169">RGB &lt;=&gt; YCbCr</h1>
+<h1 id="rgb-ycbcr">RGB &lt;=&gt; YCbCr</h1>
 
 <p>RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。</p>
 
@@ -122,9 +122,9 @@
 </ul></li>
 </ul>
 
-<h2 id="変換式:6214a8feaba721e81b237a92198f5169">変換式</h2>
+<h2 id="変換式">変換式</h2>
 
-<h3 id="rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169">RGB =&gt; YCbCr</h3>
+<h3 id="rgb-ycbcr-1">RGB =&gt; YCbCr</h3>
 
 <table>
 <thead>
@@ -160,7 +160,7 @@
 </tbody>
 </table>
 
-<h3 id="ycbcr-rgb:6214a8feaba721e81b237a92198f5169">YCbCr =&gt; RGB</h3>
+<h3 id="ycbcr-rgb">YCbCr =&gt; RGB</h3>
 
 <table>
 <thead>
@@ -196,9 +196,9 @@
 </tbody>
 </table>
 
-<h2 id="rgb-との比較:6214a8feaba721e81b237a92198f5169">RGB との比較</h2>
+<h2 id="rgb-との比較">RGB との比較</h2>
 
-<h3 id="rgb-チャネル分解:6214a8feaba721e81b237a92198f5169">RGB チャネル分解</h3>
+<h3 id="rgb-チャネル分解">RGB チャネル分解</h3>
 
 <p><center> <img src="../logo.png" /> </center></p>
 
@@ -212,7 +212,7 @@ $ convert logo.png +level-colors Red \
 <p>注) Green1 を Green にすると緑の明るさが半分になるので注意
 <center> <img src="../logo_rgb.png" /> </center></p>
 
-<h3 id="ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169">YCbCr チャネル分解</h3>
+<h3 id="ycbcr-チャネル分解">YCbCr チャネル分解</h3>
 
 <p>こちらは Golang の image パッケージで変換。</p>
 
@@ -227,7 +227,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 <p><center> <img src="../logo_ycbcr.png" /> </center>
 (YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)</p>
 
-<h2 id="メリット:6214a8feaba721e81b237a92198f5169">メリット</h2>
+<h2 id="メリット">メリット</h2>
 
 <p>輝度信号と色差信号を分けるメリットですが。</p>
 
@@ -238,9 +238,9 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 <p>JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリング方式でデータ量を節約します。尚、多くの動画形式は YCbCr でなく YUV で少し計算が異なります、概念的には似たものです。</p>
 
-<h3 id="クロマサブサンプリング:6214a8feaba721e81b237a92198f5169">クロマサブサンプリング</h3>
+<h3 id="クロマサブサンプリング">クロマサブサンプリング</h3>
 
-<h3 id="yuvabc:6214a8feaba721e81b237a92198f5169">YUVabc</h3>
+<h3 id="yuvabc">YUVabc</h3>
 
 <p>間引きかたによって YUV444、YUV422 のように表現します。</p>
 
@@ -262,7 +262,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 </ul></li>
 </ul>
 
-<h2 id="デメリット:6214a8feaba721e81b237a92198f5169">デメリット</h2>
+<h2 id="デメリット">デメリット</h2>
 
 <p>RGB と YCbCr は色空間が斜めの関係にあり、YCbCr は RGB を全部カバーする為、同じ 0-255 でも RGB より YCbCr の方が大きなスケールを表現します。</p>
 
@@ -286,14 +286,14 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 </ul></li>
 </ul>
 
-<h1 id="まとめ:6214a8feaba721e81b237a92198f5169">まとめ</h1>
+<h1 id="まとめ">まとめ</h1>
 
 <ul>
 <li>メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。</li>
 <li>デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)</li>
 </ul>
 
-<h1 id="参考ページ:6214a8feaba721e81b237a92198f5169">参考ページ</h1>
+<h1 id="参考ページ">参考ページ</h1>
 
 <ul>
 <li>JPEG File Interchange Format
