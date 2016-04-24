@@ -748,7 +748,7 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 &lt;li&gt;残り全部&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;という順でピクセルを保存する事で、ネットワークが遅い場合でも始めに全体像を表示してから、データが取得でき次第少しずつ細部を表示できます。&lt;/p&gt;
+&lt;p&gt;という順でピクセルを保存する事で、ネットワークが遅い場合でもはじめに全体像を表示してから、データが取得しながら少しずつ細部を表示できます。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -807,7 +807,7 @@ convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%2}&amp;quot; Opaopa-
 
 &lt;h1 id=&#34;ポジション指定&#34;&gt;ポジション指定&lt;/h1&gt;
 
-&lt;p&gt;GIF は描画場所の Screen と実際に描画する Image の位置を別に持るので、その描画場所を指定できます。&lt;/p&gt;
+&lt;p&gt;GIF は描画場所の Screen と実際に描画する Image の位置を別に持つので、その描画場所を指定できます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -page +50+30 Opaopa-posi.gif
 $ identify Opaopa-posi.gif
@@ -864,6 +864,8 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 &lt;h2 id=&#34;ループ回数&#34;&gt;ループ回数&lt;/h2&gt;
 
+&lt;p&gt;例えば、ループ回数に 1 を指定すると、ループしない GIF アニメが作れます。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;$ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -887,9 +889,9 @@ $ giftext Opaopa-anime-dot8.gif | grep &amp;quot;Color Map&amp;quot;
   Image Has Color Map.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。&lt;/p&gt;
+&lt;p&gt;今回は１コマ目で使う色パレットで、残り全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。&lt;/p&gt;
 
-&lt;p&gt;尚、コマ毎にバラバラに Local Color Map を持つ場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。&lt;/p&gt;
+&lt;p&gt;尚、Local Color Map があるけど全部消したい場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;optimize&#34;&gt;Optimize&lt;/h2&gt;
 
@@ -1074,6 +1076,8 @@ Opaopa-anime-dot1-optframe.gif[7] GIF 16x5 41x18+3+7 8-bit sRGB 16c 16.4KB 0.000
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;公式ページでは giftrans を使って説明してます &amp;gt; &lt;a href=&#34;http://www.imagemagick.org/Usage/anim_opt/#colortables&#34;&gt;http://www.imagemagick.org/Usage/anim_opt/#colortables&lt;/a&gt;
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;たしか大昔、Local ColorMap を読まないガラケー端末があって +map が必須だった時代があったかも。。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
