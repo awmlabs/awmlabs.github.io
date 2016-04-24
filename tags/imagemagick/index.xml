@@ -537,7 +537,7 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 &lt;h3 id=&#34;optimizeframe&#34;&gt;OptimizeFrame&lt;/h3&gt;
 
-&lt;p&gt;変化のあるピクセルだけ画像として持つ事で、データサイズを減らせます。&lt;/p&gt;
+&lt;p&gt;変化のあるピクセルを全部囲う四角(いわゆる Dirty Rectangle)でクロップした画像を持つ事で、GIF のデータサイズを減らせます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
 $ identify Opaopa-anime-dot1-optframe.gif
