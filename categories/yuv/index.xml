@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
@@ -34,23 +34,23 @@
 
 &lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
 
-&lt;h1 id=&#34;はじめに早見表&#34;&gt;はじめに早見表&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
 
-&lt;h1 id=&#34;yuvabc-の種類&#34;&gt;YUVabc の種類&lt;/h1&gt;
+&lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
 &lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
 
-&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
+&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
+&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
 
@@ -60,7 +60,7 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;色々な-yuvabc&#34;&gt;色々な YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVabc&lt;/h1&gt;
 
 &lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)&lt;/p&gt;
 
@@ -104,7 +104,7 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
+&lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
@@ -119,7 +119,7 @@
 &lt;li&gt;YUV410 は abc の法則から例外&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
