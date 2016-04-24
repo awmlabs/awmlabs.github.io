@@ -75,15 +75,15 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#auto-orient-でオフセットがズレる件">-auto-orient でオフセットがズレる件</a></li>
-<li><a href="#実装">実装</a></li>
-<li><a href="#repage">+repage</a></li>
-<li><a href="#おまけ">おまけ</a></li>
+<li><a href="#auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785">-auto-orient でオフセットがズレる件</a></li>
+<li><a href="#実装:5ebdf1d9c2e1c280f058e69d3b760785">実装</a></li>
+<li><a href="#repage:5ebdf1d9c2e1c280f058e69d3b760785">+repage</a></li>
+<li><a href="#おまけ:5ebdf1d9c2e1c280f058e69d3b760785">おまけ</a></li>
 </ul>
 </nav>
     
 
-<h1 id="auto-orient-でオフセットがズレる件">-auto-orient でオフセットがズレる件</h1>
+<h1 id="auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785">-auto-orient でオフセットがズレる件</h1>
 
 <p>例のエントリにもう一件便乗。</p>
 
@@ -108,7 +108,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 
 <p>4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。</p>
 
-<h1 id="実装">実装</h1>
+<h1 id="実装:5ebdf1d9c2e1c280f058e69d3b760785">実装</h1>
 
 <p>さて、どうして +160-160 になるのか。</p>
 
@@ -134,7 +134,7 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 <p><center> <img src="/2016/01/06/2.jpg" /> </center></p>
 
-<h1 id="repage">+repage</h1>
+<h1 id="repage:5ebdf1d9c2e1c280f058e69d3b760785">+repage</h1>
 
 <p>ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。</p>
 
@@ -145,7 +145,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 <p>という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。</p>
 
-<h1 id="おまけ">おまけ</h1>
+<h1 id="おまけ:5ebdf1d9c2e1c280f058e69d3b760785">おまけ</h1>
 
 <p>実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。</p>
 
