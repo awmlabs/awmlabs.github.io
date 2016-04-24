@@ -185,6 +185,10 @@ $ giftext Opaopa-anime-dot8.gif | grep &amp;quot;Color Map&amp;quot;
 
 &lt;h2 id=&#34;optimize&#34;&gt;Optimize&lt;/h2&gt;
 
+&lt;p&gt;GIF アニメーションには dispose メソッドというものがあり、透明ピクセルの場合に前のコマの色をそのまま使う事ができます。逆にいうと前のコマで透明じゃないピクセルを透明ピクセルに変えられなうなるのですが、それがデメリットになる事は殆どないでしょう。&lt;/p&gt;
+
+&lt;p&gt;最適化手法のうち２種類を紹介して、最後にそれらを両方適用する方法も紹介します。&lt;/p&gt;
+
 &lt;h3 id=&#34;optimizeframe&#34;&gt;OptimizeFrame&lt;/h3&gt;
 
 &lt;p&gt;変化のあるピクセルを全部囲う四角(いわゆる Dirty Rectangle)でクロップした画像を持つ事で、GIF のデータサイズを減らせます。&lt;/p&gt;
