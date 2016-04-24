@@ -473,11 +473,240 @@ Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
 
 &lt;h1 id=&#34;アニメーションgif&#34;&gt;アニメーションGIF&lt;/h1&gt;
 
+&lt;p&gt;各コマの画像を作って convert で繋いで作成できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot1-0.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-1.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-2.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-3.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-4.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-5.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-6.png&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot1-7.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-anime-dot1-[0-7].png Opaopa-anime-dot1.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot1.gif&#34; /&gt; &lt;/center&gt;
+ついでに拡大バージョン
+&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ for n in `seq 0 7`
+do convert Opaopa-anime-dot1-$n.png -filter Point -resize 800% -fx &amp;quot;(i%8&amp;gt;0)*(j%8&amp;gt;0)*u&amp;quot; Opaopa-anime-dot8-$n.png
+done
+$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;delay&#34;&gt;Delay&lt;/h2&gt;
 
-&lt;h2 id=&#34;local-descriptor-table&#34;&gt;Local Descriptor Table&lt;/h2&gt;
+&lt;p&gt;-delay オプションでコマ間の時間を指定できます。1/100 単位なので、例えば -delay 100 を指定すると 1 frame/sec です。&lt;/p&gt;
 
-&lt;h2 id=&#34;dispose&#34;&gt;dispose&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;$ convert -delay 100  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay100.gif
+$ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8-delay100.gif&#34; /&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8-delay25.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;(-delay を入力画像より前に置かないと反映されない事に注意)&lt;/p&gt;
+
+&lt;h2 id=&#34;ループ回数&#34;&gt;ループ回数&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../Opaopa-anime-dot8-loop1.gif&#34; /&gt; &lt;img src=&#34;../Opaopa-anime-dot8-loop1.gif&#34; /&gt; &lt;/a&gt; &lt;br /&gt; ↑ クリックして開けます &lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;global-or-local-colormap&#34;&gt;Global or Local ColorMap&lt;/h2&gt;
+
+&lt;p&gt;単純に convert でコマを連結して GIFアニメにするだけだと、色パレットをコマ毎に持ちます。&lt;/p&gt;
+
+&lt;p&gt;ImageMagick にコマンドで判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ giftext Opaopa-anime-dot8.gif | grep &amp;quot;Color Map&amp;quot;
+  Has Global Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  Image Has Color Map.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみ。&lt;/p&gt;
+
+&lt;p&gt;コマ毎にバラバラに Local Color Map を持つ場合は +map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。&lt;/p&gt;
+
+&lt;h2 id=&#34;optimize&#34;&gt;Optimize&lt;/h2&gt;
+
+&lt;h3 id=&#34;optimizeframe&#34;&gt;OptimizeFrame&lt;/h3&gt;
+
+&lt;p&gt;変化のあるピクセルだけ画像として持ちます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot1-optframe.gif&#34;&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8-optframe.gif&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;コマを分解します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;元画像&lt;/th&gt;
+&lt;th&gt;フレーム最適化&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-0.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optframe-0.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-1.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optframe-1.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-2.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optframe-2.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-3.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optframe-3.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-4.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optframe-4.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;＜以下 5-7 は省略＞&lt;/p&gt;
+
+&lt;h3 id=&#34;optimize-transparency&#34;&gt;Optimize Transparency&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert  Opaopa-anime-dot8.gif  -layers OptimizeTransparency Opaopa-anime-dot8-opttrans.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot1-opttrans.gif&#34;&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8-opttrans.gif&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;コマを分解します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;元画像&lt;/th&gt;
+&lt;th&gt;透明最適化&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-0.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-opttrans-0.png&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-1.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-opttrans-1.png&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-2.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-opttrans-2.png&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-3.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-opttrans-3.png&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-4.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-opttrans-4.png&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;＜以下 5-7 は省略＞&lt;/p&gt;
+
+&lt;h2 id=&#34;optimiez&#34;&gt;Optimiez&lt;/h2&gt;
+
+&lt;p&gt;それらが合わさり最強になった Optimize がこれです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot1-optimize.gif&#34;&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../Opaopa-anime-dot8-optimize.gif&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;分解します。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;元画像&lt;/th&gt;
+&lt;th&gt;最適化&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-0.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optimize-0.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-1.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optimize-1.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-2.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optimize-2.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-3.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optimize-3.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-4.png&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-anime-dot8-optimize-4.gif&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;＜以下 5-7 は省略＞&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick v6 Examples &amp;ndash; Animation Optimization
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/anim_opt/&#34;&gt;http://www.imagemagick.org/Usage/anim_opt/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;公式ページでは giftrans を使って説明してます &amp;gt; &lt;a href=&#34;http://www.imagemagick.org/Usage/anim_opt/#colortables&#34;&gt;http://www.imagemagick.org/Usage/anim_opt/#colortables&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     
