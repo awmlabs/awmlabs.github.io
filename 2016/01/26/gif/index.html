@@ -94,8 +94,8 @@
 <ul>
 <li><a href="#optimizeframe">OptimizeFrame</a></li>
 <li><a href="#optimize-transparency">Optimize Transparency</a></li>
+<li><a href="#最強の-optimize">(最強の) Optimize</a></li>
 </ul></li>
-<li><a href="#optimiez">Optimiez</a></li>
 </ul></li>
 <li><a href="#参考-url">参考 URL</a></li>
 </ul>
@@ -122,7 +122,7 @@
 <li>残り全部</li>
 </ul>
 
-<p>という順でピクセルを保存します。</p>
+<p>という順でピクセルを保存する事で、ネットワークが遅い場合でも始めに全体像を表示してから、データが取得でき次第少しずつ細部を表示できます。</p>
 
 <table>
 <thead>
@@ -270,9 +270,18 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 <h3 id="optimizeframe">OptimizeFrame</h3>
 
-<p>変化のあるピクセルだけ画像として持ちます。</p>
+<p>変化のあるピクセルだけ画像として持つ事で、データサイズを減らせます。</p>
 
 <pre><code>$ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
+$ identify Opaopa-anime-dot1-optframe.gif
+Opaopa-anime-dot1-optframe.gif[0] GIF 41x18 41x18+0+0 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[1] GIF 15x5 41x18+4+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[2] GIF 14x7 41x18+3+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[3] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[4] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[5] GIF 5x3 41x18+5+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[6] GIF 15x3 41x18+4+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[7] GIF 16x5 41x18+3+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
 </code></pre>
 
 <p><center> <img src="../Opaopa-anime-dot1-optframe.gif"> </center>
@@ -345,34 +354,36 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 <tbody>
 <tr>
 <td><img src="../Opaopa-anime-dot8-0.png"></td>
-<td><img src="../Opaopa-anime-dot8-opttrans-0.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-0.png" style="background-color:black"></td>
 </tr>
 
 <tr>
 <td><img src="../Opaopa-anime-dot8-1.png"></td>
-<td><img src="../Opaopa-anime-dot8-opttrans-1.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-1.png" style="background-color:black"></td>
 </tr>
 
 <tr>
 <td><img src="../Opaopa-anime-dot8-2.png"></td>
-<td><img src="../Opaopa-anime-dot8-opttrans-2.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-2.png" style="background-color:black"></td>
 </tr>
 
 <tr>
 <td><img src="../Opaopa-anime-dot8-3.png"></td>
-<td><img src="../Opaopa-anime-dot8-opttrans-3.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-3.png" style="background-color:black"></td>
 </tr>
 
 <tr>
 <td><img src="../Opaopa-anime-dot8-4.png"></td>
-<td><img src="../Opaopa-anime-dot8-opttrans-4.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-4.png" style="background-color:black"></td>
 </tr>
 </tbody>
 </table>
 
-<p>＜以下 5-7 は省略＞</p>
+<p>＜以下 5-7 は省略＞
+(分かりやすくする為に透明部を黒にしてます)
+１つ前のコマと色が変わらないピクセルを透明にする事で、色数を減らして圧縮の効率が上がるのが期待出来ます。</p>
 
-<h2 id="optimiez">Optimiez</h2>
+<h3 id="最強の-optimize">(最強の) Optimize</h3>
 
 <p>それらが合わさり最強になった Optimize がこれです。</p>
 
