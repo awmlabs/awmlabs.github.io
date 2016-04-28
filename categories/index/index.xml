@@ -21,10 +21,38 @@
 &lt;h1 id=&#34;imagemagick:c86ddc2258670691520613695335adcd&#34;&gt;ImageMagick&lt;/h1&gt;
 
 &lt;ul&gt;
+&lt;li&gt;ImageMagick でサムネール画像生成
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/05/thumbnail/&#34;&gt;https://blog.awm.jp/2016/01/05/thumbnail/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagick で画像を比較する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/25/diff/&#34;&gt;https://blog.awm.jp/2016/01/25/diff/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/imagemagick/&#34;&gt;http://blog.awm.jp/2016/01/25/imagemagick/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/imagemagick/&#34;&gt;http://blog.awm.jp/2016/01/25/imagemagick/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;グレー形式JPEGをPNGに変換すると暗くなる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/06/gray/&#34;&gt;https://blog.awm.jp/2016/01/06/gray/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagick の -auto-orient でオフセットがズレる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/06/orient/&#34;&gt;https://blog.awm.jp/2016/01/06/orient/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;透明度を含む画像を JPEG に変換する時の背景色
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/25/flatten/&#34;&gt;https://blog.awm.jp/2016/01/25/flatten/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -35,6 +63,11 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/26/jpeg/&#34;&gt;http://blog.awm.jp/2016/01/26/jpeg/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPEG の size hinting について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/08/jpeghint/&#34;&gt;https://blog.awm.jp/2016/01/08/jpeghint/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -73,6 +106,26 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&#34;gif:c86ddc2258670691520613695335adcd&#34;&gt;GIF&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で GIF の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/26/gif/&#34;&gt;https://blog.awm.jp/2016/01/26/gif/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;pnm:c86ddc2258670691520613695335adcd&#34;&gt;PNM&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PNM と ImageMagick で画像ファイルを手作り生成
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/04/pnm/&#34;&gt;https://blog.awm.jp/2016/01/04/pnm/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&#34;hugo:c86ddc2258670691520613695335adcd&#34;&gt;Hugo&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -90,6 +143,11 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/03/hugo/&#34;&gt;https://blog.awm.jp/2016/01/03/hugo/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Blog の Deploy で Circle CI
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/02/circleci/&#34;&gt;https://blog.awm.jp/2016/01/02/circleci/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
