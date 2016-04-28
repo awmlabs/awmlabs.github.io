@@ -75,24 +75,21 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94">JPEG のクロマサブサンプリングと YUVabc</a></li>
-<li><a href="#はじめに早見表:acf70381f9800b5605f8911f9c4c3d94">はじめに早見表</a>
+<li><a href="#jpeg-のクロマサブサンプリングと-yuvabc">JPEG のクロマサブサンプリングと YUVabc</a></li>
+<li><a href="#はじめに早見表">はじめに早見表</a></li>
+<li><a href="#yuvabc-の種類">YUVabc の種類</a>
 <ul>
-<li><a href="#imagemagick-での作り方:acf70381f9800b5605f8911f9c4c3d94">ImageMagick での作り方</a></li>
+<li><a href="#yuv444-の-y-cb-cr-の並び">YUV444 の Y,Cb,Cr の並び</a></li>
+<li><a href="#yuv422-の-y-cb-cr-の並び">YUV422 の Y,Cb,Cr の並び</a></li>
 </ul></li>
-<li><a href="#yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94">YUVabc の種類</a>
-<ul>
-<li><a href="#yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV444 の Y,Cb,Cr の並び</a></li>
-<li><a href="#yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV422 の Y,Cb,Cr の並び</a></li>
-</ul></li>
-<li><a href="#色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94">色々な YUVabc</a></li>
-<li><a href="#まとめ:acf70381f9800b5605f8911f9c4c3d94">まとめ</a></li>
-<li><a href="#参考:acf70381f9800b5605f8911f9c4c3d94">参考</a></li>
+<li><a href="#色々な-yuvabc">色々な YUVabc</a></li>
+<li><a href="#まとめ">まとめ</a></li>
+<li><a href="#参考">参考</a></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94">JPEG のクロマサブサンプリングと YUVabc</h1>
+<h1 id="jpeg-のクロマサブサンプリングと-yuvabc">JPEG のクロマサブサンプリングと YUVabc</h1>
 
 <p>YCbCr については以下のページで紹介しました。</p>
 
@@ -108,33 +105,23 @@
 
 <p>JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。</p>
 
-<h1 id="はじめに早見表:acf70381f9800b5605f8911f9c4c3d94">はじめに早見表</h1>
+<h1 id="はじめに早見表">はじめに早見表</h1>
 
 <p><center> <img src="../yuvyab.png" /> </center></p>
 
 <p>※ YUV410 だけ変則的です</p>
 
-<h2 id="imagemagick-での作り方:acf70381f9800b5605f8911f9c4c3d94">ImageMagick での作り方</h2>
-
-<pre><code>$ convert orig.jpg -sampling-factor &quot;1x1,1x1,1x1&quot; yuv444.jpg
-$ convert orig.jpg -sampling-factor &quot;2x1,1x1,1x1&quot; yuv422.jpg
-$ convert orig.jpg -sampling-factor &quot;4x1,1x1,1x1&quot; yuv411.jpg
-$ convert orig.jpg -sampling-factor &quot;1x2,1x1,1x1&quot; yuv440.jpg
-$ convert orig.jpg -sampling-factor &quot;2x2,1x1,1x1&quot; yuv420.jpg
-$ convert orig.jpg -sampling-factor &quot;4x4,1x1,1x1&quot; yuv410.jpg # yuv9
-</code></pre>
-
-<h1 id="yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94">YUVabc の種類</h1>
+<h1 id="yuvabc-の種類">YUVabc の種類</h1>
 
 <p>よく見る表現として、YUV444 、YUV422 の２つがあります。</p>
 
-<h2 id="yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV444 の Y,Cb,Cr の並び</h2>
+<h2 id="yuv444-の-y-cb-cr-の並び">YUV444 の Y,Cb,Cr の並び</h2>
 
 <p>YUVabc と見立てると a, b, c の番号は以下のように対応します。</p>
 
 <p><center> <img src="../yuv444.png" /> </center></p>
 
-<h2 id="yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94">YUV422 の Y,Cb,Cr の並び</h2>
+<h2 id="yuv422-の-y-cb-cr-の並び">YUV422 の Y,Cb,Cr の並び</h2>
 
 <p>YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。</p>
 
@@ -144,7 +131,7 @@ $ convert orig.jpg -sampling-factor &quot;4x4,1x1,1x1&quot; yuv410.jpg # yuv9
 
 <p><center> <img src="../yuv422.png" /> </center></p>
 
-<h1 id="色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94">色々な YUVabc</h1>
+<h1 id="色々な-yuvabc">色々な YUVabc</h1>
 
 <p>実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)</p>
 
@@ -188,7 +175,7 @@ $ convert orig.jpg -sampling-factor &quot;4x4,1x1,1x1&quot; yuv410.jpg # yuv9
 
 <p><center> <img src="../yuv410-4x4.png" /> </center></p>
 
-<h1 id="まとめ:acf70381f9800b5605f8911f9c4c3d94">まとめ</h1>
+<h1 id="まとめ">まとめ</h1>
 
 <ul>
 <li>YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
@@ -203,7 +190,7 @@ $ convert orig.jpg -sampling-factor &quot;4x4,1x1,1x1&quot; yuv410.jpg # yuv9
 <li>YUV410 は abc の法則から例外</li>
 </ul>
 
-<h1 id="参考:acf70381f9800b5605f8911f9c4c3d94">参考</h1>
+<h1 id="参考">参考</h1>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Chroma_subsampling">https://en.wikipedia.org/wiki/Chroma_subsampling</a></li>

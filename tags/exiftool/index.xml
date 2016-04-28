@@ -18,9 +18,9 @@
       <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-exif-orientation-の操作&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
 
-&lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-とは&#34;&gt;Orientation とは&lt;/h2&gt;
 
 &lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
@@ -36,11 +36,11 @@
     exif:Orientation: 6
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-の数値の対応&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
 
 &lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
-&lt;h3 id=&#34;早見表1:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表1&lt;/h3&gt;
+&lt;h3 id=&#34;早見表1&#34;&gt;早見表1&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -95,7 +95,7 @@
  * 1 の鏡反転 =&amp;gt; 2、8 の鏡反転 =&amp;gt; 5, 3の鏡反転=&amp;gt; 4、6 の鏡反転 =&amp;gt; 7
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;早見表2:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表2&lt;/h3&gt;
+&lt;h3 id=&#34;早見表2&#34;&gt;早見表2&lt;/h3&gt;
 
 &lt;p&gt;変換の方向がわかりやすい図もつけます。&lt;/p&gt;
 
@@ -159,19 +159,19 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
+&lt;h2 id=&#34;編集ツール&#34;&gt;編集ツール&lt;/h2&gt;
 
 &lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
 
 &lt;p&gt;ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
 
-&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
+&lt;h1 id=&#34;exiftool&#34;&gt;ExifTool&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;インストール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;インストール&lt;/h2&gt;
+&lt;h2 id=&#34;インストール&#34;&gt;インストール&lt;/h2&gt;
 
 &lt;p&gt;MacOS は&lt;/p&gt;
 
@@ -187,7 +187,7 @@
 
 &lt;p&gt;Perl なので他のプラットフォームでも入れるのは難しくないでしょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+&lt;h2 id=&#34;exiftool-の使い方&#34;&gt;ExifTool の使い方&lt;/h2&gt;
 
 &lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
 
@@ -196,7 +196,7 @@ test.jpg
     1 image files updated
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
+&lt;h2 id=&#34;まとめて-1-8を設定する&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
 
 &lt;p&gt;ついでに表示の時に元の画像の向きを維持するようにします。&lt;/p&gt;
 
@@ -308,7 +308,7 @@ done
 
 &lt;p&gt;として Exif タグを削除したものです。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Exif 2.3 規格書
