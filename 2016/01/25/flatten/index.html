@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.17-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,15 +75,15 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#透明度を含む画像を-jpeg-に変換する時の背景色:84783e3316737bab6c31917cbcac1c95">透明度を含む画像を JPEG に変換する時の背景色</a></li>
-<li><a href="#実際のところ:84783e3316737bab6c31917cbcac1c95">実際のところ</a></li>
-<li><a href="#extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95">-extent で背景を白にできる</a></li>
-<li><a href="#flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95">-flatten (レイヤーを重ねる命令)が正しい</a></li>
+<li><a href="#透明度を含む画像を-jpeg-に変換する時の背景色">透明度を含む画像を JPEG に変換する時の背景色</a></li>
+<li><a href="#実際のところ">実際のところ</a></li>
+<li><a href="#extent-で背景を白にできる">-extent で背景を白にできる</a></li>
+<li><a href="#flatten-レイヤーを重ねる命令-が正しい">-flatten (レイヤーを重ねる命令)が正しい</a></li>
 </ul>
 </nav>
     
 
-<h1 id="透明度を含む画像を-jpeg-に変換する時の背景色:84783e3316737bab6c31917cbcac1c95">透明度を含む画像を JPEG に変換する時の背景色</h1>
+<h1 id="透明度を含む画像を-jpeg-に変換する時の背景色">透明度を含む画像を JPEG に変換する時の背景色</h1>
 
 <ul>
 <li>もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -97,7 +97,7 @@
 白にしたい場合は同じサイズにリサイズしましょう。
 </code></pre>
 
-<h1 id="実際のところ:84783e3316737bab6c31917cbcac1c95">実際のところ</h1>
+<h1 id="実際のところ">実際のところ</h1>
 
 <p>そのまま JPEG に変換すると背景色は白になります。</p>
 
@@ -116,7 +116,7 @@ $ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
 
 <p>詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)</p>
 
-<h1 id="extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95">-extent で背景を白にできる</h1>
+<h1 id="extent-で背景を白にできる">-extent で背景を白にできる</h1>
 
 <pre>
 $ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
@@ -129,7 +129,7 @@ $ convert in.png -resize 200x200 -extent 200x200 out.jpg <img src="../logowhite_
 $ convert in.png -resize 200x200 –extent 400x400 out.jpg <img src="../logowhiteExtent_hh.jpg" />
 </pre>
 
-<h1 id="flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95">-flatten (レイヤーを重ねる命令)が正しい</h1>
+<h1 id="flatten-レイヤーを重ねる命令-が正しい">-flatten (レイヤーを重ねる命令)が正しい</h1>
 
 <p>-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。</p>
 
