@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
       <description>
 
-&lt;h1 id=&#34;rgb444-変換で劣化しない画像を-imagemagick-で作る:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;RGB444 変換で劣化しない画像を ImageMagick で作る&lt;/h1&gt;
+&lt;h1 id=&#34;rgb444-変換で劣化しない画像を-imagemagick-で作る&#34;&gt;RGB444 変換で劣化しない画像を ImageMagick で作る&lt;/h1&gt;
 
 &lt;p&gt;詳しい話は以下のサイトに任せるとして、&lt;/p&gt;
 
@@ -41,7 +41,7 @@
 
 &lt;p&gt;ImageMagick での具体的なやり方が書かれてないので、こんな方法もあるという解説記事です。&lt;/p&gt;
 
-&lt;h2 id=&#34;imagemagick-の減色処理:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;ImageMagick の減色処理&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-の減色処理&#34;&gt;ImageMagick の減色処理&lt;/h2&gt;
 
 &lt;p&gt;ImageMagick の減色の方法は何種類か存在します。&lt;/p&gt;
 
@@ -57,9 +57,9 @@
 
 &lt;p&gt;Unity に RGB444 指定で PNG 画像を渡した場合は (b) 相当の処理が動くようです。
 &lt;pre&gt;
-$ convert -size 300x900 gradient:&amp;lsquo;#FFF-#0FF&amp;rsquo; -rotate 90 \
-    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
-    -rotate 90 -set colorspace HSB -colorspace RGB \
+$ convert -size 300x900 gradient:&amp;lsquo;#FFF-#0FF&amp;rsquo; -rotate 90 &lt;br /&gt;
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage &lt;br /&gt;
+    -rotate 90 -set colorspace HSB -colorspace RGB &lt;br /&gt;
     gradient_hue_polar.png
 &lt;img src=&#34;../gradient_hue_polar.png&#34; /&gt;
 $ convert gradient_hue_polar.png -depth 4 depth4.png
@@ -68,14 +68,14 @@ $ convert gradient_hue_polar.png -depth 4 depth4.png
 
 &lt;p&gt;(b) の処理が動いても色が変わらないように、あらかじめ &amp;copy; の方法で減色をする。というのが今回説明する処理です。&lt;/p&gt;
 
-&lt;h2 id=&#34;やり方-成功例-rgb444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;やり方 (成功例) RGB444&lt;/h2&gt;
+&lt;h2 id=&#34;やり方-成功例-rgb444&#34;&gt;やり方 (成功例) RGB444&lt;/h2&gt;
 
-&lt;h3 id=&#34;テスト画像:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+&lt;h3 id=&#34;テスト画像&#34;&gt;テスト画像&lt;/h3&gt;
 
 &lt;p&gt;先ほど作成した画像 gradient_hue_polar.png を利用します。
 &lt;img src=&#34;../gradient_hue_polar.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;変換の準備:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+&lt;h3 id=&#34;変換の準備&#34;&gt;変換の準備&lt;/h3&gt;
 
 &lt;p&gt;ディザで残したい色を持つ画像を作成します。&lt;/p&gt;
 
@@ -95,10 +95,10 @@ $ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270  black-b
 $ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-green-blue.png
 &lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;
 &lt;/pre&gt;
-&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;実行コマンド:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+&lt;h3 id=&#34;実行コマンド&#34;&gt;実行コマンド&lt;/h3&gt;
 
 &lt;p&gt;-remap で画像ファイルを渡すと、その画像に含まれる色に限定してディザ処理をします。&lt;/p&gt;
 
@@ -111,13 +111,13 @@ $ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.p
 
 &lt;p&gt;&lt;img src=&#34;../depth4.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;透明度を含むやり方-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;透明度を含むやり方 (失敗例) RGBA4444&lt;/h2&gt;
+&lt;h2 id=&#34;透明度を含むやり方-失敗例-rgba4444&#34;&gt;透明度を含むやり方 (失敗例) RGBA4444&lt;/h2&gt;
 
 &lt;p&gt;ついでに失敗例も。透明度を含む場合は減色が綺麗に出来ませんでした。&lt;/p&gt;
 
 &lt;p&gt;以下は実験。&lt;/p&gt;
 
-&lt;h3 id=&#34;テスト画像-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+&lt;h3 id=&#34;テスト画像-1&#34;&gt;テスト画像&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
@@ -132,7 +132,7 @@ $ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
 &lt;img src=&#34;../gradient_hue_polar-transparent.png&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;h3 id=&#34;変換の準備-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+&lt;h3 id=&#34;変換の準備-1&#34;&gt;変換の準備&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;RGBA4444 パレット作成
@@ -142,32 +142,32 @@ $ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &amp
 &lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;実行コマンド-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+&lt;h3 id=&#34;実行コマンド-1&#34;&gt;実行コマンド&lt;/h3&gt;
 
 &lt;pre&gt;
 $ convert gradient_hue_polar-transparent.png  -dither Riemersma -remap black-red-green-blue-transparent.png rgba4444.png
 &lt;img src=&#34;../rgba4444.png&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;h2 id=&#34;課題:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;課題&lt;/h2&gt;
+&lt;h2 id=&#34;課題&#34;&gt;課題&lt;/h2&gt;
 
 &lt;p&gt;Unity でゲームを作る時のキャラ画像は輪郭の周りを透明にしたいでしょうから。RGBA4444 に対応してないと残念ながら使えなさそうです。
 ImageMagick は透明度つき減色が苦手ですが、ここまで酷いのは何か理由がありそうなので、もう少し調べてみます。&lt;/p&gt;
 
-&lt;h2 id=&#34;参考-url:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;参考 URL&lt;/h2&gt;
+&lt;h2 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;注釈:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;注釈&lt;/h2&gt;
+&lt;h2 id=&#34;注釈&#34;&gt;注釈&lt;/h2&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 
 &lt;hr /&gt;
 
 &lt;ol&gt;
-&lt;li id=&#34;fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;compose と tile を組み合わせて、&amp;rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&amp;rdquo; を実行したらゴミが入りました。&lt;img src=&#34;../compose_and_tile.png&#34; /&gt; 多分バグです。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;compose と tile を組み合わせて、&amp;rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&amp;rdquo; を実行したらゴミが入りました。&lt;img src=&#34;../compose_and_tile.png&#34; /&gt; 多分バグです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -181,7 +181,7 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
       <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
       <description>
 
-&lt;h1 id=&#34;透明度を含む画像を-jpeg-に変換する時の背景色:84783e3316737bab6c31917cbcac1c95&#34;&gt;透明度を含む画像を JPEG に変換する時の背景色&lt;/h1&gt;
+&lt;h1 id=&#34;透明度を含む画像を-jpeg-に変換する時の背景色&#34;&gt;透明度を含む画像を JPEG に変換する時の背景色&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -195,7 +195,7 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
 白にしたい場合は同じサイズにリサイズしましょう。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;実際のところ:84783e3316737bab6c31917cbcac1c95&#34;&gt;実際のところ&lt;/h1&gt;
+&lt;h1 id=&#34;実際のところ&#34;&gt;実際のところ&lt;/h1&gt;
 
 &lt;p&gt;そのまま JPEG に変換すると背景色は白になります。&lt;/p&gt;
 
@@ -214,7 +214,7 @@ $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#3
 
 &lt;p&gt;詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)&lt;/p&gt;
 
-&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
+&lt;h1 id=&#34;extent-で背景を白にできる&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
@@ -227,7 +227,7 @@ $ convert in.png -resize 200x200 -extent 200x200 out.jpg &lt;img src=&#34;../log
 $ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../logowhiteExtent_hh.jpg&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
+&lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
 
 &lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。&lt;/p&gt;
 
@@ -258,7 +258,7 @@ $ convert in.png -resize 200x200  –flatten &lt;u&gt;-background red&lt;/u&gt; 
       <guid>https://blog.awm.jp/2016/01/25/diff/</guid>
       <description>
 
-&lt;h1 id=&#34;imagemagick-で画像を比較する:943e202c7525f67778c9e3665dbf8092&#34;&gt;ImageMagick で画像を比較する&lt;/h1&gt;
+&lt;h1 id=&#34;imagemagick-で画像を比較する&#34;&gt;ImageMagick で画像を比較する&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -287,9 +287,9 @@ $ convert in.png -resize 200x200  –flatten &lt;u&gt;-background red&lt;/u&gt; 
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;画像の差分:943e202c7525f67778c9e3665dbf8092&#34;&gt;画像の差分&lt;/h2&gt;
+&lt;h2 id=&#34;画像の差分&#34;&gt;画像の差分&lt;/h2&gt;
 
-&lt;h3 id=&#34;compose-difference:943e202c7525f67778c9e3665dbf8092&#34;&gt;compose difference&lt;/h3&gt;
+&lt;h3 id=&#34;compose-difference&#34;&gt;compose difference&lt;/h3&gt;
 
 &lt;p&gt;-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
 以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。&lt;/p&gt;
@@ -305,7 +305,7 @@ $ mogrify -auto-level  diff.png  #差分画像を明るくする
 
 &lt;p&gt;全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。&lt;/p&gt;
 
-&lt;h3 id=&#34;identify-mean:943e202c7525f67778c9e3665dbf8092&#34;&gt;identify mean&lt;/h3&gt;
+&lt;h3 id=&#34;identify-mean&#34;&gt;identify mean&lt;/h3&gt;
 
 &lt;p&gt;difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。&lt;/p&gt;
 
@@ -325,7 +325,7 @@ identify -format &#34;%[mean]&#34; t.png  ; echo &#34; : $i&#34; ; done
 
 &lt;p&gt;以上の方法は PSNR 方式に近いのですが、人の目で見る違いと掛け離れるケースが多くあり、SSIM 方式の方が主流です。&lt;/p&gt;
 
-&lt;h1 id=&#34;ssim:943e202c7525f67778c9e3665dbf8092&#34;&gt;SSIM&lt;/h1&gt;
+&lt;h1 id=&#34;ssim&#34;&gt;SSIM&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.m.wikipedia.org/wiki/Structural_similarity&#34;&gt;https://en.m.wikipedia.org/wiki/Structural_similarity&lt;/a&gt;&lt;/li&gt;
@@ -362,7 +362,7 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
       <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
       <description>
 
-&lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
+&lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;iframe allowfullscreen=&#34;true&#34; allowtransparency=&#34;true&#34; frameborder=&#34;0&#34; height=&#34;497&#34; mozallowfullscreen=&#34;true&#34; src=&#34;//speakerdeck.com/player/248da47aa52d48ae8d57e8656f117997&#34; style=&#34;border:0; padding:0; margin:0; background:transparent;&#34; webkitallowfullscreen=&#34;true&#34; width=&#34;578&#34;&gt;&lt;/iframe&gt;
@@ -371,7 +371,7 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 
 &lt;p&gt;発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;
 
-&lt;h1 id=&#34;一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;一部界隈で話題&lt;/h1&gt;
+&lt;h1 id=&#34;一部界隈で話題&#34;&gt;一部界隈で話題&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -384,9 +384,9 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 
 &lt;p&gt;色んなノウハウが詰まっていて素晴らしい記事です。便乗して幾つか勝手に補足してみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;良いノウハウ&lt;/h1&gt;
+&lt;h1 id=&#34;良いノウハウ&#34;&gt;良いノウハウ&lt;/h1&gt;
 
-&lt;h2 id=&#34;リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
+&lt;h2 id=&#34;リリース大量消費に注意&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;limit 大事 (特にユーザ投稿画像を扱う場合)
@@ -397,7 +397,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;CMYK 画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;cmyk-画像を考慮しよう&#34;&gt;CMYK 画像を考慮しよう&lt;/h2&gt;
 
 &lt;p&gt;画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。&lt;/p&gt;
 
@@ -420,7 +420,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
           earth_lights_colorspace.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-のオプションの順序に注意&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;ImageMagick は引数を先頭から順に命令実行する&lt;/li&gt;
@@ -461,11 +461,11 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;逆にいうと順序次第で組み合わせ的に色んな操作が可能になるという事です。&lt;/p&gt;
 
-&lt;h1 id=&#34;補足したい項目:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;補足したい項目&lt;/h1&gt;
+&lt;h1 id=&#34;補足したい項目&#34;&gt;補足したい項目&lt;/h1&gt;
 
 &lt;p&gt;対応するブログのエントリを並べます。&lt;/p&gt;
 
-&lt;h2 id=&#34;画像比較は人間の眼で行うべし:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;画像比較は人間の眼で行うべし&lt;/h2&gt;
+&lt;h2 id=&#34;画像比較は人間の眼で行うべし&#34;&gt;画像比較は人間の眼で行うべし&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;ImageMagick で画像を比較する
@@ -477,7 +477,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;ある程度、計算で差分の多い画像や領域を自動抽出できます。&lt;/p&gt;
 
-&lt;h2 id=&#34;orientation-を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;Orientation を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-を考慮しよう&#34;&gt;Orientation を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;-auto-orient でオフセットがズレる件
@@ -489,7 +489,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;JPEG を経由しなくても +repage で対処出来る。かもしれません。&lt;/p&gt;
 
-&lt;h2 id=&#34;透過画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;透過画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;透過画像を考慮しよう&#34;&gt;透過画像を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;透明度を含む画像を JPEG に変換する時の背景色
@@ -501,7 +501,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;結果は恐らく変わらないので重箱の隅付きですが、-extent は副作用的に対処出来るだけで、-flatten がズバリの処理です。&lt;/p&gt;
 
-&lt;h2 id=&#34;グレイスケール画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;グレイスケール画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;グレイスケール画像を考慮しよう&#34;&gt;グレイスケール画像を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;グレー形式JPEGをPNGに変換すると暗くなる件
@@ -514,7 +514,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;p&gt;6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。
 &lt;!-- (もしかして Colorspace を明示的に指定するとうまくいくかも？) --&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;define-jpeg-size-に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;-define jpeg:size に注意&lt;/h2&gt;
+&lt;h2 id=&#34;define-jpeg-size-に注意&#34;&gt;-define jpeg:size に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG の size hinting について
@@ -526,7 +526,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。&lt;/p&gt;
 
-&lt;h1 id=&#34;さいごに:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;さいごに&lt;/h1&gt;
+&lt;h1 id=&#34;さいごに&#34;&gt;さいごに&lt;/h1&gt;
 
 &lt;p&gt;以上です。誤りや物足りない所があればご指摘ください。&lt;/p&gt;
 
@@ -559,9 +559,9 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
-&lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
+&lt;h1 id=&#34;define-jpeg-size-とは&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
-&lt;h2 id=&#34;jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
+&lt;h2 id=&#34;jpeg-のデータの持ち方&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
 
 &lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
 
@@ -569,7 +569,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
 引用) &lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
+&lt;h2 id=&#34;scaling-指定で-decode&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
 
 &lt;p&gt;元のサイズの画像データに変換する場合と比べて、手間を増やさず &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。&lt;/p&gt;
 
@@ -577,11 +577,11 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)&lt;/p&gt;
 
-&lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
+&lt;h2 id=&#34;やっている事&#34;&gt;やっている事&lt;/h2&gt;
 
 &lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
 
-&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
 
 &lt;p&gt;詳しくはこちらを参照して下さい。&lt;/p&gt;
 
@@ -593,7 +593,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
+&lt;h2 id=&#34;小さくリサイズする場合&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;普通にリサイズ (-define jpeg:size 無し)
@@ -605,7 +605,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。&lt;/p&gt;
 
-&lt;h2 id=&#34;大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
+&lt;h2 id=&#34;大きくリサイズする場合-予想&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
 
 &lt;p&gt;問題にしているケースです。&lt;/p&gt;
 
@@ -619,7 +619,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。&lt;/p&gt;
 
-&lt;h3 id=&#34;実際の動き:8297ce3a5ed4594f91a307954f292784&#34;&gt;実際の動き&lt;/h3&gt;
+&lt;h3 id=&#34;実際の動き&#34;&gt;実際の動き&lt;/h3&gt;
 
 &lt;p&gt;jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。&lt;/p&gt;
 
@@ -655,11 +655,11 @@ AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_
 ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;結論&lt;/h1&gt;
+&lt;h1 id=&#34;結論&#34;&gt;結論&lt;/h1&gt;
 
 &lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、2倍か3倍以上小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
-&lt;h1 id=&#34;scaling-の該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling の該当コード&lt;/h1&gt;
+&lt;h1 id=&#34;scaling-の該当コード&#34;&gt;scaling の該当コード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;
@@ -707,7 +707,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;p&gt;この 2/block_size scaling の条件にマッチしたのかなと予想してます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:8297ce3a5ed4594f91a307954f292784&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Libjpeg&#34;&gt;https://en.wikipedia.org/wiki/Libjpeg&lt;/a&gt;&lt;/li&gt;
@@ -748,7 +748,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
       <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
+&lt;h1 id=&#34;auto-orient-でオフセットがズレる件&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
 
 &lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
 
@@ -773,7 +773,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 
 &lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
 
-&lt;h1 id=&#34;実装:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;実装&lt;/h1&gt;
+&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
 
 &lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
 
@@ -799,7 +799,7 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;repage:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;+repage&lt;/h1&gt;
+&lt;h1 id=&#34;repage&#34;&gt;+repage&lt;/h1&gt;
 
 &lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
 
@@ -810,7 +810,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
 
-&lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
+&lt;h1 id=&#34;おまけ&#34;&gt;おまけ&lt;/h1&gt;
 
 &lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
 
@@ -840,7 +840,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
       <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
-&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
+&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
 
 &lt;p&gt;画像サムネール界隈で話題のエントリ&lt;/p&gt;
 
@@ -863,14 +863,14 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;p&gt;減色処理でここまで暗くなるのは違和感ありますし、出力で PNG8 がデフォというのも妙なので調べた所、少し前にあった ImageMagick のバグだったので話を整理しておきます。&lt;/p&gt;
 
-&lt;h1 id=&#34;いつ頃のバグ:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;いつ頃のバグ&lt;/h1&gt;
+&lt;h1 id=&#34;いつ頃のバグ&#34;&gt;いつ頃のバグ&lt;/h1&gt;
 
 &lt;p&gt;6.8.0-0 〜 6.8.0-7 の間のバグです。
 6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。&lt;/p&gt;
 
 &lt;p&gt;6.8.0-8 で修正済みです。&lt;/p&gt;
 
-&lt;h1 id=&#34;不具合修正のコード差分:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
+&lt;h1 id=&#34;不具合修正のコード差分&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
 8305,8306c8305,8306
@@ -883,7 +883,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;p&gt;あ、はい。って感じです。&lt;/p&gt;
 
-&lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
+&lt;h1 id=&#34;png8&#34;&gt;PNG8&lt;/h1&gt;
 
 &lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
 
