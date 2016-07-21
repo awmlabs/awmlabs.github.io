@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rgba4444 on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/rgba4444/</link>
+    <description>Recent content in Rgba4444 on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Thu, 21 Jul 2016 21:28:11 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/rgba4444/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
+      <link>https://blog.awm.jp/2016/07/21/rgb444/</link>
+      <pubDate>Thu, 21 Jul 2016 21:28:11 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
+      <description>
+
+&lt;h1 id=&#34;rgb444-変換で劣化しない画像を-imagemagick-で作る:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;RGB444 変換で劣化しない画像を ImageMagick で作る&lt;/h1&gt;
+
+&lt;p&gt;詳しい話は以下のサイトをご参照までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&#34;&gt;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;PNGquantやImageMagickを使う
+これらは画像変換の専用ソフトです。
+ 
+注意して欲しいのはこれらのソフトにはPNG用の減色設定もあるので、
+間違えてしまうとさっきのまでの話のように劣化してしまいます。
+ 
+設定にご注意を。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ImageMagick での具体的なやり方が書いてないので、その説明です。&lt;/p&gt;
+
+&lt;h2 id=&#34;やり方-成功例-rgb444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;やり方 (成功例) RGB444&lt;/h2&gt;
+
+&lt;h3 id=&#34;テスト画像:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
+    gradient_hue_polar.png
+&lt;img src=&#34;../gradient_hue_polar.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;変換の準備:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+
+&lt;p&gt;今回は、減色の際にパレット情報を渡す方法なので、そのパレット色だけを持つ画像を作成します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 パレット作成
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-red black-red.png
+&lt;img src=&#34;../black-red.png&#34; /&gt;
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+&lt;img src=&#34;../black-green.png&#34; /&gt;
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+&lt;img src=&#34;../black-red-green.png&#34; /&gt;
+$ convert -size 256x16 tile:black-red-green.png  black-red-green-tiled.png
+&lt;img src=&#34;../black-red-green-tiled.png&#34; /&gt;
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270  black-blue.png
+&lt;img src=&#34;../black-blue.png&#34; /&gt;
+$ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-green-blue.png
+&lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;
+&lt;/pre&gt;
+&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.png rgb444.png
+&lt;img src=&#34;../rgb444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;ディザをかけずに、そのまま元の画像を渡すと以下のようになるはずなので、それよりはマシという話です。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar.png -depth 4 depth4.png
+&lt;img src=&#34;../depth4.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;透明度を含むやり方-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;透明度を含むやり方 (失敗例) RGBA4444&lt;/h2&gt;
+
+&lt;p&gt;ついでに失敗例も。透明度を含む場合は減色が綺麗に出来ませんでした。&lt;/p&gt;
+
+&lt;p&gt;以下は実験。&lt;/p&gt;
+
+&lt;h3 id=&#34;テスト画像-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
+    -matte -channel a -fx &#34;u*j/h&#34; \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
+    gradient_hue_polar-transparent.png
+&lt;img src=&#34;../gradient_hue_polar-transparent.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;変換の準備-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGBA4444 パレット作成
+&lt;pre&gt;
+$ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &amp;ldquo;u*floor(j/16)/h*17.1&amp;rdquo; black-red-green-blue-transparent.png
+&lt;img src=&#34;../black-red-green-blue-transparent.png&#34; /&gt;
+&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png  -dither Riemersma -remap black-red-green-blue-transparent.png rgba4444.png
+&lt;img src=&#34;../rgba4444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;imagemagick-の減色処理:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;ImageMagick の減色処理&lt;/h2&gt;
+
+&lt;p&gt;減色アルゴリズムの詳細は以下のブログに解説を任せるとして。
+- &lt;a href=&#34;http://labs.gree.jp/blog/2012/09/4824/&#34;&gt;http://labs.gree.jp/blog/2012/09/4824/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ImageMagick での減色の方法は何種類か存在します。&lt;/p&gt;
+
+&lt;h1 id=&#34;注釈:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;注釈&lt;/h1&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;compose と tile を組み合わせて、&amp;rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&amp;rdquo; を実行したらゴミが入りました。&lt;img src=&#34;../compose_and_tile.png&#34; /&gt; 多分バグです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

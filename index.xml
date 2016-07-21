@@ -7,8 +7,150 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Wed, 10 Feb 2016 21:53:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 21 Jul 2016 21:28:11 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
+      <link>https://blog.awm.jp/2016/07/21/rgb444/</link>
+      <pubDate>Thu, 21 Jul 2016 21:28:11 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
+      <description>
+
+&lt;h1 id=&#34;rgb444-変換で劣化しない画像を-imagemagick-で作る:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;RGB444 変換で劣化しない画像を ImageMagick で作る&lt;/h1&gt;
+
+&lt;p&gt;詳しい話は以下のサイトをご参照までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&#34;&gt;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;PNGquantやImageMagickを使う
+これらは画像変換の専用ソフトです。
+ 
+注意して欲しいのはこれらのソフトにはPNG用の減色設定もあるので、
+間違えてしまうとさっきのまでの話のように劣化してしまいます。
+ 
+設定にご注意を。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ImageMagick での具体的なやり方が書いてないので、その説明です。&lt;/p&gt;
+
+&lt;h2 id=&#34;やり方-成功例-rgb444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;やり方 (成功例) RGB444&lt;/h2&gt;
+
+&lt;h3 id=&#34;テスト画像:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
+    gradient_hue_polar.png
+&lt;img src=&#34;../gradient_hue_polar.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;変換の準備:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+
+&lt;p&gt;今回は、減色の際にパレット情報を渡す方法なので、そのパレット色だけを持つ画像を作成します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 パレット作成
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-red black-red.png
+&lt;img src=&#34;../black-red.png&#34; /&gt;
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+&lt;img src=&#34;../black-green.png&#34; /&gt;
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+&lt;img src=&#34;../black-red-green.png&#34; /&gt;
+$ convert -size 256x16 tile:black-red-green.png  black-red-green-tiled.png
+&lt;img src=&#34;../black-red-green-tiled.png&#34; /&gt;
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270  black-blue.png
+&lt;img src=&#34;../black-blue.png&#34; /&gt;
+$ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-green-blue.png
+&lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;
+&lt;/pre&gt;
+&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.png rgb444.png
+&lt;img src=&#34;../rgb444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;ディザをかけずに、そのまま元の画像を渡すと以下のようになるはずなので、それよりはマシという話です。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar.png -depth 4 depth4.png
+&lt;img src=&#34;../depth4.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;透明度を含むやり方-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;透明度を含むやり方 (失敗例) RGBA4444&lt;/h2&gt;
+
+&lt;p&gt;ついでに失敗例も。透明度を含む場合は減色が綺麗に出来ませんでした。&lt;/p&gt;
+
+&lt;p&gt;以下は実験。&lt;/p&gt;
+
+&lt;h3 id=&#34;テスト画像-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;テスト画像&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
+    -matte -channel a -fx &#34;u*j/h&#34; \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
+    gradient_hue_polar-transparent.png
+&lt;img src=&#34;../gradient_hue_polar-transparent.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;変換の準備-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;変換の準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGBA4444 パレット作成
+&lt;pre&gt;
+$ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &amp;ldquo;u*floor(j/16)/h*17.1&amp;rdquo; black-red-green-blue-transparent.png
+&lt;img src=&#34;../black-red-green-blue-transparent.png&#34; /&gt;
+&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド-1:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png  -dither Riemersma -remap black-red-green-blue-transparent.png rgba4444.png
+&lt;img src=&#34;../rgba4444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;imagemagick-の減色処理:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;ImageMagick の減色処理&lt;/h2&gt;
+
+&lt;p&gt;減色アルゴリズムの詳細は以下のブログに解説を任せるとして。
+- &lt;a href=&#34;http://labs.gree.jp/blog/2012/09/4824/&#34;&gt;http://labs.gree.jp/blog/2012/09/4824/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ImageMagick での減色の方法は何種類か存在します。&lt;/p&gt;
+
+&lt;h1 id=&#34;注釈:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;注釈&lt;/h1&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;compose と tile を組み合わせて、&amp;rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&amp;rdquo; を実行したらゴミが入りました。&lt;img src=&#34;../compose_and_tile.png&#34; /&gt; 多分バグです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>JPEG のクロマサブサンプリングと YUVabc</title>
@@ -2745,240 +2887,6 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://o.inchiki.jp/obbr/125&#34;&gt;http://o.inchiki.jp/obbr/125&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
-      <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
-      <description>
-
-&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
-
-&lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。&lt;/p&gt;
-
-&lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
-
-&lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wikiedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;PNM は 以下の３つのフォーマットをまとめた呼び方です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PBM (portable bitmap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pbm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pbm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PGM (portable graymap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pgm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pgm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PPM (portable pixmap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/ppm.html&#34;&gt;http://netpbm.sourceforge.net/doc/ppm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;拡張フォーマット:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;拡張フォーマット&lt;/h2&gt;
-
-&lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PAM (portable arbitrary map)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pam.html&#34;&gt;http://netpbm.sourceforge.net/doc/pam.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PFM (portable float map)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pfm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pfm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
-
-&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。(尚、PAM形式は P7 で、PFM形式は PF, Pf です)&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ファイル先頭&lt;/th&gt;
-&lt;th&gt;フォーマット&lt;/th&gt;
-&lt;th&gt;データ表現&lt;/th&gt;
-&lt;th&gt;画像表現&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;P1&lt;/td&gt;
-&lt;td&gt;PBM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P2&lt;/td&gt;
-&lt;td&gt;PGM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P3&lt;/td&gt;
-&lt;td&gt;PPM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P4&lt;/td&gt;
-&lt;td&gt;PBM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P5&lt;/td&gt;
-&lt;td&gt;PGM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P6&lt;/td&gt;
-&lt;td&gt;PPM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;データ表現が ASCII の場合は以下のフォーマットをとります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;フォーマット種別 # P1〜P6のいずれか。
-横サイズ 縦サイズ
-最大値             # P1 の時は実質1固定なので省略
-画像データの並び
-.....
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
-
-&lt;p&gt;画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;batsu.pbm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P1
-7 7
-P1
-7 7
-1 0 0 0 0 0 1
-0 1 0 0 0 1 0
-0 0 1 0 1 0 0
-0 0 0 1 0 0 0
-0 0 1 0 1 0 0
-0 1 0 0 0 1 0
-1 0 0 0 0 0 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ImageMagick の convert で変換します。ついでに8倍に拡大したものも。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu.pbm batsu.png
-$ convert -resize 800% -filter point batsu.png batsu_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
-
-&lt;p&gt;白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;batsu_gray.pgm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P2
-7 7
-4
-4 0 0 0 0 0 4
-0 3 0 0 0 3 0
-0 0 2 0 2 0 0
-0 0 0 1 0 0 0
-0 0 2 0 2 0 0
-0 3 0 0 0 3 0
-4 0 0 0 0 0 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;convert で変換 &amp;amp; 8倍画像&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu_gray.pgm batsu_gray.png
-$ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
-
-&lt;p&gt;RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;batsu_rgb.ppm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P3
-7 7
-4
-4 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 4
-0 0 0  3 0 0  0 0 0  0 0 0  0 0 0  0 0 3  0 0 0
-0 0 0  0 0 0  2 0 0  0 0 0  0 0 3  0 0 0  0 0 0
-0 0 0  0 0 0  0 0 0  1 1 1  0 0 0  0 0 0  0 0 0
-0 0 0  0 0 0  0 2 0  0 0 0  2 2 0  0 0 0  0 0 0
-0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
-0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;convert で変換&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu_rgb.ppm batsu_rgb.png
-$ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
-
-&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考-url:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;参考 URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wikipedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;碧色工房 〜 PNM ( PPM / PGM / PBM ) ファイルフォーマット
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.mm2d.net/main/prog/c/image_io-01.html&#34;&gt;http://www.mm2d.net/main/prog/c/image_io-01.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&#34;&gt;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
