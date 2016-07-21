@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
       <description>
 
-&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
+&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
 
 &lt;p&gt;画像サムネール界隈で話題のエントリ&lt;/p&gt;
 
@@ -41,14 +41,14 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;p&gt;減色処理でここまで暗くなるのは違和感ありますし、出力で PNG8 がデフォというのも妙なので調べた所、少し前にあった ImageMagick のバグだったので話を整理しておきます。&lt;/p&gt;
 
-&lt;h1 id=&#34;いつ頃のバグ&#34;&gt;いつ頃のバグ&lt;/h1&gt;
+&lt;h1 id=&#34;いつ頃のバグ:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;いつ頃のバグ&lt;/h1&gt;
 
 &lt;p&gt;6.8.0-0 〜 6.8.0-7 の間のバグです。
 6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。&lt;/p&gt;
 
 &lt;p&gt;6.8.0-8 で修正済みです。&lt;/p&gt;
 
-&lt;h1 id=&#34;不具合修正のコード差分&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
+&lt;h1 id=&#34;不具合修正のコード差分:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
 8305,8306c8305,8306
@@ -61,7 +61,7 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 
 &lt;p&gt;あ、はい。って感じです。&lt;/p&gt;
 
-&lt;h1 id=&#34;png8&#34;&gt;PNG8&lt;/h1&gt;
+&lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
 
 &lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
 
