@@ -175,11 +175,11 @@ $ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
 <img src="../black-green.png" />
 $ composite -compose plus black-red.png black-green.png black-red-green.png
 <img src="../black-red-green.png" />
-$ convert -size 256x16 tile:black-red-green.png  black-red-green-tiled.png
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
 <img src="../black-red-green-tiled.png" />
-$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270  black-blue.png
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
 <img src="../black-blue.png" />
-$ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-green-blue.png
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
 <img src="../black-red-green-blue.png" />
 </pre>
 <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></li>
@@ -190,7 +190,9 @@ $ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-gr
 <p>-remap で画像ファイルを渡すと、その画像に含まれる色に限定してディザ処理をします。</p>
 
 <pre>
-$ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.png rgb444.png
+$ convert gradient_hue_polar.png \
+    -dither Riemersma -remap black-red-green-blue.png \
+    rgb444.png
 <img src="../rgb444.png" />
 </pre>
 
@@ -224,7 +226,9 @@ $ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
 <ul>
 <li>RGBA4444 パレット作成
 <pre>
-$ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &ldquo;u*floor(j/16)/h*17.1&rdquo; black-red-green-blue-transparent.png
+$ convert -size 256x256 tile:black-red-green-blue.png <br />
+-matte -channel a -fx &ldquo;u*floor(j/16)/h*17.1&rdquo; <br />
+black-red-green-blue-transparent.png
 <img src="../black-red-green-blue-transparent.png" />
 </pre></li>
 </ul>
@@ -232,7 +236,9 @@ $ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &ldq
 <h3 id="実行コマンド-1">実行コマンド</h3>
 
 <pre>
-$ convert gradient_hue_polar-transparent.png  -dither Riemersma -remap black-red-green-blue-transparent.png rgba4444.png
+$ convert gradient_hue_polar-transparent.png \
+    -dither Riemersma -remap black-red-green-blue-transparent.png \
+    rgba4444.png
 <img src="../rgba4444.png" />
 </pre>
 

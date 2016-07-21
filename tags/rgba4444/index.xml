@@ -95,11 +95,11 @@ $ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
 &lt;img src=&#34;../black-green.png&#34; /&gt;
 $ composite -compose plus black-red.png black-green.png black-red-green.png
 &lt;img src=&#34;../black-red-green.png&#34; /&gt;
-$ convert -size 256x16 tile:black-red-green.png  black-red-green-tiled.png
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
 &lt;img src=&#34;../black-red-green-tiled.png&#34; /&gt;
-$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270  black-blue.png
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
 &lt;img src=&#34;../black-blue.png&#34; /&gt;
-$ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-green-blue.png
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
 &lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;
 &lt;/pre&gt;
 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
@@ -110,7 +110,9 @@ $ composite black-red-green-tiled.png -compose plus black-blue.png  black-red-gr
 &lt;p&gt;-remap で画像ファイルを渡すと、その画像に含まれる色に限定してディザ処理をします。&lt;/p&gt;
 
 &lt;pre&gt;
-$ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.png rgb444.png
+$ convert gradient_hue_polar.png \
+    -dither Riemersma -remap black-red-green-blue.png \
+    rgb444.png
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
 
@@ -144,7 +146,9 @@ $ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
 &lt;ul&gt;
 &lt;li&gt;RGBA4444 パレット作成
 &lt;pre&gt;
-$ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &amp;ldquo;u*floor(j/16)/h*17.1&amp;rdquo; black-red-green-blue-transparent.png
+$ convert -size 256x256 tile:black-red-green-blue.png &lt;br /&gt;
+-matte -channel a -fx &amp;ldquo;u*floor(j/16)/h*17.1&amp;rdquo; &lt;br /&gt;
+black-red-green-blue-transparent.png
 &lt;img src=&#34;../black-red-green-blue-transparent.png&#34; /&gt;
 &lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -152,7 +156,9 @@ $ convert -size 256x256 tile:black-red-green-blue.png -matte -channel a -fx &amp
 &lt;h3 id=&#34;実行コマンド-1&#34;&gt;実行コマンド&lt;/h3&gt;
 
 &lt;pre&gt;
-$ convert gradient_hue_polar-transparent.png  -dither Riemersma -remap black-red-green-blue-transparent.png rgba4444.png
+$ convert gradient_hue_polar-transparent.png \
+    -dither Riemersma -remap black-red-green-blue-transparent.png \
+    rgba4444.png
 &lt;img src=&#34;../rgba4444.png&#34; /&gt;
 &lt;/pre&gt;
 
