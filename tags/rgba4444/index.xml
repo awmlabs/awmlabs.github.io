@@ -62,7 +62,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Unity に RGB444 指定で PNG 画像を渡した場合は (b.) 相当の処理が動くようです。
+&lt;p&gt;Unity に RGBA4444 指定で PNG 画像を渡した場合は (b.) 相当の処理が動くようです。
 &lt;pre&gt;
 $ convert -size 300x900 gradient:&amp;lsquo;#FFF-#0FF&amp;rsquo; -rotate 90 \
     -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
