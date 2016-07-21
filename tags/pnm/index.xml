@@ -18,11 +18,11 @@
       <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
       <description>
 
-&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
+&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
 
 &lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。&lt;/p&gt;
 
-&lt;h1 id=&#34;pnm-とは&#34;&gt;PNM とは&lt;/h1&gt;
+&lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
 
 &lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
 
@@ -50,7 +50,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;拡張フォーマット&#34;&gt;拡張フォーマット&lt;/h2&gt;
+&lt;h2 id=&#34;拡張フォーマット:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;拡張フォーマット&lt;/h2&gt;
 
 &lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。&lt;/p&gt;
 
@@ -67,7 +67,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;フォーマット概要&#34;&gt;フォーマット概要&lt;/h1&gt;
+&lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
 
 &lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。(尚、PAM形式は P7 で、PFM形式は PF, Pf です)&lt;/p&gt;
 
@@ -135,7 +135,7 @@
 .....
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;pbm-portable-bitmap-format&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
+&lt;h1 id=&#34;pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
 
 &lt;p&gt;画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)&lt;/p&gt;
 
@@ -166,7 +166,7 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;pgm-portable-graymap-format&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
+&lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
 
 &lt;p&gt;白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。&lt;/p&gt;
 
@@ -196,7 +196,7 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;ppm-portable-pixmap-format&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
+&lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
 
 &lt;p&gt;RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。&lt;/p&gt;
 
@@ -226,11 +226,11 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 &lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;さいごに&#34;&gt;さいごに&lt;/h1&gt;
+&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
 
 &lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Wikipedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
