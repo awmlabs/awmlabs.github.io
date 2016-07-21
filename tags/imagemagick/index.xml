@@ -107,6 +107,10 @@ $ convert gradient_hue_polar.png -dither Riemersma -remap black-red-green-blue.p
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
 
+&lt;p&gt;RGB444 だと色数が減るのでどのみち画質の劣化は避けられません。先ほどの変換をかけずに渡した場合よりマシという話です。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../depth4.png&#34; /&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;透明度を含むやり方-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;透明度を含むやり方 (失敗例) RGBA4444&lt;/h2&gt;
 
 &lt;p&gt;ついでに失敗例も。透明度を含む場合は減色が綺麗に出来ませんでした。&lt;/p&gt;
