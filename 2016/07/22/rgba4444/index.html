@@ -82,7 +82,6 @@
 <li><a href="#テスト画像">テスト画像</a></li>
 <li><a href="#パレット画像の準備">パレット画像の準備</a></li>
 <li><a href="#実行コマンド">実行コマンド</a></li>
-<li><a href="#参考までに">参考までに</a></li>
 </ul></li>
 <li><a href="#参考-url">参考 URL</a></li>
 </ul></li>
@@ -100,8 +99,9 @@
 </ul></li>
 </ul>
 
-<p>前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含むんだ時のディザ処理が苦手のようです。
-以下のサイトで紹介されている、色のチャネル(RGBA)毎に個別にディザをかける方法だとうまくいきます。</p>
+<p>前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含むんだ時のディザ処理が苦手のようです。</p>
+
+<p>以下のサイトで紹介されている、色のチャネル(RGBA)毎に個別にディザをかける方法だとうまくいきます。</p>
 
 <ul>
 <li>[unity][cg_tools] RGBA4444に変換できるツール
@@ -129,7 +129,9 @@ $ convert -size 16x16 gradient:black-white gray16palette.png
 <img src="../gray16palette.png" />
 </pre>
 
-<p>参照した記事では 0xfff を 0xf0f0f0 と 0xffffff のどちらで表わそうか迷ってますが、0xfff を最大値として場合 0xffffff でしか表現出来ないので、後者を採用してます。</p>
+<p>参照した記事では 0xfff を 0xf0f0f0 と 0xffffff のどちらで表わそうか迷ってますが、最大値の 0xfff は 0xffffff でしか表現出来ないので、後者を採用してます。</p>
+
+<p>尚、PNG は仕様で後者である事が示されています &gt; <a href="https://www.w3.org/TR/PNG/#12Sample-depth-scaling">https://www.w3.org/TR/PNG/#12Sample-depth-scaling</a></p>
 
 <h3 id="実行コマンド">実行コマンド</h3>
 
@@ -139,8 +141,6 @@ $ convert gradient_hue_polar-transparent.png -channel RGBA -separate \
     -channel RGBA -combine rgba4444.png
 <img src="../rgba4444.png" />
 </pre>
-
-<h3 id="参考までに">参考までに</h3>
 
 <p>尚、ディザ変換をせずに Unity 等に RGBA4444 指定で渡した場合は、以下のようになるはずです。</p>
 
@@ -173,6 +173,11 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 <ul>
 <li><a href="http://www.imagemagick.org/Usage/canvas/#gradient_colorspace">http://www.imagemagick.org/Usage/canvas/#gradient_colorspace</a></li>
+</ul></li>
+<li>PNG Specification 12.5 Sample depth scaling
+
+<ul>
+<li><a href="https://www.w3.org/TR/PNG/#12Sample-depth-scaling">https://www.w3.org/TR/PNG/#12Sample-depth-scaling</a></li>
 </ul></li>
 </ul>
 
