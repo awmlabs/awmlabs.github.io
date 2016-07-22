@@ -40,7 +40,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;やり方-成功例-rgba4444&#34;&gt;やり方 (成功例) RGBA4444&lt;/h2&gt;
+&lt;h2 id=&#34;変換方法-ブログを参考に-rgba4444&#34;&gt;変換方法 (ブログを参考に) RGBA4444&lt;/h2&gt;
 
 &lt;h3 id=&#34;テスト画像&#34;&gt;テスト画像&lt;/h3&gt;
 
@@ -82,9 +82,9 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 &lt;p&gt;これよりは予め自分でディザをかけた方が良いはずです。&lt;/p&gt;
 
-&lt;h3 id=&#34;テスト画像２&#34;&gt;テスト画像２&lt;/h3&gt;
+&lt;h2 id=&#34;テスト２-rgb444&#34;&gt;テスト２ (RGB444)&lt;/h2&gt;
 
-&lt;p&gt;RGB 画像でも当然うまくいきます。&lt;/p&gt;
+&lt;p&gt;RGB 画像でも同じ方法で変換できます。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
@@ -98,7 +98,19 @@ $ convert gradient_hue_polar.png -channel RGBA -separate \
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;p&gt;-channel RGB でも良いのですが、RGBA と全く同じコマンドで出きる。というのを示す為に RGBA 指定にしてます。&lt;/p&gt;
+&lt;p&gt;透明度がない画像は -channel RGB の方が良いかもしれません。もしくは前回説明した方法( &lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt; )でも良いでしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;追試&#34;&gt;追試&lt;/h2&gt;
+
+&lt;p&gt;(ご参考までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGBA4444 の追加実験
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgb444a4/&#34;&gt;https://blog.awm.jp/2016/07/22/rgb444a4/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h2&gt;
 

@@ -7,8 +7,63 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 22 Jul 2016 11:55:28 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RGBA4444 の追加実験</title>
+      <link>https://blog.awm.jp/2016/07/22/rgb444a4/</link>
+      <pubDate>Fri, 22 Jul 2016 11:55:28 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/22/rgb444a4/</guid>
+      <description>
+
+&lt;p&gt;#　RGBA4444 の追加実験&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;追試-rgba4444&#34;&gt;追試 RGBA4444&lt;/h2&gt;
+
+&lt;p&gt;よく見比べると、チャンネル分離してディザをかけると色合いが変わってしまうので、A だけ分離する方法を考えました。&lt;/p&gt;
+
+&lt;h3 id=&#34;パレット画像の準備&#34;&gt;パレット画像の準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 パレット作成
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-red black-red.png
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
+&lt;/pre&gt;
+&lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png +matte rgb.png
+&lt;img src=&#34;../rgb.png&#34; /&gt;
+$ convert gradient_hue_polar-transparent.png -channel A -separate alpha.png
+&lt;img src=&#34;../alpha.png&#34; /&gt;
+
+$ convert rgb.png \
+    -dither Riemersma -remap black-red-green-blue.png \
+    red-green-blue444.png
+&lt;img src=&#34;../red-green-blue444.png&#34; /&gt;
+$ convert alpha.png \
+    -dither Riemersma -remap gray16palette.png \
+    alpha444.png
+&lt;img src=&#34;../alpha444.png&#34; /&gt;
+$ convert red-green-blue444.png -separate -channel RGB 444.png
+&lt;img src=&#34;../444-0.png&#34; /&gt;
+&lt;img src=&#34;../444-1.png&#34; /&gt;
+&lt;img src=&#34;../444-2.png&#34; /&gt;
+$ convert 444-[012].png alpha444.png -channel RGBA -combine red-green-blue-alpha4444.png
+&lt;img src=&#34;../red-green-blue-alpha4444.png&#34; /&gt;
+&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
@@ -40,7 +95,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;やり方-成功例-rgba4444&#34;&gt;やり方 (成功例) RGBA4444&lt;/h2&gt;
+&lt;h2 id=&#34;変換方法-ブログを参考に-rgba4444&#34;&gt;変換方法 (ブログを参考に) RGBA4444&lt;/h2&gt;
 
 &lt;h3 id=&#34;テスト画像&#34;&gt;テスト画像&lt;/h3&gt;
 
@@ -82,9 +137,9 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 &lt;p&gt;これよりは予め自分でディザをかけた方が良いはずです。&lt;/p&gt;
 
-&lt;h3 id=&#34;テスト画像２&#34;&gt;テスト画像２&lt;/h3&gt;
+&lt;h2 id=&#34;テスト２-rgb444&#34;&gt;テスト２ (RGB444)&lt;/h2&gt;
 
-&lt;p&gt;RGB 画像でも当然うまくいきます。&lt;/p&gt;
+&lt;p&gt;RGB 画像でも同じ方法で変換できます。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
@@ -98,7 +153,19 @@ $ convert gradient_hue_polar.png -channel RGBA -separate \
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;p&gt;-channel RGB でも良いのですが、RGBA と全く同じコマンドで出きる。というのを示す為に RGBA 指定にしてます。&lt;/p&gt;
+&lt;p&gt;透明度がない画像は -channel RGB の方が良いかもしれません。もしくは前回説明した方法( &lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt; )でも良いでしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;追試&#34;&gt;追試&lt;/h2&gt;
+
+&lt;p&gt;(ご参考までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGBA4444 の追加実験
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgb444a4/&#34;&gt;https://blog.awm.jp/2016/07/22/rgb444a4/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h2&gt;
 
@@ -2773,141 +2840,6 @@ JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色�
 &lt;p&gt;あれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 は GRAY 形式。&lt;/p&gt;
 
 &lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思ってます。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
-      <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
-      <description>
-
-&lt;h1 id=&#34;imagemagick-でサムネール画像生成&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
-
-&lt;p&gt;初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。&lt;/p&gt;
-
-&lt;p&gt;ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自分は -resize を使う事が多いですが、今回は余計なメタデータを削除してくれる -thumbnail を使ってみます。&lt;/p&gt;
-
-&lt;p&gt;オリジナル画像はこちらをを使います。
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;とりあえず小さくする&#34;&gt;とりあえず小さくする&lt;/h1&gt;
-
-&lt;p&gt;手始めに適当なサイズ 100x100 を指定してサムネールを作ります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ identify saitama_100x100.jpg
-saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;単純に 100x100 を指定すると、アスペクト比(縦と横の比率)が変わらないよう調整される為です。&lt;/p&gt;
-
-&lt;h1 id=&#34;リサイズ後のサイズを-100x100-にする&#34;&gt;リサイズ後のサイズを 100x100 にする&lt;/h1&gt;
-
-&lt;p&gt;アスペクト比を無視して、確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
-
-&lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
-
-&lt;p&gt;そんな矛盾した要求を。。。と一瞬怯みますが、２つ方法を思いつきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;削ってしまう&#34;&gt;削ってしまう&lt;/h2&gt;
-
-&lt;p&gt;先程の 100x100 指定では縦と横のうち大きい辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。&lt;/p&gt;
-
-&lt;p&gt;その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100^ -gravity center \
-	-extent 100x100 saitama_100x100crop.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;余白をつける&#34;&gt;余白をつける&lt;/h2&gt;
-
-&lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -gravity center \
-	-extent 100x100 saitama_100x100extent.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;余白の色が白で見えにくいので、-background で黒を指定してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background black \
-	-gravity center -extent 100x100 saitama_100x100black.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;丸いアイコン風画像の作り方&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
-
-&lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコン風画像の作り方も紹介します。&lt;/p&gt;
-
-&lt;p&gt;尚、円の外側は透明にしたいので、今回は png を生成します。&lt;/p&gt;
-
-&lt;p&gt;まずは、convert の -draw オプションで丸のクリップ用画像を作ります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; \
-	circle_mask.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
-	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;一行にまとめる&#34;&gt;一行にまとめる&lt;/h2&gt;
-
-&lt;p&gt;カッコを使って入れ子に出来ます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
-  \( -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; \) \
-  -compose CopyOpacity -composite saitama_icon.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;画像は同じ結果なので省略します。&lt;/p&gt;
-
-&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
-
-&lt;p&gt;リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった時のケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明します。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/masking/&#34;&gt;http://www.imagemagick.org/Usage/masking/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/script/command-line-processing.php#geometry&#34;&gt;http://www.imagemagick.org/script/command-line-processing.php#geometry&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imagemagick - Ways of cropping an image to a circle (or other shape).
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a&#34;&gt;http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;ImageMagickで画像をリサイズする時のメモ
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://o.inchiki.jp/obbr/125&#34;&gt;http://o.inchiki.jp/obbr/125&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

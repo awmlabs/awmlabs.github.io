@@ -7,8 +7,63 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 22 Jul 2016 11:55:28 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RGBA4444 の追加実験</title>
+      <link>https://blog.awm.jp/2016/07/22/rgb444a4/</link>
+      <pubDate>Fri, 22 Jul 2016 11:55:28 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/22/rgb444a4/</guid>
+      <description>
+
+&lt;p&gt;#　RGBA4444 の追加実験&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;追試-rgba4444&#34;&gt;追試 RGBA4444&lt;/h2&gt;
+
+&lt;p&gt;よく見比べると、チャンネル分離してディザをかけると色合いが変わってしまうので、A だけ分離する方法を考えました。&lt;/p&gt;
+
+&lt;h3 id=&#34;パレット画像の準備&#34;&gt;パレット画像の準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 パレット作成
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-red black-red.png
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
+&lt;/pre&gt;
+&lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png +matte rgb.png
+&lt;img src=&#34;../rgb.png&#34; /&gt;
+$ convert gradient_hue_polar-transparent.png -channel A -separate alpha.png
+&lt;img src=&#34;../alpha.png&#34; /&gt;
+
+$ convert rgb.png \
+    -dither Riemersma -remap black-red-green-blue.png \
+    red-green-blue444.png
+&lt;img src=&#34;../red-green-blue444.png&#34; /&gt;
+$ convert alpha.png \
+    -dither Riemersma -remap gray16palette.png \
+    alpha444.png
+&lt;img src=&#34;../alpha444.png&#34; /&gt;
+$ convert red-green-blue444.png -separate -channel RGB 444.png
+&lt;img src=&#34;../444-0.png&#34; /&gt;
+&lt;img src=&#34;../444-1.png&#34; /&gt;
+&lt;img src=&#34;../444-2.png&#34; /&gt;
+$ convert 444-[012].png alpha444.png -channel RGBA -combine red-green-blue-alpha4444.png
+&lt;img src=&#34;../red-green-blue-alpha4444.png&#34; /&gt;
+&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
@@ -40,7 +95,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;やり方-成功例-rgba4444&#34;&gt;やり方 (成功例) RGBA4444&lt;/h2&gt;
+&lt;h2 id=&#34;変換方法-ブログを参考に-rgba4444&#34;&gt;変換方法 (ブログを参考に) RGBA4444&lt;/h2&gt;
 
 &lt;h3 id=&#34;テスト画像&#34;&gt;テスト画像&lt;/h3&gt;
 
@@ -82,9 +137,9 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 &lt;p&gt;これよりは予め自分でディザをかけた方が良いはずです。&lt;/p&gt;
 
-&lt;h3 id=&#34;テスト画像２&#34;&gt;テスト画像２&lt;/h3&gt;
+&lt;h2 id=&#34;テスト２-rgb444&#34;&gt;テスト２ (RGB444)&lt;/h2&gt;
 
-&lt;p&gt;RGB 画像でも当然うまくいきます。&lt;/p&gt;
+&lt;p&gt;RGB 画像でも同じ方法で変換できます。&lt;/p&gt;
 
 &lt;pre&gt;
 $ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
@@ -98,7 +153,19 @@ $ convert gradient_hue_polar.png -channel RGBA -separate \
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;p&gt;-channel RGB でも良いのですが、RGBA と全く同じコマンドで出きる。というのを示す為に RGBA 指定にしてます。&lt;/p&gt;
+&lt;p&gt;透明度がない画像は -channel RGB の方が良いかもしれません。もしくは前回説明した方法( &lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt; )でも良いでしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;追試&#34;&gt;追試&lt;/h2&gt;
+
+&lt;p&gt;(ご参考までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGBA4444 の追加実験
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgb444a4/&#34;&gt;https://blog.awm.jp/2016/07/22/rgb444a4/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h2&gt;
 
@@ -2729,193 +2796,6 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
-      <link>https://blog.awm.jp/2016/01/06/gray/</link>
-      <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
-      <description>
-
-&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
-
-&lt;p&gt;画像サムネール界隈で話題のエントリ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、少し気になる事が。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;グレイスケール画像を考慮しよう
-
-白黒画像を PNG に変換すると、元画像より暗くなる場合があります。
-これは減色アルゴリズムによる挙動と思われます。
-JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色しか扱えないのです。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;減色処理でここまで暗くなるのは違和感ありますし、出力で PNG8 がデフォというのも妙なので調べた所、少し前にあった ImageMagick のバグだったので話を整理しておきます。&lt;/p&gt;
-
-&lt;h1 id=&#34;いつ頃のバグ&#34;&gt;いつ頃のバグ&lt;/h1&gt;
-
-&lt;p&gt;6.8.0-0 〜 6.8.0-7 の間のバグです。
-6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。&lt;/p&gt;
-
-&lt;p&gt;6.8.0-8 で修正済みです。&lt;/p&gt;
-
-&lt;h1 id=&#34;不具合修正のコード差分&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
-8305,8306c8305,8306
-&amp;lt;          if ((IssRGBCompatibleColorspace(image-&amp;gt;colorspace) == MagickFalse) &amp;amp;&amp;amp;
-&amp;lt;              (IssRGBColorspace(image-&amp;gt;colorspace) == MagickFalse))
----
-&amp;gt;          if ((IssRGBCompatibleColorspace(image-&amp;gt;colorspace) == MagickFalse) ||
-&amp;gt;              (IssRGBColorspace(image-&amp;gt;colorspace) != MagickFalse))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あ、はい。って感じです。&lt;/p&gt;
-
-&lt;h1 id=&#34;png8&#34;&gt;PNG8&lt;/h1&gt;
-
-&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
-
-&lt;p&gt;直近だとこんな対応。&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;バージョン&lt;/th&gt;
-&lt;th&gt;形式&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;6.9.1-10&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-2&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-3&lt;/td&gt;
-&lt;td&gt;GRB (PNG24)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-4&lt;/td&gt;
-&lt;td&gt;GRB (PNG24)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-5&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-6&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-7&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-8&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-9&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;では、不具合のあった 6.8.x の頃はどうだったかというと。&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;バージョン&lt;/th&gt;
-&lt;th&gt;形式&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;6.8.0-0&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-1&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-2&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-3&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-4&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-5&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-6&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-7&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-8&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-9&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-10&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;あれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 は GRAY 形式。&lt;/p&gt;
-
-&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思ってます。&lt;/p&gt;
 </description>
     </item>
     
