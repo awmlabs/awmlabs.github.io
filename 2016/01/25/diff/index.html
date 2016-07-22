@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -73,20 +73,20 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#imagemagick-で画像を比較する">ImageMagick で画像を比較する</a>
+<li><a href="#imagemagick-で画像を比較する:943e202c7525f67778c9e3665dbf8092">ImageMagick で画像を比較する</a>
 <ul>
-<li><a href="#画像の差分">画像の差分</a>
+<li><a href="#画像の差分:943e202c7525f67778c9e3665dbf8092">画像の差分</a>
 <ul>
-<li><a href="#compose-difference">compose difference</a></li>
-<li><a href="#identify-mean">identify mean</a></li>
+<li><a href="#compose-difference:943e202c7525f67778c9e3665dbf8092">compose difference</a></li>
+<li><a href="#identify-mean:943e202c7525f67778c9e3665dbf8092">identify mean</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#ssim">SSIM</a></li>
+<li><a href="#ssim:943e202c7525f67778c9e3665dbf8092">SSIM</a></li>
 </ul>
 </nav>
     
 
-<h1 id="imagemagick-で画像を比較する">ImageMagick で画像を比較する</h1>
+<h1 id="imagemagick-で画像を比較する:943e202c7525f67778c9e3665dbf8092">ImageMagick で画像を比較する</h1>
 
 <ul>
 <li>もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -115,9 +115,9 @@
 </ul></li>
 </ul>
 
-<h2 id="画像の差分">画像の差分</h2>
+<h2 id="画像の差分:943e202c7525f67778c9e3665dbf8092">画像の差分</h2>
 
-<h3 id="compose-difference">compose difference</h3>
+<h3 id="compose-difference:943e202c7525f67778c9e3665dbf8092">compose difference</h3>
 
 <p>-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
 以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。</p>
@@ -133,7 +133,7 @@ $ mogrify -auto-level  diff.png  #差分画像を明るくする
 
 <p>全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。</p>
 
-<h3 id="identify-mean">identify mean</h3>
+<h3 id="identify-mean:943e202c7525f67778c9e3665dbf8092">identify mean</h3>
 
 <p>difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。</p>
 
@@ -153,7 +153,7 @@ identify -format "%[mean]" t.png  ; echo " : $i" ; done
 
 <p>以上の方法は PSNR 方式に近いのですが、人の目で見る違いと掛け離れるケースが多くあり、SSIM 方式の方が主流です。</p>
 
-<h1 id="ssim">SSIM</h1>
+<h1 id="ssim:943e202c7525f67778c9e3665dbf8092">SSIM</h1>
 
 <ul>
 <li><a href="https://en.m.wikipedia.org/wiki/Structural_similarity">https://en.m.wikipedia.org/wiki/Structural_similarity</a></li>

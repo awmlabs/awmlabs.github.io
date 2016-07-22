@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,31 +75,31 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#rgb444-変換で劣化しない画像を-imagemagick-で作る">RGB444 変換で劣化しない画像を ImageMagick で作る</a>
+<li><a href="#rgb444-変換で劣化しない画像を-imagemagick-で作る:3ba0dc7a98d3a7283c1d893d8bed151d">RGB444 変換で劣化しない画像を ImageMagick で作る</a>
 <ul>
-<li><a href="#追記-2017-07-22">(追記) 2017/07/22</a></li>
-<li><a href="#imagemagick-の減色処理">ImageMagick の減色処理</a></li>
-<li><a href="#変換方法-成功例-rgb444">変換方法 (成功例) RGB444</a>
+<li><a href="#追記-2017-07-22:3ba0dc7a98d3a7283c1d893d8bed151d">(追記) 2017/07/22</a></li>
+<li><a href="#imagemagick-の減色処理:3ba0dc7a98d3a7283c1d893d8bed151d">ImageMagick の減色処理</a></li>
+<li><a href="#変換方法-成功例-rgb444:3ba0dc7a98d3a7283c1d893d8bed151d">変換方法 (成功例) RGB444</a>
 <ul>
-<li><a href="#テスト画像">テスト画像</a></li>
-<li><a href="#変換の準備">変換の準備</a></li>
-<li><a href="#実行コマンド">実行コマンド</a></li>
+<li><a href="#テスト画像:3ba0dc7a98d3a7283c1d893d8bed151d">テスト画像</a></li>
+<li><a href="#変換の準備:3ba0dc7a98d3a7283c1d893d8bed151d">変換の準備</a></li>
+<li><a href="#実行コマンド:3ba0dc7a98d3a7283c1d893d8bed151d">実行コマンド</a></li>
 </ul></li>
-<li><a href="#透明度を含む実験-失敗例-rgba4444">透明度を含む実験 (失敗例) RGBA4444</a>
+<li><a href="#透明度を含む実験-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d">透明度を含む実験 (失敗例) RGBA4444</a>
 <ul>
-<li><a href="#テスト画像-1">テスト画像</a></li>
-<li><a href="#変換の準備-1">変換の準備</a></li>
-<li><a href="#実行コマンド-1">実行コマンド</a></li>
+<li><a href="#テスト画像-1:3ba0dc7a98d3a7283c1d893d8bed151d">テスト画像</a></li>
+<li><a href="#変換の準備-1:3ba0dc7a98d3a7283c1d893d8bed151d">変換の準備</a></li>
+<li><a href="#実行コマンド-1:3ba0dc7a98d3a7283c1d893d8bed151d">実行コマンド</a></li>
 </ul></li>
-<li><a href="#課題">課題</a></li>
-<li><a href="#参考-url">参考 URL</a></li>
-<li><a href="#注釈">注釈</a></li>
+<li><a href="#課題:3ba0dc7a98d3a7283c1d893d8bed151d">課題</a></li>
+<li><a href="#参考-url:3ba0dc7a98d3a7283c1d893d8bed151d">参考 URL</a></li>
+<li><a href="#注釈:3ba0dc7a98d3a7283c1d893d8bed151d">注釈</a></li>
 </ul></li>
 </ul>
 </nav>
     
 
-<h1 id="rgb444-変換で劣化しない画像を-imagemagick-で作る">RGB444 変換で劣化しない画像を ImageMagick で作る</h1>
+<h1 id="rgb444-変換で劣化しない画像を-imagemagick-で作る:3ba0dc7a98d3a7283c1d893d8bed151d">RGB444 変換で劣化しない画像を ImageMagick で作る</h1>
 
 <p>詳しい話は以下のサイトに任せるとして、</p>
 
@@ -122,7 +122,7 @@
 
 <p>このうち、ImageMagick での具体的なやり方です。</p>
 
-<h2 id="追記-2017-07-22">(追記) 2017/07/22</h2>
+<h2 id="追記-2017-07-22:3ba0dc7a98d3a7283c1d893d8bed151d">(追記) 2017/07/22</h2>
 
 <p>RGBA4444 は以下の方で説明します。</p>
 
@@ -134,7 +134,7 @@
 </ul></li>
 </ul>
 
-<h2 id="imagemagick-の減色処理">ImageMagick の減色処理</h2>
+<h2 id="imagemagick-の減色処理:3ba0dc7a98d3a7283c1d893d8bed151d">ImageMagick の減色処理</h2>
 
 <p>ImageMagick の減色の方法は何種類か存在します。</p>
 
@@ -157,9 +157,9 @@
 
 <p>Unity に RGBA4444 指定で PNG 画像を渡した場合は (b.) 相当の処理が動くようです。
 <pre>
-$ convert -size 300x900 gradient:&lsquo;#FFF-#0FF&rsquo; -rotate 90 <br />
-    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage <br />
-    -rotate 90 -set colorspace HSB -colorspace RGB <br />
+$ convert -size 300x900 gradient:&lsquo;#FFF-#0FF&rsquo; -rotate 90 \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
     gradient_hue_polar.png
 <img src="../gradient_hue_polar.png" />
 $ convert gradient_hue_polar.png -depth 4 depth4.png
@@ -168,14 +168,14 @@ $ convert gradient_hue_polar.png -depth 4 depth4.png
 
 <p>これだと画質劣化が目立つので、(b.) の処理が動いても色が変わらないよう、あらかじめ (c.) の方法で減色をする。というのが今回の手法です。</p>
 
-<h2 id="変換方法-成功例-rgb444">変換方法 (成功例) RGB444</h2>
+<h2 id="変換方法-成功例-rgb444:3ba0dc7a98d3a7283c1d893d8bed151d">変換方法 (成功例) RGB444</h2>
 
-<h3 id="テスト画像">テスト画像</h3>
+<h3 id="テスト画像:3ba0dc7a98d3a7283c1d893d8bed151d">テスト画像</h3>
 
 <p>先ほど作成した画像 gradient_hue_polar.png を利用します。
 <img src="../gradient_hue_polar.png" /></p>
 
-<h3 id="変換の準備">変換の準備</h3>
+<h3 id="変換の準備:3ba0dc7a98d3a7283c1d893d8bed151d">変換の準備</h3>
 
 <p>ディザで残したい色を持つパレット画像を作成します。</p>
 
@@ -195,10 +195,10 @@ $ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-bl
 $ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
 <img src="../black-red-green-blue.png" />
 </pre>
-<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></li>
+<sup class="footnote-ref" id="fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1"><a rel="footnote" href="#fn:3ba0dc7a98d3a7283c1d893d8bed151d:1">1</a></sup></li>
 </ul>
 
-<h3 id="実行コマンド">実行コマンド</h3>
+<h3 id="実行コマンド:3ba0dc7a98d3a7283c1d893d8bed151d">実行コマンド</h3>
 
 <p>-remap で画像ファイルを渡すと、その画像に含まれる色に限定してディザ処理をします。</p>
 
@@ -213,11 +213,11 @@ $ convert gradient_hue_polar.png \
 
 <p><img src="../depth4.png" /></p>
 
-<h2 id="透明度を含む実験-失敗例-rgba4444">透明度を含む実験 (失敗例) RGBA4444</h2>
+<h2 id="透明度を含む実験-失敗例-rgba4444:3ba0dc7a98d3a7283c1d893d8bed151d">透明度を含む実験 (失敗例) RGBA4444</h2>
 
 <p>失敗例です。透明度を含む場合は減色が綺麗に出来ませんでした。</p>
 
-<h3 id="テスト画像-1">テスト画像</h3>
+<h3 id="テスト画像-1:3ba0dc7a98d3a7283c1d893d8bed151d">テスト画像</h3>
 
 <pre>
 $ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
@@ -228,19 +228,19 @@ $ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
 <img src="../gradient_hue_polar-transparent.png" />
 </pre>
 
-<h3 id="変換の準備-1">変換の準備</h3>
+<h3 id="変換の準備-1:3ba0dc7a98d3a7283c1d893d8bed151d">変換の準備</h3>
 
 <ul>
 <li>RGBA4444 パレット作成
 <pre>
-$ convert -size 256x256 tile:black-red-green-blue.png <br />
--matte -channel a -fx &ldquo;u*floor(j/16)/h*17.1&rdquo; <br />
+$ convert -size 256x256 tile:black-red-green-blue.png \
+-matte -channel a -fx &ldquo;u*floor(j/16)/h*17.1&rdquo; \
 black-red-green-blue-transparent.png
 <img src="../black-red-green-blue-transparent.png" />
 </pre></li>
 </ul>
 
-<h3 id="実行コマンド-1">実行コマンド</h3>
+<h3 id="実行コマンド-1:3ba0dc7a98d3a7283c1d893d8bed151d">実行コマンド</h3>
 
 <pre>
 $ convert gradient_hue_polar-transparent.png \
@@ -249,26 +249,26 @@ $ convert gradient_hue_polar-transparent.png \
 <img src="../rgba4444.png" />
 </pre>
 
-<h2 id="課題">課題</h2>
+<h2 id="課題:3ba0dc7a98d3a7283c1d893d8bed151d">課題</h2>
 
 <p>Unity でゲームを作る時のキャラ画像は輪郭の周りを透明にしたいでしょうから、RGBA4444 に対応しないと残念ながら実用的では無さそうです。
 ImageMagick は透明度つき減色が苦手ですが、ここまで酷いのは何か理由がありそうなので、もう少し調べてみます。</p>
 
-<h2 id="参考-url">参考 URL</h2>
+<h2 id="参考-url:3ba0dc7a98d3a7283c1d893d8bed151d">参考 URL</h2>
 
 <ul>
 <li><a href="http://www.webtech.co.jp/blog/game-develop/unity/2562/">http://www.webtech.co.jp/blog/game-develop/unity/2562/</a></li>
 <li><a href="http://www.imagemagick.org/Usage/canvas/#gradient_colorspace">http://www.imagemagick.org/Usage/canvas/#gradient_colorspace</a></li>
 </ul>
 
-<h2 id="注釈">注釈</h2>
+<h2 id="注釈:3ba0dc7a98d3a7283c1d893d8bed151d">注釈</h2>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:1">compose と tile を組み合わせて、&rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&rdquo; を実行したらゴミが入りました。<img src="../compose_and_tile.png" /> 多分バグです。
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:3ba0dc7a98d3a7283c1d893d8bed151d:1">compose と tile を組み合わせて、&rdquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&rdquo; を実行したらゴミが入りました。<img src="../compose_and_tile.png" /> 多分バグです。
+ <a class="footnote-return" href="#fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
 
