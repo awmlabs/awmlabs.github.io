@@ -814,6 +814,11 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/25/flatten/&#34;&gt;https://blog.awm.jp/2016/01/25/flatten/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RGBA4444 変換で劣化しない画像を ImageMagick で作る
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgba4444/&#34;&gt;https://blog.awm.jp/2016/07/22/rgba4444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;jpeg&#34;&gt;JPEG&lt;/h1&gt;
