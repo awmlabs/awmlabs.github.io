@@ -18,18 +18,18 @@
       <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
       <description>
 
-&lt;h1 id=&#34;imagemagick-で-gif-の形式を変換:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ImageMagick で GIF の形式を変換&lt;/h1&gt;
+&lt;h1 id=&#34;imagemagick-で-gif-の形式を変換&#34;&gt;ImageMagick で GIF の形式を変換&lt;/h1&gt;
 
 &lt;p&gt;GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;インターレースgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;インターレースGIF&lt;/h1&gt;
+&lt;h1 id=&#34;インターレースgif&#34;&gt;インターレースGIF&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-interlace.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ピクセルの並ぶ順番:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
+&lt;h3 id=&#34;ピクセルの並ぶ順番&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;8行ごとに1行&lt;/li&gt;
@@ -95,7 +95,7 @@ convert Opaopa-dot1.png -filter Point -fx &amp;quot;p{i,j-j%2}&amp;quot; Opaopa-
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;ポジション指定:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ポジション指定&lt;/h1&gt;
+&lt;h1 id=&#34;ポジション指定&#34;&gt;ポジション指定&lt;/h1&gt;
 
 &lt;p&gt;GIF は描画場所の Screen と実際に描画する Image の位置を別に持つので、その描画場所を指定できます。&lt;/p&gt;
 
@@ -111,7 +111,7 @@ Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
 
 &lt;p&gt;上記の画像は table タグの中に入れてますが、(50,30) から描画されます。(ブラウザによって微妙に表示が変わります)&lt;/p&gt;
 
-&lt;h1 id=&#34;透明色:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;透明色&lt;/h1&gt;
+&lt;h1 id=&#34;透明色&#34;&gt;透明色&lt;/h1&gt;
 
 &lt;p&gt;インデックスの一つを透明色として扱えます。尚、半透明は扱えません。&lt;/p&gt;
 
@@ -120,7 +120,7 @@ Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-transparent.gif&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;アニメーションgif:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;アニメーションGIF&lt;/h1&gt;
+&lt;h1 id=&#34;アニメーションgif&#34;&gt;アニメーションGIF&lt;/h1&gt;
 
 &lt;p&gt;各コマの画像を作って convert で繋いで作成できます。&lt;/p&gt;
 
@@ -139,7 +139,7 @@ done
 $ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;delay:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Delay&lt;/h2&gt;
+&lt;h2 id=&#34;delay&#34;&gt;Delay&lt;/h2&gt;
 
 &lt;p&gt;-delay オプションでコマ間の時間を指定できます。1/100 単位なので、例えば -delay 100 を指定すると 1 frame/sec です。&lt;/p&gt;
 
@@ -152,7 +152,7 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 &lt;p&gt;(-delay を入力画像より前に置かないと反映されない事に注意)&lt;/p&gt;
 
-&lt;h2 id=&#34;ループ回数:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;ループ回数&lt;/h2&gt;
+&lt;h2 id=&#34;ループ回数&#34;&gt;ループ回数&lt;/h2&gt;
 
 &lt;p&gt;例えば、ループ回数に 1 を指定すると、ループしない GIF アニメが作れます。&lt;/p&gt;
 
@@ -161,9 +161,9 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 &lt;p&gt;&lt;center&gt; &lt;a href=&#34;../Opaopa-anime-dot8-loop1.gif&#34; target=&#34;_blank&#34;/&gt; &lt;img src=&#34;../Opaopa-anime-dot8-loop1.gif&#34; /&gt; &lt;/a&gt; &lt;br /&gt; ↑ クリックして開けます &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;global-local-image-colormap:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Global &amp;amp; Local(Image) ColorMap&lt;/h2&gt;
+&lt;h2 id=&#34;global-local-image-colormap&#34;&gt;Global &amp;amp; Local(Image) ColorMap&lt;/h2&gt;
 
-&lt;p&gt;ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:c77f8b7f9d2990e1e09002496bca152d:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:c77f8b7f9d2990e1e09002496bca152d:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
 $ giftext Opaopa-anime-dot8.gif | grep &amp;quot;Color Map&amp;quot;
@@ -180,15 +180,15 @@ $ giftext Opaopa-anime-dot8.gif | grep &amp;quot;Color Map&amp;quot;
 
 &lt;p&gt;今回は１コマ目で使う色パレットで、残り全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。&lt;/p&gt;
 
-&lt;p&gt;尚、Local Color Map があるけど全部消したい場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:c77f8b7f9d2990e1e09002496bca152d:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:c77f8b7f9d2990e1e09002496bca152d:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;尚、Local Color Map があるけど全部消したい場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;optimize:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Optimize&lt;/h2&gt;
+&lt;h2 id=&#34;optimize&#34;&gt;Optimize&lt;/h2&gt;
 
 &lt;p&gt;GIF アニメーションには dispose メソッドというものがあり、透明ピクセルの場合に前のコマの色をそのまま使う事ができます。逆にいうと前のコマで透明じゃないピクセルを透明ピクセルに変えられなうなるのですが、それがデメリットになる事は殆どないでしょう。&lt;/p&gt;
 
 &lt;p&gt;最適化手法のうち２種類を紹介して、最後にそれらを両方適用する方法も紹介します。&lt;/p&gt;
 
-&lt;h3 id=&#34;optimizeframe:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;OptimizeFrame&lt;/h3&gt;
+&lt;h3 id=&#34;optimizeframe&#34;&gt;OptimizeFrame&lt;/h3&gt;
 
 &lt;p&gt;変化のあるピクセルを全部囲う四角(いわゆる Dirty Rectangle)でクロップした画像を持つ事で、GIF のデータサイズを減らせます。&lt;/p&gt;
 
@@ -250,7 +250,7 @@ size=16x5 geom:41x18+3+7
 
 &lt;p&gt;＜以下 5-7 は省略＞&lt;/p&gt;
 
-&lt;h3 id=&#34;optimize-transparency:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;Optimize Transparency&lt;/h3&gt;
+&lt;h3 id=&#34;optimize-transparency&#34;&gt;Optimize Transparency&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert  Opaopa-anime-dot8.gif  -layers OptimizeTransparency Opaopa-anime-dot8-opttrans.gif
 &lt;/code&gt;&lt;/pre&gt;
@@ -316,7 +316,7 @@ size=41x18 geom:41x18+0+0
 size=41x18 geom:41x18+0+0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;最強の-optimize:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;(最強の) Optimize&lt;/h3&gt;
+&lt;h3 id=&#34;最強の-optimize&#34;&gt;(最強の) Optimize&lt;/h3&gt;
 
 &lt;p&gt;それらが合わさり最強になった Optimize がこちらです。&lt;/p&gt;
 
@@ -381,7 +381,7 @@ size=16x5 geom:41x18+3+7
 
 &lt;p&gt;とりあえず GIF 画像のサイズを減らしたい場合には -layers optimize 指定するのがお勧めです。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:c77f8b7f9d2990e1e09002496bca152d&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;ImageMagick v6 Examples &amp;ndash; Animation Optimization
@@ -395,10 +395,10 @@ size=16x5 geom:41x18+3+7
 &lt;hr /&gt;
 
 &lt;ol&gt;
-&lt;li id=&#34;fn:c77f8b7f9d2990e1e09002496bca152d:1&#34;&gt;公式ページでは giftrans を使って説明してます &amp;gt; &lt;a href=&#34;http://www.imagemagick.org/Usage/anim_opt/#colortables&#34;&gt;http://www.imagemagick.org/Usage/anim_opt/#colortables&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:c77f8b7f9d2990e1e09002496bca152d:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:c77f8b7f9d2990e1e09002496bca152d:2&#34;&gt;たしか大昔、Local ColorMap を読まないガラケー端末があって +map が必須だった時代があったかも。。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:c77f8b7f9d2990e1e09002496bca152d:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;公式ページでは giftrans を使って説明してます &amp;gt; &lt;a href=&#34;http://www.imagemagick.org/Usage/anim_opt/#colortables&#34;&gt;http://www.imagemagick.org/Usage/anim_opt/#colortables&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;たしか大昔、Local ColorMap を読まないガラケー端末があって +map が必須だった時代があったかも。。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
