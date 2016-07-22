@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,25 +75,25 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#blog-はじめました">Blog はじめました</a></li>
-<li><a href="#github-io">Github.io</a>
+<li><a href="#blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae">Blog はじめました</a></li>
+<li><a href="#github-io:e95c7dc8eefee7d0e25121cd7f0007ae">Github.io</a>
 <ul>
-<li><a href="#blog-awm-jp-を公開urlにしたい">blog.awm.jp を公開URLにしたい</a></li>
+<li><a href="#blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae">blog.awm.jp を公開URLにしたい</a></li>
 </ul></li>
-<li><a href="#hugo">Hugo</a>
+<li><a href="#hugo:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo</a>
 <ul>
-<li><a href="#hugo-themes">Hugo themes</a></li>
-<li><a href="#syntax-highlight">Syntax Highlight</a></li>
-<li><a href="#テーマの文字">テーマの文字</a></li>
+<li><a href="#hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo themes</a></li>
+<li><a href="#syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae">Syntax Highlight</a></li>
+<li><a href="#テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae">テーマの文字</a></li>
 </ul></li>
-<li><a href="#circleci">CircleCI</a></li>
-<li><a href="#備考">備考</a></li>
-<li><a href="#参考-url">参考 URL</a></li>
+<li><a href="#circleci:e95c7dc8eefee7d0e25121cd7f0007ae">CircleCI</a></li>
+<li><a href="#備考:e95c7dc8eefee7d0e25121cd7f0007ae">備考</a></li>
+<li><a href="#参考-url:e95c7dc8eefee7d0e25121cd7f0007ae">参考 URL</a></li>
 </ul>
 </nav>
     
 
-<h1 id="blog-はじめました">Blog はじめました</h1>
+<h1 id="blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae">Blog はじめました</h1>
 
 <p>WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。</p>
 
@@ -108,7 +108,7 @@
 <li><ins> <a href="https://github.com/awmlabs/blog.awm.jp">https://github.com/awmlabs/blog.awm.jp</a> </ins></li>
 </ul>
 
-<h1 id="github-io">Github.io</h1>
+<h1 id="github-io:e95c7dc8eefee7d0e25121cd7f0007ae">Github.io</h1>
 
 <p>github.com で &lt;ユーザ名&gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。</p>
 
@@ -120,7 +120,7 @@
 <p>ここにブログを表示する静的なHTMLを入れていけば良い訳です。
 Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。</p>
 
-<h2 id="blog-awm-jp-を公開urlにしたい">blog.awm.jp を公開URLにしたい</h2>
+<h2 id="blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae">blog.awm.jp を公開URLにしたい</h2>
 
 <ul>
 <li>=&gt; <a href="https://blog.awm.jp/">https://blog.awm.jp/</a> (awmlabs.github.io を指します)</li>
@@ -128,7 +128,7 @@ Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo 
 
 <p>DNS の CNAME で blog.awm.jp =&gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。</p>
 
-<h1 id="hugo">Hugo</h1>
+<h1 id="hugo:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo</h1>
 
 <pre><code>$ hugo new site blog.awm.jp
 $ cd blog.awm.jp
@@ -147,7 +147,7 @@ $ hugo new 2016/01/01/blog.md
 
 <p>を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。</p>
 
-<h2 id="hugo-themes">Hugo themes</h2>
+<h2 id="hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae">Hugo themes</h2>
 
 <ul>
 <li><p><a href="http://themes.gohugo.io/">http://themes.gohugo.io/</a>
@@ -173,7 +173,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 <p>尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。</p>
 
-<h2 id="syntax-highlight">Syntax Highlight</h2>
+<h2 id="syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae">Syntax Highlight</h2>
 
 <ul>
 <li><a href="http://gohugo.io/extras/highlighting/">http://gohugo.io/extras/highlighting/</a></li>
@@ -191,7 +191,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 <p>を入れるだけで OK です。</p>
 
-<h2 id="テーマの文字">テーマの文字</h2>
+<h2 id="テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae">テーマの文字</h2>
 
 <p>base16 は文字が読み辛いので自分好みに変更しました。</p>
 
@@ -218,13 +218,13 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 </pre></div>
 
 
-<h1 id="circleci">CircleCI</h1>
+<h1 id="circleci:e95c7dc8eefee7d0e25121cd7f0007ae">CircleCI</h1>
 
 <p>間に合わなかったので、また今度。。</p>
 
 <p>(2016/01/02 追記) &gt; <a href="http://blog.awm.jp/2016/01/02/circleci/">http://blog.awm.jp/2016/01/02/circleci/</a></p>
 
-<h1 id="備考">備考</h1>
+<h1 id="備考:e95c7dc8eefee7d0e25121cd7f0007ae">備考</h1>
 
 <ul>
 <li>Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。</li>
@@ -233,7 +233,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 <li>new 〜.md で作ったテンプレファイルでは draft = true になっているので、これを消すか false にしないと記事を表示しません。</li>
 </ul>
 
-<h1 id="参考-url">参考 URL</h1>
+<h1 id="参考-url:e95c7dc8eefee7d0e25121cd7f0007ae">参考 URL</h1>
 
 <ul>
 <li><a href="https://github.com/nobu666/nobu666.com">https://github.com/nobu666/nobu666.com</a></li>
