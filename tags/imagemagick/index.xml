@@ -7,8 +7,104 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Thu, 21 Jul 2016 21:28:11 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
+      <link>https://blog.awm.jp/2016/07/22/rgba4444/</link>
+      <pubDate>Fri, 22 Jul 2016 09:10:28 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/22/rgba4444/</guid>
+      <description>
+
+&lt;h1 id=&#34;rgba4444-変換で劣化しない画像を-imagemagick-で作る:088b0349538a1661a01b8e3136b87d86&#34;&gt;RGBA4444 変換で劣化しない画像を ImageMagick で作る&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 変換で劣化しない画像を ImageMagick で作る
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含むんだ時のディザ処理が苦手のようです。
+以下のサイトで紹介されている、色のチャネル(RGBA)毎に個別にディザをかける方法だとうまくいきます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[unity][cg_tools] RGBA4444に変換できるツール
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blawat2015.no-ip.com/~mieki256/diary/201402154.html&#34;&gt;http://blawat2015.no-ip.com/~mieki256/diary/201402154.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;テスト画像:088b0349538a1661a01b8e3136b87d86&#34;&gt;テスト画像&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
+    -matte -channel a -fx &#34;u*j/h&#34; \
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+    -rotate 90 -set colorspace HSB -colorspace RGB \
+    gradient_hue_polar-transparent.png
+&lt;img src=&#34;../gradient_hue_polar-transparent.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;パレット画像の準備:088b0349538a1661a01b8e3136b87d86&#34;&gt;パレット画像の準備&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-white gray16palette.png
+&lt;img src=&#34;../gray16palette.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;参照した記事では 0xfff を 0xf0f0f0 と 0xffffff のどちらで表わそうか迷ってますが、0xfff を最大値として場合 0xffffff でしか表現出来ないので、後者を採用してます。&lt;/p&gt;
+
+&lt;h3 id=&#34;実行コマンド:088b0349538a1661a01b8e3136b87d86&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png -channel RGBA -separate \
+    \( -dither FloydSteinberg -remap gray16palette.png \) \
+    -channel RGBA -combine rgba4444.png
+&lt;img src=&#34;../rgba4444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;参考までに:088b0349538a1661a01b8e3136b87d86&#34;&gt;参考までに&lt;/h3&gt;
+
+&lt;p&gt;尚、ディザ変換をせずに Unity 等に RGBA4444 指定で渡した場合は、以下のようになるはずです。&lt;/p&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
+&lt;img src=&#34;../depth4.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;これよりは予め自分でディザをかけた方が良いはずです。&lt;/p&gt;
+
+&lt;h2 id=&#34;参考-url:088b0349538a1661a01b8e3136b87d86&#34;&gt;参考 URL&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&#34;&gt;http://design.kayac.com/topics/2014/02/unity-RGBA4444.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Unityで、もっとキレイな16bitカラーテクスチャを使おう！
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webtech.co.jp/blog/game-develop/unity/2562/&#34;&gt;http://www.webtech.co.jp/blog/game-develop/unity/2562/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Dither using Pre-Defined Color Maps
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/quantize/#remap&#34;&gt;http://www.imagemagick.org/Usage/quantize/#remap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Gradients in other Colorspaces
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
@@ -176,6 +272,7 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
 &lt;h2 id=&#34;参考-url:3ba0dc7a98d3a7283c1d893d8bed151d&#34;&gt;参考 URL&lt;/h2&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webtech.co.jp/blog/game-develop/unity/2562/&#34;&gt;http://www.webtech.co.jp/blog/game-develop/unity/2562/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&#34;&gt;http://www.imagemagick.org/Usage/canvas/#gradient_colorspace&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
