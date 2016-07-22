@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
       <description>
 
-&lt;h1 id=&#34;blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Blog はじめました&lt;/h1&gt;
+&lt;h1 id=&#34;blog-はじめました&#34;&gt;Blog はじめました&lt;/h1&gt;
 
 &lt;p&gt;WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。&lt;/p&gt;
 
@@ -33,7 +33,7 @@
 &lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
+&lt;h1 id=&#34;github-io&#34;&gt;Github.io&lt;/h1&gt;
 
 &lt;p&gt;github.com で &amp;lt;ユーザ名&amp;gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。&lt;/p&gt;
 
@@ -45,7 +45,7 @@
 &lt;p&gt;ここにブログを表示する静的なHTMLを入れていけば良い訳です。
 Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
+&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;=&amp;gt; &lt;a href=&#34;https://blog.awm.jp/&#34;&gt;https://blog.awm.jp/&lt;/a&gt; (awmlabs.github.io を指します)&lt;/li&gt;
@@ -53,7 +53,7 @@ Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo 
 
 &lt;p&gt;DNS の CNAME で blog.awm.jp =&amp;gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。&lt;/p&gt;
 
-&lt;h1 id=&#34;hugo:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo&lt;/h1&gt;
+&lt;h1 id=&#34;hugo&#34;&gt;Hugo&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ hugo new site blog.awm.jp
 $ cd blog.awm.jp
@@ -72,7 +72,7 @@ $ hugo new 2016/01/01/blog.md
 
 &lt;p&gt;を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo themes&lt;/h2&gt;
+&lt;h2 id=&#34;hugo-themes&#34;&gt;Hugo themes&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;http://themes.gohugo.io/&lt;/a&gt;
@@ -98,7 +98,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 &lt;p&gt;尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Syntax Highlight&lt;/h2&gt;
+&lt;h2 id=&#34;syntax-highlight&#34;&gt;Syntax Highlight&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gohugo.io/extras/highlighting/&#34;&gt;http://gohugo.io/extras/highlighting/&lt;/a&gt;&lt;/li&gt;
@@ -116,7 +116,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 &lt;p&gt;を入れるだけで OK です。&lt;/p&gt;
 
-&lt;h2 id=&#34;テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;テーマの文字&lt;/h2&gt;
+&lt;h2 id=&#34;テーマの文字&#34;&gt;テーマの文字&lt;/h2&gt;
 
 &lt;p&gt;base16 は文字が読み辛いので自分好みに変更しました。&lt;/p&gt;
 
@@ -143,13 +143,13 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1 id=&#34;circleci:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;CircleCI&lt;/h1&gt;
+&lt;h1 id=&#34;circleci&#34;&gt;CircleCI&lt;/h1&gt;
 
 &lt;p&gt;間に合わなかったので、また今度。。&lt;/p&gt;
 
 &lt;p&gt;(2016/01/02 追記) &amp;gt; &lt;a href=&#34;http://blog.awm.jp/2016/01/02/circleci/&#34;&gt;http://blog.awm.jp/2016/01/02/circleci/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;備考:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;備考&lt;/h1&gt;
+&lt;h1 id=&#34;備考&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。&lt;/li&gt;
@@ -158,7 +158,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 &lt;li&gt;new 〜.md で作ったテンプレファイルでは draft = true になっているので、これを消すか false にしないと記事を表示しません。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考-url:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/nobu666/nobu666.com&#34;&gt;https://github.com/nobu666/nobu666.com&lt;/a&gt;&lt;/li&gt;
