@@ -157,25 +157,25 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 <h2 id="テスト２-rgb444">テスト２ (RGB444)</h2>
 
-<p>RGB 画像でも同じ方法で変換できます。</p>
-
+<p>RGB 画像でも同じ方法で変換できます。
 <pre>
-$ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
-    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
-    -rotate 90 -set colorspace HSB -colorspace RGB \
+$ convert -size 300x900 gradient:&lsquo;#FFF-#0FF&rsquo; -rotate 90 <br />
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage <br />
+    -rotate 90 -set colorspace HSB -colorspace RGB <br />
     gradient_hue_polar.png
 <img src="../gradient_hue_polar.png" />
-$ convert gradient_hue_polar.png -channel RGBA -separate \
-    \( -dither FloydSteinberg -remap gray16palette.png \) \
+$ convert gradient_hue_polar.png -channel RGBA -separate <br />
+    ( -dither FloydSteinberg -remap gray16palette.png ) <br />
     -channel RGBA -combine rgb444.png
 <img src="../rgb444.png" />
 </pre>
+透明度がない画像は -channel RGB でも同じ結果を得られます。</p>
 
-<p>透明度がない画像は -channel RGB の方が良いかもしれません。もしくは前回説明した方法( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> )でも良いでしょう。</p>
+<p>尚、今回の方法は原色が強く出すぎる傾向があるので、前回説明した方法( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> )の方が良い結果が得られそうです。</p>
 
 <h2 id="追試">追試</h2>
 
-<p>(ご参考までに。</p>
+<p>RGB と A で分離して、RGB は前回の方法、A は今回の方法の組み合わせで実験しました。</p>
 
 <ul>
 <li>RGBA4444 の追加実験
@@ -184,6 +184,8 @@ $ convert gradient_hue_polar.png -channel RGBA -separate \
 <li><a href="https://blog.awm.jp/2016/07/22/rgb444a4/">https://blog.awm.jp/2016/07/22/rgb444a4/</a></li>
 </ul></li>
 </ul>
+
+<p>RGBA をバラバラにする今回の方法と結果が変わらないので、唯の参考です。</p>
 
 <h2 id="参考-url">参考 URL</h2>
 

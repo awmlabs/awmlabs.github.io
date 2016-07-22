@@ -84,25 +84,25 @@ $ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
 
 &lt;h2 id=&#34;テスト２-rgb444&#34;&gt;テスト２ (RGB444)&lt;/h2&gt;
 
-&lt;p&gt;RGB 画像でも同じ方法で変換できます。&lt;/p&gt;
-
+&lt;p&gt;RGB 画像でも同じ方法で変換できます。
 &lt;pre&gt;
-$ convert -size 300x900 gradient:&#39;#FFF-#0FF&#39; -rotate 90 \
-    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
-    -rotate 90 -set colorspace HSB -colorspace RGB \
+$ convert -size 300x900 gradient:&amp;lsquo;#FFF-#0FF&amp;rsquo; -rotate 90 &lt;br /&gt;
+    -alpha set -virtual-pixel Transparent +distort Polar 149 +repage &lt;br /&gt;
+    -rotate 90 -set colorspace HSB -colorspace RGB &lt;br /&gt;
     gradient_hue_polar.png
 &lt;img src=&#34;../gradient_hue_polar.png&#34; /&gt;
-$ convert gradient_hue_polar.png -channel RGBA -separate \
-    \( -dither FloydSteinberg -remap gray16palette.png \) \
+$ convert gradient_hue_polar.png -channel RGBA -separate &lt;br /&gt;
+    ( -dither FloydSteinberg -remap gray16palette.png ) &lt;br /&gt;
     -channel RGBA -combine rgb444.png
 &lt;img src=&#34;../rgb444.png&#34; /&gt;
 &lt;/pre&gt;
+透明度がない画像は -channel RGB でも同じ結果を得られます。&lt;/p&gt;
 
-&lt;p&gt;透明度がない画像は -channel RGB の方が良いかもしれません。もしくは前回説明した方法( &lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt; )でも良いでしょう。&lt;/p&gt;
+&lt;p&gt;尚、今回の方法は原色が強く出すぎる傾向があるので、前回説明した方法( &lt;a href=&#34;http://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;http://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt; )の方が良い結果が得られそうです。&lt;/p&gt;
 
 &lt;h2 id=&#34;追試&#34;&gt;追試&lt;/h2&gt;
 
-&lt;p&gt;(ご参考までに。&lt;/p&gt;
+&lt;p&gt;RGB と A で分離して、RGB は前回の方法、A は今回の方法の組み合わせで実験しました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;RGBA4444 の追加実験
@@ -111,6 +111,8 @@ $ convert gradient_hue_polar.png -channel RGBA -separate \
 &lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgb444a4/&#34;&gt;https://blog.awm.jp/2016/07/22/rgb444a4/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;RGBA をバラバラにする今回の方法と結果が変わらないので、唯の参考です。&lt;/p&gt;
 
 &lt;h2 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h2&gt;
 
