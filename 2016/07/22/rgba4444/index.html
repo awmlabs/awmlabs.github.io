@@ -72,14 +72,16 @@
 <p>この記事の続きです。</p>
 
 <ul>
-<li>RGBA4444 変換で劣化しない画像を ImageMagick で作る
+<li>RGB444 変換で劣化しない画像を ImageMagick で作る
 
 <ul>
-<li><a href="http://blog.awm.jp/2016/07/21/rgba444/">http://blog.awm.jp/2016/07/21/rgba444/</a></li>
+<li><a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a></li>
 </ul></li>
 </ul>
 
 <h2 id="参考-url:088b0349538a1661a01b8e3136b87d86">参考 URL</h2>
+
+<p>この方法でうまくいきました。</p>
 
 <ul>
 <li>[unity][cg_tools] RGBA4444に変換できるツール
@@ -90,7 +92,7 @@
 </ul>
 
 <p>RGBA チャネル毎に４毎に分けて、バラバラにディザをかけてから合成する方式です。
-RGB としての色差は無視なので微妙かと思ったのですが、前回の実験 ( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> ) で分かったように ImageMagick は A(不透明度)を混ぜるとディザが崩れるので、とりあえずこの方法が良さそうです。</p>
+RGB としての色差は無視なので微妙かと思ったのですが、前回の実験 ( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> ) で示したように ImageMagick は A(不透明度)を混ぜるとディザが崩れるので、とりあえずこの方法が良さそうです。</p>
 
 <h3 id="テスト画像:088b0349538a1661a01b8e3136b87d86">テスト画像</h3>
 
