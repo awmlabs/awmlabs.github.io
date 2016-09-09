@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sabsampling on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/sabsampling/</link>
-    <description>Recent content in Sabsampling on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/tags/sabsampling/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Wed, 10 Feb 2016 21:53:44 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/sabsampling/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -105,7 +104,7 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;YUV410 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; 、縦方向は &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;li&gt;YUV410 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; 、縦方向は &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。(？)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;

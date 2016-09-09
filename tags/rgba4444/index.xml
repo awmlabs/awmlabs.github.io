@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rgba4444 on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/rgba4444/</link>
-    <description>Recent content in Rgba4444 on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/tags/rgba4444/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/rgba4444/index.xml" rel="self" type="application/rss+xml" />
     
     <item>

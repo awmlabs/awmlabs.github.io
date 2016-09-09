@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gif on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/gif/</link>
-    <description>Recent content in Gif on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/categories/gif/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 26 Jan 2016 14:55:40 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/gif/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
