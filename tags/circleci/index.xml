@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Circleci on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/circleci/</link>
-    <description>Recent content in Circleci on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/tags/circleci/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/circleci/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,11 +17,11 @@
       <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
       <description>
 
-&lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
+&lt;h1 id=&#34;blog-の-deploy-で-circle-ci&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
 
 &lt;p&gt;昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。&lt;/p&gt;
 
-&lt;h1 id=&#34;はじめに:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
 &lt;p&gt;前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
 
@@ -32,7 +31,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/awmlabs.github.io&#34;&gt;https://github.com/awmlabs/awmlabs.github.io&lt;/a&gt; blog の公開ファイル&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;circle.yaml&lt;/h1&gt;
+&lt;h1 id=&#34;circle-yaml&#34;&gt;circle.yaml&lt;/h1&gt;
 
 &lt;p&gt;連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。&lt;/p&gt;
 
@@ -71,7 +70,7 @@
 
 &lt;p&gt;神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)&lt;/p&gt;
 
-&lt;h2 id=&#34;pygments:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Pygments&lt;/h2&gt;
+&lt;h2 id=&#34;pygments&#34;&gt;Pygments&lt;/h2&gt;
 
 &lt;p&gt;Syntax Highlight を使いたいので、Pygments を入れたいけど、&lt;/p&gt;
 
@@ -80,7 +79,7 @@
 
 &lt;p&gt;を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-アカウント作成&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
 &lt;p&gt;連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
 
@@ -92,7 +91,7 @@
 
 &lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-での連携設定&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Add Project で監視するレポジトリを選択します。&lt;/li&gt;
@@ -102,7 +101,7 @@
 
 &lt;p&gt;(あと一手間あった気がするので、思い出したら後で追記します)&lt;/p&gt;
 
-&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
+&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
 
 &lt;p&gt;同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
 
@@ -113,14 +112,14 @@
 
 &lt;p&gt;必要に迫られた時にでも、もう少し試行錯誤してみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;備考:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;備考&lt;/h1&gt;
+&lt;h1 id=&#34;備考&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。&lt;/li&gt;
 &lt;li&gt;別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考url:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;参考URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考url&#34;&gt;参考URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&#34;&gt;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&lt;/a&gt;&lt;/li&gt;

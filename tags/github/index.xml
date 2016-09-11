@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Github on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/github/</link>
-    <description>Recent content in Github on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/tags/github/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/github/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,11 +17,11 @@
       <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
       <description>
 
-&lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
+&lt;h1 id=&#34;blog-の-deploy-で-circle-ci&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
 
 &lt;p&gt;昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。&lt;/p&gt;
 
-&lt;h1 id=&#34;はじめに:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
 &lt;p&gt;前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
 
@@ -32,7 +31,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/awmlabs.github.io&#34;&gt;https://github.com/awmlabs/awmlabs.github.io&lt;/a&gt; blog の公開ファイル&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;circle.yaml&lt;/h1&gt;
+&lt;h1 id=&#34;circle-yaml&#34;&gt;circle.yaml&lt;/h1&gt;
 
 &lt;p&gt;連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。&lt;/p&gt;
 
@@ -71,7 +70,7 @@
 
 &lt;p&gt;神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)&lt;/p&gt;
 
-&lt;h2 id=&#34;pygments:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Pygments&lt;/h2&gt;
+&lt;h2 id=&#34;pygments&#34;&gt;Pygments&lt;/h2&gt;
 
 &lt;p&gt;Syntax Highlight を使いたいので、Pygments を入れたいけど、&lt;/p&gt;
 
@@ -80,7 +79,7 @@
 
 &lt;p&gt;を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-アカウント作成&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
 &lt;p&gt;連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
 
@@ -92,7 +91,7 @@
 
 &lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-での連携設定&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Add Project で監視するレポジトリを選択します。&lt;/li&gt;
@@ -102,7 +101,7 @@
 
 &lt;p&gt;(あと一手間あった気がするので、思い出したら後で追記します)&lt;/p&gt;
 
-&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
+&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
 
 &lt;p&gt;同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
 
@@ -113,14 +112,14 @@
 
 &lt;p&gt;必要に迫られた時にでも、もう少し試行錯誤してみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;備考:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;備考&lt;/h1&gt;
+&lt;h1 id=&#34;備考&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。&lt;/li&gt;
 &lt;li&gt;別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考url:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;参考URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考url&#34;&gt;参考URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&#34;&gt;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&lt;/a&gt;&lt;/li&gt;
@@ -137,7 +136,7 @@
       <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
       <description>
 
-&lt;h1 id=&#34;blog-はじめました:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Blog はじめました&lt;/h1&gt;
+&lt;h1 id=&#34;blog-はじめました&#34;&gt;Blog はじめました&lt;/h1&gt;
 
 &lt;p&gt;WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。&lt;/p&gt;
 
@@ -152,7 +151,7 @@
 &lt;li&gt;&lt;ins&gt; &lt;a href=&#34;https://github.com/awmlabs/blog.awm.jp&#34;&gt;https://github.com/awmlabs/blog.awm.jp&lt;/a&gt; &lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;github-io:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Github.io&lt;/h1&gt;
+&lt;h1 id=&#34;github-io&#34;&gt;Github.io&lt;/h1&gt;
 
 &lt;p&gt;github.com で &amp;lt;ユーザ名&amp;gt;.github.io というレポジトリを作れば、その URL でアクセス出来ます。&lt;/p&gt;
 
@@ -164,7 +163,7 @@
 &lt;p&gt;ここにブログを表示する静的なHTMLを入れていけば良い訳です。
 Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo を使ってみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
+&lt;h2 id=&#34;blog-awm-jp-を公開urlにしたい&#34;&gt;blog.awm.jp を公開URLにしたい&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;=&amp;gt; &lt;a href=&#34;https://blog.awm.jp/&#34;&gt;https://blog.awm.jp/&lt;/a&gt; (awmlabs.github.io を指します)&lt;/li&gt;
@@ -172,7 +171,7 @@ Markdown ファイルからBlogサイトのHTMLを生成するツールは Hugo 
 
 &lt;p&gt;DNS の CNAME で blog.awm.jp =&amp;gt; awmlabs.github.io を向けた上で、static/CNAME に blog.awm.jp の文字を入れておくと awmlabs.github.io でアクセスしても blog.awm.jp にリダイレクトするようです。&lt;/p&gt;
 
-&lt;h1 id=&#34;hugo:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo&lt;/h1&gt;
+&lt;h1 id=&#34;hugo&#34;&gt;Hugo&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ hugo new site blog.awm.jp
 $ cd blog.awm.jp
@@ -191,7 +190,7 @@ $ hugo new 2016/01/01/blog.md
 
 &lt;p&gt;を実行します。すると public 以下に表示用の HTMLファイルが生成されます。 実際に表示する為には、テーマが必要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;hugo-themes:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Hugo themes&lt;/h2&gt;
+&lt;h2 id=&#34;hugo-themes&#34;&gt;Hugo themes&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;http://themes.gohugo.io/&lt;/a&gt;
@@ -217,7 +216,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 &lt;p&gt;尚、config.toml (又は config.yaml) で theme を定義すれば -t base16 は不要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;syntax-highlight:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;Syntax Highlight&lt;/h2&gt;
+&lt;h2 id=&#34;syntax-highlight&#34;&gt;Syntax Highlight&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gohugo.io/extras/highlighting/&#34;&gt;http://gohugo.io/extras/highlighting/&lt;/a&gt;&lt;/li&gt;
@@ -235,7 +234,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 &lt;p&gt;を入れるだけで OK です。&lt;/p&gt;
 
-&lt;h2 id=&#34;テーマの文字:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;テーマの文字&lt;/h2&gt;
+&lt;h2 id=&#34;テーマの文字&#34;&gt;テーマの文字&lt;/h2&gt;
 
 &lt;p&gt;base16 は文字が読み辛いので自分好みに変更しました。&lt;/p&gt;
 
@@ -262,13 +261,13 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1 id=&#34;circleci:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;CircleCI&lt;/h1&gt;
+&lt;h1 id=&#34;circleci&#34;&gt;CircleCI&lt;/h1&gt;
 
 &lt;p&gt;間に合わなかったので、また今度。。&lt;/p&gt;
 
 &lt;p&gt;(2016/01/02 追記) &amp;gt; &lt;a href=&#34;http://blog.awm.jp/2016/01/02/circleci/&#34;&gt;http://blog.awm.jp/2016/01/02/circleci/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;備考:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;備考&lt;/h1&gt;
+&lt;h1 id=&#34;備考&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Circle CI のアカウント作成で Github と連携する際に「所属する組織全てのアクセス権限」を要求する(Github API の仕様上、組織毎にオンオフ出来ない)ので、自分が管理する組織にのみ所属するアカウント (awmlabs) を使う事にしました。&lt;/li&gt;
@@ -277,7 +276,7 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 &lt;li&gt;new 〜.md で作ったテンプレファイルでは draft = true になっているので、これを消すか false にしないと記事を表示しません。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考-url:e95c7dc8eefee7d0e25121cd7f0007ae&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/nobu666/nobu666.com&#34;&gt;https://github.com/nobu666/nobu666.com&lt;/a&gt;&lt;/li&gt;
