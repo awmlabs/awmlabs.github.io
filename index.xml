@@ -1,14 +1,247 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Imagemagick on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/imagemagick/</link>
-    <description>Recent content in Imagemagick on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Sep 2016 00:11:41 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG と ICC プロファイル</title>
+      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-と-icc-プロファイル:ad62a74a83918e4a46c8e687c633597e&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
+
+&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
+引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+ sRGB, Adobe RGB 補正の例 &lt;/br&gt;
+ &lt;img src=&#34;../figure-srgb-adobergb.png&#34; /&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。&lt;/p&gt;
+
+&lt;h1 id=&#34;rgb-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB 色空間&lt;/h1&gt;
+
+&lt;p&gt;例えば赤を表す RGB:(255,0,0) 。
+世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。&lt;/p&gt;
+
+&lt;p&gt;一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+  Gamut(色域) &lt;br/&gt;
+  &lt;img src=&#34;../StandardProfilesGamutCoverage.jpg&#34; aligh=&#34;center&#34; /&gt; &lt;br/&gt;
+  ( 引用元: &lt;a href=&#34;http://wiki.nuaj.net/index.php?title=Color_Profile&#34;&gt;http://wiki.nuaj.net/index.php?title=Color_Profile&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;又、昔のディスプレイは出力に対して明るさを線形に出力出来なかったので、それに合わせたガンマ補正も入ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../Gamma06_300.png&#34; /&gt; &lt;br /&gt;
+引用元: &lt;a href=&#34;https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4&#34;&gt; &lt;a href=&#34;https://ja.wikipedia.org/wiki/ガンマ値&#34;&gt;https://ja.wikipedia.org/wiki/ガンマ値&lt;/a&gt; &lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;rgb-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB のデフォルト&lt;/h2&gt;
+
+&lt;p&gt;Web の世界では sRGB が標準です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A Standard Default Color Space for the Internet - sRGB
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/Graphics/Color/sRGB.html&#34;&gt;https://www.w3.org/Graphics/Color/sRGB.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-noicc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。&lt;/p&gt;
+
+&lt;h1 id=&#34;cmyk-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK 色空間&lt;/h1&gt;
+
+&lt;p&gt;プリンタに出力する色は CMYK で表現します。
+Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
+
+&lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Japan Color, US SWOP, FOGRA, ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)&lt;/p&gt;
+
+&lt;p&gt;RGB と CMYK は大雑把に以下の関係にあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+ &lt;img src=&#34;../CMYRGBv3.png&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt; )
+ &lt;img src=&#34;../fig14-half.jpg&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick: magick/colorspace-private.h&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;cyan    = 1.0 - red;
+magenta = 1.0 - green;
+yellow  = 1.0 - blue;
+(一番小さな値を black にしてその分補正)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。
+&lt;center&gt;
+ Japan Color 2001 Coated &lt;br /&gt;
+ &lt;img src=&#34;../10993-04-JapanColor-crop.jpg&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;リニアな CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
+
+&lt;h2 id=&#34;cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
+
+&lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので環境によって異なるので、そもそも無理でしょう。&lt;/p&gt;
+
+&lt;p&gt;ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。&lt;/p&gt;
+
+&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記の理由で、CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
+
+&lt;p&gt;Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&amp;gt; RGB 処理を行うようで、話が少し面倒だったりします。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考:ad62a74a83918e4a46c8e687c633597e&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;カラーマネージメントとプロファイル変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&#34;&gt;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;まだCMYKで消耗してるの？〜大幅な色補正をCMYKで行ってはいけない理由〜
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;紙デザイナーのためのrgbカラー超入門
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RGBA4444 の追加実験</title>
+      <link>https://blog.awm.jp/2016/07/22/rgb444a4/</link>
+      <pubDate>Fri, 22 Jul 2016 11:55:28 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/07/22/rgb444a4/</guid>
+      <description>
+
+&lt;h1 id=&#34;rgba4444-の追加実験:e662988d25e9c5b3873bdcb4ac21f97c&#34;&gt;RGBA4444 の追加実験&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 変換で劣化しない画像を ImageMagick で作る
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/21/rgb444/&#34;&gt;https://blog.awm.jp/2016/07/21/rgb444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RGBA4444 変換で劣化しない画像を ImageMagick で作る
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgba4444/&#34;&gt;https://blog.awm.jp/2016/07/22/rgba4444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;RGBA4444 のチャンネル分離してディザをかける方法だと色合いが変わってしまうので、A だけ分離する方法を試しました。&lt;/p&gt;
+
+&lt;p&gt;結論としては、RGBA バラバラに処理した時と見た目が変わりません。唯の検証メモという扱いでどうぞ。&lt;/p&gt;
+
+&lt;h2 id=&#34;rgb444-a4-のディザ画像検証:e662988d25e9c5b3873bdcb4ac21f97c&#34;&gt;RGB444, A4 のディザ画像検証&lt;/h2&gt;
+
+&lt;h3 id=&#34;パレット画像の準備:e662988d25e9c5b3873bdcb4ac21f97c&#34;&gt;パレット画像の準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RGB444 パレット作成
+&lt;pre&gt;
+$ convert -size 16x16 gradient:black-red black-red.png
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
+&lt;/pre&gt;
+&lt;img src=&#34;../black-red-green-blue.png&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;実行コマンド:e662988d25e9c5b3873bdcb4ac21f97c&#34;&gt;実行コマンド&lt;/h3&gt;
+
+&lt;pre&gt;
+$ convert gradient_hue_polar-transparent.png +matte rgb.png
+&lt;img src=&#34;../rgb.png&#34; /&gt;
+$ convert gradient_hue_polar-transparent.png -channel A -separate alpha.png
+&lt;img src=&#34;../alpha.png&#34; /&gt;
+
+$ convert rgb.png \
+    -dither Riemersma -remap black-red-green-blue.png \
+    red-green-blue444.png
+&lt;img src=&#34;../red-green-blue444.png&#34; /&gt;
+$ convert alpha.png \
+    -dither Riemersma -remap gray16palette.png \
+    alpha444.png
+&lt;img src=&#34;../alpha444.png&#34; /&gt;
+$ convert red-green-blue444.png -separate -channel RGB 444.png
+&lt;img src=&#34;../444-0.png&#34; /&gt;
+&lt;img src=&#34;../444-1.png&#34; /&gt;
+&lt;img src=&#34;../444-2.png&#34; /&gt;
+$ convert 444-[012].png alpha444.png -channel RGBA -combine red-green-blue-alpha4444.png
+&lt;img src=&#34;../red-green-blue-alpha4444.png&#34; /&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;特に改善されず。。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
@@ -326,6 +559,523 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3ba0dc7a98d3a7283c1d893d8bed151d:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JPEG のクロマサブサンプリングと YUVabc</title>
+      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
+
+&lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG の YCbCr について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/06/ycbcr/&#34;&gt;https://blog.awm.jp/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。&lt;/p&gt;
+
+&lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
+
+&lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
+
+&lt;h2 id=&#34;imagemagick-での作り方:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;ImageMagick での作り方&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert orig.jpg -sampling-factor &amp;quot;1x1,1x1,1x1&amp;quot; yuv444.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;2x1,1x1,1x1&amp;quot; yuv422.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;4x1,1x1,1x1&amp;quot; yuv411.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;1x2,1x1,1x1&amp;quot; yuv440.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;2x2,1x1,1x1&amp;quot; yuv420.jpg
+$ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg # yuv9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
+
+&lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
+
+&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
+
+&lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
+
+&lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422-onaji.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;間引く分の偶数番目の Cb, Cr はデータから省略できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVabc&lt;/h1&gt;
+
+&lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV422 (再掲) : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV440 : 縦方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv440.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV420 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 、縦方向も &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv420.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV411 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; になるよう間引く。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUV410 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; 、縦方向は &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。(？)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;と言いたい所ですが、実際には 4x4 として使われるようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
+
+&lt;ul&gt;
+&lt;li&gt;a は Y の横方向サンプル数で4固定&lt;/li&gt;
+&lt;li&gt;b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか&lt;/li&gt;
+&lt;li&gt;c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
+&lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
+&lt;li&gt;YUV410 は abc の法則から例外&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Chrome subsampling notation
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&#34;&gt;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;YUVのサンプリング種類
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&#34;&gt;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Digital Color Coding
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&#34;&gt;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JPEG の YCbCr について</title>
+      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
+
+&lt;p&gt;JPEG で保存する色は RGB でなく YCbCr なので、その話。&lt;/p&gt;
+
+&lt;h1 id=&#34;rgb-ycbcr:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
+
+&lt;p&gt;RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。&lt;/p&gt;
+
+&lt;p&gt;Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。&lt;/p&gt;
+
+&lt;p&gt;大雑把にはこんなイメージ。
+&lt;center&gt; &lt;img src=&#34;../ycbcrvolume.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スライダーで色を調整するデモを作りました。お試し下さい。
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/color/ycbcrslider.html&#34;&gt;http://blog.awm.jp/color/ycbcrslider.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;変換式:6214a8feaba721e81b237a92198f5169&#34;&gt;変換式&lt;/h2&gt;
+
+&lt;h3 id=&#34;rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Y&lt;/td&gt;
+&lt;td&gt;輝度信号&lt;/td&gt;
+&lt;td&gt;0.299  * R + 0.587  * G + 0.114  * B&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Cb&lt;/td&gt;
+&lt;td&gt;青の色差 &lt;br&gt; (B&amp;rsquo;-Y)&lt;/td&gt;
+&lt;td&gt;-0.1687 * R - 0.3313 * G + 0.5    * B + 128&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Cr&lt;/td&gt;
+&lt;td&gt;赤の色差 &lt;br&gt; (R&amp;rsquo;-Y)&lt;/td&gt;
+&lt;td&gt;0.5    * R - 0.4187 * G - 0.0813 * B + 128&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;ycbcr-rgb:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;赤 &lt;br&gt; (Y       + Cr&amp;rsquo;)&lt;/td&gt;
+&lt;td&gt;Y                        + 1.402   * (Cr - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;G&lt;/td&gt;
+&lt;td&gt;緑 &lt;br&gt; (Y - Cb&amp;rsquo; - Cr&amp;rsquo;)&lt;/td&gt;
+&lt;td&gt;Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;青 &lt;br&gt; (Y + Cb&amp;rsquo;      )&lt;/td&gt;
+&lt;td&gt;Y + 1.772   * (Cb - 128)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;rgb-との比較:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB との比較&lt;/h2&gt;
+
+&lt;h3 id=&#34;rgb-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB チャネル分解&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert logo.png -colorspace RGB -separate +append tmp.png
+$ convert logo.png +level-colors Red \
+	\( +clone +level-colors Green1 \) \
+	\( +clone +level-colors Blue \) +append \
+	tmp.png -compose Multiply -composite  logo_rgb.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注) Green1 を Green にすると緑の明るさが半分になるので注意
+&lt;center&gt; &lt;img src=&#34;../logo_rgb.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
+
+&lt;p&gt;こちらは Golang の image パッケージで変換。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/yoya/4fae336a34a8a5bf5d9c&#34;&gt;https://gist.github.com/yoya/4fae336a34a8a5bf5d9c&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ go build png_separate_ycbcr.go
+$ ./png_separate_ycbcr logo.png logo_ycbcr.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo_ycbcr.png&#34; /&gt; &lt;/center&gt;
+(YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)&lt;/p&gt;
+
+&lt;h2 id=&#34;メリット:6214a8feaba721e81b237a92198f5169&#34;&gt;メリット&lt;/h2&gt;
+
+&lt;p&gt;輝度信号と色差信号を分けるメリットですが。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;白黒テレビの信号に後付けで色味を追加できる&lt;/li&gt;
+&lt;li&gt;人の目は輝度(色の明るさ)に敏感、色味には鈍感&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリング方式でデータ量を節約します。尚、多くの動画形式は YCbCr でなく YUV で少し計算が異なります、概念的には似たものです。&lt;/p&gt;
+
+&lt;h3 id=&#34;クロマサブサンプリング:6214a8feaba721e81b237a92198f5169&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
+
+&lt;h3 id=&#34;yuvabc:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVabc&lt;/h3&gt;
+
+&lt;p&gt;間引きかたによって YUV444、YUV422 のように表現します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;YUV444
+&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;YUV422
+&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;より詳しくは以下のエントリをご参考ください。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVabc について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/02/10/yuv/&#34;&gt;http://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;デメリット:6214a8feaba721e81b237a92198f5169&#34;&gt;デメリット&lt;/h2&gt;
+
+&lt;p&gt;RGB と YCbCr は色空間が斜めの関係にあり、YCbCr は RGB を全部カバーする為、同じ 0-255 でも RGB より YCbCr の方が大きなスケールを表現します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;大きな立体が YCbCr の空間で、中の小さい立体が RGB の収まる範囲です。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../rgb2ycbcr_half.png&#34; /&gt; &lt;/center&gt; (&lt;a href=&#34;../RGB2YCbCr.gcx&#34;&gt; Grapher ファイル&lt;/a&gt; | &lt;a href=&#34;../makeVert.phps&#34;&gt; プロット生成スクリプト  &lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;(奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)&lt;/p&gt;
+
+&lt;p&gt;大小２つの立方体の間にある隙間が RGB&amp;lt;=&amp;gt;YCbCr で死ぬ無駄な空間で、YCbCr のビット数を RGB と同じにすると粒度が荒くなり表現できる色数が減ります。色数が1/4ほどまで減るとも言われます。&lt;/p&gt;
+
+&lt;p&gt;詳しくは以下のページを参照下さい。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ConvertToRGB
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://csbarn.blogspot.jp/2012/01/converttorgb.html&#34;&gt;http://csbarn.blogspot.jp/2012/01/converttorgb.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;まとめ:6214a8feaba721e81b237a92198f5169&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。&lt;/li&gt;
+&lt;li&gt;デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG File Interchange Format
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/Graphics/JPEG/jfif3.pdf&#34;&gt;https://www.w3.org/Graphics/JPEG/jfif3.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RGB⇔YCbCr変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&#34;&gt;http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;XYZ表色系
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.dic-color.com/knowledge/xyz.html&#34;&gt;http://www.dic-color.com/knowledge/xyz.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagickでHSLとHSV色空間を理解する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&#34;&gt;http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>目次</title>
+      <link>https://blog.awm.jp/contents/</link>
+      <pubDate>Tue, 26 Jan 2016 18:09:45 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/contents/</guid>
+      <description>
+
+&lt;h1 id=&#34;imagemagick:c86ddc2258670691520613695335adcd&#34;&gt;ImageMagick&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick でサムネール画像生成
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/05/thumbnail/&#34;&gt;https://blog.awm.jp/2016/01/05/thumbnail/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagick で画像を比較する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/25/diff/&#34;&gt;https://blog.awm.jp/2016/01/25/diff/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/25/imagemagick/&#34;&gt;http://blog.awm.jp/2016/01/25/imagemagick/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;グレー形式JPEGをPNGに変換すると暗くなる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/06/gray/&#34;&gt;https://blog.awm.jp/2016/01/06/gray/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ImageMagick の -auto-orient でオフセットがズレる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/06/orient/&#34;&gt;https://blog.awm.jp/2016/01/06/orient/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;透明度を含む画像を JPEG に変換する時の背景色
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/25/flatten/&#34;&gt;https://blog.awm.jp/2016/01/25/flatten/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RGBA4444 変換で劣化しない画像を ImageMagick で作る
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/07/22/rgba4444/&#34;&gt;https://blog.awm.jp/2016/07/22/rgba4444/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;jpeg:c86ddc2258670691520613695335adcd&#34;&gt;JPEG&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で JPEG の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/26/jpeg/&#34;&gt;http://blog.awm.jp/2016/01/26/jpeg/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;JPEG の size hinting について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/08/jpeghint/&#34;&gt;https://blog.awm.jp/2016/01/08/jpeghint/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ycbcr:c86ddc2258670691520613695335adcd&#34;&gt;YCbCr&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG の YCbCr について
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/06/ycbcr/&#34;&gt;https://blog.awm.jp/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/10/yuv/&#34;&gt;https://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;exif:c86ddc2258670691520613695335adcd&#34;&gt;Exif&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG Exif Orientation の操作
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/07/orient/&#34;&gt;http://blog.awm.jp/2016/01/07/orient/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;png:c86ddc2258670691520613695335adcd&#34;&gt;PNG&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で PNG の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/01/26/png/&#34;&gt;http://blog.awm.jp/2016/01/26/png/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;gif:c86ddc2258670691520613695335adcd&#34;&gt;GIF&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick で GIF の形式を変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/26/gif/&#34;&gt;https://blog.awm.jp/2016/01/26/gif/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;pnm:c86ddc2258670691520613695335adcd&#34;&gt;PNM&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PNM と ImageMagick で画像ファイルを手作り生成
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/04/pnm/&#34;&gt;https://blog.awm.jp/2016/01/04/pnm/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;hugo:c86ddc2258670691520613695335adcd&#34;&gt;Hugo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Blog はじめました
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/01/blog/&#34;&gt;https://blog.awm.jp/2016/01/01/blog/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hugo のサマリーが大きすぎる件
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/02/hugo/&#34;&gt;https://blog.awm.jp/2016/01/02/hugo/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hugo の post テンプレートのカスタマイズ
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/03/hugo/&#34;&gt;https://blog.awm.jp/2016/01/03/hugo/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Blog の Deploy で Circle CI
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/02/circleci/&#34;&gt;https://blog.awm.jp/2016/01/02/circleci/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -1828,557 +2578,321 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
     </item>
     
     <item>
-      <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
-      <link>https://blog.awm.jp/2016/01/06/gray/</link>
-      <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
+      <title>JPEG Exif Orientation の操作</title>
+      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
+      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;グレー形式jpegをpngに変換すると暗くなる件:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;グレー形式JPEGをPNGに変換すると暗くなる件&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
 
-&lt;p&gt;画像サムネール界隈で話題のエントリ&lt;/p&gt;
+&lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
 
-&lt;ul&gt;
-&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
+&lt;p&gt;JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation タグがあります。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../jpeg-exif-orient.png&#34; /&gt; &lt;/br&gt;
+引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;-limit memory でのリソース制限や jpeghint が拡大の時はまずいという問題の指摘等、素晴らしいエントリですが、少し気になる事が。&lt;/p&gt;
+&lt;p&gt;例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
+撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。
+&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/digicame.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;グレイスケール画像を考慮しよう
+&lt;p&gt;ImageMagick の identify コマンドで Orientation の値を参照出来ます。&lt;/p&gt;
 
-白黒画像を PNG に変換すると、元画像より暗くなる場合があります。
-これは減色アルゴリズムによる挙動と思われます。
-JPEG はフルカラー画像を扱えますが、通常の PNG だと 256 色しか扱えないのです。
+&lt;pre&gt;&lt;code&gt;$ identify -verbose orient-6.jpg | grep Orient
+  Orientation: RightTop
+    exif:Orientation: 6
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;減色処理でここまで暗くなるのは違和感ありますし、出力で PNG8 がデフォというのも妙なので調べた所、少し前にあった ImageMagick のバグだったので話を整理しておきます。&lt;/p&gt;
+&lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
 
-&lt;h1 id=&#34;いつ頃のバグ:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;いつ頃のバグ&lt;/h1&gt;
+&lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
-&lt;p&gt;6.8.0-0 〜 6.8.0-7 の間のバグです。
-6.8.0 で RGB互換の色空間処理を整理していた時のデグレードだと思われます。&lt;/p&gt;
-
-&lt;p&gt;6.8.0-8 で修正済みです。&lt;/p&gt;
-
-&lt;h1 id=&#34;不具合修正のコード差分:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;不具合修正のコード差分&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;$ diff -rwb  ImageMagick-6.8.0-[78]/coders/png.c
-8305,8306c8305,8306
-&amp;lt;          if ((IssRGBCompatibleColorspace(image-&amp;gt;colorspace) == MagickFalse) &amp;amp;&amp;amp;
-&amp;lt;              (IssRGBColorspace(image-&amp;gt;colorspace) == MagickFalse))
----
-&amp;gt;          if ((IssRGBCompatibleColorspace(image-&amp;gt;colorspace) == MagickFalse) ||
-&amp;gt;              (IssRGBColorspace(image-&amp;gt;colorspace) != MagickFalse))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あ、はい。って感じです。&lt;/p&gt;
-
-&lt;h1 id=&#34;png8:4b97ec97268e2c8df1249bdff4ee48d9&#34;&gt;PNG8&lt;/h1&gt;
-
-&lt;p&gt;もう一点、グレー形式JPEG を PNG に変換するとパレット形式(PNG)になるとの事ですが実はバージョンに依ります。気まぐれで本当にすみません。&lt;/p&gt;
-
-&lt;p&gt;直近だとこんな対応。&lt;/p&gt;
+&lt;h3 id=&#34;早見表1:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表1&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;バージョン&lt;/th&gt;
-&lt;th&gt;形式&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;6.9.1-10&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;1: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;3: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;4: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.9.1-2&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;5: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;6: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;7: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.9.1-3&lt;/td&gt;
-&lt;td&gt;GRB (PNG24)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-4&lt;/td&gt;
-&lt;td&gt;GRB (PNG24)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-5&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-6&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-7&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-8&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.9.1-9&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;では、不具合のあった 6.8.x の頃はどうだったかというと。&lt;/p&gt;
+&lt;p&gt;(補正で行う回転する向きでない事に注意。これらはその真逆です)&lt;/p&gt;
+
+&lt;p&gt;尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]&lt;/p&gt;
+
+&lt;p&gt;こうして素直に 1 から順に並べてみると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; * 1 を基準として、
+ * 1の左右反転 =&amp;gt; 2 、1の上下反転 =&amp;gt; 4、 1の左右と上下反転 =&amp;gt; 3、
+ * 1,2,3,4 各々を斜め軸で反転 =&amp;gt; 5,6,7,8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;となっていて、右回転、左回転の定義が不要なのが面白いです。尚、1を引くとビット毎に、どの軸で鏡像回転するかのフラグになります)&lt;/p&gt;
+
+&lt;p&gt;これらは処理系の都合であって、実際には以下のように利用されます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; * 1 を基準として、90度回転 =&amp;gt; 8, 180度回転 = 3, 270度回転 =&amp;gt; 6
+ * 1 の鏡反転 =&amp;gt; 2、8 の鏡反転 =&amp;gt; 5, 3の鏡反転=&amp;gt; 4、6 の鏡反転 =&amp;gt; 7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;早見表2:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表2&lt;/h3&gt;
+
+&lt;p&gt;変換の方向がわかりやすい図もつけます。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;バージョン&lt;/th&gt;
-&lt;th&gt;形式&lt;/th&gt;
+&lt;th&gt;Orient&lt;/th&gt;
+&lt;th&gt;画像の実データ&lt;/th&gt;
+&lt;th&gt;Exif-Orient を解釈して表示&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;6.8.0-0&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-1&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-2&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-3&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-4&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-5&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-6&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;6.8.0-7&lt;/td&gt;
-&lt;td&gt;GRAY&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-8&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-9&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;6.8.0-10&lt;/td&gt;
-&lt;td&gt;PALETTE (PNG8)&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8-strip.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1-strip.jpg&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;あれ。。不具合のあった 6.8.0-0 〜 6.8.0-7 は GRAY 形式。&lt;/p&gt;
+&lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
 
-&lt;p&gt;多分ですけど。グレー画像が暗くなる時に使った ImageMagick と、パレット形式だと確認した時のバージョンが違うのではないかなーと思ってます。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
-      <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
-      <description>
+&lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
 
-&lt;h1 id=&#34;imagemagick-でサムネール画像生成:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
+&lt;p&gt;ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
 
-&lt;p&gt;初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。&lt;/p&gt;
-
-&lt;p&gt;ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自分は -resize を使う事が多いですが、今回は余計なメタデータを削除してくれる -thumbnail を使ってみます。&lt;/p&gt;
-
-&lt;p&gt;オリジナル画像はこちらをを使います。
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;とりあえず小さくする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;とりあえず小さくする&lt;/h1&gt;
-
-&lt;p&gt;手始めに適当なサイズ 100x100 を指定してサムネールを作ります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100.jpg&#34; alt=&#34;100x100&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ identify saitama_100x100.jpg
-saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;単純に 100x100 を指定すると、アスペクト比(縦と横の比率)が変わらないよう調整される為です。&lt;/p&gt;
-
-&lt;h1 id=&#34;リサイズ後のサイズを-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;リサイズ後のサイズを 100x100 にする&lt;/h1&gt;
-
-&lt;p&gt;アスペクト比を無視して、確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100f.jpg&#34; alt=&#34;100x100!&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
-
-&lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
-
-&lt;p&gt;そんな矛盾した要求を。。。と一瞬怯みますが、２つ方法を思いつきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;削ってしまう:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;削ってしまう&lt;/h2&gt;
-
-&lt;p&gt;先程の 100x100 指定では縦と横のうち大きい辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。&lt;/p&gt;
-
-&lt;p&gt;その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100^ -gravity center \
-	-extent 100x100 saitama_100x100crop.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;余白をつける:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白をつける&lt;/h2&gt;
-
-&lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -gravity center \
-	-extent 100x100 saitama_100x100extent.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100extent.jpg&#34; alt=&#34;100x100extent&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;余白の色が白で見えにくいので、-background で黒を指定してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background black \
-	-gravity center -extent 100x100 saitama_100x100black.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;丸いアイコン風画像の作り方:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
-
-&lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコン風画像の作り方も紹介します。&lt;/p&gt;
-
-&lt;p&gt;尚、円の外側は透明にしたいので、今回は png を生成します。&lt;/p&gt;
-
-&lt;p&gt;まずは、convert の -draw オプションで丸のクリップ用画像を作ります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; \
-	circle_mask.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/circle_mask.png&#34; alt=&#34;circle_mask&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
-	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;一行にまとめる:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;一行にまとめる&lt;/h2&gt;
-
-&lt;p&gt;カッコを使って入れ子に出来ます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
-  \( -size 100x100 xc:none -fill white -draw &amp;quot;circle 50,50,50,0&amp;quot; \) \
-  -compose CopyOpacity -composite saitama_icon.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;画像は同じ結果なので省略します。&lt;/p&gt;
-
-&lt;h1 id=&#34;最後に:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;最後に&lt;/h1&gt;
-
-&lt;p&gt;リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった時のケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明します。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考-url:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/masking/&#34;&gt;http://www.imagemagick.org/Usage/masking/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/script/command-line-processing.php#geometry&#34;&gt;http://www.imagemagick.org/script/command-line-processing.php#geometry&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imagemagick - Ways of cropping an image to a circle (or other shape).
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a&#34;&gt;http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;ImageMagickで画像をリサイズする時のメモ
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://o.inchiki.jp/obbr/125&#34;&gt;http://o.inchiki.jp/obbr/125&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
-      <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
-      <description>
-
-&lt;h1 id=&#34;pnm-と-imagemagick-で画像ファイルを手作り生成:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM と ImageMagick で画像ファイルを手作り生成&lt;/h1&gt;
-
-&lt;p&gt;何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。&lt;/p&gt;
-
-&lt;h1 id=&#34;pnm-とは:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PNM とは&lt;/h1&gt;
-
-&lt;p&gt;古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wikiedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;PNM は 以下の３つのフォーマットをまとめた呼び方です。&lt;/p&gt;
+&lt;h2 id=&#34;インストール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;MacOS は&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ brew install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Debian Linux は&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# apt-get install exiftool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;でインストールできます。&lt;/p&gt;
+
+&lt;p&gt;Perl なので他のプラットフォームでも入れるのは難しくないでしょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+
+&lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ exiftool -Orientation=6 -n test.jpg
+test.jpg
+    1 image files updated
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
+
+&lt;p&gt;ついでに表示の時に元の画像の向きを維持するようにします。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;PBM (portable bitmap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pbm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pbm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PGM (portable graymap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pgm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pgm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PPM (portable pixmap)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/ppm.html&#34;&gt;http://netpbm.sourceforge.net/doc/ppm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&#34;&gt;https://github.com/yoya/misc/blob/master/bash/severalorientation.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;拡張フォーマット:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;拡張フォーマット&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#! /bin/bash&lt;/span&gt;
 
-&lt;p&gt;PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。&lt;/p&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -u
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;ORIGINAL_SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_original&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# exiftool の-delete-original が動かないので&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.jpg&amp;quot;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;PREFIX&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; i in &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;seq &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; 8&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;FILE_ORIENT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$PREFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i$SUFFIX&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  cp &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  exiftool -Orientation&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt;
+  rm &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT$ORIGINAL_SUFFIX&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$i&lt;/span&gt; in
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify       -flip -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify             -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt; -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;7&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate -90 -flop &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; mogrify -rotate  &lt;span style=&#34;color: #ae81ff&#34;&gt;90&lt;/span&gt;       &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILE_ORIENT&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;esac&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;ul&gt;
-&lt;li&gt;PAM (portable arbitrary map)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pam.html&#34;&gt;http://netpbm.sourceforge.net/doc/pam.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;PFM (portable float map)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://netpbm.sourceforge.net/doc/pfm.html&#34;&gt;http://netpbm.sourceforge.net/doc/pfm.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;実行&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;フォーマット概要:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;フォーマット概要&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;$ severalorientation.sh orient.jpg
+$ identify -verbose orient-?.jpg | grep Orient
+  Orientation: TopLeft
+    exif:Orientation: 1
+  Orientation: TopRight
+    exif:Orientation: 2
+  Orientation: BottomRight
+    exif:Orientation: 3
+  Orientation: BottomLeft
+    exif:Orientation: 4
+  Orientation: LeftTop
+    exif:Orientation: 5
+  Orientation: RightTop
+    exif:Orientation: 6
+  Orientation: RightBottom
+    exif:Orientation: 7
+  Orientation: LeftBottom
+    exif:Orientation: 8
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。(尚、PAM形式は P7 で、PFM形式は PF, Pf です)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;結果&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;ファイル先頭&lt;/th&gt;
-&lt;th&gt;フォーマット&lt;/th&gt;
-&lt;th&gt;データ表現&lt;/th&gt;
-&lt;th&gt;画像表現&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;P1&lt;/td&gt;
-&lt;td&gt;PBM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;1: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-1.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-1.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-2.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-2.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;3: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-3.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-3.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;4: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-4.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-4.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;P2&lt;/td&gt;
-&lt;td&gt;PGM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;5: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-5.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-5.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;6: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-6.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-6.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;7: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-7.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-7.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8: &lt;a href=&#34;https://blog.awm.jp/2016/01/07/orient-8.jpg&#34;&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/07/orient-8.jpg&#34; /&gt; &lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;P3&lt;/td&gt;
-&lt;td&gt;PPM&lt;/td&gt;
-&lt;td&gt;ASCII&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P4&lt;/td&gt;
-&lt;td&gt;PBM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;白黒画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/wb.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P5&lt;/td&gt;
-&lt;td&gt;PGM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;グレー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/gray.png&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;P6&lt;/td&gt;
-&lt;td&gt;PPM&lt;/td&gt;
-&lt;td&gt;Binary&lt;/td&gt;
-&lt;td&gt;カラー画像 &lt;img src=&#34;https://blog.awm.jp/2016/01/04/color.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;データ表現が ASCII の場合は以下のフォーマットをとります。&lt;/p&gt;
+&lt;p&gt;テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。(テーブルに表示するのもクリックして表示されるのも同じ JPEG 画像です)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;フォーマット種別 # P1〜P6のいずれか。
-横サイズ 縦サイズ
-最大値             # P1 の時は実質1固定なので省略
-画像データの並び
-.....
+&lt;p&gt;ちなみに、前半の方の表に貼り付けた画像は、更に&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in *-?.jpg ; do
+  o=`basename $i .jpg` ;
+  convert -strip $i $o-strip.jpg;
+done
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;pbm-portable-bitmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PBM (portable bitmap format)&lt;/h1&gt;
+&lt;p&gt;として Exif タグを削除したものです。&lt;/p&gt;
 
-&lt;p&gt;画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)&lt;/p&gt;
+&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;batsu.pbm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P1
-7 7
-P1
-7 7
-1 0 0 0 0 0 1
-0 1 0 0 0 1 0
-0 0 1 0 1 0 0
-0 0 0 1 0 0 0
-0 0 1 0 1 0 0
-0 1 0 0 0 1 0
-1 0 0 0 0 0 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ImageMagick の convert で変換します。ついでに8倍に拡大したものも。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu.pbm batsu.png
-$ convert -resize 800% -filter point batsu.png batsu_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu.png&#34; title=&#34;batsu&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_8.png&#34; title=&#34;batsu_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;pgm-portable-graymap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PGM (portable graymap format)&lt;/h1&gt;
-
-&lt;p&gt;白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。&lt;/p&gt;
+&lt;li&gt;Exif 2.3 規格書
 
 &lt;ul&gt;
-&lt;li&gt;batsu_gray.pgm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P2
-7 7
-4
-4 0 0 0 0 0 4
-0 3 0 0 0 3 0
-0 0 2 0 2 0 0
-0 0 0 1 0 0 0
-0 0 2 0 2 0 0
-0 3 0 0 0 3 0
-4 0 0 0 0 0 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;convert で変換 &amp;amp; 8倍画像&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu_gray.pgm batsu_gray.png
-$ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray.png&#34; title=&#34;batsu_gray&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_gray_8.png&#34; title=&#34;batsu_gray_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;ppm-portable-pixmap-format:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;PPM (portable pixmap format)&lt;/h1&gt;
-
-&lt;p&gt;RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;batsu_rgb.ppm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;P3
-7 7
-4
-4 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 4
-0 0 0  3 0 0  0 0 0  0 0 0  0 0 0  0 0 3  0 0 0
-0 0 0  0 0 0  2 0 0  0 0 0  0 0 3  0 0 0  0 0 0
-0 0 0  0 0 0  0 0 0  1 1 1  0 0 0  0 0 0  0 0 0
-0 0 0  0 0 0  0 2 0  0 0 0  2 2 0  0 0 0  0 0 0
-0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
-0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;convert で変換&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert batsu_rgb.ppm batsu_rgb.png
-$ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb.png&#34; title=&#34;batsu_rgb&#34; &gt; &lt;/center&gt;
-&lt;center&gt; 8倍に ↓ 拡大 &lt;/center&gt;
-&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/04/batsu_rgb_8.png&#34; title=&#34;batsu_rgb_8&#34; &gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;さいごに:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;さいごに&lt;/h1&gt;
-
-&lt;p&gt;エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考-url:c3c49ecad8577b50a243cb7525433ac2&#34;&gt;参考 URL&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wikipedia: &lt;a href=&#34;https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)&#34;&gt;PNM (画像フォーマット)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;碧色工房 〜 PNM ( PPM / PGM / PBM ) ファイルフォーマット
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.mm2d.net/main/prog/c/image_io-01.html&#34;&gt;http://www.mm2d.net/main/prog/c/image_io-01.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&#34;&gt;http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&#34;&gt;https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ExifのOrientationを見て画像を回転させる
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

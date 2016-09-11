@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -71,16 +71,16 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#hugo-の記事テンプレート">Hugo の記事テンプレート</a></li>
-<li><a href="#archetypes">archetypes</a></li>
-<li><a href="#結果">結果</a></li>
-<li><a href="#思う所">思う所</a></li>
-<li><a href="#ソース巡り">ソース巡り</a></li>
+<li><a href="#hugo-の記事テンプレート:32ab7241d48fcc174c877413a917f8cf">Hugo の記事テンプレート</a></li>
+<li><a href="#archetypes:32ab7241d48fcc174c877413a917f8cf">archetypes</a></li>
+<li><a href="#結果:32ab7241d48fcc174c877413a917f8cf">結果</a></li>
+<li><a href="#思う所:32ab7241d48fcc174c877413a917f8cf">思う所</a></li>
+<li><a href="#ソース巡り:32ab7241d48fcc174c877413a917f8cf">ソース巡り</a></li>
 </ul>
 </nav>
     
 
-<h1 id="hugo-の記事テンプレート">Hugo の記事テンプレート</h1>
+<h1 id="hugo-の記事テンプレート:32ab7241d48fcc174c877413a917f8cf">Hugo の記事テンプレート</h1>
 
 <p>hugo new <path> を実行すると Markdown ファイルが作られます。</p>
 
@@ -102,7 +102,7 @@ title = &quot;test&quot;
 
 <p>何となく、この ContentTypes の archetype が使えそうです。</p>
 
-<h1 id="archetypes">archetypes</h1>
+<h1 id="archetypes:32ab7241d48fcc174c877413a917f8cf">archetypes</h1>
 
 <p><del> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</del></p>
 
@@ -119,7 +119,7 @@ draft = false
 $ hugo new test.md
 </code></pre>
 
-<h1 id="結果">結果</h1>
+<h1 id="結果:32ab7241d48fcc174c877413a917f8cf">結果</h1>
 
 <p>元々の date, title に加えて post.md の中身が追加されました。</p>
 
@@ -143,7 +143,7 @@ title = &quot;test3&quot;
 <li>参考2 <a href="https://github.com/awmlabs/blog.awm.jp/commit/7ad97d0766219602cf72434cd2b0daad3d72c2ac">https://github.com/awmlabs/blog.awm.jp/commit/7ad97d0766219602cf72434cd2b0daad3d72c2ac</a></li>
 </ul>
 
-<h1 id="思う所">思う所</h1>
+<h1 id="思う所:32ab7241d48fcc174c877413a917f8cf">思う所</h1>
 
 <p>メタデータの並びは、出来れば</p>
 
@@ -156,7 +156,7 @@ draft = false
 
 <p>のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。</p>
 
-<h1 id="ソース巡り">ソース巡り</h1>
+<h1 id="ソース巡り:32ab7241d48fcc174c877413a917f8cf">ソース巡り</h1>
 
 <p>英語のドキュメントが苦手なので、ソースコードを追って見つけました。</p>
 
@@ -191,14 +191,14 @@ $ grep -r &quot;title =&quot; . | head -3
 <li>command/new.go</li>
 </ul>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">newCmd</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Flags</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">StringVarP</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">&amp;</span><span style="color: #a6e22e">contentType</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;kind&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;k&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Content type to create&quot;</span><span style="color: #f8f8f2">)</span>
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">newCmd</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Flags</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">StringVarP</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">&amp;</span><span style="color: #a6e22e">contentType</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;kind&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;k&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Content type to create&quot;</span><span style="color: #f8f8f2">)</span>
 <span style="color: #960050; background-color: #1e0010">＜</span><span style="color: #a6e22e">略</span><span style="color: #960050; background-color: #1e0010">＞</span>
 <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">contentType</span> <span style="color: #f92672">!=</span> <span style="color: #e6db74">&quot;&quot;</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">kind</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">contentType</span>
 <span style="color: #f8f8f2">}</span>
 <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">create</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">NewContent</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">kind</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">createpath</span><span style="color: #f8f8f2">)</span>
 </pre></div>
-
+</p>
 
 <p>これで、-k オプションで指定する事が分かります。</p>
 
