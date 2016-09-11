@@ -86,7 +86,7 @@ Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:
 &lt;pre&gt;&lt;code&gt;Japan Color, US SWOP, FOGRA, ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;(境境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)&lt;/p&gt;
+&lt;p&gt;(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)&lt;/p&gt;
 
 &lt;p&gt;RGB と CMYK は大雑把に以下の関係にあります。&lt;/p&gt;
 
@@ -109,17 +109,19 @@ yellow  = 1.0 - blue;
 (一番小さな値を black にしてその分補正)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
+&lt;p&gt;しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。
 &lt;center&gt;
  Japan Color 2001 Coated &lt;br /&gt;
  &lt;img src=&#34;../10993-04-JapanColor-crop.jpg&#34; /&gt; &lt;br /&gt;
    (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
 &lt;/center&gt;&lt;/p&gt;
 
+&lt;p&gt;リニアな CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
+
 &lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
 
 &lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; を使えば大体は大丈夫でしょう。&lt;/p&gt;
+日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
 
 &lt;p&gt;モニタ表示の時、CMYK JPEG に ICC プロファイルが入っていない場合にどうするかは環境によって異なります。&lt;/p&gt;
 

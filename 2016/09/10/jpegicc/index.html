@@ -156,7 +156,7 @@ Cyan, Magenta, Yellow, blacK <sup class="footnote-ref" id="fnref:2"><a rel="foot
 <pre><code>Japan Color, US SWOP, FOGRA, ...
 </code></pre>
 
-<p>(境境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)</p>
+<p>(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)</p>
 
 <p>RGB と CMYK は大雑把に以下の関係にあります。</p>
 
@@ -179,17 +179,19 @@ yellow  = 1.0 - blue;
 (一番小さな値を black にしてその分補正)
 </code></pre>
 
-<p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
+<p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。
 <center>
  Japan Color 2001 Coated <br />
  <img src="../10993-04-JapanColor-crop.jpg" /> <br />
    (引用元: <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a> )
 </center></p>
 
+<p>リニアな CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。</p>
+
 <h2 id="cmyk-のデフォルト">CMYK のデフォルト(?)</h2>
 
 <p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated <sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup> を使えば大体は大丈夫でしょう。</p>
+日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup> は大丈夫でしょう。</p>
 
 <p>モニタ表示の時、CMYK JPEG に ICC プロファイルが入っていない場合にどうするかは環境によって異なります。</p>
 
