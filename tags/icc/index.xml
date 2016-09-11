@@ -117,7 +117,7 @@ yellow  = 1.0 - blue;
    (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
 &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;リニアな CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;cyan = 1.0 - red&amp;rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
 
 &lt;h2 id=&#34;cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
 
