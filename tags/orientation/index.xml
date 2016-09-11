@@ -201,8 +201,13 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;h2 id=&#34;orientation-とは&#34;&gt;Orientation とは&lt;/h2&gt;
 
-&lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
-その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
+&lt;p&gt;JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation タグがあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../jpeg-exif-orient.png&#34; /&gt; &lt;/br&gt;
+引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>JPEG と ICC プロファイル - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/09/10/jpegicc/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/09/10/jpegicc/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG と ICC プロファイル" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/09/10/jpegicc/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-09-10">September 10, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/jpeg">JPEG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG と ICC プロファイル</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</a></li>
+<li><a href="#rgb-色空間">RGB 色空間</a>
+<ul>
+<li><a href="#rgb-のデフォルト">RGB のデフォルト</a></li>
+</ul></li>
+<li><a href="#cmyk-色空間">CMYK 色空間</a>
+<ul>
+<li><a href="#cmyk-のデフォルト">CMYK のデフォルト</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</h1>
+
+<p>JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値(内部的にはYCbCr)や CMYK値でも モニタ(又はプリンタ)に出力する色が変わります。</p>
+
+<p><center>
+<img src="../jpeg-profile-icc.png" /> </br>
+引用: <a href="https://speakerdeck.com/yoya/jpegmeta">https://speakerdeck.com/yoya/jpegmeta</a>
+ </center></p>
+
+<p><center>
+ sRGB, Adobe RGB 補正の例 </br>
+ <img src="../figure-srgb-adobergb.png" />
+ </center></p>
+
+<p>尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。</p>
+
+<h1 id="rgb-色空間">RGB 色空間</h1>
+
+<p>例えば赤を表す RGB:(255,0,0) 。
+世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。</p>
+
+<p>一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。</p>
+
+<pre><code>sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
+</code></pre>
+
+<p>これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。</p>
+
+<p><center>
+  Gamut(色域) <br/>
+  <img src="../StandardProfilesGamutCoverage.jpg" aligh="center" /> <br/>
+  ( 引用元: <a href="http://wiki.nuaj.net/index.php?title=Color_Profile">http://wiki.nuaj.net/index.php?title=Color_Profile</a> )
+</center></p>
+
+<p>又、昔のディスプレイは出力に対して明るさを線形に出力出来なかったので、それに合わせたガンマ補正も入ります。</p>
+
+<p><center>
+<img src="../Gamma06_300.png" /> <br />
+引用元: <a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4"> <a href="https://ja.wikipedia.org/wiki/ガンマ値">https://ja.wikipedia.org/wiki/ガンマ値</a> </a>
+ </center></p>
+
+<h2 id="rgb-のデフォルト">RGB のデフォルト</h2>
+
+<p>Web の世界では sRGB が標準です。</p>
+
+<ul>
+<li>A Standard Default Color Space for the Internet - sRGB
+
+<ul>
+<li><a href="https://www.w3.org/Graphics/Color/sRGB.html">https://www.w3.org/Graphics/Color/sRGB.html</a></li>
+</ul></li>
+</ul>
+
+<p>ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。</p>
+
+<p><center> <img src="../figure-noicc.png" /> </center></p>
+
+<p>高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。</p>
+
+<h1 id="cmyk-色空間">CMYK 色空間</h1>
+
+<p>プリンタに出力する色は CMYK で表現します。
+Cyan, Magenta, Yellow, blacK で各々インクの量です。</p>
+
+<p>CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。</p>
+
+<pre><code>Japan Color, US SWOP, FOGRA, ...
+</code></pre>
+
+<p>(境境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)</p>
+
+<p>RGB と CMYK は大雑把に以下の関係にあります。</p>
+
+<p><center>
+ <img src="../CMYRGBv3.png" /> <br />
+   (引用元: <a href="http://www.iwashi.org/archives/4108">http://www.iwashi.org/archives/4108</a> )
+ <img src="../fig14-half.jpg" /> <br />
+   (引用元: <a href="http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80">http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門</a> )
+</center></p>
+
+<p>なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。</p>
+
+<ul>
+<li>ImageMagick: magick/colorspace-private.h</li>
+</ul>
+
+<pre><code>cyan    = 1.0 - red;
+magenta = 1.0 - green;
+yellow  = 1.0 - blue;
+(一番小さな値を black にしてその分補正)
+</code></pre>
+
+<p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
+<center>
+ <img src="../10993-05-JMPA-crop.jpg" /> <br />
+   (引用元: <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a> )
+</center></p>
+
+<h2 id="cmyk-のデフォルト">CMYK のデフォルト</h2>
+
+<p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。
+日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) がデファクトに近いので、迷ったらこれを使えば大体は大丈夫でしょう。</p>
+
+<p>表示の時に ICC プロファイルが入っていない場合にどうするかは環境によって異なりますが、いずれにしてもインク特性を元にした値なので複雑な補正が必要です。</p>
+
+<p>MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイルを用いるようです。</p>
+
+<pre><code>/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
+</code></pre>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li>カラーマネージメントとプロファイル変換
+
+<ul>
+<li><a href="http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html">http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html</a></li>
+</ul></li>
+<li>まだCMYKで消耗してるの？〜大幅な色補正をCMYKで行ってはいけない理由〜
+
+<ul>
+<li><a href="http://www.iwashi.org/archives/4108">http://www.iwashi.org/archives/4108</a></li>
+</ul></li>
+<li>紙デザイナーのためのrgbカラー超入門
+
+<ul>
+<li><a href="http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80">http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門</a></li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

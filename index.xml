@@ -7,8 +7,148 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 22 Jul 2016 11:55:28 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 10 Sep 2016 00:11:41 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JPEG と ICC プロファイル</title>
+      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <description>
+
+&lt;h1 id=&#34;jpeg-と-icc-プロファイル&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
+
+&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値(内部的にはYCbCr)や CMYK値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
+引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+ sRGB, Adobe RGB 補正の例 &lt;/br&gt;
+ &lt;img src=&#34;../figure-srgb-adobergb.png&#34; /&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。&lt;/p&gt;
+
+&lt;h1 id=&#34;rgb-色空間&#34;&gt;RGB 色空間&lt;/h1&gt;
+
+&lt;p&gt;例えば赤を表す RGB:(255,0,0) 。
+世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。&lt;/p&gt;
+
+&lt;p&gt;一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+  Gamut(色域) &lt;br/&gt;
+  &lt;img src=&#34;../StandardProfilesGamutCoverage.jpg&#34; aligh=&#34;center&#34; /&gt; &lt;br/&gt;
+  ( 引用元: &lt;a href=&#34;http://wiki.nuaj.net/index.php?title=Color_Profile&#34;&gt;http://wiki.nuaj.net/index.php?title=Color_Profile&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;又、昔のディスプレイは出力に対して明るさを線形に出力出来なかったので、それに合わせたガンマ補正も入ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../Gamma06_300.png&#34; /&gt; &lt;br /&gt;
+引用元: &lt;a href=&#34;https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4&#34;&gt; &lt;a href=&#34;https://ja.wikipedia.org/wiki/ガンマ値&#34;&gt;https://ja.wikipedia.org/wiki/ガンマ値&lt;/a&gt; &lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;rgb-のデフォルト&#34;&gt;RGB のデフォルト&lt;/h2&gt;
+
+&lt;p&gt;Web の世界では sRGB が標準です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A Standard Default Color Space for the Internet - sRGB
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/Graphics/Color/sRGB.html&#34;&gt;https://www.w3.org/Graphics/Color/sRGB.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-noicc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。&lt;/p&gt;
+
+&lt;h1 id=&#34;cmyk-色空間&#34;&gt;CMYK 色空間&lt;/h1&gt;
+
+&lt;p&gt;プリンタに出力する色は CMYK で表現します。
+Cyan, Magenta, Yellow, blacK で各々インクの量です。&lt;/p&gt;
+
+&lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Japan Color, US SWOP, FOGRA, ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(境境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)&lt;/p&gt;
+
+&lt;p&gt;RGB と CMYK は大雑把に以下の関係にあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+ &lt;img src=&#34;../CMYRGBv3.png&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt; )
+ &lt;img src=&#34;../fig14-half.jpg&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick: magick/colorspace-private.h&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;cyan    = 1.0 - red;
+magenta = 1.0 - green;
+yellow  = 1.0 - blue;
+(一番小さな値を black にしてその分補正)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
+&lt;center&gt;
+ &lt;img src=&#34;../10993-05-JMPA-crop.jpg&#34; /&gt; &lt;br /&gt;
+   (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト&lt;/h2&gt;
+
+&lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。
+日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) がデファクトに近いので、迷ったらこれを使えば大体は大丈夫でしょう。&lt;/p&gt;
+
+&lt;p&gt;表示の時に ICC プロファイルが入っていない場合にどうするかは環境によって異なりますが、いずれにしてもインク特性を元にした値なので複雑な補正が必要です。&lt;/p&gt;
+
+&lt;p&gt;MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイルを用いるようです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;カラーマネージメントとプロファイル変換
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&#34;&gt;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;まだCMYKで消耗してるの？〜大幅な色補正をCMYKで行ってはいけない理由〜
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;紙デザイナーのためのrgbカラー超入門
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>RGBA4444 の追加実験</title>
@@ -2428,8 +2568,13 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;h2 id=&#34;orientation-とは&#34;&gt;Orientation とは&lt;/h2&gt;
 
-&lt;p&gt;JPEG には画像データそのものと別に Exif という形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
-その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。&lt;/p&gt;
+&lt;p&gt;JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation タグがあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../jpeg-exif-orient.png&#34; /&gt; &lt;/br&gt;
+引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
+ &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。
@@ -2728,98 +2873,6 @@ done
 &lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
-      <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
-      <description>
-
-&lt;h1 id=&#34;auto-orient-でオフセットがズレる件&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
-
-&lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。
-上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、
-offset 情報がおかしくなります。
-
-$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 0:00.000
-このケースは -auto-orient をつけて一度 JPEG に変換し、
-改めて PNG に変換すると正しい情報の画像が得られます。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
-
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
-
-&lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AutoOrientImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;AutoOrientImage から RotateImage ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。(縦横変わるだけでもはみでますけど)&lt;/p&gt;
-
-&lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置される恐れがあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;repage&#34;&gt;+repage&lt;/h1&gt;
-
-&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
-$ identify out-repage.png
-out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
-
-&lt;h1 id=&#34;おまけ&#34;&gt;おまけ&lt;/h1&gt;
-
-&lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;自分でコンパイルしたもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
 </description>
     </item>
     
