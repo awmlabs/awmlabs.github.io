@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/blog/</link>
-    <description>Recent content in Blog on awm-Tech</description>
+    <title>awm-Tech</title>
+    <link>https://blog.awm.jp/tags/blog/index.xml</link>
+    <description>Recent content on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,11 +17,11 @@
       <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
       <description>
 
-&lt;h1 id=&#34;blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
+&lt;h1 id=&#34;blog-の-deploy-で-circle-ci&#34;&gt;Blog の Deploy で Circle CI&lt;/h1&gt;
 
 &lt;p&gt;昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。&lt;/p&gt;
 
-&lt;h1 id=&#34;はじめに:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
 &lt;p&gt;前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。&lt;/p&gt;
 
@@ -32,7 +31,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/awmlabs/awmlabs.github.io&#34;&gt;https://github.com/awmlabs/awmlabs.github.io&lt;/a&gt; blog の公開ファイル&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;circle.yaml&lt;/h1&gt;
+&lt;h1 id=&#34;circle-yaml&#34;&gt;circle.yaml&lt;/h1&gt;
 
 &lt;p&gt;連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。&lt;/p&gt;
 
@@ -71,7 +70,7 @@
 
 &lt;p&gt;神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)&lt;/p&gt;
 
-&lt;h2 id=&#34;pygments:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Pygments&lt;/h2&gt;
+&lt;h2 id=&#34;pygments&#34;&gt;Pygments&lt;/h2&gt;
 
 &lt;p&gt;Syntax Highlight を使いたいので、Pygments を入れたいけど、&lt;/p&gt;
 
@@ -80,7 +79,7 @@
 
 &lt;p&gt;を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &amp;ndash;user を後ろにつけてます。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-アカウント作成&#34;&gt;Circle CI アカウント作成&lt;/h1&gt;
 
 &lt;p&gt;連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。&lt;/p&gt;
 
@@ -92,7 +91,7 @@
 
 &lt;p&gt;Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。&lt;/p&gt;
 
-&lt;h1 id=&#34;circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
+&lt;h1 id=&#34;circle-ci-での連携設定&#34;&gt;Circle CI での連携設定&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Add Project で監視するレポジトリを選択します。&lt;/li&gt;
@@ -102,7 +101,7 @@
 
 &lt;p&gt;(あと一手間あった気がするので、思い出したら後で追記します)&lt;/p&gt;
 
-&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
+&lt;h1 id=&#34;異なる-github-アカウントでの連携-推測&#34;&gt;異なる Github アカウントでの連携 (推測)&lt;/h1&gt;
 
 &lt;p&gt;同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id&lt;em&gt;rsa&lt;/em&gt;(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。&lt;/p&gt;
 
@@ -113,14 +112,14 @@
 
 &lt;p&gt;必要に迫られた時にでも、もう少し試行錯誤してみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;備考:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;備考&lt;/h1&gt;
+&lt;h1 id=&#34;備考&#34;&gt;備考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。&lt;/li&gt;
 &lt;li&gt;別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考url:74a620a9653e59d29d4e0cbb59ac7a79&#34;&gt;参考URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考url&#34;&gt;参考URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&#34;&gt;http://qiita.com/xlune/items/f5248a6cdddfb011c2ac&lt;/a&gt;&lt;/li&gt;
@@ -137,7 +136,7 @@
       <guid>https://blog.awm.jp/2016/01/02/hugo/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに:32ab7241d48fcc174c877413a917f8cf&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
 &lt;p&gt;Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。&lt;/p&gt;
 
@@ -166,7 +165,7 @@ hasCJKLanguage              false
  (.Summary and .WordCount can work properly in CJKLanguage)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Hugo のサマリーの実例&lt;/h1&gt;
+&lt;h1 id=&#34;hugo-のサマリーの実例&#34;&gt;Hugo のサマリーの実例&lt;/h1&gt;
 
 &lt;p&gt;デフォルトだと以下のようにサマリーが巨大になります。
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/02/ss1_h.png&#34; title=&#34;figure-1&#34; &gt; &lt;/center&gt;&lt;/p&gt;
@@ -175,7 +174,7 @@ hasCJKLanguage              false
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/02/ss2_h.png&#34; title=&#34;figure-2&#34;/&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;サマリーの仕様:32ab7241d48fcc174c877413a917f8cf&#34;&gt;サマリーの仕様&lt;/h1&gt;
+&lt;h1 id=&#34;サマリーの仕様&#34;&gt;サマリーの仕様&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io/content/summaries/&#34;&gt;https://gohugo.io/content/summaries/&lt;/a&gt;&lt;/li&gt;
@@ -195,7 +194,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 &lt;li&gt;&lt;a href=&#34;https://github.com/spf13/hugo&#34;&gt;https://github.com/spf13/hugo&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;実装:32ab7241d48fcc174c877413a917f8cf&#34;&gt;実装&lt;/h1&gt;
+&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;github.com/spf13/hugo/hugolib/page.go&lt;/li&gt;
@@ -224,10 +223,10 @@ By default なので値を 70 以外に変える方法があると推測し、�
 
 &lt;p&gt;よくよく見返すと、&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;isCJKLanguage&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color: #a6e22e&#34;&gt;summary&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;truncated&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;helpers&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;TruncateWordsByRune&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;CJK (中国語、日本語、韓国語をひっくるめた総称) と判定した場合に、マルチバイト文字を意識して単語毎に分割してます。それ以外だとアルファベット等として空白で分割でしょう。&lt;/p&gt;
 
