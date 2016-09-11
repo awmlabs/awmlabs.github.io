@@ -181,21 +181,24 @@ yellow  = 1.0 - blue;
 
 <p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
 <center>
- <img src="../10993-05-JMPA-crop.jpg" /> <br />
+ Japan Color 2001 Coated <br />
+ <img src="../10993-04-JapanColor-crop.jpg" /> <br />
    (引用元: <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a> )
 </center></p>
 
 <h2 id="cmyk-のデフォルト">CMYK のデフォルト</h2>
 
 <p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) がデファクトに近いので、迷ったらこれを使えば大体は大丈夫でしょう。</p>
+日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) を使えば大体は大丈夫でしょう。(オフ輪だと japan Web Coated の方が良いらしい)</p>
 
-<p>表示の時に ICC プロファイルが入っていない場合にどうするかは環境によって異なりますが、いずれにしてもインク特性を元にした値なので複雑な補正が必要です。</p>
+<p>モニタ表示の時、CMYK JPEG に ICC プロファイルが入っていない場合にどうするかは環境によって異なります。</p>
 
 <p>MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイルを用いるようです。</p>
 
 <pre><code>/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 </code></pre>
+
+<p>Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&gt; RGB 処理を行うようで、話が少し面倒だったりします。</p>
 
 <h1 id="参考">参考</h1>
 
