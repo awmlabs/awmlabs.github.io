@@ -19,7 +19,7 @@
 
 &lt;h1 id=&#34;jpeg-と-icc-プロファイル&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
 
-&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値(内部的にはYCbCr)や CMYK値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
+&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
@@ -79,7 +79,7 @@
 &lt;h1 id=&#34;cmyk-色空間&#34;&gt;CMYK 色空間&lt;/h1&gt;
 
 &lt;p&gt;プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK で各々インクの量です。&lt;/p&gt;
+Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
 
 &lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
 
@@ -116,10 +116,10 @@ yellow  = 1.0 - blue;
    (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
 &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト&lt;/h2&gt;
+&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
 
 &lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) を使えば大体は大丈夫でしょう。(オフ輪だと japan Web Coated の方が良いらしい)&lt;/p&gt;
+日本に限って言えば、Japan Color 2001 Coated &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; を使えば大体は大丈夫でしょう。&lt;/p&gt;
 
 &lt;p&gt;モニタ表示の時、CMYK JPEG に ICC プロファイルが入っていない場合にどうするかは環境によって異なります。&lt;/p&gt;
 
@@ -149,6 +149,19 @@ yellow  = 1.0 - blue;
 &lt;li&gt;&lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     
