@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>awm-Tech</title>
-    <link>https://blog.awm.jp/categories/png/index.xml</link>
-    <description>Recent content on awm-Tech</description>
+    <title>Png on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/png/</link>
+    <description>Recent content in Png on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 26 Jan 2016 14:55:42 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/png/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,11 +18,11 @@
       <guid>https://blog.awm.jp/2016/01/26/png/</guid>
       <description>
 
-&lt;h1 id=&#34;imagemagick-で-png-の形式を変換&#34;&gt;ImageMagick で PNG の形式を変換&lt;/h1&gt;
+&lt;h1 id=&#34;imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf&#34;&gt;ImageMagick で PNG の形式を変換&lt;/h1&gt;
 
 &lt;p&gt;PNG は同じように見える画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;カラータイプ&#34;&gt;カラータイプ&lt;/h1&gt;
+&lt;h1 id=&#34;カラータイプ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;カラータイプ&lt;/h1&gt;
 
 &lt;p&gt;PNG は以下の5種類のカラータイプがあります。仕様書からコピペします。&lt;/p&gt;
 
@@ -123,7 +124,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;type-0-グレースケール&#34;&gt;Type:0 グレースケール&lt;/h2&gt;
+&lt;h2 id=&#34;type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:0 グレースケール&lt;/h2&gt;
 
 &lt;p&gt;黒:0〜白:2^(bit数)の範囲の値を並べるだけの形式です。
 bit数は 1,2,4,8,16 から選択できます。
@@ -138,7 +139,7 @@ bit数は 1,2,4,8,16 から選択できます。
 &lt;li&gt;尚、tRNS チャンクをつける事で透明ピクセルも表現できます。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;type-2-rgb-png24&#34;&gt;Type:2 RGB (PNG24)&lt;/h2&gt;
+&lt;h2 id=&#34;type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:2 RGB (PNG24)&lt;/h2&gt;
 
 &lt;p&gt;ピクセルの R,G,B をそのまま展開します。
 &lt;center&gt; &lt;img src=&#34;../png-type2.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
@@ -160,7 +161,7 @@ bit数は 1,2,4,8,16 から選択できます。
 &lt;li&gt;PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;type-3-パレット-png8&#34;&gt;Type:3 パレット (PNG8)&lt;/h2&gt;
+&lt;h2 id=&#34;type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:3 パレット (PNG8)&lt;/h2&gt;
 
 &lt;p&gt;色のパレットを持ち、そこへのインデックス値を並べて画像を表現します。
 &lt;center&gt; &lt;img src=&#34;../png-type3.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
@@ -174,7 +175,7 @@ bit数は 1,2,4,8,16 から選択できます。
 &lt;center&gt; &lt;img src=&#34;../png-type3-tRNS.png&#34; /&gt; &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;../Opaopa-png8-trns.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;type-4-透明度つきグレースケール&#34;&gt;Type:4 透明度つきグレースケール&lt;/h2&gt;
+&lt;h2 id=&#34;type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:4 透明度つきグレースケール&lt;/h2&gt;
 
 &lt;p&gt;グレースケールの値と透明度のセットで表現します。
 &lt;center&gt; &lt;img src=&#34;../png-type4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
@@ -184,7 +185,7 @@ bit数は 1,2,4,8,16 から選択できます。
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-type4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;type-6-rgba-png32&#34;&gt;Type:6 RGBA (PNG32)&lt;/h2&gt;
+&lt;h2 id=&#34;type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf&#34;&gt;Type:6 RGBA (PNG32)&lt;/h2&gt;
 
 &lt;p&gt;ピクセルの R,G,B,A を展開します。
 &lt;center&gt; &lt;img src=&#34;../png-type6.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
@@ -194,18 +195,18 @@ bit数は 1,2,4,8,16 から選択できます。
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-png32.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;インターレース&#34;&gt;インターレース&lt;/h1&gt;
+&lt;h1 id=&#34;インターレース:418c06c92c8215b52bf45f50bda544bf&#34;&gt;インターレース&lt;/h1&gt;
 
 &lt;p&gt;PNG のインターレースは独特で、Adam7 アルゴリズムを使います。&lt;/p&gt;
 
-&lt;h2 id=&#34;インターレース方式-adam7&#34;&gt;インターレース方式 Adam7&lt;/h2&gt;
+&lt;h2 id=&#34;インターレース方式-adam7:418c06c92c8215b52bf45f50bda544bf&#34;&gt;インターレース方式 Adam7&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert Opaopa.png -interlace PNG Opaopa-adam7.png
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../Opaopa-adam7.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ピクセルの並ぶ順番&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
+&lt;h3 id=&#34;ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf&#34;&gt;ピクセルの並ぶ順番&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;8x8 のブロックで左上のを１つ&lt;/li&gt;
@@ -271,18 +272,18 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;メタデータ&#34;&gt;メタデータ&lt;/h1&gt;
+&lt;h1 id=&#34;メタデータ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;メタデータ&lt;/h1&gt;
 
-&lt;h2 id=&#34;gama-ガンマ補正&#34;&gt;gAMA (ガンマ補正)&lt;/h2&gt;
+&lt;h2 id=&#34;gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf&#34;&gt;gAMA (ガンマ補正)&lt;/h2&gt;
 
 &lt;p&gt;単純にガンマ値を指定します。BigEndian の4byteで表現していて、ガンマ値を100000倍した値を格納します。逆にいうと、バイナリを整数として読み出し、1/100000 した値がガンマ値です。&lt;/p&gt;
 
-&lt;h2 id=&#34;chrm-基本色度&#34;&gt;cHRM (基本色度)&lt;/h2&gt;
+&lt;h2 id=&#34;chrm-基本色度:418c06c92c8215b52bf45f50bda544bf&#34;&gt;cHRM (基本色度)&lt;/h2&gt;
 
 &lt;p&gt;基本色度やホワイトバランスを指定します。
 尚、sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。&lt;/p&gt;
 
-&lt;h2 id=&#34;icpp-icc-プロファイル&#34;&gt;iCPP (ICC プロファイル)&lt;/h2&gt;
+&lt;h2 id=&#34;icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf&#34;&gt;iCPP (ICC プロファイル)&lt;/h2&gt;
 
 &lt;p&gt;ICC プロファイルを埋め込めます。 (JPEG と同じ要領です)&lt;/p&gt;
 
@@ -317,22 +318,22 @@ $ convert  Opaopa-dot1.png -filter Point -fx &amp;quot;p{i-i%2,j-j%2}&amp;quot; 
 &lt;li&gt;ICC プロファイルがあった場合 =&amp;gt; 見た目の色が変わらないよう画像データのRGBを書き換えつつ ICCプロファイルを上書きする&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;bkgd-背景色&#34;&gt;bKGD (背景色)&lt;/h2&gt;
+&lt;h2 id=&#34;bkgd-背景色:418c06c92c8215b52bf45f50bda544bf&#34;&gt;bKGD (背景色)&lt;/h2&gt;
 
 &lt;p&gt;背景色を指定します。画像が貼られた時に埋まらなかったピクセルを埋める色です。&lt;/p&gt;
 
-&lt;h1 id=&#34;メタデータ-おまけ&#34;&gt;メタデータ (おまけ)&lt;/h1&gt;
+&lt;h1 id=&#34;メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf&#34;&gt;メタデータ (おまけ)&lt;/h1&gt;
 
-&lt;h2 id=&#34;phys&#34;&gt;pHYs&lt;/h2&gt;
+&lt;h2 id=&#34;phys:418c06c92c8215b52bf45f50bda544bf&#34;&gt;pHYs&lt;/h2&gt;
 
 &lt;p&gt;DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。単位がインチでなくメートルなので少し計算が面倒です。&lt;/p&gt;
 
-&lt;h2 id=&#34;sbit&#34;&gt;sBIT&lt;/h2&gt;
+&lt;h2 id=&#34;sbit:418c06c92c8215b52bf45f50bda544bf&#34;&gt;sBIT&lt;/h2&gt;
 
 &lt;p&gt;元画像データの Bit深度を記録します。
 恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えそうです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味がないので。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url:418c06c92c8215b52bf45f50bda544bf&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PNG (Portable Network Graphics) Specification, Version 1.2

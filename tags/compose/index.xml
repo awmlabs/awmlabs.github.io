@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>awm-Tech</title>
-    <link>https://blog.awm.jp/tags/compose/index.xml</link>
-    <description>Recent content on awm-Tech</description>
+    <title>Compose on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/compose/</link>
+    <description>Recent content in Compose on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 05 Jan 2016 22:59:30 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/compose/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
       <description>
 
-&lt;h1 id=&#34;imagemagick-でサムネール画像生成&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
+&lt;h1 id=&#34;imagemagick-でサムネール画像生成:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;ImageMagick でサムネール画像生成&lt;/h1&gt;
 
 &lt;p&gt;初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。&lt;/p&gt;
 
@@ -26,7 +27,7 @@
 &lt;p&gt;オリジナル画像はこちらをを使います。
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama.jpg&#34; alt=&#34;saitama&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;とりあえず小さくする&#34;&gt;とりあえず小さくする&lt;/h1&gt;
+&lt;h1 id=&#34;とりあえず小さくする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;とりあえず小さくする&lt;/h1&gt;
 
 &lt;p&gt;手始めに適当なサイズ 100x100 を指定してサムネールを作ります。&lt;/p&gt;
 
@@ -43,7 +44,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;単純に 100x100 を指定すると、アスペクト比(縦と横の比率)が変わらないよう調整される為です。&lt;/p&gt;
 
-&lt;h1 id=&#34;リサイズ後のサイズを-100x100-にする&#34;&gt;リサイズ後のサイズを 100x100 にする&lt;/h1&gt;
+&lt;h1 id=&#34;リサイズ後のサイズを-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;リサイズ後のサイズを 100x100 にする&lt;/h1&gt;
 
 &lt;p&gt;アスペクト比を無視して、確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。&lt;/p&gt;
 
@@ -54,11 +55,11 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;しかしこれは、恐らく望む結果ではないはずです。&lt;/p&gt;
 
-&lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
+&lt;h1 id=&#34;アスペクト比を変えずに-100x100-にする:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;アスペクト比を変えずに 100x100 にする&lt;/h1&gt;
 
 &lt;p&gt;そんな矛盾した要求を。。。と一瞬怯みますが、２つ方法を思いつきます。&lt;/p&gt;
 
-&lt;h2 id=&#34;削ってしまう&#34;&gt;削ってしまう&lt;/h2&gt;
+&lt;h2 id=&#34;削ってしまう:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;削ってしまう&lt;/h2&gt;
 
 &lt;p&gt;先程の 100x100 指定では縦と横のうち大きい辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。&lt;/p&gt;
 
@@ -70,7 +71,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100crop.jpg&#34; alt=&#34;100x100crop&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;余白をつける&#34;&gt;余白をつける&lt;/h2&gt;
+&lt;h2 id=&#34;余白をつける:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;余白をつける&lt;/h2&gt;
 
 &lt;p&gt;左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。&lt;/p&gt;
 
@@ -88,7 +89,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_100x100black.jpg&#34; alt=&#34;100x100black&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;丸いアイコン風画像の作り方&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
+&lt;h1 id=&#34;丸いアイコン風画像の作り方:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;丸いアイコン風画像の作り方&lt;/h1&gt;
 
 &lt;p&gt;最後に、サムネールとは少し異なりますが丸いアイコン風画像の作り方も紹介します。&lt;/p&gt;
 
@@ -110,7 +111,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/05/saitama_icon.png&#34; alt=&#34;icon&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;一行にまとめる&#34;&gt;一行にまとめる&lt;/h2&gt;
+&lt;h2 id=&#34;一行にまとめる:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;一行にまとめる&lt;/h2&gt;
 
 &lt;p&gt;カッコを使って入れ子に出来ます。&lt;/p&gt;
 
@@ -121,11 +122,11 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 &lt;p&gt;画像は同じ結果なので省略します。&lt;/p&gt;
 
-&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
+&lt;h1 id=&#34;最後に:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;最後に&lt;/h1&gt;
 
 &lt;p&gt;リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった時のケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明します。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url:32035ec8aa7ac7a754d0e4d44852406c&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.imagemagick.org/Usage/masking/&#34;&gt;http://www.imagemagick.org/Usage/masking/&lt;/a&gt;&lt;/li&gt;
