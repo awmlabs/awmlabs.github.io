@@ -192,7 +192,7 @@ yellow  = 1.0 - blue;
 
 <h2 id="cmyk-のデフォルト">CMYK のデフォルト(?)</h2>
 
-<p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので環境によって異なるので、そもそも無理でしょう。</p>
+<p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。</p>
 
 <p>ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。</p>
 
@@ -201,7 +201,7 @@ yellow  = 1.0 - blue;
 <pre><code>/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 </code></pre>
 
-<p>上記の理由で、CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">4</a></sup> は大丈夫でしょう。</p>
+<p>CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">4</a></sup> は大丈夫でしょう。</p>
 
 <p>Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&gt; RGB 処理を行うようで、話が少し面倒だったりします。</p>
 
