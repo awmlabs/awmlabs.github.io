@@ -121,12 +121,14 @@
   ( 引用元: <a href="http://wiki.nuaj.net/index.php?title=Color_Profile">http://wiki.nuaj.net/index.php?title=Color_Profile</a> )
 </center></p>
 
-<p>又、昔のディスプレイは出力に対して明るさを線形に出力出来なかったので、それに合わせたガンマ補正も入ります。</p>
+<p>又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。</p>
 
 <p><center>
 <img src="../Gamma06_300.png" /> <br />
 引用元: <a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4"> <a href="https://ja.wikipedia.org/wiki/ガンマ値">https://ja.wikipedia.org/wiki/ガンマ値</a> </a>
  </center></p>
+
+<p>あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。</p>
 
 <h2 id="rgb-のデフォルト">RGB のデフォルト</h2>
 
