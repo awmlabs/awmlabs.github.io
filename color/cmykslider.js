@@ -4,6 +4,9 @@ var RGB   = ["red", "green", "blue"];
 var CMYK = ["cyan", "magenta", "yellow", "key"];
 var RGBCMYK = RGB.concat(CMYK);
 
+var key_lock = getById("key_lock");
+var key_lock_checked = null;
+
 function getById(id) {
     return document.getElementById(id);
 }
@@ -36,16 +39,18 @@ function cssColor(cspace, r, g, b) {
 }
 
 // https://www.w3.org/TR/css-color-4/#cmyk-rgb
-function rgb2cmyk(rgb) {
+function rgb2cmyk(rgb, k) {
     var [r, g, b] = rgb;
-    var k = 255 - Math.max(r, g, b);
+    if (k === null) {
+	k = 255 - Math.max(r, g, b);
+    }
     if (k === 255) {
         return [0, 0, 0, 255];
     }
     var c = 255 * (255 - r - k) / (255 - k)
     var m = 255 * (255 - g - k) / (255 - k)
     var y = 255 * (255 - b - k) / (255 - k)
-    return [Math.round(c), Math.round(m), Math.round(y), Math.round(k)];
+    return [c >>> 0, m >>> 0, y >>> 0, k >>> 0];
 }
 
 function cmyk2rgb(cmyk) {
@@ -53,14 +58,11 @@ function cmyk2rgb(cmyk) {
     var r = 255 - Math.min(255, c * (255 - k)/255 + k)
     var g = 255 - Math.min(255, m * (255 - k)/255 + k)
     var b = 255 - Math.min(255, y * (255 - k)/255 + k)
-    return [Math.round(r), Math.round(g), Math.round(b)];
+    return [r >>> 0, g >>> 0, b >>> 0];
 }
 
 function showColorRGBpaint(rgb) {
     var [r, g, b] = rgb;
-    var r_style = cssColor("rgb", r, 0, 0);
-    var g_style = cssColor("rgb", 0, g, 0);
-    var b_style = cssColor("rgb", 0, 0, b);
     var rgb_paint = getById("rgb_paint");
     rgb_paint.style.backgroundColor = "black";
     var ctx = rgb_paint.getContext("2d");
@@ -68,17 +70,17 @@ function showColorRGBpaint(rgb) {
     ctx.clearRect(0, 0, width, height);
     ctx.globalCompositeOperation = "lighter"; // 加法混色
     ctx.beginPath();
-    ctx.fillStyle = r_style;
+    ctx.fillStyle = cssColor("rgb", r, 0, 0);
     ctx.arc(150, 110, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     //
     ctx.beginPath();
-    ctx.fillStyle = g_style;
+    ctx.fillStyle = cssColor("rgb", 0, g, 0);
     ctx.arc(110, 190, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     //
     ctx.beginPath();
-    ctx.fillStyle = b_style
+    ctx.fillStyle = cssColor("rgb", 0, 0, b);
     ctx.arc(190, 190, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     // #" + strN6([r, g, b], true);
@@ -172,8 +174,12 @@ function showColorCMYK(cmyk) {
 }
 
 function slideChange(e) {
-    var elem = e.target;
-    var id = elem.id;
+    if (typeof e === "string") {
+	var id = e;
+    } else {
+	var elem = e.target;
+	var id = elem.id;
+    }
     switch(id) {
     case "red":
     case "green":
@@ -183,7 +189,12 @@ function slideChange(e) {
 	    b = parseInt(getById("blue").value);
 	var rgb = [r, g, b];
 	showColorRGB(rgb);
-	var cmyk = rgb2cmyk(rgb);
+	if (key_lock_checked) {
+	    var k = parseInt(getById("key").value);
+	    var cmyk = rgb2cmyk(rgb, k);
+	} else {
+	    var cmyk = rgb2cmyk(rgb, null);
+	}
 	var [c, m, y, k] = cmyk;
 	getById("cyan").value    = c;
 	getById("magenta").value = m;
@@ -216,3 +227,21 @@ for (var i in RGBCMYK) {
     var elem = getById(RGBCMYK[i]);
     elem.addEventListener("input", slideChange);
 }
+
+key_lock.addEventListener("click", function(e) {
+    key_lock_checked = key_lock.checked;
+    if (key_lock_checked) {
+	key_num.innerHTML = 0;
+	getById("key").value = 0;
+	slideChange("key");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function(e) {
+    getById("cyan").value    = 64;
+    getById("magenta").value = 64;
+    getById("yellow").value  = 64;
+    getById("key").value     = 64;
+    slideChange("key");
+    key_lock_checked = key_lock.checked;
+});
