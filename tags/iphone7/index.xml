@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Iphone7 on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/iphone7/</link>
+    <link>https://blog.awm.jp/tags/iphone7/index.xml</link>
     <description>Recent content in Iphone7 on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 01 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/iphone7/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,27 +17,35 @@
       <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;必要なもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;必要なもの&lt;/h1&gt;
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;iPhone7 Plus (iPhone7 は所持してないので試してません)&lt;/li&gt;
+&lt;li&gt;実機
 
-&lt;li&gt;&lt;p&gt;PC (MacBook Pro で確認)&lt;/p&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;iPhone7 Plus (iPhone7 は試してません。所持してないので)&lt;/li&gt;
+&lt;li&gt;PC (MacBook Pro で確認しました)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;アカウント
 
-&lt;li&gt;&lt;p&gt;Adobe CC アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有料サブスクリプションが要る)&lt;/p&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Adobe CC アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有料サブスクリプションが要る)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;アプリ
 
-&lt;li&gt;&lt;p&gt;Adobe Lightroom for iPhone (無料)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Adobe Photoshop Lightroom CC (有料)&lt;/p&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Adobe Lightroom for iPhone (無料)&lt;/li&gt;
+&lt;li&gt;Adobe Photoshop Lightroom CC (有料)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;全体の流れ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;全体の流れ&lt;/h1&gt;
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../figure1.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;手順:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;手順&lt;/h1&gt;
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
 
-&lt;h2 id=&#34;iphone7-plus:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
@@ -49,26 +56,30 @@
 &lt;li&gt;DNG の(フラット)ボタンがあるので有効にする&lt;/li&gt;
 &lt;li&gt;撮影する&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;雲のアイコンをタッチする
+&lt;li&gt;同期が終わるまで待つ
 
 &lt;ul&gt;
-&lt;li&gt;同期が終わるまで待つ&lt;/li&gt;
+&lt;li&gt;雲のアイコンをタッチすると進捗が分かる&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;macbook-pro:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;MacBook Pro&lt;/h2&gt;
+&lt;h2 id=&#34;macbook-pro&#34;&gt;MacBook Pro&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (有料)&lt;/li&gt;
 &lt;li&gt;Adobe CC アカウントでログインする。(覚えてないけど操作があったかも)&lt;/li&gt;
-&lt;li&gt;左上の Lr ログをクリックして、Lightroom mobile と同期が動いているのを確認&lt;/li&gt;
+&lt;li&gt;Lightroom mobile との同期するまで待つ
+
+&lt;ul&gt;
+&lt;li&gt;左上の Lr ログをクリックすれば同期しているか確認出来る。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;画像の一覧が出るので、DNG が欲しい画像を選択する。&lt;/li&gt;
 &lt;li&gt;右クリックで Lightroom プリセット =&amp;gt; DNG に書き出しを実行。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考サイト:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考サイト&lt;/h1&gt;
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期
