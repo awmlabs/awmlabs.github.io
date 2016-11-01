@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jpeg on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/jpeg/</link>
+    <link>https://blog.awm.jp/tags/jpeg/index.xml</link>
     <description>Recent content in Jpeg on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 01 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/jpeg/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,7 +17,7 @@
       <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;必要なもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;必要なもの&lt;/h1&gt;
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;実機
@@ -40,13 +39,13 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;全体の流れ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;全体の流れ&lt;/h1&gt;
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../figure1.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;手順:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;手順&lt;/h1&gt;
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
 
-&lt;h2 id=&#34;iphone7-plus:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
@@ -64,7 +63,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;macbook-pro:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;MacBook Pro&lt;/h2&gt;
+&lt;h2 id=&#34;macbook-pro&#34;&gt;MacBook Pro&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (有料)&lt;/li&gt;
@@ -80,7 +79,7 @@
 
 &lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考サイト:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考サイト&lt;/h1&gt;
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期
@@ -100,9 +99,9 @@
       <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-と-icc-プロファイル:ad62a74a83918e4a46c8e687c633597e&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-と-icc-プロファイル&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
 
-&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
+&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
@@ -116,7 +115,7 @@
 
 &lt;p&gt;尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。&lt;/p&gt;
 
-&lt;h1 id=&#34;rgb-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB 色空間&lt;/h1&gt;
+&lt;h1 id=&#34;rgb-色空間&#34;&gt;RGB 色空間&lt;/h1&gt;
 
 &lt;p&gt;例えば赤を表す RGB:(255,0,0) 。
 世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。&lt;/p&gt;
@@ -143,7 +142,7 @@
 
 &lt;p&gt;あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。&lt;/p&gt;
 
-&lt;h2 id=&#34;rgb-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB のデフォルト&lt;/h2&gt;
+&lt;h2 id=&#34;rgb-のデフォルト&#34;&gt;RGB のデフォルト&lt;/h2&gt;
 
 &lt;p&gt;Web の世界では sRGB が標準です。&lt;/p&gt;
 
@@ -161,10 +160,10 @@
 
 &lt;p&gt;高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。&lt;/p&gt;
 
-&lt;h1 id=&#34;cmyk-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK 色空間&lt;/h1&gt;
+&lt;h1 id=&#34;cmyk-色空間&#34;&gt;CMYK 色空間&lt;/h1&gt;
 
 &lt;p&gt;プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
+Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
 
 &lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
 
@@ -203,22 +202,22 @@ yellow  = 1.0 - blue;
 
 &lt;p&gt;&amp;ldquo;cyan = 1.0 - red&amp;rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
 
-&lt;h2 id=&#34;cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
+&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
 
 &lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。&lt;/p&gt;
 
 &lt;p&gt;ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。&lt;/p&gt;
 
-&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
+&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
+&lt;p&gt;CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
 
 &lt;p&gt;Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&amp;gt; RGB 処理を行うようで、話が少し面倒だったりします。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考:ad62a74a83918e4a46c8e687c633597e&#34;&gt;参考&lt;/h1&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;カラーマネージメントとプロファイル変換
@@ -242,87 +241,14 @@ yellow  = 1.0 - blue;
 &lt;hr /&gt;
 
 &lt;ol&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick で JPEG 画像を RGB から CMYK に変換すると色が変わって見える件</title>
-      <link>https://blog.awm.jp/2016/09/01/cmyk/</link>
-      <pubDate>Thu, 01 Sep 2016 23:29:04 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/09/01/cmyk/</guid>
-      <description>
-
-&lt;h1 id=&#34;はじめに:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;はじめに&lt;/h1&gt;
-
-&lt;p&gt;RGB(実際はYCbCrで格納) JPEG を CMYK に変換する際に、色をなるべく変えない方法は一般に知られていますが、&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;何故変換で色が変わって見えるのか&lt;/li&gt;
-&lt;li&gt;何故その対処法で色が変わらなくなるのか&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;といった理屈を含めた簡単(?)な解説です。&lt;/p&gt;
-
-&lt;h1 id=&#34;問題:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;問題&lt;/h1&gt;
-
-&lt;p&gt;テスト画像
-&lt;center&gt; &lt;img src=&#34;../logo.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert logo.jpg -colorspace CMYK logo-cmyk.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo-cmyk-view.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;MacOS 標準の画像ビューアや Safari で開くと、こんな風に暗く見えます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;解決法:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;解決法&lt;/h1&gt;
-
-&lt;p&gt;以下のように -profile で CMYK 用 ICC プロファイルを指定すれば OK です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert logo.jpg -profile JapanColor2001Coated.icc logo-cmyk-jc2001c.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo-cmyk-jc2001c.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;JapanColor2001Coated.icc は以下のサイトから落とせます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.adobe.com/jp/support/downloads/1330.html&#34;&gt;https://www.adobe.com/jp/support/downloads/1330.html&lt;/a&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;色が変わる理由:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;色が変わる理由&lt;/h1&gt;
-
-&lt;p&gt;前提知識が思ったより多かったので、こちらにまとめました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JPEG と ICC プロファイル
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/09/10/jpegicc/&#34;&gt;http://blog.awm.jp/2016/09/10/jpegicc/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;JPEG の RGB 値や CMYK 値の実際の色は ICC プロファイル次第なので、モニタに表示する時には、この ICC プロファイルで補正します。&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;尚、上記コマンドで生成した &lt;a href=&#34;../logo-cmyk.jpg&#34;&gt;logo-cmyk.jpg&lt;/a&gt; は Chrome や Firefox だとカラーマネジメントがいい加減なので逆に、色が変わりません。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;Windows 用と書いてますが、OS 関係なく使えます。単に zip 形式というだけです。Mac 用のページだと sit 形式で公開されてます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -336,7 +262,7 @@ yellow  = 1.0 - blue;
       <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
 
 &lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
 
@@ -352,13 +278,13 @@ yellow  = 1.0 - blue;
 
 &lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
 
-&lt;h1 id=&#34;はじめに早見表:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;はじめに早見表&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに早見表&#34;&gt;はじめに早見表&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
 
-&lt;h2 id=&#34;imagemagick-での作り方:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;ImageMagick での作り方&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-での作り方&#34;&gt;ImageMagick での作り方&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ convert orig.jpg -sampling-factor &amp;quot;1x1,1x1,1x1&amp;quot; yuv444.jpg
 $ convert orig.jpg -sampling-factor &amp;quot;2x1,1x1,1x1&amp;quot; yuv422.jpg
@@ -368,17 +294,17 @@ $ convert orig.jpg -sampling-factor &amp;quot;2x2,1x1,1x1&amp;quot; yuv420.jpg
 $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg # yuv9
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;yuvabc-の種類:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUVabc の種類&lt;/h1&gt;
+&lt;h1 id=&#34;yuvabc-の種類&#34;&gt;YUVabc の種類&lt;/h1&gt;
 
 &lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
 
-&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
+&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
+&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
 
 &lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
 
@@ -388,7 +314,7 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;色々な-yuvabc:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;色々な YUVabc&lt;/h1&gt;
+&lt;h1 id=&#34;色々な-yuvabc&#34;&gt;色々な YUVabc&lt;/h1&gt;
 
 &lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)&lt;/p&gt;
 
@@ -432,7 +358,7 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;まとめ:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;まとめ&lt;/h1&gt;
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
@@ -447,7 +373,7 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 &lt;li&gt;YUV410 は abc の法則から例外&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考:acf70381f9800b5605f8911f9c4c3d94&#34;&gt;参考&lt;/h1&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
@@ -478,11 +404,11 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
       <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-の-ycbcr-について&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
 
 &lt;p&gt;JPEG で保存する色は RGB でなく YCbCr なので、その話。&lt;/p&gt;
 
-&lt;h1 id=&#34;rgb-ycbcr:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
+&lt;h1 id=&#34;rgb-ycbcr&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
 
 &lt;p&gt;RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。&lt;/p&gt;
 
@@ -499,9 +425,9 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;変換式:6214a8feaba721e81b237a92198f5169&#34;&gt;変換式&lt;/h2&gt;
+&lt;h2 id=&#34;変換式&#34;&gt;変換式&lt;/h2&gt;
 
-&lt;h3 id=&#34;rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
+&lt;h3 id=&#34;rgb-ycbcr-1&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -537,7 +463,7 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&#34;ycbcr-rgb:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
+&lt;h3 id=&#34;ycbcr-rgb&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -573,9 +499,9 @@ $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg #
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;rgb-との比較:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB との比較&lt;/h2&gt;
+&lt;h2 id=&#34;rgb-との比較&#34;&gt;RGB との比較&lt;/h2&gt;
 
-&lt;h3 id=&#34;rgb-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB チャネル分解&lt;/h3&gt;
+&lt;h3 id=&#34;rgb-チャネル分解&#34;&gt;RGB チャネル分解&lt;/h3&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -589,7 +515,7 @@ $ convert logo.png +level-colors Red \
 &lt;p&gt;注) Green1 を Green にすると緑の明るさが半分になるので注意
 &lt;center&gt; &lt;img src=&#34;../logo_rgb.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
+&lt;h3 id=&#34;ycbcr-チャネル分解&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
 
 &lt;p&gt;こちらは Golang の image パッケージで変換。&lt;/p&gt;
 
@@ -604,7 +530,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo_ycbcr.png&#34; /&gt; &lt;/center&gt;
 (YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)&lt;/p&gt;
 
-&lt;h2 id=&#34;メリット:6214a8feaba721e81b237a92198f5169&#34;&gt;メリット&lt;/h2&gt;
+&lt;h2 id=&#34;メリット&#34;&gt;メリット&lt;/h2&gt;
 
 &lt;p&gt;輝度信号と色差信号を分けるメリットですが。&lt;/p&gt;
 
@@ -615,9 +541,9 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;p&gt;JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリング方式でデータ量を節約します。尚、多くの動画形式は YCbCr でなく YUV で少し計算が異なります、概念的には似たものです。&lt;/p&gt;
 
-&lt;h3 id=&#34;クロマサブサンプリング:6214a8feaba721e81b237a92198f5169&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
+&lt;h3 id=&#34;クロマサブサンプリング&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
 
-&lt;h3 id=&#34;yuvabc:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVabc&lt;/h3&gt;
+&lt;h3 id=&#34;yuvabc&#34;&gt;YUVabc&lt;/h3&gt;
 
 &lt;p&gt;間引きかたによって YUV444、YUV422 のように表現します。&lt;/p&gt;
 
@@ -639,7 +565,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;デメリット:6214a8feaba721e81b237a92198f5169&#34;&gt;デメリット&lt;/h2&gt;
+&lt;h2 id=&#34;デメリット&#34;&gt;デメリット&lt;/h2&gt;
 
 &lt;p&gt;RGB と YCbCr は色空間が斜めの関係にあり、YCbCr は RGB を全部カバーする為、同じ 0-255 でも RGB より YCbCr の方が大きなスケールを表現します。&lt;/p&gt;
 
@@ -663,14 +589,14 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;まとめ:6214a8feaba721e81b237a92198f5169&#34;&gt;まとめ&lt;/h1&gt;
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。&lt;/li&gt;
 &lt;li&gt;デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
+&lt;h1 id=&#34;参考ページ&#34;&gt;参考ページ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG File Interchange Format
@@ -705,11 +631,11 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
       <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
       <description>
 
-&lt;h1 id=&#34;imagemagick-で-jpeg-の形式を変換:51b8d3349056accb3067af132947c35a&#34;&gt;ImageMagick で JPEG の形式を変換&lt;/h1&gt;
+&lt;h1 id=&#34;imagemagick-で-jpeg-の形式を変換&#34;&gt;ImageMagick で JPEG の形式を変換&lt;/h1&gt;
 
 &lt;p&gt;JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;プログレッシブjpeg:51b8d3349056accb3067af132947c35a&#34;&gt;プログレッシブJPEG&lt;/h1&gt;
+&lt;h1 id=&#34;プログレッシブjpeg&#34;&gt;プログレッシブJPEG&lt;/h1&gt;
 
 &lt;p&gt;読みはじめに粗い画像を表示して、読み進めるにつれて画質に更新する表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
 周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で実現します。&lt;/p&gt;
@@ -724,9 +650,9 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;pre&gt;&lt;code&gt;$ convert orig.jpg -interlace JPEG progressive.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;クロマサブサンプリング:51b8d3349056accb3067af132947c35a&#34;&gt;クロマサブサンプリング&lt;/h1&gt;
+&lt;h1 id=&#34;クロマサブサンプリング&#34;&gt;クロマサブサンプリング&lt;/h1&gt;
 
-&lt;p&gt;基本的に &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:51b8d3349056accb3067af132947c35a:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:51b8d3349056accb3067af132947c35a:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。&lt;/p&gt;
+&lt;p&gt;基本的に &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG の YCbCr について
@@ -755,9 +681,9 @@ $ convert orig.jpg -sampling-factor &amp;quot;2x2,1x1,1x1&amp;quot; yuv420.jpg
 $ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg # yuv9
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;exif-exittool-で変換:51b8d3349056accb3067af132947c35a&#34;&gt;Exif (Exittool で変換)&lt;/h1&gt;
+&lt;h1 id=&#34;exif-exittool-で変換&#34;&gt;Exif (Exittool で変換)&lt;/h1&gt;
 
-&lt;h2 id=&#34;orientation:51b8d3349056accb3067af132947c35a&#34;&gt;Orientation&lt;/h2&gt;
+&lt;h2 id=&#34;orientation&#34;&gt;Orientation&lt;/h2&gt;
 
 &lt;p&gt;Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)&lt;/p&gt;
 
@@ -785,9 +711,9 @@ $ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 
 &lt;p&gt;※ -o をつけ忘れると orig.jpg を上書きしてしまうので注意&lt;/p&gt;
 
-&lt;h1 id=&#34;profile:51b8d3349056accb3067af132947c35a&#34;&gt;Profile&lt;/h1&gt;
+&lt;h1 id=&#34;profile&#34;&gt;Profile&lt;/h1&gt;
 
-&lt;h2 id=&#34;icc-profile:51b8d3349056accb3067af132947c35a&#34;&gt;ICC Profile&lt;/h2&gt;
+&lt;h2 id=&#34;icc-profile&#34;&gt;ICC Profile&lt;/h2&gt;
 
 &lt;p&gt;ICC プロファイルの詳細は以下のスライドが分かり易いので、参照下さい。(英語)&lt;/p&gt;
 
@@ -849,7 +775,7 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../icc-profile2.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;グレイjpeg:51b8d3349056accb3067af132947c35a&#34;&gt;グレイJPEG&lt;/h1&gt;
+&lt;h1 id=&#34;グレイjpeg&#34;&gt;グレイJPEG&lt;/h1&gt;
 
 &lt;p&gt;JPEG 形式のタイプとして Grayscale が存在しますので、一応作り方を紹介。&lt;/p&gt;
 
@@ -858,11 +784,11 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 &lt;pre&gt;&lt;code&gt;$ convert orig.jpg -type grayscale gray.jpg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;最後に:51b8d3349056accb3067af132947c35a&#34;&gt;最後に&lt;/h1&gt;
+&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
 
 &lt;p&gt;他にもこんな形式を知っているという方がいましたら、ご指摘頂けると幸いです。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:51b8d3349056accb3067af132947c35a&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Exiftool
@@ -881,8 +807,8 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 &lt;hr /&gt;
 
 &lt;ol&gt;
-&lt;li id=&#34;fn:51b8d3349056accb3067af132947c35a:1&#34;&gt;Grayscale や CMYK の値で持つ事もできます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:51b8d3349056accb3067af132947c35a:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Grayscale や CMYK の値で持つ事もできます。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -896,7 +822,7 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
       <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
       <description>
 
-&lt;h1 id=&#34;透明度を含む画像を-jpeg-に変換する時の背景色:84783e3316737bab6c31917cbcac1c95&#34;&gt;透明度を含む画像を JPEG に変換する時の背景色&lt;/h1&gt;
+&lt;h1 id=&#34;透明度を含む画像を-jpeg-に変換する時の背景色&#34;&gt;透明度を含む画像を JPEG に変換する時の背景色&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -910,7 +836,7 @@ $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 白にしたい場合は同じサイズにリサイズしましょう。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;実際のところ:84783e3316737bab6c31917cbcac1c95&#34;&gt;実際のところ&lt;/h1&gt;
+&lt;h1 id=&#34;実際のところ&#34;&gt;実際のところ&lt;/h1&gt;
 
 &lt;p&gt;そのまま JPEG に変換すると背景色は白になります。&lt;/p&gt;
 
@@ -929,7 +855,7 @@ $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#3
 
 &lt;p&gt;詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)&lt;/p&gt;
 
-&lt;h1 id=&#34;extent-で背景を白にできる:84783e3316737bab6c31917cbcac1c95&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
+&lt;h1 id=&#34;extent-で背景を白にできる&#34;&gt;-extent で背景を白にできる&lt;/h1&gt;
 
 &lt;pre&gt;
 $ convert in.png -resize 200x200 out.jpg &lt;img src=&#34;../logoblack_hh.jpg&#34; /&gt;
@@ -942,7 +868,7 @@ $ convert in.png -resize 200x200 -extent 200x200 out.jpg &lt;img src=&#34;../log
 $ convert in.png -resize 200x200 –extent 400x400 out.jpg &lt;img src=&#34;../logowhiteExtent_hh.jpg&#34; /&gt;
 &lt;/pre&gt;
 
-&lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい:84783e3316737bab6c31917cbcac1c95&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
+&lt;h1 id=&#34;flatten-レイヤーを重ねる命令-が正しい&#34;&gt;-flatten (レイヤーを重ねる命令)が正しい&lt;/h1&gt;
 
 &lt;p&gt;-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。&lt;/p&gt;
 
@@ -973,7 +899,7 @@ $ convert in.png -resize 200x200  –flatten &lt;u&gt;-background red&lt;/u&gt; 
       <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
       <description>
 
-&lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
+&lt;h1 id=&#34;もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言&#34;&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集に一言&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;iframe allowfullscreen=&#34;true&#34; allowtransparency=&#34;true&#34; frameborder=&#34;0&#34; height=&#34;497&#34; mozallowfullscreen=&#34;true&#34; src=&#34;//speakerdeck.com/player/248da47aa52d48ae8d57e8656f117997&#34; style=&#34;border:0; padding:0; margin:0; background:transparent;&#34; webkitallowfullscreen=&#34;true&#34; width=&#34;578&#34;&gt;&lt;/iframe&gt;
@@ -982,7 +908,7 @@ $ convert in.png -resize 200x200  –flatten &lt;u&gt;-background red&lt;/u&gt; 
 
 &lt;p&gt;発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。&lt;/p&gt;
 
-&lt;h1 id=&#34;一部界隈で話題:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;一部界隈で話題&lt;/h1&gt;
+&lt;h1 id=&#34;一部界隈で話題&#34;&gt;一部界隈で話題&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
@@ -995,9 +921,9 @@ $ convert in.png -resize 200x200  –flatten &lt;u&gt;-background red&lt;/u&gt; 
 
 &lt;p&gt;色んなノウハウが詰まっていて素晴らしい記事です。便乗して幾つか勝手に補足してみます。&lt;/p&gt;
 
-&lt;h1 id=&#34;良いノウハウ:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;良いノウハウ&lt;/h1&gt;
+&lt;h1 id=&#34;良いノウハウ&#34;&gt;良いノウハウ&lt;/h1&gt;
 
-&lt;h2 id=&#34;リリース大量消費に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
+&lt;h2 id=&#34;リリース大量消費に注意&#34;&gt;リリース大量消費に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;limit 大事 (特にユーザ投稿画像を扱う場合)
@@ -1008,7 +934,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。&lt;/p&gt;
 
-&lt;h2 id=&#34;cmyk-画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;CMYK 画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;cmyk-画像を考慮しよう&#34;&gt;CMYK 画像を考慮しよう&lt;/h2&gt;
 
 &lt;p&gt;画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。&lt;/p&gt;
 
@@ -1031,7 +957,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
           earth_lights_colorspace.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;imagemagick-のオプションの順序に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-のオプションの順序に注意&#34;&gt;ImageMagick のオプションの順序に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;ImageMagick は引数を先頭から順に命令実行する&lt;/li&gt;
@@ -1072,11 +998,11 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;逆にいうと順序次第で組み合わせ的に色んな操作が可能になるという事です。&lt;/p&gt;
 
-&lt;h1 id=&#34;補足したい項目:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;補足したい項目&lt;/h1&gt;
+&lt;h1 id=&#34;補足したい項目&#34;&gt;補足したい項目&lt;/h1&gt;
 
 &lt;p&gt;対応するブログのエントリを並べます。&lt;/p&gt;
 
-&lt;h2 id=&#34;画像比較は人間の眼で行うべし:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;画像比較は人間の眼で行うべし&lt;/h2&gt;
+&lt;h2 id=&#34;画像比較は人間の眼で行うべし&#34;&gt;画像比較は人間の眼で行うべし&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;ImageMagick で画像を比較する
@@ -1088,7 +1014,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;ある程度、計算で差分の多い画像や領域を自動抽出できます。&lt;/p&gt;
 
-&lt;h2 id=&#34;orientation-を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;Orientation を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-を考慮しよう&#34;&gt;Orientation を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;-auto-orient でオフセットがズレる件
@@ -1100,7 +1026,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;JPEG を経由しなくても +repage で対処出来る。かもしれません。&lt;/p&gt;
 
-&lt;h2 id=&#34;透過画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;透過画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;透過画像を考慮しよう&#34;&gt;透過画像を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;透明度を含む画像を JPEG に変換する時の背景色
@@ -1112,7 +1038,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;結果は恐らく変わらないので重箱の隅付きですが、-extent は副作用的に対処出来るだけで、-flatten がズバリの処理です。&lt;/p&gt;
 
-&lt;h2 id=&#34;グレイスケール画像を考慮しよう:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;グレイスケール画像を考慮しよう&lt;/h2&gt;
+&lt;h2 id=&#34;グレイスケール画像を考慮しよう&#34;&gt;グレイスケール画像を考慮しよう&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;グレー形式JPEGをPNGに変換すると暗くなる件
@@ -1125,7 +1051,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;p&gt;6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。
 &lt;!-- (もしかして Colorspace を明示的に指定するとうまくいくかも？) --&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;define-jpeg-size-に注意:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;-define jpeg:size に注意&lt;/h2&gt;
+&lt;h2 id=&#34;define-jpeg-size-に注意&#34;&gt;-define jpeg:size に注意&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG の size hinting について
@@ -1137,7 +1063,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。&lt;/p&gt;
 
-&lt;h1 id=&#34;さいごに:a5dbf9f090c2c436a165e06d8b799a15&#34;&gt;さいごに&lt;/h1&gt;
+&lt;h1 id=&#34;さいごに&#34;&gt;さいごに&lt;/h1&gt;
 
 &lt;p&gt;以上です。誤りや物足りない所があればご指摘ください。&lt;/p&gt;
 
@@ -1170,9 +1096,9 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
-&lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
+&lt;h1 id=&#34;define-jpeg-size-とは&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
-&lt;h2 id=&#34;jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
+&lt;h2 id=&#34;jpeg-のデータの持ち方&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
 
 &lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
 
@@ -1180,7 +1106,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
 引用) &lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
+&lt;h2 id=&#34;scaling-指定で-decode&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
 
 &lt;p&gt;元のサイズの画像データに変換する場合と比べて、手間を増やさず &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。&lt;/p&gt;
 
@@ -1188,11 +1114,11 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)&lt;/p&gt;
 
-&lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
+&lt;h2 id=&#34;やっている事&#34;&gt;やっている事&lt;/h2&gt;
 
 &lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
 
-&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
 
 &lt;p&gt;詳しくはこちらを参照して下さい。&lt;/p&gt;
 
@@ -1204,7 +1130,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
+&lt;h2 id=&#34;小さくリサイズする場合&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;普通にリサイズ (-define jpeg:size 無し)
@@ -1216,7 +1142,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。&lt;/p&gt;
 
-&lt;h2 id=&#34;大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
+&lt;h2 id=&#34;大きくリサイズする場合-予想&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
 
 &lt;p&gt;問題にしているケースです。&lt;/p&gt;
 
@@ -1230,7 +1156,7 @@ $ convert -limit &lt;u&gt;memory 256MB&lt;/u&gt; -limit &lt;u&gt;disk 0&lt;/u&gt
 
 &lt;p&gt;という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。&lt;/p&gt;
 
-&lt;h3 id=&#34;実際の動き:8297ce3a5ed4594f91a307954f292784&#34;&gt;実際の動き&lt;/h3&gt;
+&lt;h3 id=&#34;実際の動き&#34;&gt;実際の動き&lt;/h3&gt;
 
 &lt;p&gt;jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。&lt;/p&gt;
 
@@ -1266,11 +1192,11 @@ AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_
 ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;結論&lt;/h1&gt;
+&lt;h1 id=&#34;結論&#34;&gt;結論&lt;/h1&gt;
 
 &lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、2倍か3倍以上小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
-&lt;h1 id=&#34;scaling-の該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling の該当コード&lt;/h1&gt;
+&lt;h1 id=&#34;scaling-の該当コード&#34;&gt;scaling の該当コード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;
@@ -1318,7 +1244,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;p&gt;この 2/block_size scaling の条件にマッチしたのかなと予想してます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:8297ce3a5ed4594f91a307954f292784&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Libjpeg&#34;&gt;https://en.wikipedia.org/wiki/Libjpeg&lt;/a&gt;&lt;/li&gt;
@@ -1359,9 +1285,9 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
       <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-exif-orientation-の操作&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
 
-&lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-とは&#34;&gt;Orientation とは&lt;/h2&gt;
 
 &lt;p&gt;JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation タグがあります。&lt;/p&gt;
@@ -1382,11 +1308,11 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
     exif:Orientation: 6
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-の数値の対応&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
 
 &lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
-&lt;h3 id=&#34;早見表1:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表1&lt;/h3&gt;
+&lt;h3 id=&#34;早見表1&#34;&gt;早見表1&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -1441,7 +1367,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
  * 1 の鏡反転 =&amp;gt; 2、8 の鏡反転 =&amp;gt; 5, 3の鏡反転=&amp;gt; 4、6 の鏡反転 =&amp;gt; 7
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;早見表2:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表2&lt;/h3&gt;
+&lt;h3 id=&#34;早見表2&#34;&gt;早見表2&lt;/h3&gt;
 
 &lt;p&gt;変換の方向がわかりやすい図もつけます。&lt;/p&gt;
 
@@ -1505,19 +1431,19 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
+&lt;h2 id=&#34;編集ツール&#34;&gt;編集ツール&lt;/h2&gt;
 
 &lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
 
 &lt;p&gt;ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
 
-&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
+&lt;h1 id=&#34;exiftool&#34;&gt;ExifTool&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;インストール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;インストール&lt;/h2&gt;
+&lt;h2 id=&#34;インストール&#34;&gt;インストール&lt;/h2&gt;
 
 &lt;p&gt;MacOS は&lt;/p&gt;
 
@@ -1533,7 +1459,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;p&gt;Perl なので他のプラットフォームでも入れるのは難しくないでしょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+&lt;h2 id=&#34;exiftool-の使い方&#34;&gt;ExifTool の使い方&lt;/h2&gt;
 
 &lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
 
@@ -1542,7 +1468,7 @@ test.jpg
     1 image files updated
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
+&lt;h2 id=&#34;まとめて-1-8を設定する&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
 
 &lt;p&gt;ついでに表示の時に元の画像の向きを維持するようにします。&lt;/p&gt;
 
@@ -1654,7 +1580,7 @@ done
 
 &lt;p&gt;として Exif タグを削除したものです。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Exif 2.3 規格書
