@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -73,15 +73,15 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#はじめに">はじめに</a></li>
-<li><a href="#hugo-のサマリーの実例">Hugo のサマリーの実例</a></li>
-<li><a href="#サマリーの仕様">サマリーの仕様</a></li>
-<li><a href="#実装">実装</a></li>
+<li><a href="#はじめに:32ab7241d48fcc174c877413a917f8cf">はじめに</a></li>
+<li><a href="#hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf">Hugo のサマリーの実例</a></li>
+<li><a href="#サマリーの仕様:32ab7241d48fcc174c877413a917f8cf">サマリーの仕様</a></li>
+<li><a href="#実装:32ab7241d48fcc174c877413a917f8cf">実装</a></li>
 </ul>
 </nav>
     
 
-<h1 id="はじめに">はじめに</h1>
+<h1 id="はじめに:32ab7241d48fcc174c877413a917f8cf">はじめに</h1>
 
 <p>Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。</p>
 
@@ -110,7 +110,7 @@ hasCJKLanguage              false
  (.Summary and .WordCount can work properly in CJKLanguage)
 </code></pre>
 
-<h1 id="hugo-のサマリーの実例">Hugo のサマリーの実例</h1>
+<h1 id="hugo-のサマリーの実例:32ab7241d48fcc174c877413a917f8cf">Hugo のサマリーの実例</h1>
 
 <p>デフォルトだと以下のようにサマリーが巨大になります。
 <center> <img src="/2016/01/02/ss1_h.png" title="figure-1" > </center></p>
@@ -119,7 +119,7 @@ hasCJKLanguage              false
 
 <p><center> <img src="/2016/01/02/ss2_h.png" title="figure-2"/> </center></p>
 
-<h1 id="サマリーの仕様">サマリーの仕様</h1>
+<h1 id="サマリーの仕様:32ab7241d48fcc174c877413a917f8cf">サマリーの仕様</h1>
 
 <ul>
 <li><a href="https://gohugo.io/content/summaries/">https://gohugo.io/content/summaries/</a></li>
@@ -139,7 +139,7 @@ By default なので値を 70 以外に変える方法があると推測し、�
 <li><a href="https://github.com/spf13/hugo">https://github.com/spf13/hugo</a></li>
 </ul>
 
-<h1 id="実装">実装</h1>
+<h1 id="実装:32ab7241d48fcc174c877413a917f8cf">実装</h1>
 
 <ul>
 <li>github.com/spf13/hugo/hugolib/page.go</li>
@@ -168,10 +168,10 @@ By default なので値を 70 以外に変える方法があると推測し、�
 
 <p>よくよく見返すと、</p>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #a6e22e">p</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">isCJKLanguage</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #a6e22e">summary</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">truncated</span> <span style="color: #f8f8f2">=</span> <span style="color: #a6e22e">helpers</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">TruncateWordsByRune</span><span style="color: #f8f8f2">(</span>
 </pre></div>
-
+</p>
 
 <p>CJK (中国語、日本語、韓国語をひっくるめた総称) と判定した場合に、マルチバイト文字を意識して単語毎に分割してます。それ以外だとアルファベット等として空白で分割でしょう。</p>
 

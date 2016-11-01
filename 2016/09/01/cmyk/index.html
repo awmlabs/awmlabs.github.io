@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>ImageMagick で JPEG 画像を RGB から CMYK に変換すると色が変わって見える件 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/09/01/cmyk/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/09/01/cmyk/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で JPEG 画像を RGB から CMYK に変換すると色が変わって見える件" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/09/01/cmyk/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-09-01">September 01, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/cmyk">CMYK</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で JPEG 画像を RGB から CMYK に変換すると色が変わって見える件</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#はじめに:2ca72d8734ee082a7e3e9ba8b06b9917">はじめに</a></li>
+<li><a href="#問題:2ca72d8734ee082a7e3e9ba8b06b9917">問題</a></li>
+<li><a href="#解決法:2ca72d8734ee082a7e3e9ba8b06b9917">解決法</a></li>
+<li><a href="#色が変わる理由:2ca72d8734ee082a7e3e9ba8b06b9917">色が変わる理由</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="はじめに:2ca72d8734ee082a7e3e9ba8b06b9917">はじめに</h1>
+
+<p>RGB(実際はYCbCrで格納) JPEG を CMYK に変換する際に、色をなるべく変えない方法は一般に知られていますが、</p>
+
+<ul>
+<li>何故変換で色が変わって見えるのか</li>
+<li>何故その対処法で色が変わらなくなるのか</li>
+</ul>
+
+<p>といった理屈を含めた簡単(?)な解説です。</p>
+
+<h1 id="問題:2ca72d8734ee082a7e3e9ba8b06b9917">問題</h1>
+
+<p>テスト画像
+<center> <img src="../logo.jpg" /> </center></p>
+
+<pre><code>$ convert logo.jpg -colorspace CMYK logo-cmyk.jpg
+</code></pre>
+
+<p><center> <img src="../logo-cmyk-view.jpg" /> </center></p>
+
+<p>MacOS 標準の画像ビューアや Safari で開くと、こんな風に暗く見えます。<sup class="footnote-ref" id="fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1"><a rel="footnote" href="#fn:2ca72d8734ee082a7e3e9ba8b06b9917:1">1</a></sup></p>
+
+<h1 id="解決法:2ca72d8734ee082a7e3e9ba8b06b9917">解決法</h1>
+
+<p>以下のように -profile で CMYK 用 ICC プロファイルを指定すれば OK です。</p>
+
+<pre><code>$ convert logo.jpg -profile JapanColor2001Coated.icc logo-cmyk-jc2001c.jpg
+</code></pre>
+
+<p><center> <img src="../logo-cmyk-jc2001c.jpg" /> </center></p>
+
+<p>JapanColor2001Coated.icc は以下のサイトから落とせます。</p>
+
+<ul>
+<li><a href="https://www.adobe.com/jp/support/downloads/1330.html">https://www.adobe.com/jp/support/downloads/1330.html</a> <sup class="footnote-ref" id="fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2"><a rel="footnote" href="#fn:2ca72d8734ee082a7e3e9ba8b06b9917:2">2</a></sup></li>
+</ul>
+
+<h1 id="色が変わる理由:2ca72d8734ee082a7e3e9ba8b06b9917">色が変わる理由</h1>
+
+<p>前提知識が思ったより多かったので、こちらにまとめました。</p>
+
+<ul>
+<li>JPEG と ICC プロファイル
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/09/10/jpegicc/">http://blog.awm.jp/2016/09/10/jpegicc/</a></li>
+</ul></li>
+</ul>
+
+<p>JPEG の RGB 値や CMYK 値の実際の色は ICC プロファイル次第なので、モニタに表示する時には、この ICC プロファイルで補正します。</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:2ca72d8734ee082a7e3e9ba8b06b9917:1">尚、上記コマンドで生成した <a href="../logo-cmyk.jpg">logo-cmyk.jpg</a> は Chrome や Firefox だとカラーマネジメントがいい加減なので逆に、色が変わりません。
+ <a class="footnote-return" href="#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1"><sup>[return]</sup></a></li>
+<li id="fn:2ca72d8734ee082a7e3e9ba8b06b9917:2">Windows 用と書いてますが、OS 関係なく使えます。単に zip 形式というだけです。Mac 用のページだと sit 形式で公開されてます。
+ <a class="footnote-return" href="#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
