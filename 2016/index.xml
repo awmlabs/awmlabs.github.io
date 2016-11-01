@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2016-rsses on awm-Tech</title>
+    <title>2016s on awm-Tech</title>
     <link>https://blog.awm.jp/2016/index.xml</link>
-    <description>Recent content in 2016-rsses on awm-Tech</description>
+    <description>Recent content in 2016s on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 10 Sep 2016 00:11:41 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>iPhone7 Plus で撮影した DNG 画像を取り出す方法</title>
+      <link>https://blog.awm.jp/2016/11/01/dng/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
+      <description>
+
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iPhone7 Plus (iPhone7 は所持してないので試してません)&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;PC (MacBook Pro で確認)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Adobe CC アカウント (ID 自体は無料だけど、Lightroom を使うのに有料サブスクリプションが要る)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Adobe Lightroom for iPhone (無料)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Adobe Photoshop Lightroom CC (有料)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;../dng/figure1.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
+
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
+&lt;li&gt;Adobe CC アカウントでログインする。(画面左上からアクセス)&lt;/li&gt;
+&lt;li&gt;Lightroom のカメラを使って撮影 (画面右下からアクセス)
+
+&lt;ul&gt;
+&lt;li&gt;DNG の(フラット)ボタンがあるので有効にする&lt;/li&gt;
+&lt;li&gt;撮影する&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;雲のアイコンをタッチする
+
+&lt;ul&gt;
+&lt;li&gt;同期が終わるまで待つ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;macbook-pro&#34;&gt;MacBook Pro&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Adobe Lightroom for iPhone をインストールする (有料)&lt;/li&gt;
+&lt;li&gt;Adobe CC アカウントでログインする。(覚えてないけど操作があったかも)&lt;/li&gt;
+&lt;li&gt;左上の Lr ログをクリックして、Lightroom mobile と同期が動いているのを確認&lt;/li&gt;
+&lt;li&gt;画像の一覧が出るので、DNG が欲しい画像を選択する。&lt;/li&gt;
+&lt;li&gt;右クリックで Lightroom プリセット =&amp;gt; DNG に書き出しを実行。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://helpx.adobe.com/jp/lightroom/help/lightroom-mobile-desktop-features.html&#34;&gt;https://helpx.adobe.com/jp/lightroom/help/lightroom-mobile-desktop-features.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>JPEG と ICC プロファイル</title>
@@ -2748,98 +2818,6 @@ done
 &lt;li&gt;&lt;a href=&#34;http://hackmylife.net/archives/7400448.html&#34;&gt;http://hackmylife.net/archives/7400448.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
-      <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
-      <description>
-
-&lt;h1 id=&#34;auto-orient-でオフセットがズレる件&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
-
-&lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。
-上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、
-offset 情報がおかしくなります。
-
-$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 0:00.000
-このケースは -auto-orient をつけて一度 JPEG に変換し、
-改めて PNG に変換すると正しい情報の画像が得られます。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
-
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
-
-&lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AutoOrientImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;AutoOrientImage から RotateImage ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。(縦横変わるだけでもはみでますけど)&lt;/p&gt;
-
-&lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置される恐れがあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;repage&#34;&gt;+repage&lt;/h1&gt;
-
-&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
-$ identify out-repage.png
-out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
-
-&lt;h1 id=&#34;おまけ&#34;&gt;おまけ&lt;/h1&gt;
-
-&lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;自分でコンパイルしたもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
 </description>
     </item>
     
