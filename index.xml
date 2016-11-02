@@ -53,21 +53,28 @@
 
 &lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
 
-&lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択。
-&lt;center&gt; &lt;img src=&#34;../lightroom01-h.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+  &lt;a href=&#34;../lightroom01.png&#34;&gt; &lt;img src=&#34;../lightroom02-1.png&#34;&gt; &lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;メニューのウィンドウからプリントを選択して、
-右はじののスクロールを一番したまで下げると、カラーマネジメントのパネルが出てくる。&lt;/p&gt;
+右端のスクロールバーを一番下まで下げると、カラーマネジメントのパネルが出てくる。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../lightroom02-h.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+  &lt;a href=&#34;../lightroom02.png&#34;&gt; &lt;img src=&#34;../lightroom02-h.png&#34;&gt; &lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;あとは、プロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
+&lt;p&gt;あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
 
 &lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
 
 &lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../photoshop01-45p.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+  &lt;a href=&#34;../photoshop01.png&#34;&gt; &lt;img src=&#34;../photoshop01-45p.png&#34;&gt; &lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;以下の保存オプションで選択&lt;/p&gt;
 
@@ -76,7 +83,9 @@
 &lt;li&gt;カラースペースに適当なプロファイル&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../photoshop02-30p.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+  &lt;a href=&#34;../photoshop02.png&#34;&gt; &lt;img src=&#34;../photoshop02-30p.png&#34;&gt; &lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;あとは右上の保存を押すだけ。&lt;/p&gt;
 </description>
