@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -73,23 +73,23 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-と-icc-プロファイル:ad62a74a83918e4a46c8e687c633597e">JPEG と ICC プロファイル</a></li>
-<li><a href="#rgb-色空間:ad62a74a83918e4a46c8e687c633597e">RGB 色空間</a>
+<li><a href="#jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</a></li>
+<li><a href="#rgb-色空間">RGB 色空間</a>
 <ul>
-<li><a href="#rgb-のデフォルト:ad62a74a83918e4a46c8e687c633597e">RGB のデフォルト</a></li>
+<li><a href="#rgb-のデフォルト">RGB のデフォルト</a></li>
 </ul></li>
-<li><a href="#cmyk-色空間:ad62a74a83918e4a46c8e687c633597e">CMYK 色空間</a>
+<li><a href="#cmyk-色空間">CMYK 色空間</a>
 <ul>
-<li><a href="#cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e">CMYK のデフォルト(?)</a></li>
+<li><a href="#cmyk-のデフォルト">CMYK のデフォルト(?)</a></li>
 </ul></li>
-<li><a href="#参考:ad62a74a83918e4a46c8e687c633597e">参考</a></li>
+<li><a href="#参考">参考</a></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-と-icc-プロファイル:ad62a74a83918e4a46c8e687c633597e">JPEG と ICC プロファイル</h1>
+<h1 id="jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</h1>
 
-<p>JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値<sup class="footnote-ref" id="fnref:ad62a74a83918e4a46c8e687c633597e:1"><a rel="footnote" href="#fn:ad62a74a83918e4a46c8e687c633597e:1">1</a></sup>や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。</p>
+<p>JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。</p>
 
 <p><center>
 <img src="../jpeg-profile-icc.png" /> </br>
@@ -103,7 +103,7 @@
 
 <p>尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。</p>
 
-<h1 id="rgb-色空間:ad62a74a83918e4a46c8e687c633597e">RGB 色空間</h1>
+<h1 id="rgb-色空間">RGB 色空間</h1>
 
 <p>例えば赤を表す RGB:(255,0,0) 。
 世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。</p>
@@ -130,7 +130,7 @@
 
 <p>あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。</p>
 
-<h2 id="rgb-のデフォルト:ad62a74a83918e4a46c8e687c633597e">RGB のデフォルト</h2>
+<h2 id="rgb-のデフォルト">RGB のデフォルト</h2>
 
 <p>Web の世界では sRGB が標準です。</p>
 
@@ -148,10 +148,10 @@
 
 <p>高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。</p>
 
-<h1 id="cmyk-色空間:ad62a74a83918e4a46c8e687c633597e">CMYK 色空間</h1>
+<h1 id="cmyk-色空間">CMYK 色空間</h1>
 
 <p>プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK <sup class="footnote-ref" id="fnref:ad62a74a83918e4a46c8e687c633597e:2"><a rel="footnote" href="#fn:ad62a74a83918e4a46c8e687c633597e:2">2</a></sup> で各々インクの量です。</p>
+Cyan, Magenta, Yellow, blacK <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> で各々インクの量です。</p>
 
 <p>CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。</p>
 
@@ -190,22 +190,22 @@ yellow  = 1.0 - blue;
 
 <p>&ldquo;cyan = 1.0 - red&rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。</p>
 
-<h2 id="cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e">CMYK のデフォルト(?)</h2>
+<h2 id="cmyk-のデフォルト">CMYK のデフォルト(?)</h2>
 
 <p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。</p>
 
 <p>ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。</p>
 
-<p>例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル<sup class="footnote-ref" id="fnref:ad62a74a83918e4a46c8e687c633597e:3"><a rel="footnote" href="#fn:ad62a74a83918e4a46c8e687c633597e:3">3</a></sup>を用いるようです。</p>
+<p>例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル<sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup>を用いるようです。</p>
 
 <pre><code>/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 </code></pre>
 
-<p>CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup class="footnote-ref" id="fnref:ad62a74a83918e4a46c8e687c633597e:4"><a rel="footnote" href="#fn:ad62a74a83918e4a46c8e687c633597e:4">4</a></sup> は大丈夫でしょう。</p>
+<p>CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">4</a></sup> は大丈夫でしょう。</p>
 
 <p>Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&gt; RGB 処理を行うようで、話が少し面倒だったりします。</p>
 
-<h1 id="参考:ad62a74a83918e4a46c8e687c633597e">参考</h1>
+<h1 id="参考">参考</h1>
 
 <ul>
 <li>カラーマネージメントとプロファイル変換
@@ -229,14 +229,14 @@ yellow  = 1.0 - blue;
 <hr />
 
 <ol>
-<li id="fn:ad62a74a83918e4a46c8e687c633597e:1">JPEG は RGB 値をYCbCrに変換して保存します
- <a class="footnote-return" href="#fnref:ad62a74a83918e4a46c8e687c633597e:1"><sup>[return]</sup></a></li>
-<li id="fn:ad62a74a83918e4a46c8e687c633597e:2">blacK の K という説より、Key の略という方が多勢のようです。
- <a class="footnote-return" href="#fnref:ad62a74a83918e4a46c8e687c633597e:2"><sup>[return]</sup></a></li>
-<li id="fn:ad62a74a83918e4a46c8e687c633597e:3">この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
- <a class="footnote-return" href="#fnref:ad62a74a83918e4a46c8e687c633597e:3"><sup>[return]</sup></a></li>
-<li id="fn:ad62a74a83918e4a46c8e687c633597e:4">Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a>
- <a class="footnote-return" href="#fnref:ad62a74a83918e4a46c8e687c633597e:4"><sup>[return]</sup></a></li>
+<li id="fn:1">JPEG は RGB 値をYCbCrに変換して保存します
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">blacK の K という説より、Key の略という方が多勢のようです。
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3">この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:4">Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a>
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

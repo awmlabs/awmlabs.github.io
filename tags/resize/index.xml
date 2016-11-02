@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Resize on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/resize/</link>
+    <link>https://blog.awm.jp/tags/resize/index.xml</link>
     <description>Recent content in Resize on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 08 Jan 2016 23:40:32 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/resize/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -35,9 +34,9 @@
 
 &lt;p&gt;注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。&lt;/p&gt;
 
-&lt;h1 id=&#34;define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
+&lt;h1 id=&#34;define-jpeg-size-とは&#34;&gt;-define jpeg:size とは？&lt;/h1&gt;
 
-&lt;h2 id=&#34;jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
+&lt;h2 id=&#34;jpeg-のデータの持ち方&#34;&gt;JPEG のデータの持ち方&lt;/h2&gt;
 
 &lt;p&gt;JPEG は画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。&lt;/p&gt;
 
@@ -45,7 +44,7 @@
 &lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/08/dct8x8-600.png&#34; /&gt; &lt;/center&gt;
 引用) &lt;a href=&#34;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&#34;&gt;https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
+&lt;h2 id=&#34;scaling-指定で-decode&#34;&gt;scaling 指定で Decode&lt;/h2&gt;
 
 &lt;p&gt;元のサイズの画像データに変換する場合と比べて、手間を増やさず &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt; サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。&lt;/p&gt;
 
@@ -53,11 +52,11 @@
 
 &lt;p&gt;(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)&lt;/p&gt;
 
-&lt;h2 id=&#34;やっている事:8297ce3a5ed4594f91a307954f292784&#34;&gt;やっている事&lt;/h2&gt;
+&lt;h2 id=&#34;やっている事&#34;&gt;やっている事&lt;/h2&gt;
 
 &lt;p&gt;リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。&lt;/p&gt;
 
-&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-size-hinting-の動作イメージ&#34;&gt;JPEG size hinting の動作イメージ&lt;/h1&gt;
 
 &lt;p&gt;詳しくはこちらを参照して下さい。&lt;/p&gt;
 
@@ -69,7 +68,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
+&lt;h2 id=&#34;小さくリサイズする場合&#34;&gt;小さくリサイズする場合&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;普通にリサイズ (-define jpeg:size 無し)
@@ -81,7 +80,7 @@
 
 &lt;p&gt;処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。&lt;/p&gt;
 
-&lt;h2 id=&#34;大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
+&lt;h2 id=&#34;大きくリサイズする場合-予想&#34;&gt;大きくリサイズする場合 (予想)&lt;/h2&gt;
 
 &lt;p&gt;問題にしているケースです。&lt;/p&gt;
 
@@ -95,7 +94,7 @@
 
 &lt;p&gt;という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。&lt;/p&gt;
 
-&lt;h3 id=&#34;実際の動き:8297ce3a5ed4594f91a307954f292784&#34;&gt;実際の動き&lt;/h3&gt;
+&lt;h3 id=&#34;実際の動き&#34;&gt;実際の動き&lt;/h3&gt;
 
 &lt;p&gt;jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。&lt;/p&gt;
 
@@ -131,11 +130,11 @@ AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_
 ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;結論:8297ce3a5ed4594f91a307954f292784&#34;&gt;結論&lt;/h1&gt;
+&lt;h1 id=&#34;結論&#34;&gt;結論&lt;/h1&gt;
 
 &lt;p&gt;拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、2倍か3倍以上小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。&lt;/p&gt;
 
-&lt;h1 id=&#34;scaling-の該当コード:8297ce3a5ed4594f91a307954f292784&#34;&gt;scaling の該当コード&lt;/h1&gt;
+&lt;h1 id=&#34;scaling-の該当コード&#34;&gt;scaling の該当コード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105&lt;/a&gt;
@@ -183,7 +182,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 &lt;p&gt;この 2/block_size scaling の条件にマッチしたのかなと予想してます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url:8297ce3a5ed4594f91a307954f292784&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Libjpeg&#34;&gt;https://en.wikipedia.org/wiki/Libjpeg&lt;/a&gt;&lt;/li&gt;
