@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ycbcr on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/ycbcr/</link>
+    <link>https://blog.awm.jp/tags/ycbcr/index.xml</link>
     <description>Recent content in Ycbcr on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 06 Feb 2016 15:58:53 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/ycbcr/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,11 +17,11 @@
       <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-の-ycbcr-について:6214a8feaba721e81b237a92198f5169&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-の-ycbcr-について&#34;&gt;JPEG の YCbCr について&lt;/h1&gt;
 
 &lt;p&gt;JPEG で保存する色は RGB でなく YCbCr なので、その話。&lt;/p&gt;
 
-&lt;h1 id=&#34;rgb-ycbcr:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
+&lt;h1 id=&#34;rgb-ycbcr&#34;&gt;RGB &amp;lt;=&amp;gt; YCbCr&lt;/h1&gt;
 
 &lt;p&gt;RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。&lt;/p&gt;
 
@@ -39,9 +38,9 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;変換式:6214a8feaba721e81b237a92198f5169&#34;&gt;変換式&lt;/h2&gt;
+&lt;h2 id=&#34;変換式&#34;&gt;変換式&lt;/h2&gt;
 
-&lt;h3 id=&#34;rgb-ycbcr-1:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
+&lt;h3 id=&#34;rgb-ycbcr-1&#34;&gt;RGB =&amp;gt; YCbCr&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -77,7 +76,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&#34;ycbcr-rgb:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
+&lt;h3 id=&#34;ycbcr-rgb&#34;&gt;YCbCr =&amp;gt; RGB&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -113,9 +112,9 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;rgb-との比較:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB との比較&lt;/h2&gt;
+&lt;h2 id=&#34;rgb-との比較&#34;&gt;RGB との比較&lt;/h2&gt;
 
-&lt;h3 id=&#34;rgb-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;RGB チャネル分解&lt;/h3&gt;
+&lt;h3 id=&#34;rgb-チャネル分解&#34;&gt;RGB チャネル分解&lt;/h3&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -129,7 +128,7 @@ $ convert logo.png +level-colors Red \
 &lt;p&gt;注) Green1 を Green にすると緑の明るさが半分になるので注意
 &lt;center&gt; &lt;img src=&#34;../logo_rgb.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ycbcr-チャネル分解:6214a8feaba721e81b237a92198f5169&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
+&lt;h3 id=&#34;ycbcr-チャネル分解&#34;&gt;YCbCr チャネル分解&lt;/h3&gt;
 
 &lt;p&gt;こちらは Golang の image パッケージで変換。&lt;/p&gt;
 
@@ -144,7 +143,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo_ycbcr.png&#34; /&gt; &lt;/center&gt;
 (YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)&lt;/p&gt;
 
-&lt;h2 id=&#34;メリット:6214a8feaba721e81b237a92198f5169&#34;&gt;メリット&lt;/h2&gt;
+&lt;h2 id=&#34;メリット&#34;&gt;メリット&lt;/h2&gt;
 
 &lt;p&gt;輝度信号と色差信号を分けるメリットですが。&lt;/p&gt;
 
@@ -155,9 +154,9 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 
 &lt;p&gt;JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプルを間引く、クロマサブサンプリング方式でデータ量を節約します。尚、多くの動画形式は YCbCr でなく YUV で少し計算が異なります、概念的には似たものです。&lt;/p&gt;
 
-&lt;h3 id=&#34;クロマサブサンプリング:6214a8feaba721e81b237a92198f5169&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
+&lt;h3 id=&#34;クロマサブサンプリング&#34;&gt;クロマサブサンプリング&lt;/h3&gt;
 
-&lt;h3 id=&#34;yuvabc:6214a8feaba721e81b237a92198f5169&#34;&gt;YUVabc&lt;/h3&gt;
+&lt;h3 id=&#34;yuvabc&#34;&gt;YUVabc&lt;/h3&gt;
 
 &lt;p&gt;間引きかたによって YUV444、YUV422 のように表現します。&lt;/p&gt;
 
@@ -179,7 +178,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;デメリット:6214a8feaba721e81b237a92198f5169&#34;&gt;デメリット&lt;/h2&gt;
+&lt;h2 id=&#34;デメリット&#34;&gt;デメリット&lt;/h2&gt;
 
 &lt;p&gt;RGB と YCbCr は色空間が斜めの関係にあり、YCbCr は RGB を全部カバーする為、同じ 0-255 でも RGB より YCbCr の方が大きなスケールを表現します。&lt;/p&gt;
 
@@ -203,14 +202,14 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;まとめ:6214a8feaba721e81b237a92198f5169&#34;&gt;まとめ&lt;/h1&gt;
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。&lt;/li&gt;
 &lt;li&gt;デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考ページ:6214a8feaba721e81b237a92198f5169&#34;&gt;参考ページ&lt;/h1&gt;
+&lt;h1 id=&#34;参考ページ&#34;&gt;参考ページ&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG File Interchange Format
