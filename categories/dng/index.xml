@@ -10,6 +10,78 @@
     <atom:link href="https://blog.awm.jp/categories/dng/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
+      <link>https://blog.awm.jp/2016/11/02/dng/</link>
+      <pubDate>Wed, 02 Nov 2016 21:09:00 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
+      <description>
+
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;h2 id=&#34;利用するもの&#34;&gt;利用するもの&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PC (MacBook Pro)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以下のどちらか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Adobe Lightroom CC&lt;/li&gt;
+&lt;li&gt;Adobe Photoshop CC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;dng-画像の入手法&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
+
+&lt;p&gt;iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/11/01/dng/&#34;&gt;http://blog.awm.jp/2016/11/01/dng/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;この DNG 画像から ICC プロファイル付きで JPEG 画像を生成する方法のメモ書きです。
+一行でまとめると。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;プリンタの設定でプロファイルを選択してJPEGファイル出力する。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
+
+&lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択。
+&lt;center&gt; &lt;img src=&#34;../lightroom01-h.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;メニューのウィンドウからプリントを選択して、
+右はじののスクロールを一番したまで下げると、カラーマネジメントのパネルが出てくる。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../lightroom02-h.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;あとは、プロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
+
+&lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
+
+&lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../photoshop01-45p.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;以下の保存オプションで選択&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ファイル形式に JPEG&lt;/li&gt;
+&lt;li&gt;カラースペースに適当なプロファイル&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../photoshop02-30p.png&#34;&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;あとは右上の保存を押すだけ。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法</title>
       <link>https://blog.awm.jp/2016/11/01/dng/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>

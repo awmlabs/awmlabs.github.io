@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>DNG から ICC プロファイル付き JPEG 画像を作る - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/11/02/dng/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/11/02/dng/" class="hatena-bookmark-button" data-hatena-bookmark-title="DNG から ICC プロファイル付き JPEG 画像を作る" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/11/02/dng/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-11-02">November 02, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/dng">DNG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/dng">DNG</a>
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">DNG から ICC プロファイル付き JPEG 画像を作る</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#はじめに">はじめに</a>
+<ul>
+<li><a href="#利用するもの">利用するもの</a></li>
+<li><a href="#dng-画像の入手法">DNG 画像の入手法</a></li>
+</ul></li>
+<li><a href="#adobe-lightroom-を使う場合">Adobe Lightroom を使う場合</a></li>
+<li><a href="#adobe-photoshop-を使う場合">Adobe Photoshop を使う場合</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="はじめに">はじめに</h1>
+
+<h2 id="利用するもの">利用するもの</h2>
+
+<ul>
+<li>PC (MacBook Pro)</li>
+</ul>
+
+<p>以下のどちらか</p>
+
+<ul>
+<li>Adobe Lightroom CC</li>
+<li>Adobe Photoshop CC</li>
+</ul>
+
+<h2 id="dng-画像の入手法">DNG 画像の入手法</h2>
+
+<p>iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。</p>
+
+<ul>
+<li>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法
+
+<ul>
+<li><a href="http://blog.awm.jp/2016/11/01/dng/">http://blog.awm.jp/2016/11/01/dng/</a></li>
+</ul></li>
+</ul>
+
+<p>この DNG 画像から ICC プロファイル付きで JPEG 画像を生成する方法のメモ書きです。
+一行でまとめると。</p>
+
+<pre><code>プリンタの設定でプロファイルを選択してJPEGファイル出力する。
+</code></pre>
+
+<h1 id="adobe-lightroom-を使う場合">Adobe Lightroom を使う場合</h1>
+
+<p>Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択。
+<center> <img src="../lightroom01-h.png"> </center></p>
+
+<p>メニューのウィンドウからプリントを選択して、
+右はじののスクロールを一番したまで下げると、カラーマネジメントのパネルが出てくる。</p>
+
+<p><center> <img src="../lightroom02-h.png"> </center></p>
+
+<p>あとは、プロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK</p>
+
+<h1 id="adobe-photoshop-を使う場合">Adobe Photoshop を使う場合</h1>
+
+<p>DNG 画像を開いて、左下の「画像を保存」ボタンを押します。</p>
+
+<p><center> <img src="../photoshop01-45p.png"> </center></p>
+
+<p>以下の保存オプションで選択</p>
+
+<ul>
+<li>ファイル形式に JPEG</li>
+<li>カラースペースに適当なプロファイル</li>
+</ul>
+
+<p><center> <img src="../photoshop02-30p.png"> </center></p>
+
+<p>あとは右上の保存を押すだけ。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
