@@ -54,8 +54,8 @@
 &lt;p&gt;例えば、(デジタル)現像と呼ばれる作業で以下の事ができます。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;輝度の高い(明るい)方から低い(暗い)ところまで情報を残しているので、保存されている DNG データを元に、好きな露出で JPEG に変換できます。&lt;/li&gt;
-&lt;li&gt;ホワイトバランスを指定して JPEG に変換できます。&lt;/li&gt;
+&lt;li&gt;輝度の高い(明るい)方から低い(暗い)ところまで情報を残しているので、保存されている DNG データを元に、好きな露出で JPEG に変換できます&lt;/li&gt;
+&lt;li&gt;ホワイトバランスを指定して JPEG に変換できます&lt;/li&gt;
 &lt;li&gt;JPEG 画像に対してだと色フィルタを強くかけるとアラが目出ちますが、自然な階調のまま変換できます&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -65,6 +65,7 @@
 &lt;li&gt;(JPEG保存に比べて) ファイルサイズが大きくなる&lt;/li&gt;
 &lt;li&gt;DNG ファイルを投稿できないサイトが多い&lt;/li&gt;
 &lt;li&gt;DNG ファイルの画像を表示できない環境が多い&lt;/li&gt;
+&lt;li&gt;撮影がもっさりして連写がしにくいらしい&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;raw-画像にどんなのがある&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
@@ -85,8 +86,10 @@
 &lt;h1 id=&#34;raw-画像の現像ツール&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
 
 &lt;p&gt;RAW 画像を JPEG 等に変換するツールを(デジタル)現像ツールと呼びます。
-各社、(デジタル)現像ツールとして RAW =&amp;gt; JPEG 変換ソフトを提供してます。
-DNG の場合は Adobe Lightroom が使えます。&lt;/p&gt;
+各社で独自の RAW 形式をもつので、各々の形式に応じた現像ツールが提供されています。
+尚、DNG の場合は Adobe Lightroom で「現像」できます。&lt;/p&gt;
+
+&lt;p&gt;参考) &lt;a href=&#34;http://blog.awm.jp/2016/11/02/dng/&#34;&gt;http://blog.awm.jp/2016/11/02/dng/&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;その他現像ツール&#34;&gt;その他現像ツール&lt;/h2&gt;
 
