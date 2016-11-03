@@ -20,7 +20,7 @@
 
 &lt;h1 id=&#34;dng-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像とは？&lt;/h1&gt;
 
-&lt;p&gt;Adobe さんが規格した RAW 画像フォーマットの一種です。&lt;/p&gt;
+&lt;p&gt;Adobe 社が規格した画像形式で、RAW 画像の一種です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Photoshop ヘルプ / Digital Negative （DNG）
@@ -30,25 +30,23 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;カメラメーカーが各々独自の RAW 規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。&lt;/p&gt;
+&lt;p&gt;RAW 画像は、カメラメーカーが各々独自の規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。&lt;/p&gt;
 
 &lt;h1 id=&#34;raw-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像とは？&lt;/h1&gt;
 
-&lt;p&gt;JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサの取れたデータを、なるべくそのまま記録するものです。&lt;/p&gt;
+&lt;p&gt;JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサで採れたデータを、なるべくそのままに記録するものです。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure01.png&#34; &gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;図の解説。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;デモザイク：画像センサーは一般的なモニタのようなRGB配列ではない事が通常なので、センサーの物理的配置から格子状の各座標のRGB値を算出します&lt;/li&gt;
-&lt;li&gt;色変換：一般的なモニタの色域に合わせて R,G,B の値を決定します。いわゆるカラーマネジメント。また8bitで量子化し直したり、YCbCr でのクロマサブサンプリングもあります&lt;/li&gt;
-&lt;li&gt;圧縮：人間の目があまり気にしない情報(主に高周波成分)を落とし、エントロピー圧縮をかけて、ファイルサイズを減らします&lt;/li&gt;
+&lt;li&gt;デモザイク：画像センサーは一般的なモニタのようなRGB配列ではない事が通常なので、センサーの物理的配置から格子状のビットマップ各座標のRGB値を算出します&lt;/li&gt;
+&lt;li&gt;色変換：一般的なモニタの色域やガンマ値等の特性に合わせて RGB値を補正します。いわゆるカラーマネジメントです。また8bitで量子化し直します。&lt;/li&gt;
+&lt;li&gt;圧縮：人間の目があまり気にしない情報を落とし、エントロピー圧縮をかけて、ファイルサイズを減らします。主に高周波成分を切り落とし、YCbCr でのクロマサブサンプリングを行う事もあります。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;JPEG は圧縮レベルによって画像が劣化する事は知られていますが、例え圧縮を殆どしなくても、そもそも古い時代の規格の為、輝度のダイナミックレンジや色域、またサンプリング量子化の粒度等で、妥協した状態で保存しています。&lt;/p&gt;
-
-&lt;p&gt;(ちなみに大昔、圧縮せずに R,G,B を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません)&lt;/p&gt;
+&lt;p&gt;JPEG は圧縮レベルによって画像が劣化します、例え圧縮をしなくても、そもそも古い時代の規格の為、輝度のダイナミックレンジや色域、またサンプリング量子化の粒度等で妥協した状態で画像データを記録します。&lt;/p&gt;
 
 &lt;h2 id=&#34;メリット:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;メリット&lt;/h2&gt;
 
@@ -69,6 +67,10 @@
 &lt;li&gt;撮影がもっさりして連写がしにくいらしい&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&#34;蛇足:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;蛇足&lt;/h2&gt;
+
+&lt;p&gt;ちなみに大昔、圧縮せずに R,G,B を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません&lt;/p&gt;
+
 &lt;h1 id=&#34;raw-画像にどんなのがある:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
 
 &lt;p&gt;幾つか列挙します。&lt;/p&gt;
@@ -82,6 +84,16 @@
 &lt;li&gt;Canon: CR2&lt;/li&gt;
 &lt;li&gt;Panasonic: RW2&lt;/li&gt;
 &lt;li&gt;Hasselblad: 3FR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以下のサイトも参考にして下さい。大量の種類があります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RAWSAMPLES.CH
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format&#34;&gt;https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;raw-画像の現像ツール:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
@@ -100,7 +112,23 @@
 &lt;pre&gt;&lt;code&gt;ufraw-batch -create-id=yoya --out-type=png --out-depth=16 --output=out.png input.dng
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;ul&gt;
+&lt;li&gt;フリー な RAW 現像 ソフト の まとめ
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.google.com/site/freerawconverter/Home&#34;&gt;https://sites.google.com/site/freerawconverter/Home&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;尚、Google Photo サービスでは RAW 画像を投稿できます。又、インライン画像を保存すると JPEG として取り出せます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;実は、GoogleフォトだってRAWに対応しているぞ
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html&#34;&gt;http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&#34;参考-url:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考 URL&lt;/h1&gt;
 
@@ -109,21 +137,6 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://cygx.mydns.jp/blog/?arti=431&#34;&gt;http://cygx.mydns.jp/blog/?arti=431&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;実は、GoogleフォトだってRAWに対応しているぞ
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html&#34;&gt;http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;フリー な RAW 現像 ソフト の まとめ
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://sites.google.com/site/freerawconverter/Home&#34;&gt;https://sites.google.com/site/freerawconverter/Home&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;RAWSAMPLES.CH
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format&#34;&gt;https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>

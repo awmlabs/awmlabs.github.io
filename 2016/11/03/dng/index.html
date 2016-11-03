@@ -78,6 +78,7 @@
 <ul>
 <li><a href="#メリット:e23322f8f0faf6ac6a702f3fbee1c037">メリット</a></li>
 <li><a href="#デメリット:e23322f8f0faf6ac6a702f3fbee1c037">デメリット</a></li>
+<li><a href="#蛇足:e23322f8f0faf6ac6a702f3fbee1c037">蛇足</a></li>
 </ul></li>
 <li><a href="#raw-画像にどんなのがある:e23322f8f0faf6ac6a702f3fbee1c037">RAW 画像にどんなのがある？</a></li>
 <li><a href="#raw-画像の現像ツール:e23322f8f0faf6ac6a702f3fbee1c037">RAW 画像の現像ツール</a>
@@ -91,7 +92,7 @@
 
 <h1 id="dng-画像とは:e23322f8f0faf6ac6a702f3fbee1c037">DNG 画像とは？</h1>
 
-<p>Adobe さんが規格した RAW 画像フォーマットの一種です。</p>
+<p>Adobe 社が規格した画像形式で、RAW 画像の一種です。</p>
 
 <ul>
 <li>Photoshop ヘルプ / Digital Negative （DNG）
@@ -101,25 +102,23 @@
 </ul></li>
 </ul>
 
-<p>カメラメーカーが各々独自の RAW 規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。</p>
+<p>RAW 画像は、カメラメーカーが各々独自の規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。</p>
 
 <h1 id="raw-画像とは:e23322f8f0faf6ac6a702f3fbee1c037">RAW 画像とは？</h1>
 
-<p>JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサの取れたデータを、なるべくそのまま記録するものです。</p>
+<p>JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサで採れたデータを、なるべくそのままに記録するものです。</p>
 
 <p><center> <img src="../figure01.png" > </center></p>
 
 <p>図の解説。</p>
 
 <ul>
-<li>デモザイク：画像センサーは一般的なモニタのようなRGB配列ではない事が通常なので、センサーの物理的配置から格子状の各座標のRGB値を算出します</li>
-<li>色変換：一般的なモニタの色域に合わせて R,G,B の値を決定します。いわゆるカラーマネジメント。また8bitで量子化し直したり、YCbCr でのクロマサブサンプリングもあります</li>
-<li>圧縮：人間の目があまり気にしない情報(主に高周波成分)を落とし、エントロピー圧縮をかけて、ファイルサイズを減らします</li>
+<li>デモザイク：画像センサーは一般的なモニタのようなRGB配列ではない事が通常なので、センサーの物理的配置から格子状のビットマップ各座標のRGB値を算出します</li>
+<li>色変換：一般的なモニタの色域やガンマ値等の特性に合わせて RGB値を補正します。いわゆるカラーマネジメントです。また8bitで量子化し直します。</li>
+<li>圧縮：人間の目があまり気にしない情報を落とし、エントロピー圧縮をかけて、ファイルサイズを減らします。主に高周波成分を切り落とし、YCbCr でのクロマサブサンプリングを行う事もあります。</li>
 </ul>
 
-<p>JPEG は圧縮レベルによって画像が劣化する事は知られていますが、例え圧縮を殆どしなくても、そもそも古い時代の規格の為、輝度のダイナミックレンジや色域、またサンプリング量子化の粒度等で、妥協した状態で保存しています。</p>
-
-<p>(ちなみに大昔、圧縮せずに R,G,B を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません)</p>
+<p>JPEG は圧縮レベルによって画像が劣化します、例え圧縮をしなくても、そもそも古い時代の規格の為、輝度のダイナミックレンジや色域、またサンプリング量子化の粒度等で妥協した状態で画像データを記録します。</p>
 
 <h2 id="メリット:e23322f8f0faf6ac6a702f3fbee1c037">メリット</h2>
 
@@ -140,6 +139,10 @@
 <li>撮影がもっさりして連写がしにくいらしい</li>
 </ul>
 
+<h2 id="蛇足:e23322f8f0faf6ac6a702f3fbee1c037">蛇足</h2>
+
+<p>ちなみに大昔、圧縮せずに R,G,B を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません</p>
+
 <h1 id="raw-画像にどんなのがある:e23322f8f0faf6ac6a702f3fbee1c037">RAW 画像にどんなのがある？</h1>
 
 <p>幾つか列挙します。</p>
@@ -153,6 +156,16 @@
 <li>Canon: CR2</li>
 <li>Panasonic: RW2</li>
 <li>Hasselblad: 3FR</li>
+</ul>
+
+<p>以下のサイトも参考にして下さい。大量の種類があります。</p>
+
+<ul>
+<li>RAWSAMPLES.CH
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format">https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format</a></li>
+</ul></li>
 </ul>
 
 <h1 id="raw-画像の現像ツール:e23322f8f0faf6ac6a702f3fbee1c037">RAW 画像の現像ツール</h1>
@@ -171,7 +184,23 @@
 <pre><code>ufraw-batch -create-id=yoya --out-type=png --out-depth=16 --output=out.png input.dng
 </code></pre>
 
+<ul>
+<li>フリー な RAW 現像 ソフト の まとめ
+
+<ul>
+<li><a href="https://sites.google.com/site/freerawconverter/Home">https://sites.google.com/site/freerawconverter/Home</a></li>
+</ul></li>
+</ul>
+
 <p>尚、Google Photo サービスでは RAW 画像を投稿できます。又、インライン画像を保存すると JPEG として取り出せます。</p>
+
+<ul>
+<li>実は、GoogleフォトだってRAWに対応しているぞ
+
+<ul>
+<li><a href="http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html">http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html</a></li>
+</ul></li>
+</ul>
 
 <h1 id="参考-url:e23322f8f0faf6ac6a702f3fbee1c037">参考 URL</h1>
 
@@ -180,21 +209,6 @@
 
 <ul>
 <li><a href="http://cygx.mydns.jp/blog/?arti=431">http://cygx.mydns.jp/blog/?arti=431</a></li>
-</ul></li>
-<li>実は、GoogleフォトだってRAWに対応しているぞ
-
-<ul>
-<li><a href="http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html">http://hokoxjouhou.blog105.fc2.com/blog-entry-489.html</a></li>
-</ul></li>
-<li>フリー な RAW 現像 ソフト の まとめ
-
-<ul>
-<li><a href="https://sites.google.com/site/freerawconverter/Home">https://sites.google.com/site/freerawconverter/Home</a></li>
-</ul></li>
-<li>RAWSAMPLES.CH
-
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format">https://en.wikipedia.org/wiki/List_of_cameras_supporting_a_raw_format</a></li>
 </ul></li>
 </ul>
 
