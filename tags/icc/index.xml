@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Icc on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/icc/</link>
+    <link>https://blog.awm.jp/tags/icc/index.xml</link>
     <description>Recent content in Icc on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Wed, 02 Nov 2016 21:09:00 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/icc/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,9 +17,9 @@
       <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;h2 id=&#34;利用するもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;利用するもの&lt;/h2&gt;
+&lt;h2 id=&#34;利用するもの&#34;&gt;利用するもの&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PC (MacBook Pro)&lt;/li&gt;
@@ -33,7 +32,7 @@
 &lt;li&gt;Adobe Photoshop CC&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;dng-画像の入手法:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
+&lt;h2 id=&#34;dng-画像の入手法&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
 
 &lt;p&gt;iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。&lt;/p&gt;
 
@@ -51,7 +50,7 @@
 &lt;pre&gt;&lt;code&gt;プリンタの設定でプロファイルを選択してJPEGファイル出力する。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;adobe-lightroom-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
 
 &lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。&lt;/p&gt;
 
@@ -68,7 +67,7 @@
 
 &lt;p&gt;あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
 
-&lt;h1 id=&#34;adobe-photoshop-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
 
 &lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
 
@@ -99,9 +98,9 @@
       <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-と-icc-プロファイル:ad62a74a83918e4a46c8e687c633597e&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-と-icc-プロファイル&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
 
-&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
+&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
@@ -115,7 +114,7 @@
 
 &lt;p&gt;尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。&lt;/p&gt;
 
-&lt;h1 id=&#34;rgb-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB 色空間&lt;/h1&gt;
+&lt;h1 id=&#34;rgb-色空間&#34;&gt;RGB 色空間&lt;/h1&gt;
 
 &lt;p&gt;例えば赤を表す RGB:(255,0,0) 。
 世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。&lt;/p&gt;
@@ -142,7 +141,7 @@
 
 &lt;p&gt;あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。&lt;/p&gt;
 
-&lt;h2 id=&#34;rgb-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;RGB のデフォルト&lt;/h2&gt;
+&lt;h2 id=&#34;rgb-のデフォルト&#34;&gt;RGB のデフォルト&lt;/h2&gt;
 
 &lt;p&gt;Web の世界では sRGB が標準です。&lt;/p&gt;
 
@@ -154,16 +153,16 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。&lt;/p&gt;
+&lt;p&gt;ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-noicc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。&lt;/p&gt;
 
-&lt;h1 id=&#34;cmyk-色空間:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK 色空間&lt;/h1&gt;
+&lt;h1 id=&#34;cmyk-色空間&#34;&gt;CMYK 色空間&lt;/h1&gt;
 
 &lt;p&gt;プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
+Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
 
 &lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
 
@@ -202,22 +201,22 @@ yellow  = 1.0 - blue;
 
 &lt;p&gt;&amp;ldquo;cyan = 1.0 - red&amp;rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
 
-&lt;h2 id=&#34;cmyk-のデフォルト:ad62a74a83918e4a46c8e687c633597e&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
+&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
 
 &lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。&lt;/p&gt;
 
 &lt;p&gt;ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。&lt;/p&gt;
 
-&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
+&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
+&lt;p&gt;CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
 
 &lt;p&gt;Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&amp;gt; RGB 処理を行うようで、話が少し面倒だったりします。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考:ad62a74a83918e4a46c8e687c633597e&#34;&gt;参考&lt;/h1&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;カラーマネージメントとプロファイル変換
@@ -241,87 +240,16 @@ yellow  = 1.0 - blue;
 &lt;hr /&gt;
 
 &lt;ol&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad62a74a83918e4a46c8e687c633597e:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ImageMagick で JPEG 画像を RGB から CMYK に変換すると色が変わって見える件</title>
-      <link>https://blog.awm.jp/2016/09/01/cmyk/</link>
-      <pubDate>Thu, 01 Sep 2016 23:29:04 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/09/01/cmyk/</guid>
-      <description>
-
-&lt;h1 id=&#34;はじめに:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;はじめに&lt;/h1&gt;
-
-&lt;p&gt;RGB(実際はYCbCrで格納) JPEG を CMYK に変換する際に、色をなるべく変えない方法は一般に知られていますが、&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;何故変換で色が変わって見えるのか&lt;/li&gt;
-&lt;li&gt;何故その対処法で色が変わらなくなるのか&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;といった理屈を含めた簡単(?)な解説です。&lt;/p&gt;
-
-&lt;h1 id=&#34;問題:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;問題&lt;/h1&gt;
-
-&lt;p&gt;テスト画像
-&lt;center&gt; &lt;img src=&#34;../logo.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert logo.jpg -colorspace CMYK logo-cmyk.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo-cmyk-view.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;MacOS 標準の画像ビューアや Safari で開くと、こんな風に暗く見えます。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;解決法:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;解決法&lt;/h1&gt;
-
-&lt;p&gt;以下のように -profile で CMYK 用 ICC プロファイルを指定すれば OK です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert logo.jpg -profile JapanColor2001Coated.icc logo-cmyk-jc2001c.jpg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../logo-cmyk-jc2001c.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;JapanColor2001Coated.icc は以下のサイトから落とせます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.adobe.com/jp/support/downloads/1330.html&#34;&gt;https://www.adobe.com/jp/support/downloads/1330.html&lt;/a&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;色が変わる理由:2ca72d8734ee082a7e3e9ba8b06b9917&#34;&gt;色が変わる理由&lt;/h1&gt;
-
-&lt;p&gt;前提知識が思ったより多かったので、こちらにまとめました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JPEG と ICC プロファイル
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2016/09/10/jpegicc/&#34;&gt;http://blog.awm.jp/2016/09/10/jpegicc/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;JPEG の RGB 値や CMYK 値の実際の色は ICC プロファイル次第なので、モニタに表示する時には、この ICC プロファイルで補正します。&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;尚、上記コマンドで生成した &lt;a href=&#34;../logo-cmyk.jpg&#34;&gt;logo-cmyk.jpg&lt;/a&gt; は Chrome や Firefox だとカラーマネジメントがいい加減なので逆に、色が変わりません。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;Windows 用と書いてますが、OS 関係なく使えます。単に zip 形式というだけです。Mac 用のページだと sit 形式で公開されてます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2ca72d8734ee082a7e3e9ba8b06b9917:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;最近の FireFox のデフォルト設定だと、ICC プロファイルが入っていないと何も補正しないそうです。そのままディスプレイのプロファイルで解釈されます。辛い。。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
