@@ -2,11 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Raw on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/raw/index.xml</link>
+    <link>https://blog.awm.jp/categories/raw/</link>
     <description>Recent content in Raw on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Thu, 03 Nov 2016 21:06:03 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/raw/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/11/03/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;dng-画像とは&#34;&gt;DNG 画像とは？&lt;/h1&gt;
+&lt;h1 id=&#34;dng-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像とは？&lt;/h1&gt;
 
 &lt;p&gt;Adobe さんが規格した RAW 画像フォーマットの一種です。&lt;/p&gt;
 
@@ -31,7 +32,7 @@
 
 &lt;p&gt;カメラメーカーが各々独自の RAW 規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。&lt;/p&gt;
 
-&lt;h1 id=&#34;raw-画像とは&#34;&gt;RAW 画像とは？&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像とは？&lt;/h1&gt;
 
 &lt;p&gt;JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサの取れたデータを、なるべくそのまま記録するものです。&lt;/p&gt;
 
@@ -49,7 +50,7 @@
 
 &lt;p&gt;(ちなみに大昔、圧縮せずに R,G,B を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません)&lt;/p&gt;
 
-&lt;h2 id=&#34;メリット&#34;&gt;メリット&lt;/h2&gt;
+&lt;h2 id=&#34;メリット:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;メリット&lt;/h2&gt;
 
 &lt;p&gt;例えば、(デジタル)現像と呼ばれる作業で以下の事ができます。&lt;/p&gt;
 
@@ -59,7 +60,7 @@
 &lt;li&gt;JPEG 画像に対してだと色フィルタを強くかけるとアラが目出ちますが、自然な階調のまま変換できます&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;デメリット&#34;&gt;デメリット&lt;/h2&gt;
+&lt;h2 id=&#34;デメリット:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;デメリット&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;(JPEG保存に比べて) ファイルサイズが大きくなる&lt;/li&gt;
@@ -68,7 +69,7 @@
 &lt;li&gt;撮影がもっさりして連写がしにくいらしい&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;raw-画像にどんなのがある&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像にどんなのがある:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
 
 &lt;p&gt;幾つか列挙します。&lt;/p&gt;
 
@@ -83,7 +84,7 @@
 &lt;li&gt;Hasselblad: 3FR&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;raw-画像の現像ツール&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像の現像ツール:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
 
 &lt;p&gt;RAW 画像を JPEG 等に変換するツールを(デジタル)現像ツールと呼びます。
 各社で独自の RAW 形式をもつので、各々の形式に応じた現像ツールが提供されています。
@@ -91,7 +92,7 @@
 
 &lt;p&gt;参考) &lt;a href=&#34;http://blog.awm.jp/2016/11/02/dng/&#34;&gt;http://blog.awm.jp/2016/11/02/dng/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;その他現像ツール&#34;&gt;その他現像ツール&lt;/h2&gt;
+&lt;h2 id=&#34;その他現像ツール:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;その他現像ツール&lt;/h2&gt;
 
 &lt;p&gt;フリーソフトでは UFRaw と Dcraw が有名です。
 例えば、UFRaw は以下のように使います。&lt;/p&gt;
@@ -101,7 +102,7 @@
 
 &lt;p&gt;尚、Google Photo サービスでは RAW 画像を投稿できます。又、インライン画像を保存すると JPEG として取り出せます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;RAW画像はどのように圧縮されているか
