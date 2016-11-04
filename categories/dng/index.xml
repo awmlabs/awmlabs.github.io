@@ -2,13 +2,71 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dng on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/dng/</link>
+    <link>https://blog.awm.jp/categories/dng/index.xml</link>
     <description>Recent content in Dng on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Wed, 02 Nov 2016 21:09:00 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/dng/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>DNG 画像のフォーマット (コンテナ編)</title>
+      <link>https://blog.awm.jp/2016/11/04/dng/</link>
+      <pubDate>Fri, 04 Nov 2016 23:14:09 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/11/04/dng/</guid>
+      <description>
+
+&lt;h1 id=&#34;dng-仕様書&#34;&gt;DNG 仕様書&lt;/h1&gt;
+
+&lt;p&gt;Adobe DNG ヘルプにリンクがあります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://helpx.adobe.com/jp/photoshop/digital-negative.html&#34;&gt;https://helpx.adobe.com/jp/photoshop/digital-negative.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://wwwimages.adobe.com/content/dam/Adobe/en/products/photoshop/pdfs/dng_spec_1.4.0.0.pdf&#34;&gt;http://wwwimages.adobe.com/content/dam/Adobe/en/products/photoshop/pdfs/dng_spec_1.4.0.0.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;TIFF Compatible
+DNG is an extension of the TIFF 6.0 format, and is compatible with the TIFF-EP standard. It
+is possible (but not required) for a DNG file to simultaneously comply with both the Digital
+Negative specification and the TIFF-EP standard.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;TIFF のフォーマットを用いて、新たな DNG 用タグを追加する方式です。
+例えば、ImageMagick に TIFF として読ませようとすると。以下のように知らないタグの警告が出ます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../identity-dngAsTiff.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;exiftool は DNGタグに対応している為、以下のように解釈できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../exiftool01.png&#34; /&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../exiftool02.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;編集の設定値&#34;&gt;編集の設定値&lt;/h1&gt;
+
+&lt;p&gt;Lightroom や Photoshop で&amp;rdquo;現像&amp;rdquo;する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../saveMetadata.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;試してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../photoshop-colortemp.png&#34;&gt; &lt;img src=&#34;../photoshop-colortemp-h.png&#34; /&gt; &lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;さて TIFF タグを確認。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../exiftool-colortemp.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;確かに値が書き換わってます。&lt;/p&gt;
+
+&lt;h1 id=&#34;history-タグ&#34;&gt;History タグ&lt;/h1&gt;
+
+&lt;p&gt;Lightroom で誤って JPEG 画像を指定して DNG 出力してしまった場合、このタグに記録が残ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../historyTag.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;便利ですね！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
@@ -18,9 +76,9 @@
       <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;h2 id=&#34;利用するもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;利用するもの&lt;/h2&gt;
+&lt;h2 id=&#34;利用するもの&#34;&gt;利用するもの&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PC (MacBook Pro)&lt;/li&gt;
@@ -33,7 +91,7 @@
 &lt;li&gt;Adobe Photoshop CC&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;dng-画像の入手法:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
+&lt;h2 id=&#34;dng-画像の入手法&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
 
 &lt;p&gt;iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。&lt;/p&gt;
 
@@ -51,7 +109,7 @@
 &lt;pre&gt;&lt;code&gt;プリンタの設定でプロファイルを選択してJPEGファイル出力する。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;adobe-lightroom-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
 
 &lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。&lt;/p&gt;
 
@@ -68,7 +126,7 @@
 
 &lt;p&gt;あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
 
-&lt;h1 id=&#34;adobe-photoshop-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
 
 &lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
 
@@ -99,7 +157,7 @@
       <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;必要なもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;必要なもの&lt;/h1&gt;
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;実機
@@ -121,13 +179,13 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;全体の流れ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;全体の流れ&lt;/h1&gt;
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../figure1.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;手順:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;手順&lt;/h1&gt;
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
 
-&lt;h2 id=&#34;iphone7-plus:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
@@ -145,7 +203,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;pc-macbook-pro:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
+&lt;h2 id=&#34;pc-macbook-pro&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom CC をインストールする (有料)&lt;/li&gt;
@@ -161,7 +219,7 @@
 
 &lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考サイト:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考サイト&lt;/h1&gt;
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期
