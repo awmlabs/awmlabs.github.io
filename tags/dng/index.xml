@@ -42,6 +42,8 @@ Negative specification and the TIFF-EP standard.
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../exiftool01.png&#34; /&gt; &lt;/center&gt;
 &lt;center&gt; &lt;img src=&#34;../exiftool02.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
+&lt;p&gt;尚、GPSInfoの座標は神奈川県の相模原公園です。&lt;/p&gt;
+
 &lt;h1 id=&#34;編集の設定値&#34;&gt;編集の設定値&lt;/h1&gt;
 
 &lt;p&gt;Lightroom や Photoshop で&amp;rdquo;現像&amp;rdquo;する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。&lt;/p&gt;
