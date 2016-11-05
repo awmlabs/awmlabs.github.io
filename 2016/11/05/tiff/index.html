@@ -90,8 +90,11 @@
 
 <h1 id="tiff-フォーマット仕様">TIFF フォーマット仕様</h1>
 
-<p>仕様はこちらですが、いきなり読むのは辛いはずです。
-- <a href="https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf">https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf</a></p>
+<p>仕様はこちらですが、いきなり読むのは辛いはずです。</p>
+
+<ul>
+<li><a href="https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf">https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf</a></li>
+</ul>
 
 <p>こちらの Exif 解説の方がイメージが掴めるでしょう。 klab さん有難う。</p>
 
@@ -103,7 +106,8 @@
 </ul></li>
 </ul>
 
-<p>Exif は TIFF のフォーマットを利用していて、先頭 6byte &ldquo;Exif\0\0&rdquo; を除けば、TIFF として読めます。</p>
+<p>Exif は TIFF のフォーマットを利用していて、先頭 6byte &ldquo;Exif\0\0&rdquo; を除けば、TIFF として読めます。
+但し、古いバージョンを使うので TIFF としては少しだけ物足りないです。(特に浮動小数点を扱わないとこ)</p>
 
 <h1 id="大雑把なイメージ">大雑把なイメージ</h1>
 
@@ -126,7 +130,13 @@
 <li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
 </ul>
 
-<p>DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。</p>
+<p>例によって IO_Bit を使ってます。</p>
+
+<ul>
+<li><a href="https://github.com/yoya/IO_Bit">https://github.com/yoya/IO_Bit</a></li>
+</ul>
+
+<p>DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。(Raw IFD が見えてないですが。。)</p>
 
 <pre><code>$ php sample/tiffdump.php  -nf test/APC_0025.dng
 ByteOrder:II(LittleEndian)
