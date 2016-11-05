@@ -52,7 +52,7 @@
 &lt;ul&gt;
 &lt;li&gt;count が指定する数分 offset が後ろに何個も並ぶ&lt;/li&gt;
 &lt;li&gt;type が使うバイト数xcount が 4byte に収まる場合は、offset フィールドに実データを入れてしまう。&lt;/li&gt;
-&lt;li&gt;治らない場合は、offset として IFD 以外のエリアに置かれたデータの場所を指す&lt;/li&gt;
+&lt;li&gt;4byte に入りきらない場合は、offset 値として IFD 以外のエリアに置かれたデータの場所を指す&lt;/li&gt;
 &lt;li&gt;DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -93,7 +93,13 @@ IFD:0th
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;ちなみに、FLOAT と DOUBLE の読み出しがまだ怪しいです。また今度調べます。&lt;/p&gt;
+&lt;h1 id=&#34;todo&#34;&gt;TODO&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DNG 新規タグは Raw IFD テーブルに多く入るみたいですが、その tag id が謎なので、もうちょっと調べます。。&lt;/li&gt;
+&lt;li&gt;FLOAT と DOUBLE の読み出しがまだ怪しいので、そのうち直します。&lt;/li&gt;
+&lt;li&gt;build 処理も書いたけど多分動作しません。フィルタ実装が最終目的なので、そのうち対応します。&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;以上です。&lt;/p&gt;
 </description>

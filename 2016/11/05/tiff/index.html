@@ -75,6 +75,7 @@
 <li><a href="#tiff-フォーマット仕様">TIFF フォーマット仕様</a></li>
 <li><a href="#大雑把なイメージ">大雑把なイメージ</a></li>
 <li><a href="#php-で分解">PHP で分解</a></li>
+<li><a href="#todo">TODO</a></li>
 </ul>
 </nav>
     
@@ -113,7 +114,7 @@
 <ul>
 <li>count が指定する数分 offset が後ろに何個も並ぶ</li>
 <li>type が使うバイト数xcount が 4byte に収まる場合は、offset フィールドに実データを入れてしまう。</li>
-<li>治らない場合は、offset として IFD 以外のエリアに置かれたデータの場所を指す</li>
+<li>4byte に入りきらない場合は、offset 値として IFD 以外のエリアに置かれたデータの場所を指す</li>
 <li>DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。</li>
 </ul>
 
@@ -154,7 +155,13 @@ IFD:0th
 ＜略＞
 </code></pre>
 
-<p>ちなみに、FLOAT と DOUBLE の読み出しがまだ怪しいです。また今度調べます。</p>
+<h1 id="todo">TODO</h1>
+
+<ul>
+<li>DNG 新規タグは Raw IFD テーブルに多く入るみたいですが、その tag id が謎なので、もうちょっと調べます。。</li>
+<li>FLOAT と DOUBLE の読み出しがまだ怪しいので、そのうち直します。</li>
+<li>build 処理も書いたけど多分動作しません。フィルタ実装が最終目的なので、そのうち対応します。</li>
+</ul>
 
 <p>以上です。</p>
 
