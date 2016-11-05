@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,26 +75,26 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79">Blog の Deploy で Circle CI</a></li>
-<li><a href="#はじめに:74a620a9653e59d29d4e0cbb59ac7a79">はじめに</a></li>
-<li><a href="#circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79">circle.yaml</a>
+<li><a href="#blog-の-deploy-で-circle-ci">Blog の Deploy で Circle CI</a></li>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#circle-yaml">circle.yaml</a>
 <ul>
-<li><a href="#pygments:74a620a9653e59d29d4e0cbb59ac7a79">Pygments</a></li>
+<li><a href="#pygments">Pygments</a></li>
 </ul></li>
-<li><a href="#circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI アカウント作成</a></li>
-<li><a href="#circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI での連携設定</a></li>
-<li><a href="#異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79">異なる Github アカウントでの連携 (推測)</a></li>
-<li><a href="#備考:74a620a9653e59d29d4e0cbb59ac7a79">備考</a></li>
-<li><a href="#参考url:74a620a9653e59d29d4e0cbb59ac7a79">参考URL</a></li>
+<li><a href="#circle-ci-アカウント作成">Circle CI アカウント作成</a></li>
+<li><a href="#circle-ci-での連携設定">Circle CI での連携設定</a></li>
+<li><a href="#異なる-github-アカウントでの連携-推測">異なる Github アカウントでの連携 (推測)</a></li>
+<li><a href="#備考">備考</a></li>
+<li><a href="#参考url">参考URL</a></li>
 </ul>
 </nav>
     
 
-<h1 id="blog-の-deploy-で-circle-ci:74a620a9653e59d29d4e0cbb59ac7a79">Blog の Deploy で Circle CI</h1>
+<h1 id="blog-の-deploy-で-circle-ci">Blog の Deploy で Circle CI</h1>
 
 <p>昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。</p>
 
-<h1 id="はじめに:74a620a9653e59d29d4e0cbb59ac7a79">はじめに</h1>
+<h1 id="はじめに">はじめに</h1>
 
 <p>前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。</p>
 
@@ -104,7 +104,7 @@
 <li><a href="https://github.com/awmlabs/awmlabs.github.io">https://github.com/awmlabs/awmlabs.github.io</a> blog の公開ファイル</li>
 </ul>
 
-<h1 id="circle-yaml:74a620a9653e59d29d4e0cbb59ac7a79">circle.yaml</h1>
+<h1 id="circle-yaml">circle.yaml</h1>
 
 <p>連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。</p>
 
@@ -143,7 +143,7 @@
 
 <p>神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)</p>
 
-<h2 id="pygments:74a620a9653e59d29d4e0cbb59ac7a79">Pygments</h2>
+<h2 id="pygments">Pygments</h2>
 
 <p>Syntax Highlight を使いたいので、Pygments を入れたいけど、</p>
 
@@ -152,7 +152,7 @@
 
 <p>を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &ndash;user を後ろにつけてます。</p>
 
-<h1 id="circle-ci-アカウント作成:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI アカウント作成</h1>
+<h1 id="circle-ci-アカウント作成">Circle CI アカウント作成</h1>
 
 <p>連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。</p>
 
@@ -164,7 +164,7 @@
 
 <p>Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。</p>
 
-<h1 id="circle-ci-での連携設定:74a620a9653e59d29d4e0cbb59ac7a79">Circle CI での連携設定</h1>
+<h1 id="circle-ci-での連携設定">Circle CI での連携設定</h1>
 
 <ul>
 <li>Add Project で監視するレポジトリを選択します。</li>
@@ -174,7 +174,7 @@
 
 <p>(あと一手間あった気がするので、思い出したら後で追記します)</p>
 
-<h1 id="異なる-github-アカウントでの連携-推測:74a620a9653e59d29d4e0cbb59ac7a79">異なる Github アカウントでの連携 (推測)</h1>
+<h1 id="異なる-github-アカウントでの連携-推測">異なる Github アカウントでの連携 (推測)</h1>
 
 <p>同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id<em>rsa</em>(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。</p>
 
@@ -185,14 +185,14 @@
 
 <p>必要に迫られた時にでも、もう少し試行錯誤してみます。</p>
 
-<h1 id="備考:74a620a9653e59d29d4e0cbb59ac7a79">備考</h1>
+<h1 id="備考">備考</h1>
 
 <ul>
 <li>当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。</li>
 <li>別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。</li>
 </ul>
 
-<h1 id="参考url:74a620a9653e59d29d4e0cbb59ac7a79">参考URL</h1>
+<h1 id="参考url">参考URL</h1>
 
 <ul>
 <li><a href="http://qiita.com/xlune/items/f5248a6cdddfb011c2ac">http://qiita.com/xlune/items/f5248a6cdddfb011c2ac</a></li>

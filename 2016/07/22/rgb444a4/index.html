@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -56,19 +56,19 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#rgba4444-の追加実験:e662988d25e9c5b3873bdcb4ac21f97c">RGBA4444 の追加実験</a>
+<li><a href="#rgba4444-の追加実験">RGBA4444 の追加実験</a>
 <ul>
-<li><a href="#rgb444-a4-のディザ画像検証:e662988d25e9c5b3873bdcb4ac21f97c">RGB444, A4 のディザ画像検証</a>
+<li><a href="#rgb444-a4-のディザ画像検証">RGB444, A4 のディザ画像検証</a>
 <ul>
-<li><a href="#パレット画像の準備:e662988d25e9c5b3873bdcb4ac21f97c">パレット画像の準備</a></li>
-<li><a href="#実行コマンド:e662988d25e9c5b3873bdcb4ac21f97c">実行コマンド</a></li>
+<li><a href="#パレット画像の準備">パレット画像の準備</a></li>
+<li><a href="#実行コマンド">実行コマンド</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </nav>
     
 
-<h1 id="rgba4444-の追加実験:e662988d25e9c5b3873bdcb4ac21f97c">RGBA4444 の追加実験</h1>
+<h1 id="rgba4444-の追加実験">RGBA4444 の追加実験</h1>
 
 <ul>
 <li>RGB444 変換で劣化しない画像を ImageMagick で作る
@@ -87,9 +87,9 @@
 
 <p>結論としては、RGBA バラバラに処理した時と見た目が変わりません。唯の検証メモという扱いでどうぞ。</p>
 
-<h2 id="rgb444-a4-のディザ画像検証:e662988d25e9c5b3873bdcb4ac21f97c">RGB444, A4 のディザ画像検証</h2>
+<h2 id="rgb444-a4-のディザ画像検証">RGB444, A4 のディザ画像検証</h2>
 
-<h3 id="パレット画像の準備:e662988d25e9c5b3873bdcb4ac21f97c">パレット画像の準備</h3>
+<h3 id="パレット画像の準備">パレット画像の準備</h3>
 
 <ul>
 <li>RGB444 パレット作成
@@ -104,7 +104,7 @@ $ composite black-red-green-tiled.png -compose plus black-blue.png black-red-gre
 <img src="../black-red-green-blue.png" /></li>
 </ul>
 
-<h3 id="実行コマンド:e662988d25e9c5b3873bdcb4ac21f97c">実行コマンド</h3>
+<h3 id="実行コマンド">実行コマンド</h3>
 
 <pre>
 $ convert gradient_hue_polar-transparent.png +matte rgb.png

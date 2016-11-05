@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,14 +75,14 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#dng-仕様書:e23322f8f0faf6ac6a702f3fbee1c037">DNG 仕様書</a></li>
-<li><a href="#編集の設定値:e23322f8f0faf6ac6a702f3fbee1c037">編集の設定値</a></li>
-<li><a href="#history-タグ:e23322f8f0faf6ac6a702f3fbee1c037">History タグ</a></li>
+<li><a href="#dng-仕様書">DNG 仕様書</a></li>
+<li><a href="#編集の設定値">編集の設定値</a></li>
+<li><a href="#history-タグ">History タグ</a></li>
 </ul>
 </nav>
     
 
-<h1 id="dng-仕様書:e23322f8f0faf6ac6a702f3fbee1c037">DNG 仕様書</h1>
+<h1 id="dng-仕様書">DNG 仕様書</h1>
 
 <p>Adobe DNG ヘルプにリンクがあります。</p>
 
@@ -98,34 +98,38 @@ Negative specification and the TIFF-EP standard.
 </code></pre>
 
 <p>TIFF のフォーマットを用いて、新たな DNG 用タグを追加する方式です。
-例えば、ImageMagick に TIFF として読ませようとすると。以下のように知らないタグの警告が出ます。</p>
+例えば、ImageMagick に TIFF として読ませようとすると。以下のように知らないタグの警告が出ます。(DNG として読ませようとすると PNG に変換して identify するので駄目です)</p>
 
 <p><center> <img src="../identity-dngAsTiff.png" /> </center></p>
 
-<p>exiftool は DNGタグに対応している為、以下のように解釈できます。</p>
+<p>尚、ExifTool は DNG のタグに対応しています。</p>
+
+<ul>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/DNG.html">http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/DNG.html</a></li>
+</ul>
 
 <p><center> <img src="../exiftool01.png" /> </center>
 <center> <img src="../exiftool02.png" /> </center></p>
 
 <p>尚、GPSInfoの座標は神奈川県の相模原公園です。</p>
 
-<h1 id="編集の設定値:e23322f8f0faf6ac6a702f3fbee1c037">編集の設定値</h1>
+<h1 id="編集の設定値">編集の設定値</h1>
 
 <p>Lightroom や Photoshop で&rdquo;現像&rdquo;する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。</p>
 
 <p><center> <img src="../saveMetadata.png" /> </center></p>
 
-<p>試してみます。</p>
+<p>Lightroom で編集して実験してみます。</p>
 
 <p><center> <a href="../photoshop-colortemp.png"> <img src="../photoshop-colortemp-h.png" /> </a> </center></p>
 
-<p>さて TIFF タグを確認。</p>
+<p>さて ExifTool で DNG タグを確認。</p>
 
 <p><center> <img src="../exiftool-colortemp.png" /> </center></p>
 
 <p>確かに値が書き換わってます。</p>
 
-<h1 id="history-タグ:e23322f8f0faf6ac6a702f3fbee1c037">History タグ</h1>
+<h1 id="history-タグ">History タグ</h1>
 
 <p>Lightroom で誤って JPEG 画像を指定して DNG 出力してしまった場合、このタグに記録が残ります。</p>
 
