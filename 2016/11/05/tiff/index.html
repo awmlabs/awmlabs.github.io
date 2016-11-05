@@ -74,20 +74,25 @@
 <li><a href="#tiff-フォーマットの分解">TIFF フォーマットの分解</a></li>
 <li><a href="#tiff-フォーマット仕様">TIFF フォーマット仕様</a></li>
 <li><a href="#大雑把なイメージ">大雑把なイメージ</a></li>
+<li><a href="#php-で分解">PHP で分解</a></li>
 </ul>
 </nav>
     
 
 <h1 id="tiff-フォーマットの分解">TIFF フォーマットの分解</h1>
 
-<p>DNG は TIFF として分解出来るので、折角なので TIFF を分解してみます。(PHP で)</p>
+<p>最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で)</p>
+
+<ul>
+<li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
+</ul>
 
 <h1 id="tiff-フォーマット仕様">TIFF フォーマット仕様</h1>
 
-<p>仕様はこちらですが、いきなり読むのは辛いと思います。
+<p>仕様はこちらですが、いきなり読むのは辛いはずです。
 - <a href="https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf">https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf</a></p>
 
-<p>こちらの Exif 解説の方がイメージが掴めると思います。</p>
+<p>こちらの Exif 解説の方がイメージが掴めるでしょう。 klab さん有難う。</p>
 
 <ul>
 <li>Exif データにアクセスするコードを自作してみる
@@ -112,13 +117,15 @@
 <li>DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。</li>
 </ul>
 
-<p>という訳で、作りました。</p>
+<h1 id="php-で分解">PHP で分解</h1>
+
+<p>という訳で、こちらが成果物です。</p>
 
 <ul>
 <li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
 </ul>
 
-<p>DNG のタグIDと名前の対応表を入れていないので中途半端ですが、一応、分解はできます。</p>
+<p>DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。</p>
 
 <pre><code>$ php sample/tiffdump.php  -nf test/APC_0025.dng
 ByteOrder:II(LittleEndian)

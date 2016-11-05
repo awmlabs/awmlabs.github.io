@@ -19,14 +19,18 @@
 
 &lt;h1 id=&#34;tiff-フォーマットの分解&#34;&gt;TIFF フォーマットの分解&lt;/h1&gt;
 
-&lt;p&gt;DNG は TIFF として分解出来るので、折角なので TIFF を分解してみます。(PHP で)&lt;/p&gt;
+&lt;p&gt;最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/yoya/IO_TIFF&#34;&gt;https://github.com/yoya/IO_TIFF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&#34;tiff-フォーマット仕様&#34;&gt;TIFF フォーマット仕様&lt;/h1&gt;
 
-&lt;p&gt;仕様はこちらですが、いきなり読むのは辛いと思います。
+&lt;p&gt;仕様はこちらですが、いきなり読むのは辛いはずです。
 - &lt;a href=&#34;https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf&#34;&gt;https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;こちらの Exif 解説の方がイメージが掴めると思います。&lt;/p&gt;
+&lt;p&gt;こちらの Exif 解説の方がイメージが掴めるでしょう。 klab さん有難う。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Exif データにアクセスするコードを自作してみる
@@ -51,13 +55,15 @@
 &lt;li&gt;DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;という訳で、作りました。&lt;/p&gt;
+&lt;h1 id=&#34;php-で分解&#34;&gt;PHP で分解&lt;/h1&gt;
+
+&lt;p&gt;という訳で、こちらが成果物です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/IO_TIFF&#34;&gt;https://github.com/yoya/IO_TIFF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;DNG のタグIDと名前の対応表を入れていないので中途半端ですが、一応、分解はできます。&lt;/p&gt;
+&lt;p&gt;DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ php sample/tiffdump.php  -nf test/APC_0025.dng
 ByteOrder:II(LittleEndian)
