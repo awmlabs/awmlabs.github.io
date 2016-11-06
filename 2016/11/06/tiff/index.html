@@ -142,7 +142,7 @@
     }
     list($offset, $dummy) = $jpegBit-&gt;getOffset();
     if ($found === false) {
-        throw new Exception(&quot;Illegal JPEG format. offset: $offset&quot;);
+        throw new Exception(&quot;Wrong JPEG format. offset: $offset&quot;);
     }
     $bit-&gt;input(substr($tiffData, $offset));
 </code></pre>

@@ -74,7 +74,7 @@
     }
     list($offset, $dummy) = $jpegBit-&amp;gt;getOffset();
     if ($found === false) {
-        throw new Exception(&amp;quot;Illegal JPEG format. offset: $offset&amp;quot;);
+        throw new Exception(&amp;quot;Wrong JPEG format. offset: $offset&amp;quot;);
     }
     $bit-&amp;gt;input(substr($tiffData, $offset));
 &lt;/code&gt;&lt;/pre&gt;
