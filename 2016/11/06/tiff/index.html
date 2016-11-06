@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>TIFF と Exif と JPEG - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/11/06/tiff/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/11/06/tiff/" class="hatena-bookmark-button" data-hatena-bookmark-title="TIFF と Exif と JPEG" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/11/06/tiff/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-11-06">November 06, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/tiff">TIFF</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/tiff">TIFF</a>
+
+        <a href="https://blog.awm.jp/tags/exif">Exif</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">TIFF と Exif と JPEG</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#jpeg-と-exif-と-tiff-の関係">JPEG と Exif と TIFF の関係</a></li>
+<li><a href="#実装">実装</a>
+<ul>
+<li><a href="#tiff-をとりこむ">TIFF をとりこむ</a></li>
+<li><a href="#exif-を取り込む">Exif を取り込む</a></li>
+<li><a href="#jepg-を取り込む">JEPG を取り込む</a></li>
+</ul></li>
+</ul>
+</nav>
+    
+
+<h1 id="jpeg-と-exif-と-tiff-の関係">JPEG と Exif と TIFF の関係</h1>
+
+<p>TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのまま使っています。</p>
+
+<p>だいたい以下のような関係です。</p>
+
+<p><center> <img src="../figure01.png" /> </center></p>
+
+<p>昨日作った IO_TIFF はこの構造を理解するので、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。</p>
+
+<h1 id="実装">実装</h1>
+
+<ul>
+<li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
+</ul>
+
+<p>IO/TIFF.php の parse function の先頭です。</p>
+
+<h2 id="tiff-をとりこむ">TIFF をとりこむ</h2>
+
+<p>TIFF ファイルが渡された場合はそのまま取り込みます。</p>
+
+<pre><code>f ($head2 === &quot;II&quot; || $head2 === &quot;MM&quot;) { // TIFF format
+            $bit-&gt;input($tiffData);
+</code></pre>
+
+<h2 id="exif-を取り込む">Exif を取り込む</h2>
+
+<p>Exit ファイルが渡された場合は、先頭6バイトを読み飛ばします。</p>
+
+<pre><code>        } else if ($head6 === &quot;Exif\0\0&quot;) { // Exif format
+            $bit-&gt;input(substr($tiffData, 6));
+</code></pre>
+
+<h2 id="jepg-を取り込む">JEPG を取り込む</h2>
+
+<p>これは少し厄介です。JPEG の Chunk を APP1 が出るまで読み飛ばし、APP1 の先頭を削って Exif 内の TIFF 形式の場所を抜き出します。</p>
+
+<pre><code>        } else if ($head2 === &quot;\xff\xd8&quot;) { // JPEG format
+            $jpegBit = new IO_Bit();
+            $jpegBit-&gt;input($tiffData);
+            $jpegBit-&gt;setOffset(2, 0);
+            $found = false;
+            while ($jpegBit-&gt;getUI8() == 0xff) {
+                $marker2 = $jpegBit-&gt;getUI8();
+                var_dump($marker2);
+                if ($marker2 === 0xe1) {
+                    $found = true;
+                    // 8 = 2(JPEG chunk length field) + 6(Exif signature)
+                    $jpegBit-&gt;incrementOffset(8, 0); // seek to TIFF head
+                    break;
+                } else {
+                    $len = $jpegBit-&gt;getUI16BE();
+                    $jpegBit-&gt;incrementOffset($len - 2, 0);
+                }
+            }
+            list($offset, $dummy) = $jpegBit-&gt;getOffset();
+            if ($found === false) {
+                throw new Exception(&quot;Illegal JPEG format. offset: $offset&quot;);
+            }
+            $bit-&gt;input(substr($tiffData, $offset));
+</code></pre>
+
+<p>まぁ、でもバイナリのコンテナ分解に慣れると一瞬でかける処理です。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
