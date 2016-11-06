@@ -94,7 +94,7 @@
 
 <p><center> <img src="../figure01.png" /> </center></p>
 
-<p>昨日作った IO_TIFF はこの構造を理解するので、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。</p>
+<p>昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。</p>
 
 <h1 id="実装">実装</h1>
 
@@ -108,45 +108,43 @@
 
 <p>TIFF ファイルが渡された場合はそのまま取り込みます。</p>
 
-<pre><code>f ($head2 === &quot;II&quot; || $head2 === &quot;MM&quot;) { // TIFF format
-            $bit-&gt;input($tiffData);
+<pre><code>if ($head2 === &quot;II&quot; || $head2 === &quot;MM&quot;) { // TIFF format
+    $bit-&gt;input($tiffData);
 </code></pre>
 
 <h2 id="exif-を取り込む">Exif を取り込む</h2>
 
 <p>Exit ファイルが渡された場合は、先頭6バイトを読み飛ばします。</p>
 
-<pre><code>        } else if ($head6 === &quot;Exif\0\0&quot;) { // Exif format
-            $bit-&gt;input(substr($tiffData, 6));
+<pre><code>} else if ($head6 === &quot;Exif\0\0&quot;) { // Exif format
+    $bit-&gt;input(substr($tiffData, 6));
 </code></pre>
 
 <h2 id="jepg-を取り込む">JEPG を取り込む</h2>
 
 <p>これは少し厄介です。JPEG の Chunk を APP1 が出るまで読み飛ばし、APP1 の先頭を削って Exif 内の TIFF 形式の場所を抜き出します。</p>
 
-<pre><code>        } else if ($head2 === &quot;\xff\xd8&quot;) { // JPEG format
-            $jpegBit = new IO_Bit();
-            $jpegBit-&gt;input($tiffData);
-            $jpegBit-&gt;setOffset(2, 0);
-            $found = false;
-            while ($jpegBit-&gt;getUI8() == 0xff) {
-                $marker2 = $jpegBit-&gt;getUI8();
-                var_dump($marker2);
-                if ($marker2 === 0xe1) {
-                    $found = true;
-                    // 8 = 2(JPEG chunk length field) + 6(Exif signature)
-                    $jpegBit-&gt;incrementOffset(8, 0); // seek to TIFF head
-                    break;
-                } else {
-                    $len = $jpegBit-&gt;getUI16BE();
-                    $jpegBit-&gt;incrementOffset($len - 2, 0);
-                }
-            }
-            list($offset, $dummy) = $jpegBit-&gt;getOffset();
-            if ($found === false) {
-                throw new Exception(&quot;Illegal JPEG format. offset: $offset&quot;);
-            }
-            $bit-&gt;input(substr($tiffData, $offset));
+<pre><code>} else if ($head2 === &quot;\xff\xd8&quot;) { // JPEG format
+    $jpegBit = new IO_Bit();
+    $jpegBit-&gt;input($tiffData);
+    $jpegBit-&gt;setOffset(2, 0); // skip SOI
+    $found = false;
+    while ($jpegBit-&gt;getUI8() == 0xff) { // chunk marker
+        $marker2 = $jpegBit-&gt;getUI8();
+        $len = $jpegBit-&gt;getUI16BE();
+        if ($marker2 === 0xe1) { // APP1
+	       if ($jpegBit-&gt;getData(6) === &quot;Exif\0\0&quot;) {
+                $found = true;
+                break;
+			    }
+        }
+		$jpegBit-&gt;incrementOffset($len - 2, 0);
+    }
+    list($offset, $dummy) = $jpegBit-&gt;getOffset();
+    if ($found === false) {
+        throw new Exception(&quot;Illegal JPEG format. offset: $offset&quot;);
+    }
+    $bit-&gt;input(substr($tiffData, $offset));
 </code></pre>
 
 <p>まぁ、でもバイナリのコンテナ分解に慣れると一瞬でかける処理です。</p>
