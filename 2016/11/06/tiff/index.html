@@ -133,12 +133,12 @@
         $marker2 = $jpegBit-&gt;getUI8();
         $len = $jpegBit-&gt;getUI16BE();
         if ($marker2 === 0xe1) { // APP1
-	       if ($jpegBit-&gt;getData(6) === &quot;Exif\0\0&quot;) {
+               if ($jpegBit-&gt;getData(6) === &quot;Exif\0\0&quot;) {
                 $found = true;
                 break;
-			    }
+            }
         }
-		$jpegBit-&gt;incrementOffset($len - 2, 0);
+        $jpegBit-&gt;incrementOffset($len - 2, 0);
     }
     list($offset, $dummy) = $jpegBit-&gt;getOffset();
     if ($found === false) {
