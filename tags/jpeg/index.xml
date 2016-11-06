@@ -64,7 +64,7 @@
         $marker2 = $jpegBit-&amp;gt;getUI8();
         $len = $jpegBit-&amp;gt;getUI16BE();
         if ($marker2 === 0xe1) { // APP1
-               if ($jpegBit-&amp;gt;getData(6) === &amp;quot;Exif\0\0&amp;quot;) {
+            if ($jpegBit-&amp;gt;getData(6) === &amp;quot;Exif\0\0&amp;quot;) {
                 $found = true;
                 break;
             }
