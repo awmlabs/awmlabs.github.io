@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -71,16 +71,16 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#tiff-フォーマットの分解:5972b361355938e744b0d7681dd7c7fa">TIFF フォーマットの分解</a></li>
-<li><a href="#tiff-フォーマット仕様:5972b361355938e744b0d7681dd7c7fa">TIFF フォーマット仕様</a></li>
-<li><a href="#大雑把なイメージ:5972b361355938e744b0d7681dd7c7fa">大雑把なイメージ</a></li>
-<li><a href="#php-で分解:5972b361355938e744b0d7681dd7c7fa">PHP で分解</a></li>
-<li><a href="#todo:5972b361355938e744b0d7681dd7c7fa">TODO</a></li>
+<li><a href="#tiff-フォーマットの分解">TIFF フォーマットの分解</a></li>
+<li><a href="#tiff-フォーマット仕様">TIFF フォーマット仕様</a></li>
+<li><a href="#大雑把なイメージ">大雑把なイメージ</a></li>
+<li><a href="#php-で分解">PHP で分解</a></li>
+<li><a href="#todo">TODO</a></li>
 </ul>
 </nav>
     
 
-<h1 id="tiff-フォーマットの分解:5972b361355938e744b0d7681dd7c7fa">TIFF フォーマットの分解</h1>
+<h1 id="tiff-フォーマットの分解">TIFF フォーマットの分解</h1>
 
 <p>最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で)</p>
 
@@ -88,7 +88,7 @@
 <li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
 </ul>
 
-<h1 id="tiff-フォーマット仕様:5972b361355938e744b0d7681dd7c7fa">TIFF フォーマット仕様</h1>
+<h1 id="tiff-フォーマット仕様">TIFF フォーマット仕様</h1>
 
 <p>仕様はこちらですが、いきなり読むのは辛いはずです。</p>
 
@@ -109,7 +109,7 @@
 <p>Exif は TIFF のフォーマットを利用していて、先頭 6byte &ldquo;Exif\0\0&rdquo; を除けば、TIFF として読めます。
 但し、古いバージョンを使うので TIFF としては少しだけ物足りないです。(特に浮動小数点を扱わないとこ)</p>
 
-<h1 id="大雑把なイメージ:5972b361355938e744b0d7681dd7c7fa">大雑把なイメージ</h1>
+<h1 id="大雑把なイメージ">大雑把なイメージ</h1>
 
 <p><center> <img src="../figure01.png" /> </center></p>
 
@@ -122,7 +122,7 @@
 <li>DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。</li>
 </ul>
 
-<h1 id="php-で分解:5972b361355938e744b0d7681dd7c7fa">PHP で分解</h1>
+<h1 id="php-で分解">PHP で分解</h1>
 
 <p>という訳で、こちらが成果物です。</p>
 
@@ -165,7 +165,7 @@ IFD:0th
 ＜略＞
 </code></pre>
 
-<h1 id="todo:5972b361355938e744b0d7681dd7c7fa">TODO</h1>
+<h1 id="todo">TODO</h1>
 
 <ul>
 <li>DNG 新規タグは Raw IFD テーブルに多く入るみたいですが、その tag id が謎なので、もうちょっと調べます。。</li>

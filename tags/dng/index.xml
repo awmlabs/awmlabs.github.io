@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dng on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/dng/</link>
+    <link>https://blog.awm.jp/tags/dng/index.xml</link>
     <description>Recent content in Dng on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 04 Nov 2016 23:14:09 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/dng/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,7 +17,7 @@
       <guid>https://blog.awm.jp/2016/11/04/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;dng-仕様書:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 仕様書&lt;/h1&gt;
+&lt;h1 id=&#34;dng-仕様書&#34;&gt;DNG 仕様書&lt;/h1&gt;
 
 &lt;p&gt;Adobe DNG ヘルプにリンクがあります。&lt;/p&gt;
 
@@ -49,7 +48,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;尚、GPSInfoの座標は神奈川県の相模原公園です。&lt;/p&gt;
 
-&lt;h1 id=&#34;編集の設定値:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;編集の設定値&lt;/h1&gt;
+&lt;h1 id=&#34;編集の設定値&#34;&gt;編集の設定値&lt;/h1&gt;
 
 &lt;p&gt;Lightroom や Photoshop で&amp;rdquo;現像&amp;rdquo;する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。&lt;/p&gt;
 
@@ -65,7 +64,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;確かに値が書き換わってます。&lt;/p&gt;
 
-&lt;h1 id=&#34;history-タグ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;History タグ&lt;/h1&gt;
+&lt;h1 id=&#34;history-タグ&#34;&gt;History タグ&lt;/h1&gt;
 
 &lt;p&gt;Lightroom で誤って JPEG 画像を指定して DNG 出力してしまった場合、このタグに記録が残ります。&lt;/p&gt;
 
@@ -83,7 +82,7 @@ Negative specification and the TIFF-EP standard.
       <guid>https://blog.awm.jp/2016/11/03/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;dng-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像とは？&lt;/h1&gt;
+&lt;h1 id=&#34;dng-画像とは&#34;&gt;DNG 画像とは？&lt;/h1&gt;
 
 &lt;p&gt;Adobe 社が規格した画像形式で、RAW 画像の一種です。&lt;/p&gt;
 
@@ -97,7 +96,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;RAW 画像は、カメラメーカーが各々独自の規格を出していますが、それらに対しての統一フォーマット的な意味合いもあります。&lt;/p&gt;
 
-&lt;h1 id=&#34;raw-画像とは:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像とは？&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像とは&#34;&gt;RAW 画像とは？&lt;/h1&gt;
 
 &lt;p&gt;JPEG の形式を使わず、デジタルカメラの CCD や CMOS センサで採れたデータを、なるべくそのままに記録するものです。&lt;/p&gt;
 
@@ -113,7 +112,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;JPEG は圧縮レベルによって画像が劣化します、例え圧縮をしなくても、そもそも古い時代の規格の為、輝度のダイナミックレンジや色域、またサンプリング量子化の粒度等で妥協した状態で画像データを記録します。&lt;/p&gt;
 
-&lt;h2 id=&#34;メリット:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;メリット&lt;/h2&gt;
+&lt;h2 id=&#34;メリット&#34;&gt;メリット&lt;/h2&gt;
 
 &lt;p&gt;例えば、(デジタル)現像と呼ばれる作業で以下の事ができます。&lt;/p&gt;
 
@@ -123,7 +122,7 @@ Negative specification and the TIFF-EP standard.
 &lt;li&gt;自然な階調のまま色フィルタをかけられます。JPEG 画像にフィルタをかけると階調のアラが目出ちますよね。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;デメリット:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;デメリット&lt;/h2&gt;
+&lt;h2 id=&#34;デメリット&#34;&gt;デメリット&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG 保存に比べて DNG はファイルサイズが大きい。&lt;/li&gt;
@@ -132,11 +131,11 @@ Negative specification and the TIFF-EP standard.
 &lt;li&gt;撮影がもっさりして連写がしにくいらしい&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;蛇足:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;蛇足&lt;/h2&gt;
+&lt;h2 id=&#34;蛇足&#34;&gt;蛇足&lt;/h2&gt;
 
 &lt;p&gt;大昔、圧縮せずに RGB の値を並べただけの画像を RAW 形式と読んでいた事もあると聞くので、古いドキュメントを見るときは注意が必要かもしれません。&lt;/p&gt;
 
-&lt;h1 id=&#34;raw-画像にどんなのがある:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像にどんなのがある&#34;&gt;RAW 画像にどんなのがある？&lt;/h1&gt;
 
 &lt;p&gt;幾つか列挙します。&lt;/p&gt;
 
@@ -161,7 +160,7 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;raw-画像の現像ツール:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
+&lt;h1 id=&#34;raw-画像の現像ツール&#34;&gt;RAW 画像の現像ツール&lt;/h1&gt;
 
 &lt;p&gt;RAW 画像を JPEG 等に変換するツールを(デジタル)現像ツールと呼びます。
 各社で独自の RAW 形式をもつので、各々の形式に応じた現像ツールが提供されています。
@@ -169,7 +168,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;参考) &lt;a href=&#34;http://blog.awm.jp/2016/11/02/dng/&#34;&gt;http://blog.awm.jp/2016/11/02/dng/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;その他現像ツール:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;その他現像ツール&lt;/h2&gt;
+&lt;h2 id=&#34;その他現像ツール&#34;&gt;その他現像ツール&lt;/h2&gt;
 
 &lt;p&gt;フリーソフトでは UFRaw と Dcraw が有名です。
 例えば、UFRaw は以下のように使います。&lt;/p&gt;
@@ -195,7 +194,7 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;参考-url:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;解説！「RAW」ってなに？
@@ -220,9 +219,9 @@ Negative specification and the TIFF-EP standard.
       <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;h2 id=&#34;利用するもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;利用するもの&lt;/h2&gt;
+&lt;h2 id=&#34;利用するもの&#34;&gt;利用するもの&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PC (MacBook Pro)&lt;/li&gt;
@@ -235,7 +234,7 @@ Negative specification and the TIFF-EP standard.
 &lt;li&gt;Adobe Photoshop CC&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;dng-画像の入手法:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
+&lt;h2 id=&#34;dng-画像の入手法&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
 
 &lt;p&gt;iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。&lt;/p&gt;
 
@@ -253,7 +252,7 @@ Negative specification and the TIFF-EP standard.
 &lt;pre&gt;&lt;code&gt;プリンタの設定でプロファイルを選択してJPEGファイル出力する。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;adobe-lightroom-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
 
 &lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。&lt;/p&gt;
 
@@ -270,7 +269,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
 
-&lt;h1 id=&#34;adobe-photoshop-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
 
 &lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
 
@@ -301,7 +300,7 @@ Negative specification and the TIFF-EP standard.
       <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;必要なもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;必要なもの&lt;/h1&gt;
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;実機
@@ -323,13 +322,13 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;全体の流れ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;全体の流れ&lt;/h1&gt;
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../figure1.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;手順:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;手順&lt;/h1&gt;
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
 
-&lt;h2 id=&#34;iphone7-plus:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
@@ -347,7 +346,7 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;pc-macbook-pro:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
+&lt;h2 id=&#34;pc-macbook-pro&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom CC をインストールする (有料)&lt;/li&gt;
@@ -363,7 +362,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考サイト:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考サイト&lt;/h1&gt;
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期
