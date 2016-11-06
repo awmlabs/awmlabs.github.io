@@ -2,11 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tiff on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/tiff/index.xml</link>
+    <link>https://blog.awm.jp/categories/tiff/</link>
     <description>Recent content in Tiff on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 06 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/tiff/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/11/06/tiff/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-と-exif-と-tiff-の関係&#34;&gt;JPEG と Exif と TIFF の関係&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-と-exif-と-tiff-の関係:5972b361355938e744b0d7681dd7c7fa&#34;&gt;JPEG と Exif と TIFF の関係&lt;/h1&gt;
 
 &lt;p&gt;TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのまま使っています。&lt;/p&gt;
 
@@ -27,7 +28,7 @@
 
 &lt;p&gt;昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。&lt;/p&gt;
 
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
+&lt;h1 id=&#34;実装:5972b361355938e744b0d7681dd7c7fa&#34;&gt;実装&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/IO_TIFF&#34;&gt;https://github.com/yoya/IO_TIFF&lt;/a&gt;&lt;/li&gt;
@@ -35,7 +36,7 @@
 
 &lt;p&gt;IO/TIFF.php の parse function の先頭です。&lt;/p&gt;
 
-&lt;h2 id=&#34;tiff-をとりこむ&#34;&gt;TIFF をとりこむ&lt;/h2&gt;
+&lt;h2 id=&#34;tiff-をとりこむ:5972b361355938e744b0d7681dd7c7fa&#34;&gt;TIFF をとりこむ&lt;/h2&gt;
 
 &lt;p&gt;TIFF ファイルが渡された場合はそのまま取り込みます。&lt;/p&gt;
 
@@ -43,7 +44,7 @@
     $bit-&amp;gt;input($tiffData);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;exif-を取り込む&#34;&gt;Exif を取り込む&lt;/h2&gt;
+&lt;h2 id=&#34;exif-を取り込む:5972b361355938e744b0d7681dd7c7fa&#34;&gt;Exif を取り込む&lt;/h2&gt;
 
 &lt;p&gt;Exit ファイルが渡された場合は、先頭6バイトを読み飛ばします。&lt;/p&gt;
 
@@ -51,7 +52,7 @@
     $bit-&amp;gt;input(substr($tiffData, 6));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jepg-を取り込む&#34;&gt;JEPG を取り込む&lt;/h2&gt;
+&lt;h2 id=&#34;jepg-を取り込む:5972b361355938e744b0d7681dd7c7fa&#34;&gt;JEPG を取り込む&lt;/h2&gt;
 
 &lt;p&gt;これは少し厄介です。JPEG の Chunk を APP1 が出るまで読み飛ばし、APP1 の先頭を削って Exif 内の TIFF 形式の場所を抜き出します。&lt;/p&gt;
 
@@ -64,12 +65,12 @@
         $marker2 = $jpegBit-&amp;gt;getUI8();
         $len = $jpegBit-&amp;gt;getUI16BE();
         if ($marker2 === 0xe1) { // APP1
-	       if ($jpegBit-&amp;gt;getData(6) === &amp;quot;Exif\0\0&amp;quot;) {
+            if ($jpegBit-&amp;gt;getData(6) === &amp;quot;Exif\0\0&amp;quot;) {
                 $found = true;
                 break;
-			    }
+            }
         }
-		$jpegBit-&amp;gt;incrementOffset($len - 2, 0);
+        $jpegBit-&amp;gt;incrementOffset($len - 2, 0);
     }
     list($offset, $dummy) = $jpegBit-&amp;gt;getOffset();
     if ($found === false) {
@@ -90,7 +91,7 @@
       <guid>https://blog.awm.jp/2016/11/05/tiff/</guid>
       <description>
 
-&lt;h1 id=&#34;tiff-フォーマットの分解&#34;&gt;TIFF フォーマットの分解&lt;/h1&gt;
+&lt;h1 id=&#34;tiff-フォーマットの分解:5972b361355938e744b0d7681dd7c7fa&#34;&gt;TIFF フォーマットの分解&lt;/h1&gt;
 
 &lt;p&gt;最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で)&lt;/p&gt;
 
@@ -98,7 +99,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/IO_TIFF&#34;&gt;https://github.com/yoya/IO_TIFF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;tiff-フォーマット仕様&#34;&gt;TIFF フォーマット仕様&lt;/h1&gt;
+&lt;h1 id=&#34;tiff-フォーマット仕様:5972b361355938e744b0d7681dd7c7fa&#34;&gt;TIFF フォーマット仕様&lt;/h1&gt;
 
 &lt;p&gt;仕様はこちらですが、いきなり読むのは辛いはずです。&lt;/p&gt;
 
@@ -119,7 +120,7 @@
 &lt;p&gt;Exif は TIFF のフォーマットを利用していて、先頭 6byte &amp;ldquo;Exif\0\0&amp;rdquo; を除けば、TIFF として読めます。
 但し、古いバージョンを使うので TIFF としては少しだけ物足りないです。(特に浮動小数点を扱わないとこ)&lt;/p&gt;
 
-&lt;h1 id=&#34;大雑把なイメージ&#34;&gt;大雑把なイメージ&lt;/h1&gt;
+&lt;h1 id=&#34;大雑把なイメージ:5972b361355938e744b0d7681dd7c7fa&#34;&gt;大雑把なイメージ&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure01.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -132,7 +133,7 @@
 &lt;li&gt;DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;php-で分解&#34;&gt;PHP で分解&lt;/h1&gt;
+&lt;h1 id=&#34;php-で分解:5972b361355938e744b0d7681dd7c7fa&#34;&gt;PHP で分解&lt;/h1&gt;
 
 &lt;p&gt;という訳で、こちらが成果物です。&lt;/p&gt;
 
@@ -175,7 +176,7 @@ IFD:0th
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;todo&#34;&gt;TODO&lt;/h1&gt;
+&lt;h1 id=&#34;todo:5972b361355938e744b0d7681dd7c7fa&#34;&gt;TODO&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;DNG 新規タグは Raw IFD テーブルに多く入るみたいですが、その tag id が謎なので、もうちょっと調べます。。&lt;/li&gt;
