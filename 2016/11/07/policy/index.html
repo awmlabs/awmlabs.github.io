@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -71,30 +71,30 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#policy-xml:7e05e2dc1a051a7606f1d6f0365f8313">policy.xml</a></li>
-<li><a href="#受理する画像のホワイトリストを設定したい:7e05e2dc1a051a7606f1d6f0365f8313">受理する画像のホワイトリストを設定したい</a>
+<li><a href="#policy-xml">policy.xml</a></li>
+<li><a href="#受理する画像のホワイトリストを設定したい">受理する画像のホワイトリストを設定したい</a>
 <ul>
-<li><a href="#policy-xml-を書き換えて実験:7e05e2dc1a051a7606f1d6f0365f8313">policy.xml を書き換えて実験</a>
+<li><a href="#policy-xml-を書き換えて実験">policy.xml を書き換えて実験</a>
 <ul>
-<li><a href="#先勝ちルールでは:7e05e2dc1a051a7606f1d6f0365f8313">先勝ちルールでは？</a></li>
-<li><a href="#後勝ちルールでは:7e05e2dc1a051a7606f1d6f0365f8313">後勝ちルールでは？</a></li>
+<li><a href="#先勝ちルールでは">先勝ちルールでは？</a></li>
+<li><a href="#後勝ちルールでは">後勝ちルールでは？</a></li>
 </ul></li>
-<li><a href="#magick-policy-xml:7e05e2dc1a051a7606f1d6f0365f8313">magick/policy.xml</a></li>
+<li><a href="#magick-policy-xml">magick/policy.xml</a></li>
 </ul></li>
-<li><a href="#true-は何のため:7e05e2dc1a051a7606f1d6f0365f8313">True は何のため？</a></li>
-<li><a href="#結論:7e05e2dc1a051a7606f1d6f0365f8313">結論</a>
+<li><a href="#true-は何のため">True は何のため？</a></li>
+<li><a href="#結論">結論</a>
 <ul>
-<li><a href="#結局-どうすればいいの:7e05e2dc1a051a7606f1d6f0365f8313">結局、どうすればいいの？</a>
+<li><a href="#結局-どうすればいいの">結局、どうすればいいの？</a>
 <ul>
-<li><a href="#シグネチャを自分でチェック:7e05e2dc1a051a7606f1d6f0365f8313">シグネチャを自分でチェック</a></li>
-<li><a href="#ブラックリストで頑張る:7e05e2dc1a051a7606f1d6f0365f8313">ブラックリストで頑張る</a></li>
+<li><a href="#シグネチャを自分でチェック">シグネチャを自分でチェック</a></li>
+<li><a href="#ブラックリストで頑張る">ブラックリストで頑張る</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </nav>
     
 
-<h1 id="policy-xml:7e05e2dc1a051a7606f1d6f0365f8313">policy.xml</h1>
+<h1 id="policy-xml">policy.xml</h1>
 
 <p>ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。</p>
 
@@ -118,7 +118,7 @@ magic.xml		type-apple.xml
 </ul></li>
 </ul>
 
-<h1 id="受理する画像のホワイトリストを設定したい:7e05e2dc1a051a7606f1d6f0365f8313">受理する画像のホワイトリストを設定したい</h1>
+<h1 id="受理する画像のホワイトリストを設定したい">受理する画像のホワイトリストを設定したい</h1>
 
 <p>以前、このような事を呟きました。</p>
 
@@ -131,11 +131,11 @@ magic.xml		type-apple.xml
 
 <p>結論を先にいうと無理でしたが。調べた事を以下にメモします。</p>
 
-<h2 id="policy-xml-を書き換えて実験:7e05e2dc1a051a7606f1d6f0365f8313">policy.xml を書き換えて実験</h2>
+<h2 id="policy-xml-を書き換えて実験">policy.xml を書き換えて実験</h2>
 
 <p>以下のように実験しました。</p>
 
-<h3 id="先勝ちルールでは:7e05e2dc1a051a7606f1d6f0365f8313">先勝ちルールでは？</h3>
+<h3 id="先勝ちルールでは">先勝ちルールでは？</h3>
 
 <pre><code>  &lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
   &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
@@ -146,7 +146,7 @@ convert: not authorized `t.png' @ error/constitute.c/ReadImage/412.
 convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
 </code></pre>
 
-<h3 id="後勝ちルールでは:7e05e2dc1a051a7606f1d6f0365f8313">後勝ちルールでは？</h3>
+<h3 id="後勝ちルールでは">後勝ちルールでは？</h3>
 
 <pre><code>  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
   &lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
@@ -160,7 +160,7 @@ convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
 <p>どちらも駄目でした。
 さて、コードを見てみましょう。</p>
 
-<h2 id="magick-policy-xml:7e05e2dc1a051a7606f1d6f0365f8313">magick/policy.xml</h2>
+<h2 id="magick-policy-xml">magick/policy.xml</h2>
 
 <pre><code>p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 while ((p != (PolicyInfo *) NULL) &amp;&amp; (authorized != MagickFalse))
@@ -200,11 +200,11 @@ if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
 
 <p>例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。</p>
 
-<h1 id="true-は何のため:7e05e2dc1a051a7606f1d6f0365f8313">True は何のため？</h1>
+<h1 id="true-は何のため">True は何のため？</h1>
 
 <p>False が一つでもマッチすると拒否するのだったら、True は何の為にあるの？と一瞬戸惑いましたが、write だけ、read だけといった区別で使っているようです。</p>
 
-<h1 id="結論:7e05e2dc1a051a7606f1d6f0365f8313">結論</h1>
+<h1 id="結論">結論</h1>
 
 <p>残念でした</p>
 
@@ -213,9 +213,9 @@ if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
 <center> <img src="../tweet02-h.png" /> </center></li>
 </ul>
 
-<h2 id="結局-どうすればいいの:7e05e2dc1a051a7606f1d6f0365f8313">結局、どうすればいいの？</h2>
+<h2 id="結局-どうすればいいの">結局、どうすればいいの？</h2>
 
-<h3 id="シグネチャを自分でチェック:7e05e2dc1a051a7606f1d6f0365f8313">シグネチャを自分でチェック</h3>
+<h3 id="シグネチャを自分でチェック">シグネチャを自分でチェック</h3>
 
 <p>画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。ImageMagick に画像ファイルを渡す前に自分でチェックする方法があります。</p>
 
@@ -225,7 +225,7 @@ if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
 <li>GIF: &ldquo;GIF&rdquo;</li>
 </ul>
 
-<h3 id="ブラックリストで頑張る:7e05e2dc1a051a7606f1d6f0365f8313">ブラックリストで頑張る</h3>
+<h3 id="ブラックリストで頑張る">ブラックリストで頑張る</h3>
 
 <p>あとは、</p>
 
