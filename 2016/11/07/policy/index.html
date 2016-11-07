@@ -162,6 +162,26 @@ convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
 
 <h2 id="magick-policy-xml">magick/policy.xml</h2>
 
+<ul>
+<li>エラーの発生箇所はここで</li>
+</ul>
+
+<pre><code>domain=CoderPolicyDomain;
+rights=ReadPolicyRights;
+if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
+  {
+    errno=EPERM;
+    (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
+      &quot;NotAuthorized&quot;,&quot;`%s'&quot;,read_info-&gt;filename);
+    read_info=DestroyImageInfo(read_info);
+    return((Image *) NULL);
+  }
+</code></pre>
+
+<ul>
+<li>IsRightsAuthorized の処理はこれです。</li>
+</ul>
+
 <pre><code>p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 while ((p != (PolicyInfo *) NULL) &amp;&amp; (authorized != MagickFalse))
 {
@@ -183,20 +203,6 @@ while ((p != (PolicyInfo *) NULL) &amp;&amp; (authorized != MagickFalse))
 </code></pre>
 
 <p>先勝ちでも後がちでもなく False 勝ちルールのようです。。</p>
-
-<p>あと、呼び元はこんな感じです。</p>
-
-<pre><code>domain=CoderPolicyDomain;
-rights=ReadPolicyRights;
-if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
-  {
-    errno=EPERM;
-    (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
-      &quot;NotAuthorized&quot;,&quot;`%s'&quot;,read_info-&gt;filename);
-    read_info=DestroyImageInfo(read_info);
-    return((Image *) NULL);
-  }
-</code></pre>
 
 <h1 id="true-は何のため">True は何のため？</h1>
 
