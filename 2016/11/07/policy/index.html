@@ -77,6 +77,7 @@
 <li><a href="#policy-xml-を書き換えて実験">policy.xml を書き換えて実験</a></li>
 <li><a href="#magick-policy-xml">magick/policy.xml</a></li>
 </ul></li>
+<li><a href="#じゃぁ-true-は何のため">じゃぁ、True は何のため？</a></li>
 <li><a href="#結論">結論</a></li>
 </ul>
 </nav>
@@ -86,10 +87,14 @@
 
 <p>ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。</p>
 
-<p>etc の場所は -list configure で分かります。</p>
-
 <pre><code>$ convert -list configure | grep etc
 CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+$ ls /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+coder.xml		mime.xml		type-dejavu.xml
+colors.xml		policy.xml		type-ghostscript.xml
+delegates.xml		quantization-table.xml	type-windows.xml
+log.xml			thresholds.xml		type.xml
+magic.xml		type-apple.xml
 </code></pre>
 
 <p>policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。
@@ -98,7 +103,7 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 <h1 id="受理する画像の種類のホワイトリストを設定がしたい">受理する画像の種類のホワイトリストを設定がしたい</h1>
 
-<p>以前、こんな事をつぶやいたのですが、</p>
+<p>以前、このような事を呟きました。</p>
 
 <ul>
 <li><a href="https://twitter.com/yoya/status/727867440412024832">https://twitter.com/yoya/status/727867440412024832</a>
@@ -107,14 +112,14 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 <p>policy.xml で domain=&ldquo;coder&rdquo; を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリストとして設定したいですよね。</p>
 
-<p>結論を先にいうと無理でしたが。一応調べた事のメモ。</p>
+<p>結論を先にいうと無理でしたが。一応調べた事を以下にメモします。</p>
 
 <h2 id="policy-xml-を書き換えて実験">policy.xml を書き換えて実験</h2>
 
-<p>以下のように実験してみました。</p>
+<p>以下のように実験しました。</p>
 
 <ul>
-<li><p>先勝ちルール？</p>
+<li><p>先勝ちルールでは？</p>
 
 <pre><code>&lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
 &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
@@ -122,7 +127,7 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 <p>=&gt; PNG 処理できず</p></li>
 
-<li><p>後勝ちルール？</p>
+<li><p>後勝ちルールでは？</p>
 
 <pre><code>&lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
 &lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
@@ -170,6 +175,10 @@ if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
 </code></pre>
 
 <p>例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。</p>
+
+<h1 id="じゃぁ-true-は何のため">じゃぁ、True は何のため？</h1>
+
+<p>write だけとか、read だけとかの区別で使っているようです。</p>
 
 <h1 id="結論">結論</h1>
 

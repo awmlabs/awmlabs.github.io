@@ -21,10 +21,14 @@
 
 &lt;p&gt;ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。&lt;/p&gt;
 
-&lt;p&gt;etc の場所は -list configure で分かります。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;$ convert -list configure | grep etc
 CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+$ ls /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+coder.xml		mime.xml		type-dejavu.xml
+colors.xml		policy.xml		type-ghostscript.xml
+delegates.xml		quantization-table.xml	type-windows.xml
+log.xml			thresholds.xml		type.xml
+magic.xml		type-apple.xml
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。
@@ -33,7 +37,7 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 &lt;h1 id=&#34;受理する画像の種類のホワイトリストを設定がしたい&#34;&gt;受理する画像の種類のホワイトリストを設定がしたい&lt;/h1&gt;
 
-&lt;p&gt;以前、こんな事をつぶやいたのですが、&lt;/p&gt;
+&lt;p&gt;以前、このような事を呟きました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/yoya/status/727867440412024832&#34;&gt;https://twitter.com/yoya/status/727867440412024832&lt;/a&gt;
@@ -42,14 +46,14 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 &lt;p&gt;policy.xml で domain=&amp;ldquo;coder&amp;rdquo; を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリストとして設定したいですよね。&lt;/p&gt;
 
-&lt;p&gt;結論を先にいうと無理でしたが。一応調べた事のメモ。&lt;/p&gt;
+&lt;p&gt;結論を先にいうと無理でしたが。一応調べた事を以下にメモします。&lt;/p&gt;
 
 &lt;h2 id=&#34;policy-xml-を書き換えて実験&#34;&gt;policy.xml を書き換えて実験&lt;/h2&gt;
 
-&lt;p&gt;以下のように実験してみました。&lt;/p&gt;
+&lt;p&gt;以下のように実験しました。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;先勝ちルール？&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;先勝ちルールでは？&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
 &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
@@ -57,7 +61,7 @@ CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
 
 &lt;p&gt;=&amp;gt; PNG 処理できず&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;後勝ちルール？&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;後勝ちルールでは？&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
 &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
@@ -105,6 +109,10 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。&lt;/p&gt;
+
+&lt;h1 id=&#34;じゃぁ-true-は何のため&#34;&gt;じゃぁ、True は何のため？&lt;/h1&gt;
+
+&lt;p&gt;write だけとか、read だけとかの区別で使っているようです。&lt;/p&gt;
 
 &lt;h1 id=&#34;結論&#34;&gt;結論&lt;/h1&gt;
 
