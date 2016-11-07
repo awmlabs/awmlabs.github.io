@@ -31,9 +31,15 @@ log.xml			thresholds.xml		type.xml
 magic.xml		type-apple.xml
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。
-- ImageMagickのピクセルキャッシュとリソース制限
-  -  &lt;a href=&#34;http://techlife.cookpad.com/entry/2016/05/18/180703&#34;&gt;http://techlife.cookpad.com/entry/2016/05/18/180703&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagickのピクセルキャッシュとリソース制限
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://techlife.cookpad.com/entry/2016/05/18/180703&#34;&gt;http://techlife.cookpad.com/entry/2016/05/18/180703&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&#34;受理する画像の種類のホワイトリストを設定がしたい&#34;&gt;受理する画像の種類のホワイトリストを設定がしたい&lt;/h1&gt;
 
@@ -46,29 +52,36 @@ magic.xml		type-apple.xml
 
 &lt;p&gt;policy.xml で domain=&amp;ldquo;coder&amp;rdquo; を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリストとして設定したいですよね。&lt;/p&gt;
 
-&lt;p&gt;結論を先にいうと無理でしたが。一応調べた事を以下にメモします。&lt;/p&gt;
+&lt;p&gt;結論を先にいうと無理でしたが。調べた事を以下にメモします。&lt;/p&gt;
 
 &lt;h2 id=&#34;policy-xml-を書き換えて実験&#34;&gt;policy.xml を書き換えて実験&lt;/h2&gt;
 
 &lt;p&gt;以下のように実験しました。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;先勝ちルールでは？&lt;/p&gt;
+&lt;h3 id=&#34;先勝ちルールでは&#34;&gt;先勝ちルールでは？&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
-&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
+&lt;pre&gt;&lt;code&gt;  &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
+  &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;=&amp;gt; PNG 処理できず&lt;/p&gt;&lt;/li&gt;
+&lt;pre&gt;&lt;code&gt; $ convert t.png t2.png
+convert: not authorized `t.png&#39; @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png&#39; @ error/convert.c/ConvertImageCommand/3257.
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;li&gt;&lt;p&gt;後勝ちルールでは？&lt;/p&gt;
+&lt;h3 id=&#34;後勝ちルールでは&#34;&gt;後勝ちルールでは？&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
-&amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;  &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;none&amp;quot; pattern=&amp;quot;*&amp;quot; /&amp;gt;
+  &amp;lt;policy domain=&amp;quot;coder&amp;quot; rights=&amp;quot;read|write&amp;quot; pattern=&amp;quot;PNG&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;どちらも駄目です。コードを見てみましょう。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ convert t.png t2.png
+convert: not authorized `t.png&#39; @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png&#39; @ error/convert.c/ConvertImageCommand/3257.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;どちらも駄目でした。
+さて、コードを見てみましょう。&lt;/p&gt;
 
 &lt;h2 id=&#34;magick-policy-xml&#34;&gt;magick/policy.xml&lt;/h2&gt;
 
@@ -110,9 +123,9 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 
 &lt;p&gt;例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。&lt;/p&gt;
 
-&lt;h1 id=&#34;じゃぁ-true-は何のため&#34;&gt;じゃぁ、True は何のため？&lt;/h1&gt;
+&lt;h1 id=&#34;true-は何のため&#34;&gt;True は何のため？&lt;/h1&gt;
 
-&lt;p&gt;write だけとか、read だけとかの区別で使っているようです。&lt;/p&gt;
+&lt;p&gt;False が一つでもマッチすると拒否するのだったら、True は何の為にあるの？と一瞬戸惑いましたが、write だけ、read だけといった区別で使っているようです。&lt;/p&gt;
 
 &lt;h1 id=&#34;結論&#34;&gt;結論&lt;/h1&gt;
 

@@ -74,10 +74,14 @@
 <li><a href="#policy-xml">policy.xml</a></li>
 <li><a href="#受理する画像の種類のホワイトリストを設定がしたい">受理する画像の種類のホワイトリストを設定がしたい</a>
 <ul>
-<li><a href="#policy-xml-を書き換えて実験">policy.xml を書き換えて実験</a></li>
+<li><a href="#policy-xml-を書き換えて実験">policy.xml を書き換えて実験</a>
+<ul>
+<li><a href="#先勝ちルールでは">先勝ちルールでは？</a></li>
+<li><a href="#後勝ちルールでは">後勝ちルールでは？</a></li>
+</ul></li>
 <li><a href="#magick-policy-xml">magick/policy.xml</a></li>
 </ul></li>
-<li><a href="#じゃぁ-true-は何のため">じゃぁ、True は何のため？</a></li>
+<li><a href="#true-は何のため">True は何のため？</a></li>
 <li><a href="#結論">結論</a></li>
 </ul>
 </nav>
@@ -97,9 +101,15 @@ log.xml			thresholds.xml		type.xml
 magic.xml		type-apple.xml
 </code></pre>
 
-<p>policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。
-- ImageMagickのピクセルキャッシュとリソース制限
-  -  <a href="http://techlife.cookpad.com/entry/2016/05/18/180703">http://techlife.cookpad.com/entry/2016/05/18/180703</a></p>
+<p>policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。</p>
+
+<ul>
+<li>ImageMagickのピクセルキャッシュとリソース制限
+
+<ul>
+<li><a href="http://techlife.cookpad.com/entry/2016/05/18/180703">http://techlife.cookpad.com/entry/2016/05/18/180703</a></li>
+</ul></li>
+</ul>
 
 <h1 id="受理する画像の種類のホワイトリストを設定がしたい">受理する画像の種類のホワイトリストを設定がしたい</h1>
 
@@ -112,29 +122,36 @@ magic.xml		type-apple.xml
 
 <p>policy.xml で domain=&ldquo;coder&rdquo; を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリストとして設定したいですよね。</p>
 
-<p>結論を先にいうと無理でしたが。一応調べた事を以下にメモします。</p>
+<p>結論を先にいうと無理でしたが。調べた事を以下にメモします。</p>
 
 <h2 id="policy-xml-を書き換えて実験">policy.xml を書き換えて実験</h2>
 
 <p>以下のように実験しました。</p>
 
-<ul>
-<li><p>先勝ちルールでは？</p>
+<h3 id="先勝ちルールでは">先勝ちルールでは？</h3>
 
-<pre><code>&lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
-&lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
+<pre><code>  &lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
 </code></pre>
 
-<p>=&gt; PNG 処理できず</p></li>
+<pre><code> $ convert t.png t2.png
+convert: not authorized `t.png' @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
+</code></pre>
 
-<li><p>後勝ちルールでは？</p>
+<h3 id="後勝ちルールでは">後勝ちルールでは？</h3>
 
-<pre><code>&lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
-&lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
-</code></pre></li>
-</ul>
+<pre><code>  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;*&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;read|write&quot; pattern=&quot;PNG&quot; /&gt;
+</code></pre>
 
-<p>どちらも駄目です。コードを見てみましょう。</p>
+<pre><code>$ convert t.png t2.png
+convert: not authorized `t.png' @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
+</code></pre>
+
+<p>どちらも駄目でした。
+さて、コードを見てみましょう。</p>
 
 <h2 id="magick-policy-xml">magick/policy.xml</h2>
 
@@ -176,9 +193,9 @@ if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
 
 <p>例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。</p>
 
-<h1 id="じゃぁ-true-は何のため">じゃぁ、True は何のため？</h1>
+<h1 id="true-は何のため">True は何のため？</h1>
 
-<p>write だけとか、read だけとかの区別で使っているようです。</p>
+<p>False が一つでもマッチすると拒否するのだったら、True は何の為にあるの？と一瞬戸惑いましたが、write だけ、read だけといった区別で使っているようです。</p>
 
 <h1 id="結論">結論</h1>
 
