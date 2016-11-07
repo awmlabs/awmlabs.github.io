@@ -136,6 +136,40 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/yoya/status/795515839042580481&#34;&gt;https://twitter.com/yoya/status/795515839042580481&lt;/a&gt;
 &lt;center&gt; &lt;img src=&#34;../tweet02-h.png&#34; /&gt; &lt;/center&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&#34;じゃなくて-どうすればいいの&#34;&gt;じゃなくて、どうすればいいの？&lt;/h2&gt;
+
+&lt;h3 id=&#34;シグネチャ&#34;&gt;シグネチャ&lt;/h3&gt;
+
+&lt;p&gt;画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。そこで知ってるフォーマット以外を弾く事が多いです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JPEG: &amp;ldquo;\xff\xd8\xff&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;PNG: &amp;ldquo;\x89PNG&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;GIF: &amp;ldquo;GIF&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ブラックリスト&#34;&gt;ブラックリスト&lt;/h3&gt;
+
+&lt;p&gt;あとは、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ convert -list coder
+
+Path: [built-in]
+
+Magick      Coder
+-------------------------------------------------------------------------------
+IMPLICIT    ***
+BGRA        BGR
+BGRO        BGR
+BMP3        BMP
+BMP2        BMP
+＜略＞
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;で出てくる符号化を全部ブラックリストとして列挙して、必要なものだけコメントアウトする方式を使ったりします。&lt;/p&gt;
+
+&lt;p&gt;ちょっと辛い。&lt;/p&gt;
 </description>
     </item>
     
