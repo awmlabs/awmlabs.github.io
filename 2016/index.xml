@@ -141,7 +141,7 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 
 &lt;h3 id=&#34;シグネチャ&#34;&gt;シグネチャ&lt;/h3&gt;
 
-&lt;p&gt;画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。そこで知ってるフォーマット以外を弾く事が多いです。&lt;/p&gt;
+&lt;p&gt;画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。ImageMagick に画像ファイルを渡す前に自分でチェックする方法があります。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;JPEG: &amp;ldquo;\xff\xd8\xff&amp;rdquo;&lt;/li&gt;
@@ -167,9 +167,9 @@ BMP2        BMP
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;で出てくる符号化を全部ブラックリストとして列挙して、必要なものだけコメントアウトする方式を使ったりします。&lt;/p&gt;
+&lt;p&gt;で出てくる符号化を全部ブラックリストとして列挙して、必要なものだけコメントアウトする方法があります。&lt;/p&gt;
 
-&lt;p&gt;ちょっと辛い。&lt;/p&gt;
+&lt;p&gt;ちょっと辛いし、ImageMagick に新規フォーマットが追加された時の追随が面倒。&lt;/p&gt;
 </description>
     </item>
     
