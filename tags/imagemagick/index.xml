@@ -107,7 +107,7 @@ while ((p != (PolicyInfo *) NULL) &amp;amp;&amp;amp; (authorized != MagickFalse)
 
 &lt;p&gt;先勝ちでも後がちでもなく False 勝ちルールのようです。。&lt;/p&gt;
 
-&lt;p&gt;呼び元を見ると。&lt;/p&gt;
+&lt;p&gt;あと、呼び元はこんな感じです。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;domain=CoderPolicyDomain;
 rights=ReadPolicyRights;
@@ -120,8 +120,6 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
     return((Image *) NULL);
   }
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。&lt;/p&gt;
 
 &lt;h1 id=&#34;true-は何のため&#34;&gt;True は何のため？&lt;/h1&gt;
 
