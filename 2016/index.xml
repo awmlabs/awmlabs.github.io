@@ -137,9 +137,9 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 &lt;center&gt; &lt;img src=&#34;../tweet02-h.png&#34; /&gt; &lt;/center&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;じゃなくて-どうすればいいの&#34;&gt;じゃなくて、どうすればいいの？&lt;/h2&gt;
+&lt;h2 id=&#34;結局-どうすればいいの&#34;&gt;結局、どうすればいいの？&lt;/h2&gt;
 
-&lt;h3 id=&#34;シグネチャ&#34;&gt;シグネチャ&lt;/h3&gt;
+&lt;h3 id=&#34;シグネチャを自分でチェック&#34;&gt;シグネチャを自分でチェック&lt;/h3&gt;
 
 &lt;p&gt;画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。ImageMagick に画像ファイルを渡す前に自分でチェックする方法があります。&lt;/p&gt;
 
@@ -149,7 +149,7 @@ if (IsRightsAuthorized(domain,rights,read_info-&amp;gt;magick) == MagickFalse)
 &lt;li&gt;GIF: &amp;ldquo;GIF&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;ブラックリスト&#34;&gt;ブラックリスト&lt;/h3&gt;
+&lt;h3 id=&#34;ブラックリストで頑張る&#34;&gt;ブラックリストで頑張る&lt;/h3&gt;
 
 &lt;p&gt;あとは、&lt;/p&gt;
 
