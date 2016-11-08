@@ -66,7 +66,8 @@ function ls(folder) {
 
 &lt;p&gt;myFunction を指定して再生ボタンを押すと、一度だけ承認を求められます。&lt;/p&gt;
 
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../approval.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../approval.png&#34; /&gt; &lt;/center&gt;
+&lt;center&gt; &lt;img src=&#34;../oauth2.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;実行したらログを確認します。&lt;/p&gt;
 
