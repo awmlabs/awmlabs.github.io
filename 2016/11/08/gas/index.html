@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>GAS で GoogleDrive のフォルダ一覧 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/11/08/gas/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/11/08/gas/" class="hatena-bookmark-button" data-hatena-bookmark-title="GAS で GoogleDrive のフォルダ一覧" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/11/08/gas/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-11-08">November 08, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/gas">GAS</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/gas">GAS</a>
+
+        <a href="https://blog.awm.jp/tags/driveapp">DriveApp</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">GAS で GoogleDrive のフォルダ一覧</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#google-apps-script-作成">Google Apps Script 作成</a></li>
+<li><a href="#フォルダの-id-を調べます">フォルダの ID を調べます</a></li>
+<li><a href="#ls-的なコード">ls 的なコード</a></li>
+<li><a href="#find-的なコード">find 的なコード</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="google-apps-script-作成">Google Apps Script 作成</h1>
+
+<p>まずは Google Drive 上で Apps Script のファイルを作成します。</p>
+
+<p><img src="../menu-log.png" /></p>
+
+<h1 id="フォルダの-id-を調べます">フォルダの ID を調べます</h1>
+
+<p><img src="../drive-url.png" /></p>
+
+<p>ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。</p>
+
+<h1 id="ls-的なコード">ls 的なコード</h1>
+
+<ul>
+<li>Class DriveApps
+
+<ul>
+<li><a href="https://developers.google.com/apps-script/reference/drive/drive-app">https://developers.google.com/apps-script/reference/drive/drive-app</a></li>
+</ul></li>
+</ul>
+
+<p>このドキュメントを見て、適当に実装します。</p>
+
+<pre><code>function myFunction() {
+  var folderId = &quot;0B------------------------k0&quot;; // URLからコピペして埋める
+  var folder = DriveApp.getFolderById(folder);
+  var [files, folders] = ls(folderId);
+  Logger.log(files); // ログ出力
+}
+
+// イテレータを使ってファイルとフォルダの配列を作る。
+function ls(folder) {
+  folder = getFolder(folder);
+  var files = [], folders = [];
+  fileIte = folder.getFiles();
+  while (fileIte.hasNext()) {
+    files.push(fileIte.next());
+  }
+  folderIte = folder.getFolders();
+  while (folderIte.hasNext()) {
+    folders.push(folderIte.next());
+  }
+  return [files, folders];
+}
+</code></pre>
+
+<p>myFunction を指定して再生ボタンを押すと、一度だけ承認を求められます。</p>
+
+<p><center> <img src="../approval.png" /> </center></p>
+
+<p>実行したらログを確認します。</p>
+
+<p><center> <img src="../menu-log.png" /> </center></p>
+
+<p>こんな感じで。</p>
+
+<p><center> <img src="../log-dialog.png" /> </center></p>
+
+<h1 id="find-的なコード">find 的なコード</h1>
+
+<p>searchFiles という便利なものがあります。</p>
+
+<ul>
+<li>searchFiles(params)
+
+<ul>
+<li><a href="https://developers.google.com/apps-script/reference/drive/drive-app#searchFiles(String">https://developers.google.com/apps-script/reference/drive/drive-app#searchFiles(String</a>)</li>
+</ul></li>
+</ul>
+
+<pre><code>function find(folder, params) {
+  var files = [], folders = [];
+  fileIte = folder.searchFiles(params);
+  while (fileIte.hasNext()) {
+    files.push(fileIte.next());
+  }
+  folderIte = folder.searchFolders(params);
+  while (folderIte.hasNext()) {
+    folders.push(folderIte.next());
+  }
+  return [files, folders];
+}
+</code></pre>
+
+<p>(条件を空にしてるのとサブフォルダがないので ls と同じ動きをしてます)</p>
+
+<p><center> <img src="../log-dialog-2.png" /> </center></p>
+
+<p>条件は以下のようなものが使えます。</p>
+
+<ul>
+<li>Search for Files
+
+<ul>
+<li><a href="https://developers.google.com/drive/v3/web/search-parameters">https://developers.google.com/drive/v3/web/search-parameters</a></li>
+</ul></li>
+</ul>
+
+<p>最近追加されたり編集されたファイルの一覧を出すのに便利ですね。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

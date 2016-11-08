@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Driveapp on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/driveapp/index.xml</link>
+    <description>Recent content in Driveapp on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <atom:link href="https://blog.awm.jp/tags/driveapp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>GAS で GoogleDrive のフォルダ一覧</title>
+      <link>https://blog.awm.jp/2016/11/08/gas/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/2016/11/08/gas/</guid>
+      <description>
+
+&lt;h1 id=&#34;google-apps-script-作成&#34;&gt;Google Apps Script 作成&lt;/h1&gt;
+
+&lt;p&gt;まずは Google Drive 上で Apps Script のファイルを作成します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../menu-log.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;フォルダの-id-を調べます&#34;&gt;フォルダの ID を調べます&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;../drive-url.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。&lt;/p&gt;
+
+&lt;h1 id=&#34;ls-的なコード&#34;&gt;ls 的なコード&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Class DriveApps
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/apps-script/reference/drive/drive-app&#34;&gt;https://developers.google.com/apps-script/reference/drive/drive-app&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;このドキュメントを見て、適当に実装します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function myFunction() {
+  var folderId = &amp;quot;0B------------------------k0&amp;quot;; // URLからコピペして埋める
+  var folder = DriveApp.getFolderById(folder);
+  var [files, folders] = ls(folderId);
+  Logger.log(files); // ログ出力
+}
+
+// イテレータを使ってファイルとフォルダの配列を作る。
+function ls(folder) {
+  folder = getFolder(folder);
+  var files = [], folders = [];
+  fileIte = folder.getFiles();
+  while (fileIte.hasNext()) {
+    files.push(fileIte.next());
+  }
+  folderIte = folder.getFolders();
+  while (folderIte.hasNext()) {
+    folders.push(folderIte.next());
+  }
+  return [files, folders];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;myFunction を指定して再生ボタンを押すと、一度だけ承認を求められます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../approval.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;実行したらログを確認します。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../menu-log.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;こんな感じで。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../log-dialog.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;find-的なコード&#34;&gt;find 的なコード&lt;/h1&gt;
+
+&lt;p&gt;searchFiles という便利なものがあります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;searchFiles(params)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/apps-script/reference/drive/drive-app#searchFiles(String&#34;&gt;https://developers.google.com/apps-script/reference/drive/drive-app#searchFiles(String&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;function find(folder, params) {
+  var files = [], folders = [];
+  fileIte = folder.searchFiles(params);
+  while (fileIte.hasNext()) {
+    files.push(fileIte.next());
+  }
+  folderIte = folder.searchFolders(params);
+  while (folderIte.hasNext()) {
+    folders.push(folderIte.next());
+  }
+  return [files, folders];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(条件を空にしてるのとサブフォルダがないので ls と同じ動きをしてます)&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../log-dialog-2.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;条件は以下のようなものが使えます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Search for Files
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/drive/v3/web/search-parameters&#34;&gt;https://developers.google.com/drive/v3/web/search-parameters&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最近追加されたり編集されたファイルの一覧を出すのに便利ですね。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
