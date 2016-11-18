@@ -109,7 +109,7 @@ while (($offset + 8) &amp;lt; $dataLen) {
 &lt;h2 id=&#34;実行例&#34;&gt;実行例&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;(Google) NotoSans Color Emoji&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;(Google) NotoColorEmoji&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ php pngextract.php  -f NotoColorEmoji.ttf -p notoemoji
 notoemoji000000.png
@@ -202,12 +202,13 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;文字列検索はアルゴリズム的に頑張る余地があるのですが、今後の課題にしておきますね。&lt;/p&gt;
+&lt;p&gt;文字列検索はアルゴリズム的に頑張る余地がありますが、今後の課題にしておきますね。&lt;/p&gt;
 
 &lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
 
-&lt;p&gt;以上。
-フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式であれ PNG データを吸い出せるので便利です。ご活用下さい。&lt;/p&gt;
+&lt;p&gt;以上。&lt;/p&gt;
+
+&lt;p&gt;フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式からでも PNG データを吸い出せるので便利です。ご活用下さい。&lt;/p&gt;
 </description>
     </item>
     
