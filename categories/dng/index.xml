@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dng on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/dng/</link>
+    <link>https://blog.awm.jp/categories/dng/index.xml</link>
     <description>Recent content in Dng on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Fri, 04 Nov 2016 23:14:09 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/dng/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,7 +17,7 @@
       <guid>https://blog.awm.jp/2016/11/04/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;dng-仕様書:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 仕様書&lt;/h1&gt;
+&lt;h1 id=&#34;dng-仕様書&#34;&gt;DNG 仕様書&lt;/h1&gt;
 
 &lt;p&gt;Adobe DNG ヘルプにリンクがあります。&lt;/p&gt;
 
@@ -49,7 +48,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;尚、GPSInfoの座標は神奈川県の相模原公園です。&lt;/p&gt;
 
-&lt;h1 id=&#34;編集の設定値:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;編集の設定値&lt;/h1&gt;
+&lt;h1 id=&#34;編集の設定値&#34;&gt;編集の設定値&lt;/h1&gt;
 
 &lt;p&gt;Lightroom や Photoshop で&amp;rdquo;現像&amp;rdquo;する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。&lt;/p&gt;
 
@@ -65,7 +64,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;確かに値が書き換わってます。&lt;/p&gt;
 
-&lt;h1 id=&#34;history-タグ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;History タグ&lt;/h1&gt;
+&lt;h1 id=&#34;history-タグ&#34;&gt;History タグ&lt;/h1&gt;
 
 &lt;p&gt;Lightroom で誤って JPEG 画像を指定して DNG 出力してしまった場合、このタグに記録が残ります。&lt;/p&gt;
 
@@ -83,9 +82,9 @@ Negative specification and the TIFF-EP standard.
       <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;h2 id=&#34;利用するもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;利用するもの&lt;/h2&gt;
+&lt;h2 id=&#34;利用するもの&#34;&gt;利用するもの&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PC (MacBook Pro)&lt;/li&gt;
@@ -98,7 +97,7 @@ Negative specification and the TIFF-EP standard.
 &lt;li&gt;Adobe Photoshop CC&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;dng-画像の入手法:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
+&lt;h2 id=&#34;dng-画像の入手法&#34;&gt;DNG 画像の入手法&lt;/h2&gt;
 
 &lt;p&gt;iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。&lt;/p&gt;
 
@@ -116,7 +115,7 @@ Negative specification and the TIFF-EP standard.
 &lt;pre&gt;&lt;code&gt;プリンタの設定でプロファイルを選択してJPEGファイル出力する。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;adobe-lightroom-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-lightroom-を使う場合&#34;&gt;Adobe Lightroom を使う場合&lt;/h1&gt;
 
 &lt;p&gt;Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。&lt;/p&gt;
 
@@ -133,7 +132,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK&lt;/p&gt;
 
-&lt;h1 id=&#34;adobe-photoshop-を使う場合:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
+&lt;h1 id=&#34;adobe-photoshop-を使う場合&#34;&gt;Adobe Photoshop を使う場合&lt;/h1&gt;
 
 &lt;p&gt;DNG 画像を開いて、左下の「画像を保存」ボタンを押します。&lt;/p&gt;
 
@@ -164,7 +163,7 @@ Negative specification and the TIFF-EP standard.
       <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
       <description>
 
-&lt;h1 id=&#34;必要なもの:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;必要なもの&lt;/h1&gt;
+&lt;h1 id=&#34;必要なもの&#34;&gt;必要なもの&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;実機
@@ -186,13 +185,13 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;全体の流れ:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;全体の流れ&lt;/h1&gt;
+&lt;h1 id=&#34;全体の流れ&#34;&gt;全体の流れ&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../figure1.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;手順:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;手順&lt;/h1&gt;
+&lt;h1 id=&#34;手順&#34;&gt;手順&lt;/h1&gt;
 
-&lt;h2 id=&#34;iphone7-plus:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;iPhone7 Plus&lt;/h2&gt;
+&lt;h2 id=&#34;iphone7-plus&#34;&gt;iPhone7 Plus&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom for iPhone をインストールする (無料)&lt;/li&gt;
@@ -210,7 +209,7 @@ Negative specification and the TIFF-EP standard.
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;pc-macbook-pro:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
+&lt;h2 id=&#34;pc-macbook-pro&#34;&gt;PC (MacBook Pro)&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Adobe Lightroom CC をインストールする (有料)&lt;/li&gt;
@@ -226,7 +225,7 @@ Negative specification and the TIFF-EP standard.
 
 &lt;p&gt;以上で、撮影した DNG ファイルが手元のディスクに保存されます。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考サイト:e23322f8f0faf6ac6a702f3fbee1c037&#34;&gt;参考サイト&lt;/h1&gt;
+&lt;h1 id=&#34;参考サイト&#34;&gt;参考サイト&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lightroom デスクトップとモバイルプラットフォームの同期

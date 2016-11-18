@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.18-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -71,29 +71,29 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#ツールを作ったきっかけ:418c06c92c8215b52bf45f50bda544bf">ツールを作ったきっかけ</a></li>
-<li><a href="#カラー絵文字:418c06c92c8215b52bf45f50bda544bf">カラー絵文字</a></li>
-<li><a href="#png-の構造:418c06c92c8215b52bf45f50bda544bf">PNG の構造</a></li>
-<li><a href="#処理概要:418c06c92c8215b52bf45f50bda544bf">処理概要</a></li>
-<li><a href="#ツール-take1:418c06c92c8215b52bf45f50bda544bf">ツール take1</a>
+<li><a href="#ツールを作ったきっかけ">ツールを作ったきっかけ</a></li>
+<li><a href="#カラー絵文字">カラー絵文字</a></li>
+<li><a href="#png-の構造">PNG の構造</a></li>
+<li><a href="#処理概要">処理概要</a></li>
+<li><a href="#ツール-take1">ツール take1</a>
 <ul>
-<li><a href="#実行例:418c06c92c8215b52bf45f50bda544bf">実行例</a></li>
+<li><a href="#実行例">実行例</a></li>
 </ul></li>
-<li><a href="#ツール-take2-ストリーム方式:418c06c92c8215b52bf45f50bda544bf">ツール take2 (ストリーム方式)</a></li>
-<li><a href="#最後に:418c06c92c8215b52bf45f50bda544bf">最後に</a></li>
+<li><a href="#ツール-take2-ストリーム方式">ツール take2 (ストリーム方式)</a></li>
+<li><a href="#最後に">最後に</a></li>
 </ul>
 </nav>
     
 
-<h1 id="ツールを作ったきっかけ:418c06c92c8215b52bf45f50bda544bf">ツールを作ったきっかけ</h1>
+<h1 id="ツールを作ったきっかけ">ツールを作ったきっかけ</h1>
 
-<p>絵文字用フォントには色んな方式がありまして、その中でも Apple の標準カラー絵文字フォントと Google のNotoColorEmoji フォントは、フォントファイルの中に絵文字のPNG画像データが埋め込まれています。</p>
+<p>カラー絵文字用フォントには色んな方式がありまして、その中でも Apple のカラー絵文字と、 Google のNotoColorEmoji のフォントは、ファイルの中に絵文字のPNG画像データが埋め込まれています。</p>
 
 <p><center> <img src="../figure-ttf.png" /> </center></p>
 
-<h1 id="カラー絵文字:418c06c92c8215b52bf45f50bda544bf">カラー絵文字</h1>
+<h1 id="カラー絵文字">カラー絵文字</h1>
 
-<p>カラー絵文字フォントの方式は大雑把に以下の種類に分けられます。</p>
+<p>カラー絵文字フォントには以下の方式があります。</p>
 
 <ul>
 <li>a) SVG 画像を入れる</li>
@@ -118,13 +118,14 @@
 </ul></li>
 </ul>
 
-<p>本来であれば上記仕様書に従って分解するべきでしょうけど、面倒なので PNG の先頭シグネチャを目印に抜き出しました。</p>
+<p>本来であれば上記仕様書に従って分解するべきでしょうけど、面倒なので PNG の先頭シグネチャを目印に抜き出しました。
+絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。</p>
 
-<h1 id="png-の構造:418c06c92c8215b52bf45f50bda544bf">PNG の構造</h1>
+<h1 id="png-の構造">PNG の構造</h1>
 
 <p><center> <img src="../figure-png.png" /> </center></p>
 
-<h1 id="処理概要:418c06c92c8215b52bf45f50bda544bf">処理概要</h1>
+<h1 id="処理概要">処理概要</h1>
 
 <ul>
 <li>1) フォントファイルの先頭から PNG のシグネチャを探す。</li>
@@ -140,9 +141,9 @@
 <li>4) 1 に戻る</li>
 </ul>
 
-<h1 id="ツール-take1:418c06c92c8215b52bf45f50bda544bf">ツール take1</h1>
+<h1 id="ツール-take1">ツール take1</h1>
 
-<p>(すみません、PHP で。。)</p>
+<p>すみません、PHP で。。。</p>
 
 <ul>
 <li><a href="https://github.com/yoya/misc/blob/96452d7ddbe797685728a5825df2cf3ca863c80c/php/pngextract.php">https://github.com/yoya/misc/blob/96452d7ddbe797685728a5825df2cf3ca863c80c/php/pngextract.php</a></li>
@@ -153,7 +154,7 @@
 <pre><code>$pngSignature = &quot;\x89\x50\x4E\x47\x0D\x0A\x1A\x0A&quot;;
 </code></pre>
 
-<p>このシグネチャを探して、チャンクを IEND まで辿る処理</p>
+<p>このシグネチャを探して、チャンクを IEND まで辿る処理は以下の通りです。</p>
 
 <pre><code>$startOffset = strpos($data, $pngSignature, $offset);
 $offset = $startOffset + strlen($pngSignature);
@@ -169,10 +170,10 @@ while (($offset + 8) &lt; $dataLen) {
 }
 </code></pre>
 
-<h2 id="実行例:418c06c92c8215b52bf45f50bda544bf">実行例</h2>
+<h2 id="実行例">実行例</h2>
 
 <ul>
-<li><p>NotoSans Color Emoji</p>
+<li><p>(Google) NotoSans Color Emoji</p>
 
 <pre><code>$ php pngextract.php  -f NotoColorEmoji.ttf -p notoemoji
 notoemoji000000.png
@@ -204,11 +205,11 @@ OK
 
 <p><center> <img src="../appleemoji-ss.png" /> </center></p>
 
-<p>無条件で PNG を吸い出しているので、絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。</p>
+<p>Apple の方が PNG ファイルの数(5974 &gt; 2387)が多いけど、画像サイズが Google の方が大きい(136x128 &gt; 20x20)という違いがありますね。</p>
 
-<h1 id="ツール-take2-ストリーム方式:418c06c92c8215b52bf45f50bda544bf">ツール take2 (ストリーム方式)</h1>
+<h1 id="ツール-take2-ストリーム方式">ツール take2 (ストリーム方式)</h1>
 
-<p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、数GB といったファイルの処理には適しません。動かない可能性も高いです。</p>
+<p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性があります。</p>
 
 <p>ファイルストリームで処理する版に改良しました。</p>
 
@@ -242,17 +243,34 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 
 <p>要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。</p>
 
-<p>なお、strpos が使えなくなるので、ベタな方法で代価してます。</p>
+<p>なお、strpos が使えなくなるので、ベタな方法で代価してます。(標準関数で欲しい。。)</p>
 
-<pre><code>
-
+<pre><code>function searchText($fp, $needle) {
+    $len = strlen($needle);
+    $buff = fread($fp, $len);
+    if ($buff === false)  {
+        return false;
+    }
+    while (($buff !== $needle)) {
+        if (feof($fp)) {
+            return false;
+        }
+        $c = fread($fp, 1);
+        if ($c === false) {
+            return false;
+        }
+        $buff = substr($buff, 1) . $c;
+    }
+    return true;
+}
 </code></pre>
 
-<p>文字列検索は頑張る余地があるのですが、ここは今後の課題にしておきます。</p>
+<p>文字列検索はアルゴリズム的に頑張る余地があるのですが、今後の課題にしておきますね。</p>
 
-<h1 id="最後に:418c06c92c8215b52bf45f50bda544bf">最後に</h1>
+<h1 id="最後に">最後に</h1>
 
-<p>フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、それがどんな形式であれ PNG を吸い出せるので便利です。ご活用下さい。</p>
+<p>以上。
+フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式であれ PNG データを吸い出せるので便利です。ご活用下さい。</p>
 
   </section>
 </article>
