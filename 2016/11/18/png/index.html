@@ -71,10 +71,10 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#ツールを作ったきっかけ">ツールを作ったきっかけ</a></li>
+<li><a href="#はじめに">はじめに</a></li>
 <li><a href="#カラー絵文字">カラー絵文字</a></li>
 <li><a href="#png-の構造">PNG の構造</a></li>
-<li><a href="#処理概要">処理概要</a></li>
+<li><a href="#ツール処理概要">ツール処理概要</a></li>
 <li><a href="#ツール-take1">ツール take1</a>
 <ul>
 <li><a href="#実行例">実行例</a></li>
@@ -85,13 +85,11 @@
 </nav>
     
 
-<h1 id="ツールを作ったきっかけ">ツールを作ったきっかけ</h1>
+<h1 id="はじめに">はじめに</h1>
 
-<p>カラー絵文字用フォントには色んな方式がありまして、その中でも Apple のカラー絵文字と、 Google のNotoColorEmoji のフォントは、ファイルの中に絵文字のPNG画像データが埋め込まれています。</p>
+<p>Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内包されている絵文字の PNG 画像データを抽出する事が目的です。</p>
 
 <p><center> <img src="../figure-ttf.png" /> </center></p>
-
-<p>この PNG 画像を抽出するのが目的です。</p>
 
 <h1 id="カラー絵文字">カラー絵文字</h1>
 
@@ -103,7 +101,7 @@
 <li>c) 色数分の文字データをもってレイヤー合成で表示</li>
 </ul>
 
-<p>今回はこのうち b) 方式のフォントファイルから絵文字の画像を抜きだします。</p>
+<p>今回はこのうち b) 方式のフォントファイル形式を対象にします。</p>
 
 <p>参考)</p>
 
@@ -120,24 +118,27 @@
 </ul></li>
 </ul>
 
-<p>本来であれば上記仕様書に従って分解するべきですが、面倒なので PNG の先頭シグネチャを目印に抜き出す(フォントに限定しない)汎用的なツールを作りました。
+<p>上記仕様書に従って分解するのが面倒なので、PNG の先頭シグネチャを目印に抜き出す、フォント以外でも利用出来る汎用的なツールを作りました。
 絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。</p>
 
 <h1 id="png-の構造">PNG の構造</h1>
 
 <p><center> <img src="../figure-png.png" /> </center></p>
 
-<h1 id="処理概要">処理概要</h1>
+<h1 id="ツール処理概要">ツール処理概要</h1>
 
 <ul>
 <li>1) フォントファイルの先頭から PNG のシグネチャを探す。</li>
 <li>2) 見つけたら、その後ろのチャンクを順番に見る。
 
 <ul>
-<li>len + name + payload + crc の構造</li>
-<li>len は UInt32(4byte) BigEndiana</li>
-<li>name は4文字(4byte)。IHDR チャンクで始まり IEND チャンクで終わる</li>
-<li>チャンクの最後 4byte に crc 値がある事に注意</li>
+<li>len + name + payload + crc の構造
+
+<ul>
+<li>len は UInt32(4byte) BigEndian</li>
+<li>name は4文字(4byte)。最初のチャンクが IHDR で、最後が IEND</li>
+<li>チャンクの末尾 4byte に crc 値がある事に注意</li>
+</ul></li>
 </ul></li>
 <li>3) IEND のチャンクにたどり着いたら、そこまでを一つの PNGファイルとして出力する。</li>
 <li>4) 1 に戻る</li>
@@ -156,7 +157,7 @@
 <pre><code>$pngSignature = &quot;\x89\x50\x4E\x47\x0D\x0A\x1A\x0A&quot;;
 </code></pre>
 
-<p>このシグネチャを探して、チャンクを IEND まで辿る処理は以下の通りです。</p>
+<p>このシグネチャを strpos で探して、その後ろに続くチャンクを IEND まで辿る処理を作りました。</p>
 
 <pre><code>$startOffset = strpos($data, $pngSignature, $offset);
 $offset = $startOffset + strlen($pngSignature);
@@ -202,16 +203,17 @@ appleemoji009538.png
 appleemoji009539.png
 appleemoji009540.png
 OK
+$
 </code></pre></li>
 </ul>
 
 <p><center> <img src="../appleemoji-ss.png" /> </center></p>
 
-<p>Apple の方が PNG ファイルの数(5974 &gt; 2387)が多いけれど、画像サイズが Google の方が大きい(136x128 &gt; 20x20)という違いがありますね。</p>
+<p>Apple の方が PNG ファイルの数(5974 &gt; 2387)が多いけれど、Google の方が画像サイズが大きい(136x128 &gt; 20x20)という違いがありますね。</p>
 
 <h1 id="ツール-take2-ストリーム方式">ツール take2 (ストリーム方式)</h1>
 
-<p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性があります。</p>
+<p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性が出てきます。</p>
 
 <p>ファイルストリームで処理する版に改良しました。</p>
 
@@ -243,7 +245,7 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 ＜略＞
 </code></pre>
 
-<p>要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。</p>
+<p>要するに、入力したデータをなるべく即出力する事で、使用メモリを節約できます。</p>
 
 <p>なお、strpos が使えなくなるので、ベタな方法で代価してます。(標準関数で欲しい。。)</p>
 

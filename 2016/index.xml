@@ -18,13 +18,11 @@
       <guid>https://blog.awm.jp/2016/11/18/png/</guid>
       <description>
 
-&lt;h1 id=&#34;ツールを作ったきっかけ&#34;&gt;ツールを作ったきっかけ&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;カラー絵文字用フォントには色んな方式がありまして、その中でも Apple のカラー絵文字と、 Google のNotoColorEmoji のフォントは、ファイルの中に絵文字のPNG画像データが埋め込まれています。&lt;/p&gt;
+&lt;p&gt;Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内包されている絵文字の PNG 画像データを抽出する事が目的です。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-ttf.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;この PNG 画像を抽出するのが目的です。&lt;/p&gt;
 
 &lt;h1 id=&#34;カラー絵文字&#34;&gt;カラー絵文字&lt;/h1&gt;
 
@@ -36,7 +34,7 @@
 &lt;li&gt;c) 色数分の文字データをもってレイヤー合成で表示&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;今回はこのうち b) 方式のフォントファイルから絵文字の画像を抜きだします。&lt;/p&gt;
+&lt;p&gt;今回はこのうち b) 方式のフォントファイル形式を対象にします。&lt;/p&gt;
 
 &lt;p&gt;参考)&lt;/p&gt;
 
@@ -53,24 +51,27 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;本来であれば上記仕様書に従って分解するべきですが、面倒なので PNG の先頭シグネチャを目印に抜き出す(フォントに限定しない)汎用的なツールを作りました。
+&lt;p&gt;上記仕様書に従って分解するのが面倒なので、PNG の先頭シグネチャを目印に抜き出す、フォント以外でも利用出来る汎用的なツールを作りました。
 絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。&lt;/p&gt;
 
 &lt;h1 id=&#34;png-の構造&#34;&gt;PNG の構造&lt;/h1&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-png.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;処理概要&#34;&gt;処理概要&lt;/h1&gt;
+&lt;h1 id=&#34;ツール処理概要&#34;&gt;ツール処理概要&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;1) フォントファイルの先頭から PNG のシグネチャを探す。&lt;/li&gt;
 &lt;li&gt;2) 見つけたら、その後ろのチャンクを順番に見る。
 
 &lt;ul&gt;
-&lt;li&gt;len + name + payload + crc の構造&lt;/li&gt;
-&lt;li&gt;len は UInt32(4byte) BigEndiana&lt;/li&gt;
-&lt;li&gt;name は4文字(4byte)。IHDR チャンクで始まり IEND チャンクで終わる&lt;/li&gt;
-&lt;li&gt;チャンクの最後 4byte に crc 値がある事に注意&lt;/li&gt;
+&lt;li&gt;len + name + payload + crc の構造
+
+&lt;ul&gt;
+&lt;li&gt;len は UInt32(4byte) BigEndian&lt;/li&gt;
+&lt;li&gt;name は4文字(4byte)。最初のチャンクが IHDR で、最後が IEND&lt;/li&gt;
+&lt;li&gt;チャンクの末尾 4byte に crc 値がある事に注意&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;3) IEND のチャンクにたどり着いたら、そこまでを一つの PNGファイルとして出力する。&lt;/li&gt;
 &lt;li&gt;4) 1 に戻る&lt;/li&gt;
@@ -89,7 +90,7 @@
 &lt;pre&gt;&lt;code&gt;$pngSignature = &amp;quot;\x89\x50\x4E\x47\x0D\x0A\x1A\x0A&amp;quot;;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;このシグネチャを探して、チャンクを IEND まで辿る処理は以下の通りです。&lt;/p&gt;
+&lt;p&gt;このシグネチャを strpos で探して、その後ろに続くチャンクを IEND まで辿る処理を作りました。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$startOffset = strpos($data, $pngSignature, $offset);
 $offset = $startOffset + strlen($pngSignature);
@@ -135,16 +136,17 @@ appleemoji009538.png
 appleemoji009539.png
 appleemoji009540.png
 OK
+$
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../appleemoji-ss.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;Apple の方が PNG ファイルの数(5974 &amp;gt; 2387)が多いけれど、画像サイズが Google の方が大きい(136x128 &amp;gt; 20x20)という違いがありますね。&lt;/p&gt;
+&lt;p&gt;Apple の方が PNG ファイルの数(5974 &amp;gt; 2387)が多いけれど、Google の方が画像サイズが大きい(136x128 &amp;gt; 20x20)という違いがありますね。&lt;/p&gt;
 
 &lt;h1 id=&#34;ツール-take2-ストリーム方式&#34;&gt;ツール take2 (ストリーム方式)&lt;/h1&gt;
 
-&lt;p&gt;上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性があります。&lt;/p&gt;
+&lt;p&gt;上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性が出てきます。&lt;/p&gt;
 
 &lt;p&gt;ファイルストリームで処理する版に改良しました。&lt;/p&gt;
 
@@ -176,7 +178,7 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 ＜略＞
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。&lt;/p&gt;
+&lt;p&gt;要するに、入力したデータをなるべく即出力する事で、使用メモリを節約できます。&lt;/p&gt;
 
 &lt;p&gt;なお、strpos が使えなくなるので、ベタな方法で代価してます。(標準関数で欲しい。。)&lt;/p&gt;
 
