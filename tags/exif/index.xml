@@ -2,11 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Exif on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/exif/index.xml</link>
+    <link>https://blog.awm.jp/tags/exif/</link>
     <description>Recent content in Exif on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 06 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/exif/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +18,7 @@
       <guid>https://blog.awm.jp/2016/11/06/tiff/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-と-exif-と-tiff-の関係&#34;&gt;JPEG と Exif と TIFF の関係&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-と-exif-と-tiff-の関係:5972b361355938e744b0d7681dd7c7fa&#34;&gt;JPEG と Exif と TIFF の関係&lt;/h1&gt;
 
 &lt;p&gt;TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのまま使っています。&lt;/p&gt;
 
@@ -27,7 +28,7 @@
 
 &lt;p&gt;昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。&lt;/p&gt;
 
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
+&lt;h1 id=&#34;実装:5972b361355938e744b0d7681dd7c7fa&#34;&gt;実装&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/IO_TIFF&#34;&gt;https://github.com/yoya/IO_TIFF&lt;/a&gt;&lt;/li&gt;
@@ -35,7 +36,7 @@
 
 &lt;p&gt;IO/TIFF.php の parse function の先頭です。&lt;/p&gt;
 
-&lt;h2 id=&#34;tiff-をとりこむ&#34;&gt;TIFF をとりこむ&lt;/h2&gt;
+&lt;h2 id=&#34;tiff-をとりこむ:5972b361355938e744b0d7681dd7c7fa&#34;&gt;TIFF をとりこむ&lt;/h2&gt;
 
 &lt;p&gt;TIFF ファイルが渡された場合はそのまま取り込みます。&lt;/p&gt;
 
@@ -43,7 +44,7 @@
     $bit-&amp;gt;input($tiffData);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;exif-を取り込む&#34;&gt;Exif を取り込む&lt;/h2&gt;
+&lt;h2 id=&#34;exif-を取り込む:5972b361355938e744b0d7681dd7c7fa&#34;&gt;Exif を取り込む&lt;/h2&gt;
 
 &lt;p&gt;Exit ファイルが渡された場合は、先頭6バイトを読み飛ばします。&lt;/p&gt;
 
@@ -51,7 +52,7 @@
     $bit-&amp;gt;input(substr($tiffData, 6));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jepg-を取り込む&#34;&gt;JEPG を取り込む&lt;/h2&gt;
+&lt;h2 id=&#34;jepg-を取り込む:5972b361355938e744b0d7681dd7c7fa&#34;&gt;JEPG を取り込む&lt;/h2&gt;
 
 &lt;p&gt;これは少し厄介です。JPEG の Chunk を APP1 が出るまで読み飛ばし、APP1 の先頭を削って Exif 内の TIFF 形式の場所を抜き出します。&lt;/p&gt;
 
@@ -90,9 +91,9 @@
       <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;jpeg-exif-orientation-の操作&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
+&lt;h1 id=&#34;jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;JPEG Exif Orientation の操作&lt;/h1&gt;
 
-&lt;h2 id=&#34;orientation-とは&#34;&gt;Orientation とは&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation とは&lt;/h2&gt;
 
 &lt;p&gt;JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation タグがあります。&lt;/p&gt;
@@ -113,11 +114,11 @@
     exif:Orientation: 6
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;orientation-の数値の対応&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
+&lt;h2 id=&#34;orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;Orientation の数値の対応&lt;/h2&gt;
 
 &lt;p&gt;以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)&lt;/p&gt;
 
-&lt;h3 id=&#34;早見表1&#34;&gt;早見表1&lt;/h3&gt;
+&lt;h3 id=&#34;早見表1:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表1&lt;/h3&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -172,7 +173,7 @@
  * 1 の鏡反転 =&amp;gt; 2、8 の鏡反転 =&amp;gt; 5, 3の鏡反転=&amp;gt; 4、6 の鏡反転 =&amp;gt; 7
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;早見表2&#34;&gt;早見表2&lt;/h3&gt;
+&lt;h3 id=&#34;早見表2:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;早見表2&lt;/h3&gt;
 
 &lt;p&gt;変換の方向がわかりやすい図もつけます。&lt;/p&gt;
 
@@ -236,19 +237,19 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;編集ツール&#34;&gt;編集ツール&lt;/h2&gt;
+&lt;h2 id=&#34;編集ツール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;編集ツール&lt;/h2&gt;
 
 &lt;p&gt;Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。&lt;/p&gt;
 
 &lt;p&gt;ExifTool が便利なのでこちらを使う事にします。&lt;/p&gt;
 
-&lt;h1 id=&#34;exiftool&#34;&gt;ExifTool&lt;/h1&gt;
+&lt;h1 id=&#34;exiftool:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.sno.phy.queensu.ca/~phil/exiftool/&#34;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;インストール&#34;&gt;インストール&lt;/h2&gt;
+&lt;h2 id=&#34;インストール:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;インストール&lt;/h2&gt;
 
 &lt;p&gt;MacOS は&lt;/p&gt;
 
@@ -264,7 +265,7 @@
 
 &lt;p&gt;Perl なので他のプラットフォームでも入れるのは難しくないでしょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;exiftool-の使い方&#34;&gt;ExifTool の使い方&lt;/h2&gt;
+&lt;h2 id=&#34;exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;ExifTool の使い方&lt;/h2&gt;
 
 &lt;p&gt;Orientation は以下のコマンドで書き換えられます。&lt;/p&gt;
 
@@ -273,7 +274,7 @@ test.jpg
     1 image files updated
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;まとめて-1-8を設定する&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
+&lt;h2 id=&#34;まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;まとめて 1〜8を設定する&lt;/h2&gt;
 
 &lt;p&gt;ついでに表示の時に元の画像の向きを維持するようにします。&lt;/p&gt;
 
@@ -385,7 +386,7 @@ done
 
 &lt;p&gt;として Exif タグを削除したものです。&lt;/p&gt;
 
-&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+&lt;h1 id=&#34;参考-url:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;参考 URL&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Exif 2.3 規格書
@@ -410,7 +411,7 @@ done
       <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
       <description>
 
-&lt;h1 id=&#34;auto-orient-でオフセットがズレる件&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
+&lt;h1 id=&#34;auto-orient-でオフセットがズレる件:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
 
 &lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
 
@@ -435,7 +436,7 @@ out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 
 
 &lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
 
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
+&lt;h1 id=&#34;実装:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;実装&lt;/h1&gt;
 
 &lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
 
@@ -461,7 +462,7 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;repage&#34;&gt;+repage&lt;/h1&gt;
+&lt;h1 id=&#34;repage:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;+repage&lt;/h1&gt;
 
 &lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
 
@@ -472,7 +473,7 @@ out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 &lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
 
-&lt;h1 id=&#34;おまけ&#34;&gt;おまけ&lt;/h1&gt;
+&lt;h1 id=&#34;おまけ:5ebdf1d9c2e1c280f058e69d3b760785&#34;&gt;おまけ&lt;/h1&gt;
 
 &lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
 
