@@ -26,12 +26,12 @@
 
 &lt;h1 id=&#34;カラー絵文字&#34;&gt;カラー絵文字&lt;/h1&gt;
 
-&lt;p&gt;カラー絵文字フォントには以下の方式があります。&lt;/p&gt;
+&lt;p&gt;カラー絵文字フォントには以下のような種類があります。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;a) SVG 画像を入れる&lt;/li&gt;
-&lt;li&gt;b) フォントにPNG画像を入れる&lt;/li&gt;
-&lt;li&gt;c) 色数分の文字データをもってレイヤー合成で表示&lt;/li&gt;
+&lt;li&gt;a) フォントにSVG 画像で絵文字を入れる&lt;/li&gt;
+&lt;li&gt;b) ＜同上＞PNG画像で絵文字を入れる (Apple,Google 方式)&lt;/li&gt;
+&lt;li&gt;c) ＜同上＞色数分の文字データをもってレイヤー合成で絵文字表示 (Microsoft方式)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;今回はこのうち b) 方式のフォントファイル形式を対象にします。&lt;/p&gt;
@@ -209,6 +209,15 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 &lt;p&gt;以上。&lt;/p&gt;
 
 &lt;p&gt;フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式からでも PNG データを吸い出せるので便利です。ご活用下さい。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考-url&#34;&gt;参考 URL&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://wontfix.blogspot.jp/2014/04/firefox-developers-conference-2014-in.html&#34;&gt;http://wontfix.blogspot.jp/2014/04/firefox-developers-conference-2014-in.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Apple_Color_Emoji&#34;&gt;https://en.wikipedia.org/wiki/Apple_Color_Emoji&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://opensource.googleblog.com/2013/05/open-standard-color-font-fun-for.html&#34;&gt;https://opensource.googleblog.com/2013/05/open-standard-color-font-fun-for.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.fontlab.com/font-tech/color-fonts/color-font-format-proposals/&#34;&gt;http://blog.fontlab.com/font-tech/color-fonts/color-font-format-proposals/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

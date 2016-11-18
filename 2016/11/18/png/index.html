@@ -81,6 +81,7 @@
 </ul></li>
 <li><a href="#ツール-take2-ストリーム方式">ツール take2 (ストリーム方式)</a></li>
 <li><a href="#最後に">最後に</a></li>
+<li><a href="#参考-url">参考 URL</a></li>
 </ul>
 </nav>
     
@@ -93,12 +94,12 @@
 
 <h1 id="カラー絵文字">カラー絵文字</h1>
 
-<p>カラー絵文字フォントには以下の方式があります。</p>
+<p>カラー絵文字フォントには以下のような種類があります。</p>
 
 <ul>
-<li>a) SVG 画像を入れる</li>
-<li>b) フォントにPNG画像を入れる</li>
-<li>c) 色数分の文字データをもってレイヤー合成で表示</li>
+<li>a) フォントにSVG 画像で絵文字を入れる</li>
+<li>b) ＜同上＞PNG画像で絵文字を入れる (Apple,Google 方式)</li>
+<li>c) ＜同上＞色数分の文字データをもってレイヤー合成で絵文字表示 (Microsoft方式)</li>
 </ul>
 
 <p>今回はこのうち b) 方式のフォントファイル形式を対象にします。</p>
@@ -276,6 +277,15 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 <p>以上。</p>
 
 <p>フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式からでも PNG データを吸い出せるので便利です。ご活用下さい。</p>
+
+<h1 id="参考-url">参考 URL</h1>
+
+<ul>
+<li><a href="http://wontfix.blogspot.jp/2014/04/firefox-developers-conference-2014-in.html">http://wontfix.blogspot.jp/2014/04/firefox-developers-conference-2014-in.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Apple_Color_Emoji">https://en.wikipedia.org/wiki/Apple_Color_Emoji</a></li>
+<li><a href="https://opensource.googleblog.com/2013/05/open-standard-color-font-fun-for.html">https://opensource.googleblog.com/2013/05/open-standard-color-font-fun-for.html</a></li>
+<li><a href="http://blog.fontlab.com/font-tech/color-fonts/color-font-format-proposals/">http://blog.fontlab.com/font-tech/color-fonts/color-font-format-proposals/</a></li>
+</ul>
 
   </section>
 </article>
