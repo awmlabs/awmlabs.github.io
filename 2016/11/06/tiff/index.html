@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="generator" content="Hugo 0.16-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,18 +75,18 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-と-exif-と-tiff-の関係">JPEG と Exif と TIFF の関係</a></li>
-<li><a href="#実装">実装</a>
+<li><a href="#jpeg-と-exif-と-tiff-の関係:5972b361355938e744b0d7681dd7c7fa">JPEG と Exif と TIFF の関係</a></li>
+<li><a href="#実装:5972b361355938e744b0d7681dd7c7fa">実装</a>
 <ul>
-<li><a href="#tiff-をとりこむ">TIFF をとりこむ</a></li>
-<li><a href="#exif-を取り込む">Exif を取り込む</a></li>
-<li><a href="#jepg-を取り込む">JEPG を取り込む</a></li>
+<li><a href="#tiff-をとりこむ:5972b361355938e744b0d7681dd7c7fa">TIFF をとりこむ</a></li>
+<li><a href="#exif-を取り込む:5972b361355938e744b0d7681dd7c7fa">Exif を取り込む</a></li>
+<li><a href="#jepg-を取り込む:5972b361355938e744b0d7681dd7c7fa">JEPG を取り込む</a></li>
 </ul></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-と-exif-と-tiff-の関係">JPEG と Exif と TIFF の関係</h1>
+<h1 id="jpeg-と-exif-と-tiff-の関係:5972b361355938e744b0d7681dd7c7fa">JPEG と Exif と TIFF の関係</h1>
 
 <p>TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのまま使っています。</p>
 
@@ -96,7 +96,7 @@
 
 <p>昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。</p>
 
-<h1 id="実装">実装</h1>
+<h1 id="実装:5972b361355938e744b0d7681dd7c7fa">実装</h1>
 
 <ul>
 <li><a href="https://github.com/yoya/IO_TIFF">https://github.com/yoya/IO_TIFF</a></li>
@@ -104,7 +104,7 @@
 
 <p>IO/TIFF.php の parse function の先頭です。</p>
 
-<h2 id="tiff-をとりこむ">TIFF をとりこむ</h2>
+<h2 id="tiff-をとりこむ:5972b361355938e744b0d7681dd7c7fa">TIFF をとりこむ</h2>
 
 <p>TIFF ファイルが渡された場合はそのまま取り込みます。</p>
 
@@ -112,7 +112,7 @@
     $bit-&gt;input($tiffData);
 </code></pre>
 
-<h2 id="exif-を取り込む">Exif を取り込む</h2>
+<h2 id="exif-を取り込む:5972b361355938e744b0d7681dd7c7fa">Exif を取り込む</h2>
 
 <p>Exit ファイルが渡された場合は、先頭6バイトを読み飛ばします。</p>
 
@@ -120,7 +120,7 @@
     $bit-&gt;input(substr($tiffData, 6));
 </code></pre>
 
-<h2 id="jepg-を取り込む">JEPG を取り込む</h2>
+<h2 id="jepg-を取り込む:5972b361355938e744b0d7681dd7c7fa">JEPG を取り込む</h2>
 
 <p>これは少し厄介です。JPEG の Chunk を APP1 が出るまで読み飛ばし、APP1 の先頭を削って Exif 内の TIFF 形式の場所を抜き出します。</p>
 
