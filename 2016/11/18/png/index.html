@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.18-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>任意のファイルから PNG を抜き出す - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/11/18/png/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2016/11/18/png/" class="hatena-bookmark-button" data-hatena-bookmark-title="任意のファイルから PNG を抜き出す" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/11/18/png/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-11-18">November 18, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/png">PNG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/png">PNG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">任意のファイルから PNG を抜き出す</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#ツールを作ったきっかけ">ツールを作ったきっかけ</a></li>
+<li><a href="#カラー絵文字">カラー絵文字</a></li>
+<li><a href="#png-の構造">PNG の構造</a></li>
+<li><a href="#処理概要">処理概要</a></li>
+<li><a href="#ツール-take1">ツール take1</a>
+<ul>
+<li><a href="#実行例">実行例</a></li>
+<li><a href="#ファイルストリーム方式">ファイルストリーム方式</a></li>
+</ul></li>
+<li><a href="#最後に">最後に</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="ツールを作ったきっかけ">ツールを作ったきっかけ</h1>
+
+<p>絵文字用フォントには色んな方式がありまして、その中でも Apple の標準カラー絵文字フォントと Google のNotoColorEmoji フォントは、フォントファイルの中に絵文字のPNG画像データが埋め込まれています。</p>
+
+<p><center> <img src="../figure-ttf.png" /> </center></p>
+
+<h1 id="カラー絵文字">カラー絵文字</h1>
+
+<p>カラー絵文字フォントの方式は大雑把に以下の種類に分けられます。</p>
+
+<ul>
+<li>a) SVG 画像を入れる</li>
+<li>b) フォントにPNG画像を入れる</li>
+<li>c) 色数分の文字データをもってレイヤー合成で表示</li>
+</ul>
+
+<p>今回はこのうち b) 方式のフォントファイルから絵文字の画像を抜きだします。</p>
+
+<p>参考)</p>
+
+<ul>
+<li>Apple Color Emoji spec
+
+<ul>
+<li><a href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6sbix.html">https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6sbix.html</a></li>
+</ul></li>
+<li>Google Noto Color Emoji spec
+
+<ul>
+<li><a href="https://rawgit.com/behdad/color-emoji/master/specification/v1.html">https://rawgit.com/behdad/color-emoji/master/specification/v1.html</a></li>
+</ul></li>
+</ul>
+
+<p>本来であれば上記仕様書に従って分解するべきでしょうけど、面倒なので PNG の先頭シグネチャを目印に抜き出しました。</p>
+
+<h1 id="png-の構造">PNG の構造</h1>
+
+<p><center> <img src="../figure-png.png" /> </center></p>
+
+<h1 id="処理概要">処理概要</h1>
+
+<ul>
+<li>1) フォントファイルの先頭から PNG のシグネチャを探す。</li>
+<li>2) 見つけたら、その後ろのチャンクを順番に見る。
+
+<ul>
+<li>len + name + payload + crc の構造</li>
+<li>len は UInt32(4byte) BigEndiana</li>
+<li>name は4文字(4byte)。IHDR チャンクで始まり IEND チャンクで終わる</li>
+<li>チャンクの最後 4byte に crc 値がある事に注意</li>
+</ul></li>
+<li>3) IEND のチャンクにたどり着いたら、そこまでを一つの PNGファイルとして出力する。</li>
+<li>4) 1 に戻る</li>
+</ul>
+
+<h1 id="ツール-take1">ツール take1</h1>
+
+<p>(すみません、PHP で。。)</p>
+
+<ul>
+<li><a href="https://github.com/yoya/misc/blob/96452d7ddbe797685728a5825df2cf3ca863c80c/php/pngextract.php">https://github.com/yoya/misc/blob/96452d7ddbe797685728a5825df2cf3ca863c80c/php/pngextract.php</a></li>
+</ul>
+
+<p>PNG の先頭シグネチャは以下の8バイトです。</p>
+
+<pre><code>$pngSignature = &quot;\x89\x50\x4E\x47\x0D\x0A\x1A\x0A&quot;;
+</code></pre>
+
+<p>このシグネチャを探して、チャンクを IEND まで辿る処理</p>
+
+<pre><code>$startOffset = strpos($data, $pngSignature, $offset);
+$offset = $startOffset + strlen($pngSignature);
+$iendFound = false;
+while (($offset + 8) &lt; $dataLen) {
+    $len = readUI32($data, $offset);
+    $sig = substr($data, $offset + 4 , 4);
+    $offset += 4 + 4 + $len + 4; // len + name + &lt;payload&gt; + crc
+    if ($sig === &quot;IEND&quot;) {
+        $iendFound = true;
+        break;
+    }
+}
+</code></pre>
+
+<h2 id="実行例">実行例</h2>
+
+<ul>
+<li><p>NotoSans Color Emoji</p>
+
+<pre><code>$ php pngextract.php  -f NotoColorEmoji.ttf -p notoemoji
+notoemoji000000.png
+notoemoji000001.png
+notoemoji000002.png
+＜略＞
+notoemoji002384.png
+notoemoji002385.png
+notoemoji002386.png
+OK
+$
+</code></pre>
+
+<p><center> <img src="../notoemoji-ss.png" /> </center></p></li>
+
+<li><p>Apple Color Emoji</p>
+
+<pre><code>$ php pngextract.php -f /System/Library/Fonts/Apple\ Color\ Emoji.ttf -p appleemoji
+appleemoji000000.png
+appleemoji000001.png
+appleemoji000002.png
+＜略＞
+appleemoji009538.png
+appleemoji009539.png
+appleemoji009540.png
+OK
+</code></pre></li>
+</ul>
+
+<p><center> <img src="../appleemoji-ss.png" /> </center></p>
+
+<p>無条件で PNG を吸い出しているので、絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。</p>
+
+<h2 id="ファイルストリーム方式">ファイルストリーム方式</h2>
+
+<p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、数GB といったファイルの処理には適しません。動かない可能性も高いです。</p>
+
+<p>ファイルストリームで処理する版に改良しました。</p>
+
+<ul>
+<li><a href="https://github.com/yoya/misc/blob/14686cfdb14e3859605710488a2ddd6a63a965de/php/pngextract.php">https://github.com/yoya/misc/blob/14686cfdb14e3859605710488a2ddd6a63a965de/php/pngextract.php</a></li>
+</ul>
+
+<pre><code>$fp = fopen($file, &quot;rb&quot;);
+for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
+     $outputFilename = sprintf(&quot;%s%06d.png&quot;, $prefix, $i);
+    echo &quot;$outputFilename\n&quot;;
+    $fp_out = fopen($outputFilename, &quot;wb&quot;);
+    fwrite($fp_out, $pngSignature);
+    $iendFound = false;
+    while (($len_name = fread($fp, 8)) !== false) {
+        fwrite($fp_out, $len_name);
+        $len = readUI32(substr($len_name, 0, 4));
+        $name = substr($len_name, 4, 4);
+        $payload_crc = fread($fp, $len + 4);
+        if ($payload_crc === false) {
+            break;
+        }
+        fwrite($fp_out, $payload_crc);
+        if ($name === &quot;IEND&quot;) {
+            $iendFound = true;
+            break;
+        }
+    }
+＜略＞
+
+</code></pre>
+
+<p>要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。</p>
+
+<h1 id="最後に">最後に</h1>
+
+<p>フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、それがどんな形式であれ PNG を吸い出せるので便利です。ご活用下さい。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

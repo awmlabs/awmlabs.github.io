@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gas on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/gas/</link>
+    <link>https://blog.awm.jp/categories/gas/index.xml</link>
     <description>Recent content in Gas on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Tue, 08 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/categories/gas/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,19 +17,19 @@
       <guid>https://blog.awm.jp/2016/11/08/gas/</guid>
       <description>
 
-&lt;h1 id=&#34;google-apps-script-作成:ade2431a67148677c334b673f0d1d121&#34;&gt;Google Apps Script 作成&lt;/h1&gt;
+&lt;h1 id=&#34;google-apps-script-作成&#34;&gt;Google Apps Script 作成&lt;/h1&gt;
 
 &lt;p&gt;まずは Google Drive 上で Apps Script のファイルを作成します。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;../menu-appsscript.png&#34; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;フォルダの-id-を調べます:ade2431a67148677c334b673f0d1d121&#34;&gt;フォルダの ID を調べます&lt;/h1&gt;
+&lt;h1 id=&#34;フォルダの-id-を調べます&#34;&gt;フォルダの ID を調べます&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;../drive-url.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。&lt;/p&gt;
 
-&lt;h1 id=&#34;ls-的なコード:ade2431a67148677c334b673f0d1d121&#34;&gt;ls 的なコード&lt;/h1&gt;
+&lt;h1 id=&#34;ls-的なコード&#34;&gt;ls 的なコード&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Class DriveApps
@@ -78,7 +77,7 @@ function ls(folder) {
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../log-dialog.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;find-的なコード:ade2431a67148677c334b673f0d1d121&#34;&gt;find 的なコード&lt;/h1&gt;
+&lt;h1 id=&#34;find-的なコード&#34;&gt;find 的なコード&lt;/h1&gt;
 
 &lt;p&gt;searchFiles という便利なものがあります。&lt;/p&gt;
 
