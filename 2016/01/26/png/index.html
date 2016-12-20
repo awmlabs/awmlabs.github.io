@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.19-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,44 +75,44 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf">ImageMagick で PNG の形式を変換</a></li>
-<li><a href="#カラータイプ:418c06c92c8215b52bf45f50bda544bf">カラータイプ</a>
+<li><a href="#imagemagick-で-png-の形式を変換">ImageMagick で PNG の形式を変換</a></li>
+<li><a href="#カラータイプ">カラータイプ</a>
 <ul>
-<li><a href="#type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf">Type:0 グレースケール</a></li>
-<li><a href="#type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf">Type:2 RGB (PNG24)</a></li>
-<li><a href="#type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf">Type:3 パレット (PNG8)</a></li>
-<li><a href="#type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf">Type:4 透明度つきグレースケール</a></li>
-<li><a href="#type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf">Type:6 RGBA (PNG32)</a></li>
+<li><a href="#type-0-グレースケール">Type:0 グレースケール</a></li>
+<li><a href="#type-2-rgb-png24">Type:2 RGB (PNG24)</a></li>
+<li><a href="#type-3-パレット-png8">Type:3 パレット (PNG8)</a></li>
+<li><a href="#type-4-透明度つきグレースケール">Type:4 透明度つきグレースケール</a></li>
+<li><a href="#type-6-rgba-png32">Type:6 RGBA (PNG32)</a></li>
 </ul></li>
-<li><a href="#インターレース:418c06c92c8215b52bf45f50bda544bf">インターレース</a>
+<li><a href="#インターレース">インターレース</a>
 <ul>
-<li><a href="#インターレース方式-adam7:418c06c92c8215b52bf45f50bda544bf">インターレース方式 Adam7</a>
+<li><a href="#インターレース方式-adam7">インターレース方式 Adam7</a>
 <ul>
-<li><a href="#ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf">ピクセルの並ぶ順番</a></li>
+<li><a href="#ピクセルの並ぶ順番">ピクセルの並ぶ順番</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</a>
+<li><a href="#メタデータ">メタデータ</a>
 <ul>
-<li><a href="#gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</a></li>
-<li><a href="#chrm-基本色度:418c06c92c8215b52bf45f50bda544bf">cHRM (基本色度)</a></li>
-<li><a href="#icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf">iCPP (ICC プロファイル)</a></li>
-<li><a href="#bkgd-背景色:418c06c92c8215b52bf45f50bda544bf">bKGD (背景色)</a></li>
+<li><a href="#gama-ガンマ補正">gAMA (ガンマ補正)</a></li>
+<li><a href="#chrm-基本色度">cHRM (基本色度)</a></li>
+<li><a href="#icpp-icc-プロファイル">iCPP (ICC プロファイル)</a></li>
+<li><a href="#bkgd-背景色">bKGD (背景色)</a></li>
 </ul></li>
-<li><a href="#メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf">メタデータ (おまけ)</a>
+<li><a href="#メタデータ-おまけ">メタデータ (おまけ)</a>
 <ul>
-<li><a href="#phys:418c06c92c8215b52bf45f50bda544bf">pHYs</a></li>
-<li><a href="#sbit:418c06c92c8215b52bf45f50bda544bf">sBIT</a></li>
+<li><a href="#phys">pHYs</a></li>
+<li><a href="#sbit">sBIT</a></li>
 </ul></li>
-<li><a href="#参考-url:418c06c92c8215b52bf45f50bda544bf">参考 URL</a></li>
+<li><a href="#参考-url">参考 URL</a></li>
 </ul>
 </nav>
     
 
-<h1 id="imagemagick-で-png-の形式を変換:418c06c92c8215b52bf45f50bda544bf">ImageMagick で PNG の形式を変換</h1>
+<h1 id="imagemagick-で-png-の形式を変換">ImageMagick で PNG の形式を変換</h1>
 
 <p>PNG は同じように見える画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
 
-<h1 id="カラータイプ:418c06c92c8215b52bf45f50bda544bf">カラータイプ</h1>
+<h1 id="カラータイプ">カラータイプ</h1>
 
 <p>PNG は以下の5種類のカラータイプがあります。仕様書からコピペします。</p>
 
@@ -214,7 +214,7 @@
 </tbody>
 </table>
 
-<h2 id="type-0-グレースケール:418c06c92c8215b52bf45f50bda544bf">Type:0 グレースケール</h2>
+<h2 id="type-0-グレースケール">Type:0 グレースケール</h2>
 
 <p>黒:0〜白:2^(bit数)の範囲の値を並べるだけの形式です。
 bit数は 1,2,4,8,16 から選択できます。
@@ -229,7 +229,7 @@ bit数は 1,2,4,8,16 から選択できます。
 <li>尚、tRNS チャンクをつける事で透明ピクセルも表現できます。</li>
 </ul>
 
-<h2 id="type-2-rgb-png24:418c06c92c8215b52bf45f50bda544bf">Type:2 RGB (PNG24)</h2>
+<h2 id="type-2-rgb-png24">Type:2 RGB (PNG24)</h2>
 
 <p>ピクセルの R,G,B をそのまま展開します。
 <center> <img src="../png-type2.png" /> </center></p>
@@ -251,7 +251,7 @@ bit数は 1,2,4,8,16 から選択できます。
 <li>PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)</li>
 </ul>
 
-<h2 id="type-3-パレット-png8:418c06c92c8215b52bf45f50bda544bf">Type:3 パレット (PNG8)</h2>
+<h2 id="type-3-パレット-png8">Type:3 パレット (PNG8)</h2>
 
 <p>色のパレットを持ち、そこへのインデックス値を並べて画像を表現します。
 <center> <img src="../png-type3.png" /> </center></p>
@@ -265,7 +265,7 @@ bit数は 1,2,4,8,16 から選択できます。
 <center> <img src="../png-type3-tRNS.png" /> </center>
 <center> <img src="../Opaopa-png8-trns.png" /> </center></p>
 
-<h2 id="type-4-透明度つきグレースケール:418c06c92c8215b52bf45f50bda544bf">Type:4 透明度つきグレースケール</h2>
+<h2 id="type-4-透明度つきグレースケール">Type:4 透明度つきグレースケール</h2>
 
 <p>グレースケールの値と透明度のセットで表現します。
 <center> <img src="../png-type4.png" /> </center></p>
@@ -275,7 +275,7 @@ bit数は 1,2,4,8,16 から選択できます。
 
 <p><center> <img src="../Opaopa-type4.png" /> </center></p>
 
-<h2 id="type-6-rgba-png32:418c06c92c8215b52bf45f50bda544bf">Type:6 RGBA (PNG32)</h2>
+<h2 id="type-6-rgba-png32">Type:6 RGBA (PNG32)</h2>
 
 <p>ピクセルの R,G,B,A を展開します。
 <center> <img src="../png-type6.png" /> </center></p>
@@ -285,18 +285,18 @@ bit数は 1,2,4,8,16 から選択できます。
 
 <p><center> <img src="../Opaopa-png32.png" /> </center></p>
 
-<h1 id="インターレース:418c06c92c8215b52bf45f50bda544bf">インターレース</h1>
+<h1 id="インターレース">インターレース</h1>
 
 <p>PNG のインターレースは独特で、Adam7 アルゴリズムを使います。</p>
 
-<h2 id="インターレース方式-adam7:418c06c92c8215b52bf45f50bda544bf">インターレース方式 Adam7</h2>
+<h2 id="インターレース方式-adam7">インターレース方式 Adam7</h2>
 
 <pre><code>$ convert Opaopa.png -interlace PNG Opaopa-adam7.png
 </code></pre>
 
 <p><center> <img src="../Opaopa-adam7.png" /> </center></p>
 
-<h3 id="ピクセルの並ぶ順番:418c06c92c8215b52bf45f50bda544bf">ピクセルの並ぶ順番</h3>
+<h3 id="ピクセルの並ぶ順番">ピクセルの並ぶ順番</h3>
 
 <ul>
 <li>8x8 のブロックで左上のを１つ</li>
@@ -362,18 +362,18 @@ $ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%2,j-j%2}&quot; Opaopa-d
 </code></pre></li>
 </ul>
 
-<h1 id="メタデータ:418c06c92c8215b52bf45f50bda544bf">メタデータ</h1>
+<h1 id="メタデータ">メタデータ</h1>
 
-<h2 id="gama-ガンマ補正:418c06c92c8215b52bf45f50bda544bf">gAMA (ガンマ補正)</h2>
+<h2 id="gama-ガンマ補正">gAMA (ガンマ補正)</h2>
 
 <p>単純にガンマ値を指定します。BigEndian の4byteで表現していて、ガンマ値を100000倍した値を格納します。逆にいうと、バイナリを整数として読み出し、1/100000 した値がガンマ値です。</p>
 
-<h2 id="chrm-基本色度:418c06c92c8215b52bf45f50bda544bf">cHRM (基本色度)</h2>
+<h2 id="chrm-基本色度">cHRM (基本色度)</h2>
 
 <p>基本色度やホワイトバランスを指定します。
 尚、sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。</p>
 
-<h2 id="icpp-icc-プロファイル:418c06c92c8215b52bf45f50bda544bf">iCPP (ICC プロファイル)</h2>
+<h2 id="icpp-icc-プロファイル">iCPP (ICC プロファイル)</h2>
 
 <p>ICC プロファイルを埋め込めます。 (JPEG と同じ要領です)</p>
 
@@ -408,22 +408,22 @@ $ convert  Opaopa-dot1.png -filter Point -fx &quot;p{i-i%2,j-j%2}&quot; Opaopa-d
 <li>ICC プロファイルがあった場合 =&gt; 見た目の色が変わらないよう画像データのRGBを書き換えつつ ICCプロファイルを上書きする</li>
 </ul>
 
-<h2 id="bkgd-背景色:418c06c92c8215b52bf45f50bda544bf">bKGD (背景色)</h2>
+<h2 id="bkgd-背景色">bKGD (背景色)</h2>
 
 <p>背景色を指定します。画像が貼られた時に埋まらなかったピクセルを埋める色です。</p>
 
-<h1 id="メタデータ-おまけ:418c06c92c8215b52bf45f50bda544bf">メタデータ (おまけ)</h1>
+<h1 id="メタデータ-おまけ">メタデータ (おまけ)</h1>
 
-<h2 id="phys:418c06c92c8215b52bf45f50bda544bf">pHYs</h2>
+<h2 id="phys">pHYs</h2>
 
 <p>DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。単位がインチでなくメートルなので少し計算が面倒です。</p>
 
-<h2 id="sbit:418c06c92c8215b52bf45f50bda544bf">sBIT</h2>
+<h2 id="sbit">sBIT</h2>
 
 <p>元画像データの Bit深度を記録します。
 恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えそうです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味がないので。</p>
 
-<h1 id="参考-url:418c06c92c8215b52bf45f50bda544bf">参考 URL</h1>
+<h1 id="参考-url">参考 URL</h1>
 
 <ul>
 <li>PNG (Portable Network Graphics) Specification, Version 1.2

@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.19-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -75,23 +75,23 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</a>
+<li><a href="#define-jpeg-size-とは">-define jpeg:size とは？</a>
 <ul>
-<li><a href="#jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784">JPEG のデータの持ち方</a></li>
-<li><a href="#scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784">scaling 指定で Decode</a></li>
-<li><a href="#やっている事:8297ce3a5ed4594f91a307954f292784">やっている事</a></li>
+<li><a href="#jpeg-のデータの持ち方">JPEG のデータの持ち方</a></li>
+<li><a href="#scaling-指定で-decode">scaling 指定で Decode</a></li>
+<li><a href="#やっている事">やっている事</a></li>
 </ul></li>
-<li><a href="#jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の動作イメージ</a>
+<li><a href="#jpeg-size-hinting-の動作イメージ">JPEG size hinting の動作イメージ</a>
 <ul>
-<li><a href="#小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784">小さくリサイズする場合</a></li>
-<li><a href="#大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784">大きくリサイズする場合 (予想)</a>
+<li><a href="#小さくリサイズする場合">小さくリサイズする場合</a></li>
+<li><a href="#大きくリサイズする場合-予想">大きくリサイズする場合 (予想)</a>
 <ul>
-<li><a href="#実際の動き:8297ce3a5ed4594f91a307954f292784">実際の動き</a></li>
+<li><a href="#実際の動き">実際の動き</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#結論:8297ce3a5ed4594f91a307954f292784">結論</a></li>
-<li><a href="#scaling-の該当コード:8297ce3a5ed4594f91a307954f292784">scaling の該当コード</a></li>
-<li><a href="#参考-url:8297ce3a5ed4594f91a307954f292784">参考 URL</a></li>
+<li><a href="#結論">結論</a></li>
+<li><a href="#scaling-の該当コード">scaling の該当コード</a></li>
+<li><a href="#参考-url">参考 URL</a></li>
 </ul>
 </nav>
     
@@ -113,9 +113,9 @@
 
 <p>注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。</p>
 
-<h1 id="define-jpeg-size-とは:8297ce3a5ed4594f91a307954f292784">-define jpeg:size とは？</h1>
+<h1 id="define-jpeg-size-とは">-define jpeg:size とは？</h1>
 
-<h2 id="jpeg-のデータの持ち方:8297ce3a5ed4594f91a307954f292784">JPEG のデータの持ち方</h2>
+<h2 id="jpeg-のデータの持ち方">JPEG のデータの持ち方</h2>
 
 <p>JPEG は画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。尚、8x8 単位で画像をグリッド分割してこの処理をします。</p>
 
@@ -123,7 +123,7 @@
 <center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
 引用) <a href="https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf">https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf</a></p>
 
-<h2 id="scaling-指定で-decode:8297ce3a5ed4594f91a307954f292784">scaling 指定で Decode</h2>
+<h2 id="scaling-指定で-decode">scaling 指定で Decode</h2>
 
 <p>元のサイズの画像データに変換する場合と比べて、手間を増やさず <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>8</sub> サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。</p>
 
@@ -131,11 +131,11 @@
 
 <p>(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)</p>
 
-<h2 id="やっている事:8297ce3a5ed4594f91a307954f292784">やっている事</h2>
+<h2 id="やっている事">やっている事</h2>
 
 <p>リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。</p>
 
-<h1 id="jpeg-size-hinting-の動作イメージ:8297ce3a5ed4594f91a307954f292784">JPEG size hinting の動作イメージ</h1>
+<h1 id="jpeg-size-hinting-の動作イメージ">JPEG size hinting の動作イメージ</h1>
 
 <p>詳しくはこちらを参照して下さい。</p>
 
@@ -147,7 +147,7 @@
 </ul></li>
 </ul>
 
-<h2 id="小さくリサイズする場合:8297ce3a5ed4594f91a307954f292784">小さくリサイズする場合</h2>
+<h2 id="小さくリサイズする場合">小さくリサイズする場合</h2>
 
 <ul>
 <li><p>普通にリサイズ (-define jpeg:size 無し)
@@ -159,7 +159,7 @@
 
 <p>処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。</p>
 
-<h2 id="大きくリサイズする場合-予想:8297ce3a5ed4594f91a307954f292784">大きくリサイズする場合 (予想)</h2>
+<h2 id="大きくリサイズする場合-予想">大きくリサイズする場合 (予想)</h2>
 
 <p>問題にしているケースです。</p>
 
@@ -173,7 +173,7 @@
 
 <p>という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。</p>
 
-<h3 id="実際の動き:8297ce3a5ed4594f91a307954f292784">実際の動き</h3>
+<h3 id="実際の動き">実際の動き</h3>
 
 <p>jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で Decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。</p>
 
@@ -209,11 +209,11 @@ AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_
 ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
 </code></pre>
 
-<h1 id="結論:8297ce3a5ed4594f91a307954f292784">結論</h1>
+<h1 id="結論">結論</h1>
 
 <p>拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、2倍か3倍以上小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。</p>
 
-<h1 id="scaling-の該当コード:8297ce3a5ed4594f91a307954f292784">scaling の該当コード</h1>
+<h1 id="scaling-の該当コード">scaling の該当コード</h1>
 
 <ul>
 <li><a href="http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105">http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105</a>
@@ -261,7 +261,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 <p>この 2/block_size scaling の条件にマッチしたのかなと予想してます。</p>
 
-<h1 id="参考-url:8297ce3a5ed4594f91a307954f292784">参考 URL</h1>
+<h1 id="参考-url">参考 URL</h1>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Libjpeg">https://en.wikipedia.org/wiki/Libjpeg</a></li>

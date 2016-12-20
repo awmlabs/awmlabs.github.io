@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.16-DEV" />
+<meta name="generator" content="Hugo 0.19-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -77,30 +77,30 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785">JPEG Exif Orientation の操作</a>
+<li><a href="#jpeg-exif-orientation-の操作">JPEG Exif Orientation の操作</a>
 <ul>
-<li><a href="#orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785">Orientation とは</a></li>
-<li><a href="#orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785">Orientation の数値の対応</a>
+<li><a href="#orientation-とは">Orientation とは</a></li>
+<li><a href="#orientation-の数値の対応">Orientation の数値の対応</a>
 <ul>
-<li><a href="#早見表1:5ebdf1d9c2e1c280f058e69d3b760785">早見表1</a></li>
-<li><a href="#早見表2:5ebdf1d9c2e1c280f058e69d3b760785">早見表2</a></li>
+<li><a href="#早見表1">早見表1</a></li>
+<li><a href="#早見表2">早見表2</a></li>
 </ul></li>
-<li><a href="#編集ツール:5ebdf1d9c2e1c280f058e69d3b760785">編集ツール</a></li>
+<li><a href="#編集ツール">編集ツール</a></li>
 </ul></li>
-<li><a href="#exiftool:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool</a>
+<li><a href="#exiftool">ExifTool</a>
 <ul>
-<li><a href="#インストール:5ebdf1d9c2e1c280f058e69d3b760785">インストール</a></li>
-<li><a href="#exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool の使い方</a></li>
-<li><a href="#まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785">まとめて 1〜8を設定する</a></li>
+<li><a href="#インストール">インストール</a></li>
+<li><a href="#exiftool-の使い方">ExifTool の使い方</a></li>
+<li><a href="#まとめて-1-8を設定する">まとめて 1〜8を設定する</a></li>
 </ul></li>
-<li><a href="#参考-url:5ebdf1d9c2e1c280f058e69d3b760785">参考 URL</a></li>
+<li><a href="#参考-url">参考 URL</a></li>
 </ul>
 </nav>
     
 
-<h1 id="jpeg-exif-orientation-の操作:5ebdf1d9c2e1c280f058e69d3b760785">JPEG Exif Orientation の操作</h1>
+<h1 id="jpeg-exif-orientation-の操作">JPEG Exif Orientation の操作</h1>
 
-<h2 id="orientation-とは:5ebdf1d9c2e1c280f058e69d3b760785">Orientation とは</h2>
+<h2 id="orientation-とは">Orientation とは</h2>
 
 <p>JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation タグがあります。</p>
@@ -121,11 +121,11 @@
     exif:Orientation: 6
 </code></pre>
 
-<h2 id="orientation-の数値の対応:5ebdf1d9c2e1c280f058e69d3b760785">Orientation の数値の対応</h2>
+<h2 id="orientation-の数値の対応">Orientation の数値の対応</h2>
 
 <p>以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)</p>
 
-<h3 id="早見表1:5ebdf1d9c2e1c280f058e69d3b760785">早見表1</h3>
+<h3 id="早見表1">早見表1</h3>
 
 <table>
 <thead>
@@ -180,7 +180,7 @@
  * 1 の鏡反転 =&gt; 2、8 の鏡反転 =&gt; 5, 3の鏡反転=&gt; 4、6 の鏡反転 =&gt; 7
 </code></pre>
 
-<h3 id="早見表2:5ebdf1d9c2e1c280f058e69d3b760785">早見表2</h3>
+<h3 id="早見表2">早見表2</h3>
 
 <p>変換の方向がわかりやすい図もつけます。</p>
 
@@ -244,19 +244,19 @@
 </tbody>
 </table>
 
-<h2 id="編集ツール:5ebdf1d9c2e1c280f058e69d3b760785">編集ツール</h2>
+<h2 id="編集ツール">編集ツール</h2>
 
 <p>Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。</p>
 
 <p>ExifTool が便利なのでこちらを使う事にします。</p>
 
-<h1 id="exiftool:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool</h1>
+<h1 id="exiftool">ExifTool</h1>
 
 <ul>
 <li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/">http://www.sno.phy.queensu.ca/~phil/exiftool/</a></li>
 </ul>
 
-<h2 id="インストール:5ebdf1d9c2e1c280f058e69d3b760785">インストール</h2>
+<h2 id="インストール">インストール</h2>
 
 <p>MacOS は</p>
 
@@ -272,7 +272,7 @@
 
 <p>Perl なので他のプラットフォームでも入れるのは難しくないでしょう。</p>
 
-<h2 id="exiftool-の使い方:5ebdf1d9c2e1c280f058e69d3b760785">ExifTool の使い方</h2>
+<h2 id="exiftool-の使い方">ExifTool の使い方</h2>
 
 <p>Orientation は以下のコマンドで書き換えられます。</p>
 
@@ -281,7 +281,7 @@ test.jpg
     1 image files updated
 </code></pre>
 
-<h2 id="まとめて-1-8を設定する:5ebdf1d9c2e1c280f058e69d3b760785">まとめて 1〜8を設定する</h2>
+<h2 id="まとめて-1-8を設定する">まとめて 1〜8を設定する</h2>
 
 <p>ついでに表示の時に元の画像の向きを維持するようにします。</p>
 
@@ -393,7 +393,7 @@ done
 
 <p>として Exif タグを削除したものです。</p>
 
-<h1 id="参考-url:5ebdf1d9c2e1c280f058e69d3b760785">参考 URL</h1>
+<h1 id="参考-url">参考 URL</h1>
 
 <ul>
 <li>Exif 2.3 規格書
