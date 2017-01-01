@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.19-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>yoya-thumber と go-thumber - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/01/01/yoya-thumber/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2017/01/01/yoya-thumber/" class="hatena-bookmark-button" data-hatena-bookmark-title="yoya-thumber と go-thumber" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/01/01/yoya-thumber/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-01-01">January 01, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/graphics">Graphics</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/yoya-thumber">yoya-thumber</a>
+
+        <a href="https://blog.awm.jp/tags/go-thumber">go-thumber</a>
+
+        <a href="https://blog.awm.jp/tags/golang">Golang</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">yoya-thumber と go-thumber</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#go-thumber">go-thumber</a></li>
+<li><a href="#yoya-thumber">yoya-thumber</a></li>
+<li><a href="#goimagick">GoImagick</a></li>
+<li><a href="#その他">その他</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="はじめに">はじめに</h1>
+
+<p>go-thumber は Pivix さんの公開している画像リサイズプロキシです。</p>
+
+<ul>
+<li><a href="https://github.com/pixiv/go-thumber">https://github.com/pixiv/go-thumber</a></li>
+</ul>
+
+<p>yoya-thumber は、go-thumber を魔改造して ImageMagick に繋げたものです。</p>
+
+<ul>
+<li><a href="https://github.com/smartnews/yoya-thumber">https://github.com/smartnews/yoya-thumber</a></li>
+<li><a href="http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/">http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/</a></li>
+</ul>
+
+<p>これらについて少し解説します。</p>
+
+<h1 id="go-thumber">go-thumber</h1>
+
+<p>go-thumber を構成するディレクトリです。</p>
+
+<pre><code>$ git clone git@github.com:pixiv/go-thumber.git
+$ go-thumber
+$ ls
+LICENSE		jpeg		swscale		thumberd
+README.md	mkthumb		test-image	thumbnail
+</code></pre>
+
+<ul>
+<li>jpeg： libjpeg を使って JPEG 画像の処理</li>
+<li>mkthumb: テスト用コマンドラインツール</li>
+<li>swscale: ffmpeg の libswscale を使って画像リサイズ</li>
+<li>thumberd: net/http でサーバ機能を実装 (開始エントリ)</li>
+<li>thumbnail: 画像リサイズの主に座標計算</li>
+</ul>
+
+<p>このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale のルーチンを呼び出します。</p>
+
+<p><center> <img src="../go-thumber.png" />  </center></p>
+
+<p>運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や JPEG も扱いたい。文字入れや画像の合成もしたいという要望があり、
+go-thumber を素直に拡張すると、まず libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする。といった大工事が想像出来ます。</p>
+
+<p><center> <img src="../go-thumber-kai.png" />  </center></p>
+
+<p>これは少し辛いので採用しませんでした。</p>
+
+<h1 id="yoya-thumber">yoya-thumber</h1>
+
+<p>cgo の処理を全部 GoImagick に丸投げして、ImageMagick の機能を使えるようにしたのが yoya-thumber です。</p>
+
+<p><center> <img src="../yoya-thumber.png" />  </center></p>
+
+<p>つまり、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま使い、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。</p>
+
+<h1 id="goimagick">GoImagick</h1>
+
+<p>Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。</p>
+
+<ul>
+<li><a href="https://github.com/gographics/imagick">https://github.com/gographics/imagick</a></li>
+</ul>
+
+<p>以前、GoImagick の紹介スライドを作りました、参考にして下さい。</p>
+
+<ul>
+<li>GoImagick でサムネール作成
+
+<ul>
+<li><a href="https://speakerdeck.com/yoya/goimagickthumbnail">https://speakerdeck.com/yoya/goimagickthumbnail</a></li>
+</ul></li>
+</ul>
+
+<p>尚、自分が GoImagick を使い始めた当初はメモリリークが激しかったので、本家に修正 PR を送って取り込んで貰いました。</p>
+
+<ul>
+<li>fixed to memory leak, string array issue.
+
+<ul>
+<li><a href="https://github.com/gographics/imagick/pull/37">https://github.com/gographics/imagick/pull/37</a></li>
+</ul></li>
+</ul>
+
+<p>今は多分大丈夫だと思います。</p>
+
+<h1 id="その他">その他</h1>
+
+<p>続くかもしれません。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2017  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
