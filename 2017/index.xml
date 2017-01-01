@@ -26,7 +26,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/pixiv/go-thumber&#34;&gt;https://github.com/pixiv/go-thumber&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;yoya-thumber は、go-thumber を魔改造して ImageMagick に繋げたものです。&lt;/p&gt;
+&lt;p&gt;yoya-thumber は SmartNews さんの公開しているプロダクトで、go-thumber を魔改造して ImageMagick に繋げたものです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/smartnews/yoya-thumber&#34;&gt;https://github.com/smartnews/yoya-thumber&lt;/a&gt;&lt;/li&gt;
