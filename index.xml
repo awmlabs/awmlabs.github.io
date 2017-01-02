@@ -7,71 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 23:11:14 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jan 2017 14:15:26 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>yoya-thumber と go-thumber</title>
-      <link>https://blog.awm.jp/2017/01/01/yoya-thumber/</link>
-      <pubDate>Sun, 01 Jan 2017 23:11:14 +0900</pubDate>
+      <title>Go Imagick について</title>
+      <link>https://blog.awm.jp/2017/01/02/goimagick/</link>
+      <pubDate>Mon, 02 Jan 2017 14:15:26 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2017/01/01/yoya-thumber/</guid>
+      <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
       <description>
-
-&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
-
-&lt;p&gt;go-thumber は Pivix さんの公開している画像リサイズプロキシです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/pixiv/go-thumber&#34;&gt;https://github.com/pixiv/go-thumber&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;yoya-thumber は SmartNews さんの公開しているプロダクトで、go-thumber を魔改造して ImageMagick に繋げたものです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/smartnews/yoya-thumber&#34;&gt;https://github.com/smartnews/yoya-thumber&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/&#34;&gt;http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;これらについて少し解説します。&lt;/p&gt;
-
-&lt;h1 id=&#34;go-thumber&#34;&gt;go-thumber&lt;/h1&gt;
-
-&lt;p&gt;go-thumber を構成するディレクトリです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone git@github.com:pixiv/go-thumber.git
-$ go-thumber
-$ ls
-LICENSE		jpeg		swscale		thumberd
-README.md	mkthumb		test-image	thumbnail
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;jpeg： libjpeg を使って JPEG 画像の処理&lt;/li&gt;
-&lt;li&gt;mkthumb: テスト用コマンドラインツール&lt;/li&gt;
-&lt;li&gt;swscale: ffmpeg の libswscale を使って画像リサイズ&lt;/li&gt;
-&lt;li&gt;thumberd: net/http でサーバ機能を実装 (開始エントリ)&lt;/li&gt;
-&lt;li&gt;thumbnail: 画像リサイズの主に座標計算&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale のルーチンを呼び出します。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../go-thumber.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や JPEG も扱いたい。文字入れや画像の合成もしたいという要望があり、
-go-thumber を素直に拡張すると、まず libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする。といった大工事が想像出来ます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../go-thumber-kai.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;これは少し辛いので採用しませんでした。&lt;/p&gt;
-
-&lt;h1 id=&#34;yoya-thumber&#34;&gt;yoya-thumber&lt;/h1&gt;
-
-&lt;p&gt;cgo の処理を全部 GoImagick に丸投げして、ImageMagick の機能を使えるようにしたのが yoya-thumber です。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yoya-thumber.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;つまり、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま使い、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。&lt;/p&gt;
 
 &lt;h1 id=&#34;goimagick&#34;&gt;GoImagick&lt;/h1&gt;
 
@@ -91,6 +36,58 @@ go-thumber を素直に拡張すると、まず libpng や giflib を繋げて�
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&#34;導入-インストール&#34;&gt;導入(インストール)&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install ImageMagick-devel
+    # ImageMagick v6.8.9-8以前 (dpkg も多分これ)
+$ go get gopkg.in/gographics/imagick.v1/imagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+    # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
+$ go get gopkg.in/gographics/imagick.v2/imagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;サンプルコード&#34;&gt;サンプルコード&lt;/h1&gt;
+
+&lt;p&gt;こちらにサンプルが沢山用意されています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gographics/imagick/tree/master/examples&#34;&gt;https://github.com/gographics/imagick/tree/master/examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;エラー処理や後始末を省いて単純化した例をだします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+import (
+        &amp;quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+)
+func main() {
+        imagick.Initialize()
+        mw := imagick.NewMagickWand()
+        _ = mw.ReadImage(”input.png”)
+        _ = mw.ResizeImage(640, 480, imagick.FILTER_UNDEFINED, 1)
+        _ = mw.WriteImage(&amp;quot;output.png&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;実行
+&lt;code&gt;
+$ ls
+imagick_resize.go       input.png               output.png
+$ go run imagick_resize.go
+$ identify *.png
+input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
+output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
+&lt;/code&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
+
 &lt;p&gt;尚、自分が GoImagick を使い始めた当初はメモリリークが激しかったので、本家に修正 PR を送って取り込んで貰いました。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -102,8 +99,71 @@ go-thumber を素直に拡張すると、まず libpng や giflib を繋げて�
 &lt;/ul&gt;
 
 &lt;p&gt;今は多分大丈夫だと思います。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>yoya-thumber と go-thumber</title>
+      <link>https://blog.awm.jp/2017/01/01/yoya-thumber/</link>
+      <pubDate>Sun, 01 Jan 2017 23:11:14 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/01/01/yoya-thumber/</guid>
+      <description>
 
-&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;p&gt;go-thumber は Pivix さんの公開している画像リサイズプロキシです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/pixiv/go-thumber&#34;&gt;https://github.com/pixiv/go-thumber&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。
+Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ直し、文字入れや画像合成の機能を追加しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/smartnews/yoya-thumber&#34;&gt;https://github.com/smartnews/yoya-thumber&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/&#34;&gt;http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;go-thumber&#34;&gt;go-thumber&lt;/h1&gt;
+
+&lt;p&gt;go-thumber を構成するディレクトリです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone git@github.com:pixiv/go-thumber.git
+$ cd go-thumber
+$ ls
+LICENSE		jpeg		swscale		thumberd
+README.md	mkthumb		test-image	thumbnail
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jpeg： libjpeg を使って JPEG 画像の処理&lt;/li&gt;
+&lt;li&gt;mkthumb: テスト用コマンドラインツール&lt;/li&gt;
+&lt;li&gt;swscale: ffmpeg の libswscale を使って画像リサイズ&lt;/li&gt;
+&lt;li&gt;thumberd: net/http でサーバ機能を実装 (処理の起点)&lt;/li&gt;
+&lt;li&gt;thumbnail: パラメータに応じた画像リサイズ処理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale の C言語 API にアクセスします。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../go-thumber.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や GIF も扱いたいですし、文字入れや画像の重ね合わせもしたいといった要望に応じて、go-thumber を素直に拡張すると、libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする、大工事が想定されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../go-thumber-kai.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;見るからに大変そうです。また go-thumber は jpeg に特化して作られているので png や gif に合わせて抽象化するのも手間がかかります。&lt;/p&gt;
+
+&lt;h1 id=&#34;yoya-thumber&#34;&gt;yoya-thumber&lt;/h1&gt;
+
+&lt;p&gt;GoImagick を介して画像処理の殆どをImageMagick に丸投げしたのが yoya-thumber です。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yoya-thumber.png&#34; /&gt;  &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;まとめると、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。&lt;/p&gt;
+
+&lt;h1 id=&#34;あとがき&#34;&gt;あとがき&lt;/h1&gt;
 
 &lt;p&gt;続くかもしれません。&lt;/p&gt;
 </description>
@@ -1711,148 +1771,6 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JPEG のクロマサブサンプリングと YUVabc</title>
-      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
-      <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
-      <description>
-
-&lt;h1 id=&#34;jpeg-のクロマサブサンプリングと-yuvabc&#34;&gt;JPEG のクロマサブサンプリングと YUVabc&lt;/h1&gt;
-
-&lt;p&gt;YCbCr については以下のページで紹介しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JPEG の YCbCr について
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2016/02/06/ycbcr/&#34;&gt;https://blog.awm.jp/2016/02/06/ycbcr/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。&lt;/p&gt;
-
-&lt;p&gt;JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。&lt;/p&gt;
-
-&lt;h1 id=&#34;はじめに早見表&#34;&gt;はじめに早見表&lt;/h1&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuvyab.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;※ YUV410 だけ変則的です&lt;/p&gt;
-
-&lt;h2 id=&#34;imagemagick-での作り方&#34;&gt;ImageMagick での作り方&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert orig.jpg -sampling-factor &amp;quot;1x1,1x1,1x1&amp;quot; yuv444.jpg
-$ convert orig.jpg -sampling-factor &amp;quot;2x1,1x1,1x1&amp;quot; yuv422.jpg
-$ convert orig.jpg -sampling-factor &amp;quot;4x1,1x1,1x1&amp;quot; yuv411.jpg
-$ convert orig.jpg -sampling-factor &amp;quot;1x2,1x1,1x1&amp;quot; yuv440.jpg
-$ convert orig.jpg -sampling-factor &amp;quot;2x2,1x1,1x1&amp;quot; yuv420.jpg
-$ convert orig.jpg -sampling-factor &amp;quot;4x4,1x1,1x1&amp;quot; yuv410.jpg # yuv9
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;yuvabc-の種類&#34;&gt;YUVabc の種類&lt;/h1&gt;
-
-&lt;p&gt;よく見る表現として、YUV444 、YUV422 の２つがあります。&lt;/p&gt;
-
-&lt;h2 id=&#34;yuv444-の-y-cb-cr-の並び&#34;&gt;YUV444 の Y,Cb,Cr の並び&lt;/h2&gt;
-
-&lt;p&gt;YUVabc と見立てると a, b, c の番号は以下のように対応します。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;yuv422-の-y-cb-cr-の並び&#34;&gt;YUV422 の Y,Cb,Cr の並び&lt;/h2&gt;
-
-&lt;p&gt;YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422-onaji.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;間引く分の偶数番目の Cb, Cr はデータから省略できます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;色々な-yuvabc&#34;&gt;色々な YUVabc&lt;/h1&gt;
-
-&lt;p&gt;実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV444 (再掲) : 間引かない&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv444.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV422 (再掲) : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv422.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV440 : 縦方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv440.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV420 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 、縦方向も &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv420.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV411 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; になるよう間引く。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv411.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUV410 : 横方向に &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; 、縦方向は &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; 間引く。(？)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;と言いたい所ですが、実際には 4x4 として使われるようです。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../yuv410-4x4.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
-
-&lt;ul&gt;
-&lt;li&gt;a は Y の横方向サンプル数で4固定&lt;/li&gt;
-&lt;li&gt;b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか&lt;/li&gt;
-&lt;li&gt;c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ&lt;/li&gt;
-&lt;li&gt;YUV422 は Cb,Cr を横方向で &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; で間引く。JPEG や動画でよく使われる&lt;/li&gt;
-&lt;li&gt;YUV410 は abc の法則から例外&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroma_subsampling&#34;&gt;https://en.wikipedia.org/wiki/Chroma_subsampling&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Chrome subsampling notation
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&#34;&gt;http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;YUVのサンプリング種類
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&#34;&gt;http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Digital Color Coding
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&#34;&gt;http://www.telairity.com/assets/downloads/Digital%20Color%20Coding.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

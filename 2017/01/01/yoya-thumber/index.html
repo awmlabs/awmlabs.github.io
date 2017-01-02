@@ -80,8 +80,7 @@
 <li><a href="#はじめに">はじめに</a></li>
 <li><a href="#go-thumber">go-thumber</a></li>
 <li><a href="#yoya-thumber">yoya-thumber</a></li>
-<li><a href="#goimagick">GoImagick</a></li>
-<li><a href="#その他">その他</a></li>
+<li><a href="#あとがき">あとがき</a></li>
 </ul>
 </nav>
     
@@ -94,21 +93,20 @@
 <li><a href="https://github.com/pixiv/go-thumber">https://github.com/pixiv/go-thumber</a></li>
 </ul>
 
-<p>yoya-thumber は SmartNews さんの公開しているプロダクトで、go-thumber を魔改造して ImageMagick に繋げたものです。</p>
+<p>yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。
+Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ直し、文字入れや画像合成の機能を追加しました。</p>
 
 <ul>
 <li><a href="https://github.com/smartnews/yoya-thumber">https://github.com/smartnews/yoya-thumber</a></li>
 <li><a href="http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/">http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/</a></li>
 </ul>
 
-<p>これらについて少し解説します。</p>
-
 <h1 id="go-thumber">go-thumber</h1>
 
 <p>go-thumber を構成するディレクトリです。</p>
 
 <pre><code>$ git clone git@github.com:pixiv/go-thumber.git
-$ go-thumber
+$ cd go-thumber
 $ ls
 LICENSE		jpeg		swscale		thumberd
 README.md	mkthumb		test-image	thumbnail
@@ -118,60 +116,29 @@ README.md	mkthumb		test-image	thumbnail
 <li>jpeg： libjpeg を使って JPEG 画像の処理</li>
 <li>mkthumb: テスト用コマンドラインツール</li>
 <li>swscale: ffmpeg の libswscale を使って画像リサイズ</li>
-<li>thumberd: net/http でサーバ機能を実装 (開始エントリ)</li>
-<li>thumbnail: 画像リサイズの主に座標計算</li>
+<li>thumberd: net/http でサーバ機能を実装 (処理の起点)</li>
+<li>thumbnail: パラメータに応じた画像リサイズ処理</li>
 </ul>
 
-<p>このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale のルーチンを呼び出します。</p>
+<p>このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale の C言語 API にアクセスします。</p>
 
 <p><center> <img src="../go-thumber.png" />  </center></p>
 
-<p>運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や JPEG も扱いたい。文字入れや画像の合成もしたいという要望があり、
-go-thumber を素直に拡張すると、まず libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする。といった大工事が想像出来ます。</p>
+<p>運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や GIF も扱いたいですし、文字入れや画像の重ね合わせもしたいといった要望に応じて、go-thumber を素直に拡張すると、libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする、大工事が想定されます。</p>
 
 <p><center> <img src="../go-thumber-kai.png" />  </center></p>
 
-<p>これは少し辛いので採用しませんでした。</p>
+<p>見るからに大変そうです。また go-thumber は jpeg に特化して作られているので png や gif に合わせて抽象化するのも手間がかかります。</p>
 
 <h1 id="yoya-thumber">yoya-thumber</h1>
 
-<p>cgo の処理を全部 GoImagick に丸投げして、ImageMagick の機能を使えるようにしたのが yoya-thumber です。</p>
+<p>GoImagick を介して画像処理の殆どをImageMagick に丸投げしたのが yoya-thumber です。</p>
 
 <p><center> <img src="../yoya-thumber.png" />  </center></p>
 
-<p>つまり、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま使い、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。</p>
+<p>まとめると、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。</p>
 
-<h1 id="goimagick">GoImagick</h1>
-
-<p>Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。</p>
-
-<ul>
-<li><a href="https://github.com/gographics/imagick">https://github.com/gographics/imagick</a></li>
-</ul>
-
-<p>以前、GoImagick の紹介スライドを作りました、参考にして下さい。</p>
-
-<ul>
-<li>GoImagick でサムネール作成
-
-<ul>
-<li><a href="https://speakerdeck.com/yoya/goimagickthumbnail">https://speakerdeck.com/yoya/goimagickthumbnail</a></li>
-</ul></li>
-</ul>
-
-<p>尚、自分が GoImagick を使い始めた当初はメモリリークが激しかったので、本家に修正 PR を送って取り込んで貰いました。</p>
-
-<ul>
-<li>fixed to memory leak, string array issue.
-
-<ul>
-<li><a href="https://github.com/gographics/imagick/pull/37">https://github.com/gographics/imagick/pull/37</a></li>
-</ul></li>
-</ul>
-
-<p>今は多分大丈夫だと思います。</p>
-
-<h1 id="その他">その他</h1>
+<h1 id="あとがき">あとがき</h1>
 
 <p>続くかもしれません。</p>
 

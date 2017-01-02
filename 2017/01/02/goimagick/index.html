@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.19-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>Go Imagick について - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/01/02/goimagick/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2017/01/02/goimagick/" class="hatena-bookmark-button" data-hatena-bookmark-title="Go Imagick について" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/01/02/goimagick/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-01-02">January 02, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/golang">Golang</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Go Imagick について</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#goimagick">GoImagick</a></li>
+<li><a href="#導入-インストール">導入(インストール)</a></li>
+<li><a href="#サンプルコード">サンプルコード</a></li>
+<li><a href="#その他">その他</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="goimagick">GoImagick</h1>
+
+<p>Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。</p>
+
+<ul>
+<li><a href="https://github.com/gographics/imagick">https://github.com/gographics/imagick</a></li>
+</ul>
+
+<p>以前、GoImagick の紹介スライドを作りました、参考にして下さい。</p>
+
+<ul>
+<li>GoImagick でサムネール作成
+
+<ul>
+<li><a href="https://speakerdeck.com/yoya/goimagickthumbnail">https://speakerdeck.com/yoya/goimagickthumbnail</a></li>
+</ul></li>
+</ul>
+
+<h1 id="導入-インストール">導入(インストール)</h1>
+
+<pre><code>$ sudo yum install ImageMagick-devel
+    # ImageMagick v6.8.9-8以前 (dpkg も多分これ)
+$ go get gopkg.in/gographics/imagick.v1/imagick
+</code></pre>
+
+<p>yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。</p>
+
+<pre><code>$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+    # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
+$ go get gopkg.in/gographics/imagick.v2/imagick
+</code></pre>
+
+<h1 id="サンプルコード">サンプルコード</h1>
+
+<p>こちらにサンプルが沢山用意されています。</p>
+
+<ul>
+<li><a href="https://github.com/gographics/imagick/tree/master/examples">https://github.com/gographics/imagick/tree/master/examples</a></li>
+</ul>
+
+<p>エラー処理や後始末を省いて単純化した例をだします。</p>
+
+<pre><code>package main
+import (
+        &quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+)
+func main() {
+        imagick.Initialize()
+        mw := imagick.NewMagickWand()
+        _ = mw.ReadImage(”input.png”)
+        _ = mw.ResizeImage(640, 480, imagick.FILTER_UNDEFINED, 1)
+        _ = mw.WriteImage(&quot;output.png&quot;)
+}
+</code></pre>
+
+<ul>
+<li>実行
+<code>
+$ ls
+imagick_resize.go       input.png               output.png
+$ go run imagick_resize.go
+$ identify *.png
+input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
+output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
+</code>
+<br /></li>
+</ul>
+
+<h1 id="その他">その他</h1>
+
+<p>尚、自分が GoImagick を使い始めた当初はメモリリークが激しかったので、本家に修正 PR を送って取り込んで貰いました。</p>
+
+<ul>
+<li>fixed to memory leak, string array issue.
+
+<ul>
+<li><a href="https://github.com/gographics/imagick/pull/37">https://github.com/gographics/imagick/pull/37</a></li>
+</ul></li>
+</ul>
+
+<p>今は多分大丈夫だと思います。</p>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2017  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

@@ -10,6 +10,98 @@
     <atom:link href="https://blog.awm.jp/categories/imagemagick/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Go Imagick について</title>
+      <link>https://blog.awm.jp/2017/01/02/goimagick/</link>
+      <pubDate>Mon, 02 Jan 2017 14:15:26 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
+      <description>
+
+&lt;h1 id=&#34;goimagick&#34;&gt;GoImagick&lt;/h1&gt;
+
+&lt;p&gt;Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gographics/imagick&#34;&gt;https://github.com/gographics/imagick&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以前、GoImagick の紹介スライドを作りました、参考にして下さい。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GoImagick でサムネール作成
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://speakerdeck.com/yoya/goimagickthumbnail&#34;&gt;https://speakerdeck.com/yoya/goimagickthumbnail&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;導入-インストール&#34;&gt;導入(インストール)&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install ImageMagick-devel
+    # ImageMagick v6.8.9-8以前 (dpkg も多分これ)
+$ go get gopkg.in/gographics/imagick.v1/imagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+    # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
+$ go get gopkg.in/gographics/imagick.v2/imagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;サンプルコード&#34;&gt;サンプルコード&lt;/h1&gt;
+
+&lt;p&gt;こちらにサンプルが沢山用意されています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gographics/imagick/tree/master/examples&#34;&gt;https://github.com/gographics/imagick/tree/master/examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;エラー処理や後始末を省いて単純化した例をだします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+import (
+        &amp;quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+)
+func main() {
+        imagick.Initialize()
+        mw := imagick.NewMagickWand()
+        _ = mw.ReadImage(”input.png”)
+        _ = mw.ResizeImage(640, 480, imagick.FILTER_UNDEFINED, 1)
+        _ = mw.WriteImage(&amp;quot;output.png&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;実行
+&lt;code&gt;
+$ ls
+imagick_resize.go       input.png               output.png
+$ go run imagick_resize.go
+$ identify *.png
+input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
+output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
+&lt;/code&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
+
+&lt;p&gt;尚、自分が GoImagick を使い始めた当初はメモリリークが激しかったので、本家に修正 PR を送って取り込んで貰いました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fixed to memory leak, string array issue.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gographics/imagick/pull/37&#34;&gt;https://github.com/gographics/imagick/pull/37&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今は多分大丈夫だと思います。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>ImageMagick の policy.xml でホワイトリスト？</title>
       <link>https://blog.awm.jp/2016/11/07/policy/</link>
       <pubDate>Mon, 07 Nov 2016 23:51:30 +0900</pubDate>
