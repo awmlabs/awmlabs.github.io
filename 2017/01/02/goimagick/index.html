@@ -52,7 +52,7 @@
     <span class="key">in</span>
     <span class="val">
 
-        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+        <a href="https://blog.awm.jp/categories/graphics">Graphics</a>
 
     </span>
 
@@ -73,7 +73,7 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#goimagick">GoImagick</a></li>
+<li><a href="#go-imagick">Go Imagick</a></li>
 <li><a href="#導入-インストール">導入(インストール)</a></li>
 <li><a href="#サンプルコード">サンプルコード</a></li>
 <li><a href="#その他">その他</a></li>
@@ -81,15 +81,15 @@
 </nav>
     
 
-<h1 id="goimagick">GoImagick</h1>
+<h1 id="go-imagick">Go Imagick</h1>
 
-<p>Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。</p>
+<p>Go言語で ImageMagick の機能を使えるようにするパッケージです。</p>
 
 <ul>
 <li><a href="https://github.com/gographics/imagick">https://github.com/gographics/imagick</a></li>
 </ul>
 
-<p>以前、GoImagick の紹介スライドを作りました、参考にして下さい。</p>
+<p>以前、Go Imagick の紹介スライドを作りました、参考にして下さい。</p>
 
 <ul>
 <li>GoImagick でサムネール作成
@@ -99,6 +99,10 @@
 </ul></li>
 </ul>
 
+<p>ImageMagick の上位層ライブラリである MagickWand に cgo で繋いだ thin(薄い)ラッパーです。</p>
+
+<p><center> <img src="../goimagick.png" /> </center></p>
+
 <h1 id="導入-インストール">導入(インストール)</h1>
 
 <pre><code>$ sudo yum install ImageMagick-devel
@@ -106,9 +110,10 @@
 $ go get gopkg.in/gographics/imagick.v1/imagick
 </code></pre>
 
-<p>yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。</p>
+<p>yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。ちなみに、macports はほぼ最新に近い状態で素晴らしいです。</p>
 
-<pre><code>$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+<pre><code>$ tar xfz ImageMagick-6.9.6-6.tar.gz
+$ (cd ImageMagick-6.9.6-6 ; ./configure ; make install)
     # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
 $ go get gopkg.in/gographics/imagick.v2/imagick
 </code></pre>
@@ -125,7 +130,7 @@ $ go get gopkg.in/gographics/imagick.v2/imagick
 
 <pre><code>package main
 import (
-        &quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+        &quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v
 )
 func main() {
         imagick.Initialize()
@@ -137,17 +142,16 @@ func main() {
 </code></pre>
 
 <ul>
-<li>実行
-<code>
-$ ls
-imagick_resize.go       input.png               output.png
-$ go run imagick_resize.go
+<li>実行</li>
+</ul>
+
+<pre><code>$ ls
+resize640x480.go        input.png               output.png
+$ go run resize640x480.go
 $ identify *.png
 input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
 output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
-</code>
-<br /></li>
-</ul>
+</code></pre>
 
 <h1 id="その他">その他</h1>
 

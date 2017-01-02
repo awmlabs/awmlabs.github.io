@@ -17,15 +17,15 @@
       <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
       <description>
 
-&lt;h1 id=&#34;goimagick&#34;&gt;GoImagick&lt;/h1&gt;
+&lt;h1 id=&#34;go-imagick&#34;&gt;Go Imagick&lt;/h1&gt;
 
-&lt;p&gt;Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。&lt;/p&gt;
+&lt;p&gt;Go言語で ImageMagick の機能を使えるようにするパッケージです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/gographics/imagick&#34;&gt;https://github.com/gographics/imagick&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;以前、GoImagick の紹介スライドを作りました、参考にして下さい。&lt;/p&gt;
+&lt;p&gt;以前、Go Imagick の紹介スライドを作りました、参考にして下さい。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;GoImagick でサムネール作成
@@ -35,6 +35,10 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;ImageMagick の上位層ライブラリである MagickWand に cgo で繋いだ thin(薄い)ラッパーです。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../goimagick.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
 &lt;h1 id=&#34;導入-インストール&#34;&gt;導入(インストール)&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install ImageMagick-devel
@@ -42,9 +46,10 @@
 $ go get gopkg.in/gographics/imagick.v1/imagick
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。&lt;/p&gt;
+&lt;p&gt;yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。ちなみに、macports はほぼ最新に近い状態で素晴らしいです。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+&lt;pre&gt;&lt;code&gt;$ tar xfz ImageMagick-6.9.6-6.tar.gz
+$ (cd ImageMagick-6.9.6-6 ; ./configure ; make install)
     # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
 $ go get gopkg.in/gographics/imagick.v2/imagick
 &lt;/code&gt;&lt;/pre&gt;
@@ -61,7 +66,7 @@ $ go get gopkg.in/gographics/imagick.v2/imagick
 
 &lt;pre&gt;&lt;code&gt;package main
 import (
-        &amp;quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+        &amp;quot;gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v
 )
 func main() {
         imagick.Initialize()
@@ -73,17 +78,16 @@ func main() {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;実行
-&lt;code&gt;
-$ ls
-imagick_resize.go       input.png               output.png
-$ go run imagick_resize.go
+&lt;li&gt;実行&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ls
+resize640x480.go        input.png               output.png
+$ go run resize640x480.go
 $ identify *.png
 input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
 output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
-&lt;/code&gt;
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
 
