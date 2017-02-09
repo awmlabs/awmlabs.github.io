@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>ImageMagick 6.9.7-7 から policy の挙動が変わりました - awm-Tech</title>
+<title>Behavior of policy changed from ImageMagick 6.9.7-7 - awm-Tech</title>
 </head>
 <body>
 
@@ -38,10 +38,10 @@
         js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-like" data-href=" https://blog.awm.jp/2017/02/09/imagemagick/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
-<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2017/02/09/imagemagick/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick 6.9.7-7 から policy の挙動が変わりました" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/02/09/imagemagick-en/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2017/02/09/imagemagick-en/" class="hatena-bookmark-button" data-hatena-bookmark-title="Behavior of policy changed from ImageMagick 6.9.7-7" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
 をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/02/09/imagemagick/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/02/09/imagemagick-en/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
  </div>
 
@@ -66,49 +66,48 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">ImageMagick 6.9.7-7 から policy の挙動が変わりました</h1>
+  <h1 class="headline" itemprop="headline">Behavior of policy changed from ImageMagick 6.9.7-7</h1>
 
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#はじめに">はじめに</a></li>
-<li><a href="#改善点">改善点</a></li>
-<li><a href="#ルール例">ルール例</a></li>
-<li><a href="#ソース差分">ソース差分</a>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#improvement">Improvement</a></li>
+<li><a href="#rule-example">Rule example</a></li>
+<li><a href="#source-code-diff">Source code diff</a>
 <ul>
 <li><a href="#imagemagick-6-9-7-6">ImageMagick-6.9.7-6</a></li>
 <li><a href="#imagemagick-6-9-7-7">ImageMagick-6.9.7-7</a></li>
 </ul></li>
-<li><a href="#さいごに">さいごに</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </nav>
     
 
-<h1 id="はじめに">はじめに</h1>
+<h1 id="introduction">Introduction</h1>
 
-<p>ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然、ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
-通常、設定ファイルの policy.xml<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> を使って画像形式毎に許可/不許可を指示します。</p>
+<p>ImageMagick supports over 100 types of image formats. Even if one of them is vulnerable, it will obviously be vulnerable to ImageMagick, so we need care to avoid receiving unnecessary image formats. Normal, policy.xml <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> of the configuration file 1 tells the enable / disable for each image format using.</p>
 
-<p>そして、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が、変わりました。</p>
+<p>And, from ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.</p>
 
 <ul>
-<li>ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)</li>
-<li>ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)</li>
+<li>ImageMagick-6.9.7-6 it is NG if there is even one NG (false winning)</li>
+<li>ImageMagick-6.9.7-7 NG if the last matching rule is NG (after winning)</li>
 </ul>
 
-<p>尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。</p>
+<p>It is not listed in ChangeLog of ImageMagick 6.9.7-7.</p>
 
-<h1 id="改善点">改善点</h1>
+<h1 id="improvement">Improvement</h1>
 
-<p>今まで NG ルールが一つでもあると NG 扱いでした。この場合はブラックリスト方式でしか使えません。例えば読みたくない画像形式がある場合は、それを全て列挙します。面倒ですし漏れがありそうですよね。。</p>
+<p>Until now, there was even one NG rule and it was treated as NG. In this case, it can only be used with the blacklist method. For example, if there are image formats you do not want to read, list them all. It is troublesome and there seems to be a leak. .</p>
 
-<p>しかし今回、後勝ち NG ルールになった事で、始めに *(ワイルドカード)で全部 NG にして、その後ろで許可したい画像(PNG, JPEG, GIF など？)だけ OK のルールを書けば、それ以外の画像は処理しなくなる。安心という訳です。</p>
+<p>But this time, because it became the winning NG rule, if you first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) You want to allow behind that Other images will not be processed. It is a translation that is safe.</p>
 
-<p>今までブラックリストを大量に列挙するか、それだと漏れがあったり、ImageMagick 自体に新しい形式が追加されても漏れるので、自前で画像先頭バイナリを走査してホワイトリスト形式で弾く前処理を入れる。等といった手間を強いられました。</p>
+<p>Even if you enumerate a large number of black lists until now, there is a leak, even if a new format is added to ImageMagick itself, you can scan the head binary of the image and preprocess it in whitelist form . I was forced to take such trouble as.</p>
 
-<h1 id="ルール例">ルール例</h1>
+<h1 id="rule-example">Rule example</h1>
 
-<p>ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます。</p>
+<p>From ImageMagick - 6.9.7 - 7 you can make the following settings in policy.xml.</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;read|write&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;PNG&quot;</span> <span style="color: #f92672">/&gt;</span>
@@ -117,9 +116,9 @@
 </pre></div>
 
 
-<p>尚、ImageMagick-6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。</p>
+<p>In ImageMagick - 6.9.7 - 6 and earlier, NG is determined by the * rule, and all image formats can not be processed.</p>
 
-<p>また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。</p>
+<p>Also, definition all has been added from 6.9.7-7. It represents all authorities. Specifically, it is the same as read | write | execute.</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;all&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;PNG&quot;</span> <span style="color: #f92672">/&gt;</span>
@@ -128,21 +127,20 @@
 </pre></div>
 
 
-<h1 id="ソース差分">ソース差分</h1>
+<h1 id="source-code-diff">Source code diff</h1>
 
-<p>magick/policy.c の IsRightsAuthorized 関数に差分があります。</p>
+<p>There is a difference in the IsRightsAuthorized function of magick / policy.c.</p>
 
-<p>policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットします。</p>
+<p>Policy_cache is a list of configuration entries. We will set MagickFalse if we do not have read, write, execute privileges by focusing on the corresponding entry in GlobExpression.</p>
 
-<p>この MagickFalse のセットの仕方が変更されています。</p>
+<p>The way of setting this MagickFalse has been changed.</p>
 
 <h2 id="imagemagick-6-9-7-6">ImageMagick-6.9.7-6</h2>
 
-<p>始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし NG の場合は MagickFalse を代入します。
-MagickTrue に戻す処理がないので、NG とするエントリが一つあれば後ろでひっくり返す事が出来ません。</p>
+<p>First, as authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it is NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
-<span style="color: #960050; background-color: #1e0010">＜略＞</span>
+<span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>
 <span style="color: #f8f8f2">p</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(PolicyInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">GetNextValueInLinkedList(policy_cache);</span>
   <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">((p</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">(PolicyInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">NULL)</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">(authorized</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">MagickFalse))</span>
 <span style="color: #f8f8f2">{</span>
@@ -166,10 +164,10 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 
 <h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
 
-<p>始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし OK なら MagickTrue 、NG なら MagickFalse を代入します。エントリが見つかる毎に上書きするので、後勝ちルールになります。</p>
+<p>First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it is OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites every entry found, so it will be the winning rule.</p>
 
 <p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
-<span style="color: #960050; background-color: #1e0010">＜略＞</span>
+<span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>
 <span style="color: #f8f8f2">p</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(PolicyInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">GetNextValueInLinkedList(policy_cache);</span>
 <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">(p</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">(PolicyInfo</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">NULL)</span>
 <span style="color: #f8f8f2">{</span>
@@ -188,15 +186,15 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 </pre></div>
 </p>
 
-<h1 id="さいごに">さいごに</h1>
+<h1 id="conclusion">Conclusion</h1>
 
-<p>自分には嬉しい機能変更ですが、明確に挙動が変わっているので公式のアナウンスがあった方が良いと考えます。</p>
+<p>It is a nice feature change to me, but I think that it was better to have an official announcement because the behavior has changed clearly.</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:1">具体的には以下の場所にファイルがあります → &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
+<li id="fn:1">Specifically, there are files in the following places -&gt; &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
