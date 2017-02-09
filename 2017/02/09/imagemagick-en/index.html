@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.19-DEV" />
+<meta name="generator" content="Hugo 0.18" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -86,7 +86,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> in the setting file to instruct permission(OK)/non-permission(NG) for each image format.</p>
+<p>ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> in the setting file to instruct permission(OK)/non-permission(NG) for each image format(codec).</p>
 
 <p>From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.</p>
 
@@ -164,7 +164,7 @@
 
 <h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
 
-<p>First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites every entry found, so it will be the winning rule.</p>
+<p>First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.</p>
 
 <p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
 <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>
@@ -188,7 +188,7 @@
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>It&rsquo;s a nice feature change to me, but I think that it was better to have an official announcement because the behavior has changed clearly.</p>
+<p>It&rsquo;s a nice feature change to us, but I think that it was better to have an official announcement because the behavior has changed clearly.</p>
 <div class="footnotes">
 
 <hr />
