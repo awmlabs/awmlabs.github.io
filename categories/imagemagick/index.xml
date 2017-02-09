@@ -10,6 +10,133 @@
     <atom:link href="https://blog.awm.jp/categories/imagemagick/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>ImageMagick 6.9.7-7 から policy の挙動が変わりました</title>
+      <link>https://blog.awm.jp/2017/02/09/imagemagick/</link>
+      <pubDate>Thu, 09 Feb 2017 20:59:11 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/02/09/imagemagick/</guid>
+      <description>
+
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;p&gt;ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然、ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
+通常、設定ファイルの policy.xml&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; を使って画像形式毎に許可/不許可を指示します。&lt;/p&gt;
+
+&lt;p&gt;そして、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が、変わりました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)&lt;/li&gt;
+&lt;li&gt;ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。&lt;/p&gt;
+
+&lt;h1 id=&#34;改善点&#34;&gt;改善点&lt;/h1&gt;
+
+&lt;p&gt;今まで NG ルールが一つでもあると NG 扱いでした。この場合はブラックリスト方式でしか使えません。例えば読みたくない画像形式がある場合は、それを全て列挙します。面倒ですし漏れがありそうですよね。。&lt;/p&gt;
+
+&lt;p&gt;しかし今回、後勝ち NG ルールになった事で、始めに *(ワイルドカード)で全部 NG にして、その後ろで許可したい画像(PNG, JPEG, GIF など？)だけ OK のルールを書けば、それ以外の画像は処理しなくなる。安心という訳です。&lt;/p&gt;
+
+&lt;p&gt;今までブラックリストを大量に列挙するか、それだと漏れがあったり、ImageMagick 自体が新しい形式が追加されたら困るので、自前で画像先頭バイナリを見てホワイトリスト形式で弾く前処理を入れる。等といった面倒な対策を強いられていました。&lt;/p&gt;
+
+&lt;h1 id=&#34;ルール例&#34;&gt;ルール例&lt;/h1&gt;
+
+&lt;p&gt;ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;read|write&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;PNG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;read|write&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;JPEG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;read|write&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;GIF&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;尚、ImageMagick-6.9.7-6 では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。&lt;/p&gt;
+
+&lt;p&gt;また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;all&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;PNG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;all&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;JPEG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;all&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;GIF&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id=&#34;ソース差分&#34;&gt;ソース差分&lt;/h1&gt;
+
+&lt;p&gt;magick/policy.c の IsRightsAuthorized 関数に差分があります。&lt;/p&gt;
+
+&lt;p&gt;policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットします。&lt;/p&gt;
+
+&lt;p&gt;この MagickFalse のセットの仕方が変更されています。&lt;/p&gt;
+
+&lt;h2 id=&#34;imagemagick-6-9-7-6&#34;&gt;ImageMagick-6.9.7-6&lt;/h2&gt;
+
+&lt;p&gt;始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし NG の場合は MagickFalse を代入します。
+MagickTrue に戻す処理がないので、NG とするエントリが一つあれば後ろでひっくり返す事が出来ません。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickTrue;&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;GetNextValueInLinkedList(policy_cache);&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;NULL)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(authorized&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse))&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;domain&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;domain)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;(GlobExpression(pattern,p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pattern,MagickFalse)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse))&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ReadPolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ReadPolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;WritePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;WritePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExecutePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExecutePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;GetNextValueInLinkedList(policy_cache);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick-6.9.7-7&lt;/h2&gt;
+
+&lt;p&gt;始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし OK なら MagickTrue 、NG なら MagickFalse を代入します。エントリが見つかる毎に上書きするので、後勝ちルールになります。&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickTrue;&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;＜略＞&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;GetNextValueInLinkedList(policy_cache);&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(p&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;NULL)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;domain&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;domain)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;(GlobExpression(pattern,p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pattern,MagickFalse)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickFalse))&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ReadPolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ReadPolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;WritePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;WritePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;((rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExecutePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rights&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExecutePolicyRights)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(PolicyInfo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;GetNextValueInLinkedList(policy_cache);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;h1 id=&#34;さいごに&#34;&gt;さいごに&lt;/h1&gt;
+
+&lt;p&gt;自分には嬉しい機能変更ですが、明確に挙動が変わっているので公式のアナウンスがあった方が良いと考えます。&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;具体的には以下の場所にファイルがあります → &amp;lt;prefix&amp;gt;/etc/ImageMagick-6/policy.xml
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>ImageMagick の policy.xml でホワイトリスト？</title>
       <link>https://blog.awm.jp/2016/11/07/policy/</link>
       <pubDate>Mon, 07 Nov 2016 23:51:30 +0900</pubDate>
