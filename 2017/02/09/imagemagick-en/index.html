@@ -86,7 +86,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> in the setting file to instruct permission(OK)/non-permission(NG) for each image format(codec).</p>
+<p>ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> in the setting file to instruct permission(OK)/non-permission(NG) for each image format(domain=coder).</p>
 
 <p>From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.</p>
 
@@ -131,13 +131,13 @@
 
 <p>There is a difference in the IsRightsAuthorized function of magick/policy.c.</p>
 
-<p>Policy_cache is a list of configuration entries. MagickFalse will be set if we do not have read, write, execute privileges, focusing on the corresponding entry in GlobExpression.</p>
+<p>Policy_cache has a list of configuration entries. MagickFalse is set if you do not have authority to read, write, execute, etc., by focusing on the matching entry in GlobExpression.</p>
 
 <p>The way of setting this MagickFalse has been changed.</p>
 
 <h2 id="imagemagick-6-9-7-6">ImageMagick-6.9.7-6</h2>
 
-<p>First, as authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it&rsquo;s NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.</p>
+<p>First, let authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it&rsquo;s NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
 <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>
@@ -164,7 +164,7 @@
 
 <h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
 
-<p>First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.</p>
+<p>First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.</p>
 
 <p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
 <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>

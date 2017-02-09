@@ -87,7 +87,7 @@
 <h1 id="はじめに">はじめに</h1>
 
 <p>ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
-通常は設定ファイルの policy.xml<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> を使って画像形式(codec)毎に許可(OK)/不許可(NG)を指示します。</p>
+通常は設定ファイルの policy.xml<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> を使って画像形式(domain=coder)毎に許可(OK)/不許可(NG)を指示します。</p>
 
 <p>そして本題ですが、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が変わりました。</p>
 
@@ -132,7 +132,7 @@
 
 <p>magick/policy.c の IsRightsAuthorized 関数に差分があります。</p>
 
-<p>policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットれます。</p>
+<p>policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に authorized に MagickFalse をセットします。</p>
 
 <p>この MagickFalse のセットの仕方が変更されています。</p>
 
