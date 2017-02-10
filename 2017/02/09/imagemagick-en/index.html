@@ -71,7 +71,10 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#additional-notes-2017-02-10">Additional notes (2017/02/10)</a></li>
+</ul></li>
 <li><a href="#improvement">Improvement</a></li>
 <li><a href="#rule-example">Rule example</a></li>
 <li><a href="#source-code-diff">Source code diff</a>
@@ -96,6 +99,19 @@
 </ul>
 
 <p>It&rsquo;s not listed in ChangeLog of ImageMagick 6.9.7-7.</p>
+
+<h2 id="additional-notes-2017-02-10">Additional notes (2017/02/10)</h2>
+
+<p>This topic is taken up in the board and the manual has also been updated.</p>
+
+<ul>
+<li>ImageMagick Security Policy
+
+<ul>
+<li><a href="http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&amp;t=26801">http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&amp;t=26801</a></li>
+</ul></li>
+<li><a href="https://www.imagemagick.org/script/security-policy.php">https://www.imagemagick.org/script/security-policy.php</a></li>
+</ul>
 
 <h1 id="improvement">Improvement</h1>
 
@@ -126,6 +142,15 @@
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;all&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;GIF&quot;</span> <span style="color: #f92672">/&gt;</span>
 </pre></div>
 
+
+<p>I will also apply it like this.</p>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
+<span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;all&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;{PNG|JPEG|GIF}&quot;</span> <span style="color: #f92672">/&gt;</span>
+</pre></div>
+
+
+<p>It is convenient.</p>
 
 <h1 id="source-code-diff">Source code diff</h1>
 
@@ -194,7 +219,7 @@
 <hr />
 
 <ol>
-<li id="fn:1">Specifically, there are files in the following places -&gt; &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
+<li id="fn:1">Specifically, there are files in the following places -&gt; &lt;prefix&gt;/etc/ImageMagick-[67]/policy.xml
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
 </div>

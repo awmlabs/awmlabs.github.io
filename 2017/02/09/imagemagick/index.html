@@ -71,7 +71,10 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#はじめに">はじめに</a>
+<ul>
+<li><a href="#追記-2017-02-10">追記 (2017/02/10)</a></li>
+</ul></li>
 <li><a href="#改善点">改善点</a></li>
 <li><a href="#ルール例">ルール例</a></li>
 <li><a href="#ソース差分">ソース差分</a>
@@ -97,6 +100,19 @@
 </ul>
 
 <p>尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。</p>
+
+<h2 id="追記-2017-02-10">追記 (2017/02/10)</h2>
+
+<p>この件は掲示板で取り上げていてマニュアルも更新されています。</p>
+
+<ul>
+<li>ImageMagick Security Policy
+
+<ul>
+<li><a href="http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&amp;t=26801">http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&amp;t=26801</a></li>
+</ul></li>
+<li><a href="https://www.imagemagick.org/script/security-policy.php">https://www.imagemagick.org/script/security-policy.php</a></li>
+</ul>
 
 <h1 id="改善点">改善点</h1>
 
@@ -127,6 +143,15 @@
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;all&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;GIF&quot;</span> <span style="color: #f92672">/&gt;</span>
 </pre></div>
 
+
+<p>更にこんな風にもかけます。</p>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
+<span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;all&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;{PNG|JPEG|GIF}&quot;</span> <span style="color: #f92672">/&gt;</span>
+</pre></div>
+
+
+<p>便利ですね。</p>
 
 <h1 id="ソース差分">ソース差分</h1>
 
@@ -196,7 +221,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 <hr />
 
 <ol>
-<li id="fn:1">具体的には以下の場所にファイルがあります → &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
+<li id="fn:1">具体的には以下の場所にファイルがあります → &lt;prefix&gt;/etc/ImageMagick-[67]/policy.xml
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
