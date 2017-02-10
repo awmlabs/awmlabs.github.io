@@ -272,7 +272,7 @@ and it&amp;rsquo;s better disable delegate, also add WEBP.&lt;/p&gt;
 
 &lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick-6.9.7-7&lt;/h2&gt;
 
-&lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&amp;rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.&lt;/p&gt;
+&lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&amp;rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the after winning rule.&lt;/p&gt;
 
 &lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickTrue;&lt;/span&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;omit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
