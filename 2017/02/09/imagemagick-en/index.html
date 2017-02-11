@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.18" />
+<meta name="generator" content="Hugo 0.19-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -79,8 +79,8 @@
 <li><a href="#rule-example">Rule example</a></li>
 <li><a href="#source-code-diff">Source code diff</a>
 <ul>
-<li><a href="#imagemagick-6-9-7-6">ImageMagick-6.9.7-6</a></li>
-<li><a href="#imagemagick-6-9-7-7">ImageMagick-6.9.7-7</a></li>
+<li><a href="#imagemagick-6-9-7-6">ImageMagick 6.9.7-6</a></li>
+<li><a href="#imagemagick-6-9-7-7">ImageMagick 6.9.7-7</a></li>
 </ul></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ul>
@@ -94,8 +94,8 @@
 <p>From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.</p>
 
 <ul>
-<li>ImageMagick-6.9.7-6 NG if there is even one NG (false winning)</li>
-<li>ImageMagick-6.9.7-7 NG if the last matching rule is NG (after winning)</li>
+<li>ImageMagick 6.9.7-6 NG if there is even one NG (false winning)</li>
+<li>ImageMagick 6.9.7-7 NG if the last matching rule is NG (after winning)</li>
 </ul>
 
 <p>It&rsquo;s not listed in ChangeLog of ImageMagick 6.9.7-7.</p>
@@ -123,7 +123,7 @@
 
 <h1 id="rule-example">Rule example</h1>
 
-<p>From ImageMagick - 6.9.7-7 we can make the following settings in policy.xml.</p>
+<p>From ImageMagick 6.9.7-7 we can make the following settings in policy.xml.</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;read|write&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;PNG&quot;</span> <span style="color: #f92672">/&gt;</span>
@@ -132,7 +132,7 @@
 </pre></div>
 
 
-<p>In ImageMagick - 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.</p>
+<p>In ImageMagick 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.</p>
 
 <p>Also, definition &ldquo;all&rdquo; has been added from 6.9.7-7. It represents all authorities. Specifically, it is the same as &ldquo;read|write|execute&rdquo;.</p>
 
@@ -162,7 +162,7 @@ and it&rsquo;s better disable delegate, also add WEBP.</p>
 
 <p>The way of setting this MagickFalse has been changed.</p>
 
-<h2 id="imagemagick-6-9-7-6">ImageMagick-6.9.7-6</h2>
+<h2 id="imagemagick-6-9-7-6">ImageMagick 6.9.7-6</h2>
 
 <p>First, let authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it&rsquo;s NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.</p>
 
@@ -189,7 +189,7 @@ and it&rsquo;s better disable delegate, also add WEBP.</p>
 </pre></div>
 
 
-<h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
+<h2 id="imagemagick-6-9-7-7">ImageMagick 6.9.7-7</h2>
 
 <p>First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the &ldquo;after winning&rdquo; NG rule.</p>
 

@@ -19,14 +19,14 @@
 
 &lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
+&lt;p&gt;ImageMagick は100種類以上の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
 通常は設定ファイルの policy.xml&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; を使って画像形式(domain=coder)毎に許可(OK)/不許可(NG)を指示します。&lt;/p&gt;
 
 &lt;p&gt;そして本題ですが、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が変わりました。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)&lt;/li&gt;
-&lt;li&gt;ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)&lt;/li&gt;
+&lt;li&gt;ImageMagick 6.9.7-6 では NG が1つでもあると NG (false 勝ち)&lt;/li&gt;
+&lt;li&gt;ImageMagick 6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。&lt;/p&gt;
@@ -54,7 +54,7 @@
 
 &lt;h1 id=&#34;ルール例&#34;&gt;ルール例&lt;/h1&gt;
 
-&lt;p&gt;ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます。&lt;/p&gt;
+&lt;p&gt;ImageMagick 6.9.7-7 から policy.xml で以下のような設定ができます。&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;read|write&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;PNG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
@@ -63,7 +63,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;尚、ImageMagick-6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。&lt;/p&gt;
+&lt;p&gt;尚、ImageMagick 6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。&lt;/p&gt;
 
 &lt;p&gt;また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。&lt;/p&gt;
 
@@ -93,7 +93,7 @@ delegate も無効にした方が良いですね。あと、WEBP も追加しま
 
 &lt;p&gt;この MagickFalse のセットの仕方が変更されています。&lt;/p&gt;
 
-&lt;h2 id=&#34;imagemagick-6-9-7-6&#34;&gt;ImageMagick-6.9.7-6&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-6-9-7-6&#34;&gt;ImageMagick 6.9.7-6&lt;/h2&gt;
 
 &lt;p&gt;始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし NG の場合は MagickFalse を代入します。
 MagickTrue に戻す処理がないので、NG とするエントリが一つあれば後ろでひっくり返す事が出来ません。&lt;/p&gt;
@@ -121,7 +121,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick-6.9.7-7&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick 6.9.7-7&lt;/h2&gt;
 
 &lt;p&gt;始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし OK なら MagickTrue 、NG なら MagickFalse を代入します。エントリが見つかる毎に上書きするので、後勝ちルールになります。&lt;/p&gt;
 
@@ -175,8 +175,8 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 &lt;p&gt;From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;ImageMagick-6.9.7-6 NG if there is even one NG (false winning)&lt;/li&gt;
-&lt;li&gt;ImageMagick-6.9.7-7 NG if the last matching rule is NG (after winning)&lt;/li&gt;
+&lt;li&gt;ImageMagick 6.9.7-6 NG if there is even one NG (false winning)&lt;/li&gt;
+&lt;li&gt;ImageMagick 6.9.7-7 NG if the last matching rule is NG (after winning)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;It&amp;rsquo;s not listed in ChangeLog of ImageMagick 6.9.7-7.&lt;/p&gt;
@@ -204,7 +204,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 
 &lt;h1 id=&#34;rule-example&#34;&gt;Rule example&lt;/h1&gt;
 
-&lt;p&gt;From ImageMagick - 6.9.7-7 we can make the following settings in policy.xml.&lt;/p&gt;
+&lt;p&gt;From ImageMagick 6.9.7-7 we can make the following settings in policy.xml.&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;policy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;domain=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;coder&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rights=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;read|write&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;PNG&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
@@ -213,7 +213,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In ImageMagick - 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.&lt;/p&gt;
+&lt;p&gt;In ImageMagick 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.&lt;/p&gt;
 
 &lt;p&gt;Also, definition &amp;ldquo;all&amp;rdquo; has been added from 6.9.7-7. It represents all authorities. Specifically, it is the same as &amp;ldquo;read|write|execute&amp;rdquo;.&lt;/p&gt;
 
@@ -243,7 +243,7 @@ and it&amp;rsquo;s better disable delegate, also add WEBP.&lt;/p&gt;
 
 &lt;p&gt;The way of setting this MagickFalse has been changed.&lt;/p&gt;
 
-&lt;h2 id=&#34;imagemagick-6-9-7-6&#34;&gt;ImageMagick-6.9.7-6&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-6-9-7-6&#34;&gt;ImageMagick 6.9.7-6&lt;/h2&gt;
 
 &lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it&amp;rsquo;s NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.&lt;/p&gt;
 
@@ -270,7 +270,7 @@ and it&amp;rsquo;s better disable delegate, also add WEBP.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick-6.9.7-7&lt;/h2&gt;
+&lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick 6.9.7-7&lt;/h2&gt;
 
 &lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&amp;rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the &amp;ldquo;after winning&amp;rdquo; NG rule.&lt;/p&gt;
 
@@ -469,14 +469,6 @@ README.md	mkthumb		test-image	thumbnail
 &lt;h1 id=&#34;あとがき&#34;&gt;あとがき&lt;/h1&gt;
 
 &lt;p&gt;続くかもしれません。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Go Imagick について
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2017/01/02/goimagick/&#34;&gt;http://blog.awm.jp/2017/01/02/goimagick/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

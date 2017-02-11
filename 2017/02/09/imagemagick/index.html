@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.18" />
+<meta name="generator" content="Hugo 0.19-DEV" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -79,8 +79,8 @@
 <li><a href="#ルール例">ルール例</a></li>
 <li><a href="#ソース差分">ソース差分</a>
 <ul>
-<li><a href="#imagemagick-6-9-7-6">ImageMagick-6.9.7-6</a></li>
-<li><a href="#imagemagick-6-9-7-7">ImageMagick-6.9.7-7</a></li>
+<li><a href="#imagemagick-6-9-7-6">ImageMagick 6.9.7-6</a></li>
+<li><a href="#imagemagick-6-9-7-7">ImageMagick 6.9.7-7</a></li>
 </ul></li>
 <li><a href="#さいごに">さいごに</a></li>
 </ul>
@@ -89,14 +89,14 @@
 
 <h1 id="はじめに">はじめに</h1>
 
-<p>ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
+<p>ImageMagick は100種類以上の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
 通常は設定ファイルの policy.xml<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> を使って画像形式(domain=coder)毎に許可(OK)/不許可(NG)を指示します。</p>
 
 <p>そして本題ですが、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が変わりました。</p>
 
 <ul>
-<li>ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)</li>
-<li>ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)</li>
+<li>ImageMagick 6.9.7-6 では NG が1つでもあると NG (false 勝ち)</li>
+<li>ImageMagick 6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)</li>
 </ul>
 
 <p>尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。</p>
@@ -124,7 +124,7 @@
 
 <h1 id="ルール例">ルール例</h1>
 
-<p>ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます。</p>
+<p>ImageMagick 6.9.7-7 から policy.xml で以下のような設定ができます。</p>
 
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;none&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">/&gt;</span>
 <span style="color: #f92672">&lt;policy</span> <span style="color: #a6e22e">domain=</span><span style="color: #e6db74">&quot;coder&quot;</span> <span style="color: #a6e22e">rights=</span><span style="color: #e6db74">&quot;read|write&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;PNG&quot;</span> <span style="color: #f92672">/&gt;</span>
@@ -133,7 +133,7 @@
 </pre></div>
 
 
-<p>尚、ImageMagick-6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。</p>
+<p>尚、ImageMagick 6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。</p>
 
 <p>また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。</p>
 
@@ -163,7 +163,7 @@ delegate も無効にした方が良いですね。あと、WEBP も追加しま
 
 <p>この MagickFalse のセットの仕方が変更されています。</p>
 
-<h2 id="imagemagick-6-9-7-6">ImageMagick-6.9.7-6</h2>
+<h2 id="imagemagick-6-9-7-6">ImageMagick 6.9.7-6</h2>
 
 <p>始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし NG の場合は MagickFalse を代入します。
 MagickTrue に戻す処理がないので、NG とするエントリが一つあれば後ろでひっくり返す事が出来ません。</p>
@@ -191,7 +191,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 </pre></div>
 
 
-<h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
+<h2 id="imagemagick-6-9-7-7">ImageMagick 6.9.7-7</h2>
 
 <p>始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし OK なら MagickTrue 、NG なら MagickFalse を代入します。エントリが見つかる毎に上書きするので、後勝ちルールになります。</p>
 
