@@ -117,7 +117,7 @@
 
 <p>Until now, there was even one NG rule and it was treated as NG. In this case, it can only be used with the blacklist method. For example, if there are image formats we do not want to read, list them all. It is troublesome and there seems to be a leak.</p>
 
-<p>But this time, because it became the winning NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) We want to allow behind that Other images will not be processed. It&rsquo;s very safe.</p>
+<p>But this time, because it became the &ldquo;false winning&rdquo; NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) we want to allow behind that Other images will not be processed. It&rsquo;s very safe.</p>
 
 <p>Even if we enumerate a large number of black lists until now, there is a leak, even if a new format is added to ImageMagick itself, or scanning the signature of the image binary, etc&hellip;</p>
 
@@ -191,7 +191,7 @@ and it&rsquo;s better disable delegate, also add WEBP.</p>
 
 <h2 id="imagemagick-6-9-7-7">ImageMagick-6.9.7-7</h2>
 
-<p>First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the after winning rule.</p>
+<p>First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the &ldquo;after winning&rdquo; NG rule.</p>
 
 <p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">authorized</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">MagickTrue;</span>
 <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">omit</span><span style="color: #f92672">&gt;</span>

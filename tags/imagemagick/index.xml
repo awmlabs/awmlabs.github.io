@@ -198,7 +198,7 @@ MagickTrue に戻す処理がないので、NG とするエントリが一つあ
 
 &lt;p&gt;Until now, there was even one NG rule and it was treated as NG. In this case, it can only be used with the blacklist method. For example, if there are image formats we do not want to read, list them all. It is troublesome and there seems to be a leak.&lt;/p&gt;
 
-&lt;p&gt;But this time, because it became the winning NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) We want to allow behind that Other images will not be processed. It&amp;rsquo;s very safe.&lt;/p&gt;
+&lt;p&gt;But this time, because it became the &amp;ldquo;false winning&amp;rdquo; NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) we want to allow behind that Other images will not be processed. It&amp;rsquo;s very safe.&lt;/p&gt;
 
 &lt;p&gt;Even if we enumerate a large number of black lists until now, there is a leak, even if a new format is added to ImageMagick itself, or scanning the signature of the image binary, etc&amp;hellip;&lt;/p&gt;
 
@@ -272,7 +272,7 @@ and it&amp;rsquo;s better disable delegate, also add WEBP.&lt;/p&gt;
 
 &lt;h2 id=&#34;imagemagick-6-9-7-7&#34;&gt;ImageMagick-6.9.7-7&lt;/h2&gt;
 
-&lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&amp;rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the after winning rule.&lt;/p&gt;
+&lt;p&gt;First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it&amp;rsquo;s OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the &amp;ldquo;after winning&amp;rdquo; NG rule.&lt;/p&gt;
 
 &lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;authorized&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;MagickTrue;&lt;/span&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;omit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
