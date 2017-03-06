@@ -143,9 +143,9 @@
 
 <h1 id="既存の方法と比較">既存の方法と比較</h1>
 
-<p>画像の一部を拡大して拡大結果を比較してみます。</p>
+<p>画像の一部に注目して拡大結果を比較します。</p>
 
-<p><img src="../miku.png" /> (クリップ画像)</p>
+<p><img src="../miku.png" /></p>
 
 <pre><code>% convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
 % convert miku.png -filter triangle -resize 200%x200% miku-triangle.png # Bi-Linear
@@ -186,7 +186,7 @@
 </tbody>
 </table>
 
-<p>FCBI だとぼやけが少ないですし、線もよく繋がっていて、いい感じです。</p>
+<p>FCBI だと明瞭さがそこそこ、線もよく繋がっていて、いい感じです。</p>
 
 <h1 id="最後に">最後に</h1>
 
