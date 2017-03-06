@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="awmlabs">
-<meta name="generator" content="Hugo 0.20-DEV" />
+<meta name="generator" content="Hugo 0.18" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
@@ -76,7 +76,13 @@
 <li><a href="#はじめに">はじめに</a></li>
 <li><a href="#デモ">デモ</a>
 <ul>
-<li><a href="#使い方">使い方</a></li>
+<li><a href="#使い方">使い方</a>
+<ul>
+<li><a href="#1-画像をドロップして渡す">(1) 画像をドロップして渡す</a></li>
+<li><a href="#2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整">(2) edge モードで輪郭が期待通りに出るよう TM 値を調整</a></li>
+<li><a href="#3-maxwidthheight-を最大値にする">(3) maxWidthHeight を最大値にする</a></li>
+<li><a href="#4-edge-を外して完成">(4) edge を外して完成</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#既存の方法と比較">既存の方法と比較</a></li>
 <li><a href="#最後に">最後に</a></li>
@@ -87,7 +93,7 @@
 
 <h1 id="はじめに">はじめに</h1>
 
-<p>インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。</p>
+<p>インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(需要があれば次回アルゴリズム詳説を書く予定)</p>
 
 <p>あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。</p>
 
@@ -111,7 +117,7 @@
 
 <p><a href="https://twitter.com/rityulate/status/772006898279120896">https://twitter.com/rityulate/status/772006898279120896</a></p>
 
-<p>(1) 画像をドロップする。</p>
+<h3 id="1-画像をドロップして渡す">(1) 画像をドロップして渡す</h3>
 
 <p>ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。</p>
 
@@ -119,27 +125,27 @@
 
 <p>初期状態では画像の一片を320pxに制限しています。</p>
 
-<p>(2) edge モードで輪郭が期待通りに出るよう TM 値をいじる。</p>
+<h3 id="2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整">(2) edge モードで輪郭が期待通りに出るよう TM 値を調整</h3>
 
 <p><center> <a href="../demo01.png"> <img src="../demo01-h.png" /> </a> </center></p>
 
 <p>尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。</p>
 
-<p>(3) maxWidthHeight を最大値にする。</p>
+<h3 id="3-maxwidthheight-を最大値にする">(3) maxWidthHeight を最大値にする</h3>
 
 <p><center> <a href="../demo02.png"> <img src="../demo02-h.png" /> </a> </center></p>
 
 <p>輪郭が期待と違う場合は TM を再調整。</p>
 
-<p>(3) edge を外して完成。</p>
+<h3 id="4-edge-を外して完成">(4) edge を外して完成</h3>
 
 <p><center> <a href="../demo03.png"> <img src="../demo03-h.png" /> </a> </center></p>
 
 <h1 id="既存の方法と比較">既存の方法と比較</h1>
 
-<p>画像の一部を拡大して比較してみます。</p>
+<p>画像の一部を拡大して拡大結果を比較してみます。</p>
 
-<p><img src="../miku.png" /></p>
+<p><img src="../miku.png" /> (クリップ画像)</p>
 
 <pre><code>% convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
 % convert miku.png -filter triangle -resize 200%x200% miku-triangle.png # Bi-Linear
