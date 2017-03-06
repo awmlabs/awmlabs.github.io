@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="awmlabs">
+<meta name="generator" content="Hugo 0.20-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+<title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方 - awm-Tech</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret"># _</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/03/06/fcbi/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="http://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/06/fcbi/" class="hatena-bookmark-button" data-hatena-bookmark-title="エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/03/06/fcbi/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-03-06">March 06, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/graphics">Graphics</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/fcbi">FCBI</a>
+
+        <a href="https://blog.awm.jp/tags/superresolution">SuperResolution</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#デモ">デモ</a>
+<ul>
+<li><a href="#使い方">使い方</a></li>
+</ul></li>
+<li><a href="#既存の方法と比較">既存の方法と比較</a></li>
+<li><a href="#最後に">最後に</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+    
+
+<h1 id="はじめに">はじめに</h1>
+
+<p>インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。</p>
+
+<p>あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。</p>
+
+<h1 id="デモ">デモ</h1>
+
+<ul>
+<li><a href="http://app.awm.jp/image.js/fcbi.html">http://app.awm.jp/image.js/fcbi.html</a>
+
+<ul>
+<li>ソースコード: <a href="https://github.com/yoya/image.js/blob/master/fcbi.js">https://github.com/yoya/image.js/blob/master/fcbi.js</a></li>
+</ul></li>
+</ul>
+
+<p>仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。</p>
+
+<p>制限事項: 画像の一片は maxWidthHeight で指定できますが、 その最大値を 1000px 制限してます。そのうち上限を増やすかも。</p>
+
+<h2 id="使い方">使い方</h2>
+
+<p>同じ実験するのならできる限り可愛い絵の方が頑張れるので、こちらの世界一可愛いミクさん絵で綺麗な拡大を試みます。</p>
+
+<p><a href="https://twitter.com/rityulate/status/772006898279120896">https://twitter.com/rityulate/status/772006898279120896</a></p>
+
+<p>(1) 画像をドロップする。</p>
+
+<p>ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。</p>
+
+<p><center> <a href="../demo00.png"> <img src="../demo00-h.png" /> </a></center></p>
+
+<p>初期状態では画像の一片を320pxに制限しています。</p>
+
+<p>(2) edge モードで輪郭が期待通りに出るよう TM 値をいじる。</p>
+
+<p><center> <a href="../demo01.png"> <img src="../demo01-h.png" /> </a> </center></p>
+
+<p>尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。</p>
+
+<p>(3) maxWidthHeight を最大値にする。</p>
+
+<p><center> <a href="../demo02.png"> <img src="../demo02-h.png" /> </a> </center></p>
+
+<p>輪郭が期待と違う場合は TM を再調整。</p>
+
+<p>(3) edge を外して完成。</p>
+
+<p><center> <a href="../demo03.png"> <img src="../demo03-h.png" /> </a> </center></p>
+
+<h1 id="既存の方法と比較">既存の方法と比較</h1>
+
+<p>画像の一部を拡大して比較してみます。</p>
+
+<p><img src="../miku.png" /></p>
+
+<pre><code>% convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
+% convert miku.png -filter triangle -resize 200%x200% miku-triangle.png # Bi-Linear
+% convert miku.png -filter cubic    -resize 200%x200% miku-cubic.png
+% convert miku.png -filter mitchell -resize 200%x200% miku-mitchell.png
+% convert miku.png -filter lanczos  -resize 200%x200% miku-lanczos.png
+</code></pre>
+
+<p>ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。</p>
+
+<table>
+<thead>
+<tr>
+<th>Nearest-Neighbor</th>
+<th>Bi-Liner</th>
+<th>Bi-Cubic</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="../miku-box.png"/></td>
+<td><img src="../miku-triangle.png"/></td>
+<td><img src="../miku-cubic.png"/></td>
+</tr>
+
+<tr>
+<td>Lanczoz</td>
+<td>Mitchell</td>
+<td>FCBI</td>
+</tr>
+
+<tr>
+<td><img src="../miku-lanczos.png"/></td>
+<td><img src="../miku-mitchell.png"/></td>
+<td><img src="../miku-fcbi.png"/></td>
+</tr>
+</tbody>
+</table>
+
+<p>FCBI の線がよく繋がっていて、いい感じです。</p>
+
+<h1 id="最後に">最後に</h1>
+
+<p>レベル補正で正規化したピクセルを元にエッジ判定すれば、TM はもう少し適当で良いかもしれません。</p>
+
+<p>次回で、自分なりにアルゴリズムを解説し直す予定です。インターフェース誌の解説だと多分、慣れてる人じゃないと l って具体的に何？テンソル積記号出てきたけどどうすれば良いの？で止まるはずなので。その辺りの補足説明をしたいかも。</p>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li>Interface 2015年6月号 (CQ出版)
+
+<ul>
+<li><a href="http://www.kumikomi.net/interface/contents/201506.php">http://www.kumikomi.net/interface/contents/201506.php</a></li>
+</ul></li>
+<li>Comparative Analysis of Edge Based Single Image Superresolution
+
+<ul>
+<li><a href="http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf">http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf</a></li>
+</ul></li>
+</ul>
+
+  </section>
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2017  awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

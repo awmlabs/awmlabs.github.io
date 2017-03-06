@@ -1,104 +1,148 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>awm-Tech</title>
+    <title>Tags on awm-Tech</title>
     <link>https://blog.awm.jp/tags/index.xml</link>
-    <description>Recent content on awm-Tech</description>
+    <description>Recent content in Tags on awm-Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Wed, 06 Jan 2016 19:52:03 +0900</lastBuildDate>
     <atom:link href="https://blog.awm.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
+      <title></title>
+      <link>https://blog.awm.jp/tags/</link>
       <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
       
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
-      <description>
-
-&lt;h1 id=&#34;auto-orient-でオフセットがズレる件&#34;&gt;-auto-orient でオフセットがズレる件&lt;/h1&gt;
-
-&lt;p&gt;例のエントリにもう一件便乗。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;もうサムネイルで泣かないための ImageMagick ノウハウ集
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.cybozu.io/entry/2016/01/06/080000&#34;&gt;http://blog.cybozu.io/entry/2016/01/06/080000&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。
-上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、
-offset 情報がおかしくなります。
-
-$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160+4294967136 8-bit PseudoClass 256c 13.8KB 0.000u 0:00.000
-このケースは -auto-orient をつけて一度 JPEG に変換し、
-改めて PNG に変換すると正しい情報の画像が得られます。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;4294967136 はバイナリ的には2の補数表現の -160 と同等なので単純に表示が壊れている(%d と %u の違い)と思います。つまり 640x480+160-160 相当で、結論を先に言うと +repage を使ってみてはどうでしょうという回避策の提案です。&lt;/p&gt;
-
-&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
-
-&lt;p&gt;さて、どうして +160-160 になるのか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AutoOrientImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1339.html#L79&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;RotateImage: &lt;a href=&#34;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&#34;&gt;http://gt.awm.jp/ImageMagick-6.9.3-0/S/1261.html#L2787&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;AutoOrientImage から RotateImage ルーチンを呼び出します。汎用なので斜めの回転ではみ出る可能性があり、自動で描画領域を広げる処理があります。(縦横変わるだけでもはみでますけど)&lt;/p&gt;
-
-&lt;p&gt;ちなみに、自分が手元で convert を動かすとこうなります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient out.png
-$ identify out.png
-out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;座標から想像するに、右下を軸に回転してしまっていると予想されます。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/1.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;画像を単独で表示する分には気になりませんが、例えば HTML ドキュメントにレイアウトされる場合、期待する場所は左下で、実際には右上の方にズレて配置される恐れがあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;https://blog.awm.jp/2016/01/06/2.jpg&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;repage&#34;&gt;+repage&lt;/h1&gt;
-
-&lt;p&gt;ImageMagick の draw 命令や GIF アニメーションでコマ分割等をする人には馴染みがあるのオプションですが、今回のように表示上の左上を原点として仕切り直すのに +repage オプションが使えます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ convert right-mirrored.jpg -auto-orient +repage out-repage.png
-$ identify out-repage.png
-out-repage.png PNG 480x640 480x640+0+0 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;という感じで、auto-rotate で原点がズレるのは不具合ですが、とりあえずは +repage で回避出来るのでは。という提案でした。&lt;/p&gt;
-
-&lt;h1 id=&#34;おまけ&#34;&gt;おまけ&lt;/h1&gt;
-
-&lt;p&gt;実は手元の MacOSX だと、 MacPorts の ImageMagick で変換すると 640x480+160-160 になりますが、自分でコンパイルした ImageMagick で変換すると(+repageつけなくても) 480x640+0+0 になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;MacPorts の configure オプションをギリギリまで削ったもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure LDFLAGS=-L/opt/local/lib CPPFLAGS=-I/opt/local/include
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;自分でコンパイルしたもの&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure --with-png=/usr/local/Cellar/libpng/1.6.18/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;libpng 次第で挙動が変わる模様です。バージョンのせいか Homebrew の libpng だからなのかは分かりません。調べるのは少し骨が折れそうです。気が向いたらもう少し追います。&lt;/p&gt;
-</description>
+      <guid>https://blog.awm.jp/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://blog.awm.jp/tags/blog/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Circleci</title>
+      <link>https://blog.awm.jp/tags/circleci/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/circleci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Colorspace</title>
+      <link>https://blog.awm.jp/tags/colorspace/</link>
+      <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/colorspace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Compose</title>
+      <link>https://blog.awm.jp/tags/compose/</link>
+      <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/compose/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Css</title>
+      <link>https://blog.awm.jp/tags/css/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dng</title>
+      <link>https://blog.awm.jp/tags/dng/</link>
+      <pubDate>Fri, 04 Nov 2016 23:14:09 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/dng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Driveapp</title>
+      <link>https://blog.awm.jp/tags/driveapp/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/driveapp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exif</title>
+      <link>https://blog.awm.jp/tags/exif/</link>
+      <pubDate>Sun, 06 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/exif/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exiftool</title>
+      <link>https://blog.awm.jp/tags/exiftool/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/exiftool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fcbi</title>
+      <link>https://blog.awm.jp/tags/fcbi/</link>
+      <pubDate>Mon, 06 Mar 2017 12:53:31 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/fcbi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Format</title>
+      <link>https://blog.awm.jp/tags/format/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:42 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/format/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gas</title>
+      <link>https://blog.awm.jp/tags/gas/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/gas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gif</title>
+      <link>https://blog.awm.jp/tags/gif/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/gif/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Github</title>
+      <link>https://blog.awm.jp/tags/github/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/tags/github/</guid>
+      <description></description>
     </item>
     
   </channel>

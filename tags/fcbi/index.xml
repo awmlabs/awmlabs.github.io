@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fcbi on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/fcbi/index.xml</link>
+    <description>Recent content in Fcbi on awm-Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <atom:link href="https://blog.awm.jp/tags/fcbi/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
+      <link>https://blog.awm.jp/2017/03/06/fcbi/</link>
+      <pubDate>Mon, 06 Mar 2017 12:53:31 +0900</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/03/06/fcbi/</guid>
+      <description>
+
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。&lt;/p&gt;
+
+&lt;p&gt;あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。&lt;/p&gt;
+
+&lt;h1 id=&#34;デモ&#34;&gt;デモ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://app.awm.jp/image.js/fcbi.html&#34;&gt;http://app.awm.jp/image.js/fcbi.html&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。&lt;/p&gt;
+
+&lt;p&gt;制限事項: 画像の一片は maxWidthHeight で指定できますが、 その最大値を 1000px 制限してます。そのうち上限を増やすかも。&lt;/p&gt;
+
+&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;同じ実験するのならできる限り可愛い絵の方が頑張れるので、こちらの世界一可愛いミクさん絵で綺麗な拡大を試みます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/rityulate/status/772006898279120896&#34;&gt;https://twitter.com/rityulate/status/772006898279120896&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(1) 画像をドロップする。&lt;/p&gt;
+
+&lt;p&gt;ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../demo00.png&#34;&gt; &lt;img src=&#34;../demo00-h.png&#34; /&gt; &lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;初期状態では画像の一片を320pxに制限しています。&lt;/p&gt;
+
+&lt;p&gt;(2) edge モードで輪郭が期待通りに出るよう TM 値をいじる。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../demo01.png&#34;&gt; &lt;img src=&#34;../demo01-h.png&#34; /&gt; &lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。&lt;/p&gt;
+
+&lt;p&gt;(3) maxWidthHeight を最大値にする。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../demo02.png&#34;&gt; &lt;img src=&#34;../demo02-h.png&#34; /&gt; &lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;輪郭が期待と違う場合は TM を再調整。&lt;/p&gt;
+
+&lt;p&gt;(3) edge を外して完成。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;../demo03.png&#34;&gt; &lt;img src=&#34;../demo03-h.png&#34; /&gt; &lt;/a&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;既存の方法と比較&#34;&gt;既存の方法と比較&lt;/h1&gt;
+
+&lt;p&gt;画像の一部を拡大して比較してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../miku.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
+% convert miku.png -filter triangle -resize 200%x200% miku-triangle.png # Bi-Linear
+% convert miku.png -filter cubic    -resize 200%x200% miku-cubic.png
+% convert miku.png -filter mitchell -resize 200%x200% miku-mitchell.png
+% convert miku.png -filter lanczos  -resize 200%x200% miku-lanczos.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../miku-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;FCBI の線がよく繋がっていて、いい感じです。&lt;/p&gt;
+
+&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
+
+&lt;p&gt;レベル補正で正規化したピクセルを元にエッジ判定すれば、TM はもう少し適当で良いかもしれません。&lt;/p&gt;
+
+&lt;p&gt;次回で、自分なりにアルゴリズムを解説し直す予定です。インターフェース誌の解説だと多分、慣れてる人じゃないと l って具体的に何？テンソル積記号出てきたけどどうすれば良いの？で止まるはずなので。その辺りの補足説明をしたいかも。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Interface 2015年6月号 (CQ出版)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.kumikomi.net/interface/contents/201506.php&#34;&gt;http://www.kumikomi.net/interface/contents/201506.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Comparative Analysis of Edge Based Single Image Superresolution
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&#34;&gt;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
