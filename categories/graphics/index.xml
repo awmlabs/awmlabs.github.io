@@ -29,7 +29,7 @@
 &lt;li&gt;&lt;a href=&#34;http://app.awm.jp/image.js/fcbi.html&#34;&gt;http://app.awm.jp/image.js/fcbi.html&lt;/a&gt;
 
 &lt;ul&gt;
-&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt; (アルゴリズムに対応する function は drawFCBI_Phase[123] です)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -112,7 +112,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;FCBI の線がよく繋がっていて、いい感じです。&lt;/p&gt;
+&lt;p&gt;FCBI だとぼやけが少ないですし、線もよく繋がっていて、いい感じです。&lt;/p&gt;
 
 &lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
 
