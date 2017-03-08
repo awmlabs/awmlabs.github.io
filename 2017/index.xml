@@ -30,7 +30,9 @@
 &lt;li&gt;&lt;a href=&#34;http://app.awm.jp/image.js/fcbi.html&#34;&gt;http://app.awm.jp/image.js/fcbi.html&lt;/a&gt;
 
 &lt;ul&gt;
-&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt; (アルゴリズムに対応する function は drawFCBI_Phase[123] です)&lt;/li&gt;
+&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;(アルゴリズムに対応する function は drawFCBI_Phase[123] です)
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -48,15 +50,17 @@
 
 &lt;p&gt;初期状態では画像の一片を320pxに制限しています。&lt;/p&gt;
 
-&lt;h3 id=&#34;2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整&#34;&gt;(2) edge モードで輪郭が期待通りに出るよう TM 値を調整&lt;/h3&gt;
+&lt;h3 id=&#34;2-edge-モードで-tm-値を調整&#34;&gt;(2) edge モードで TM 値を調整&lt;/h3&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo01.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。&lt;/p&gt;
+&lt;p&gt;輪郭が期待通りに出るよう TM 値を調整します。
+イラストだと大抵は小さい値にすれば良いのですが、自然画だと丁度良い値を探すのが難しいです。&lt;/p&gt;
 
 &lt;h3 id=&#34;3-maxwidthheight-を最大値にする&#34;&gt;(3) maxWidthHeight を最大値にする&lt;/h3&gt;
 
-&lt;p&gt;輪郭が期待と違う場合は TM を再調整。&lt;/p&gt;
+&lt;p&gt;大きなサイズの画像は320以下に制限しているので、その制限値を引き上げます。
+輪郭が期待と違っている場合は TM を再調整します。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo02.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -66,7 +70,9 @@
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo03.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;既存の方法と比較&#34;&gt;既存の方法と比較&lt;/h1&gt;
+&lt;h1 id=&#34;既存のリサイズ手法と比較&#34;&gt;既存のリサイズ手法と比較&lt;/h1&gt;
+
+&lt;p&gt;ドット絵とイラスト絵で実験しました。&lt;/p&gt;
 
 &lt;h2 id=&#34;ドット絵&#34;&gt;ドット絵&lt;/h2&gt;
 
@@ -79,7 +85,7 @@
 % convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。&lt;/p&gt;
+&lt;p&gt;ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;

@@ -79,12 +79,12 @@
 <li><a href="#使い方">使い方</a>
 <ul>
 <li><a href="#1-画像をドロップして渡す">(1) 画像をドロップして渡す</a></li>
-<li><a href="#2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整">(2) edge モードで輪郭が期待通りに出るよう TM 値を調整</a></li>
+<li><a href="#2-edge-モードで-tm-値を調整">(2) edge モードで TM 値を調整</a></li>
 <li><a href="#3-maxwidthheight-を最大値にする">(3) maxWidthHeight を最大値にする</a></li>
 <li><a href="#4-edge-を外して完成">(4) edge を外して完成</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#既存の方法と比較">既存の方法と比較</a>
+<li><a href="#既存のリサイズ手法と比較">既存のリサイズ手法と比較</a>
 <ul>
 <li><a href="#ドット絵">ドット絵</a>
 <ul>
@@ -109,7 +109,9 @@
 <li><a href="http://app.awm.jp/image.js/fcbi.html">http://app.awm.jp/image.js/fcbi.html</a>
 
 <ul>
-<li>ソースコード: <a href="https://github.com/yoya/image.js/blob/master/fcbi.js">https://github.com/yoya/image.js/blob/master/fcbi.js</a> (アルゴリズムに対応する function は drawFCBI_Phase[123] です)</li>
+<li>ソースコード: <a href="https://github.com/yoya/image.js/blob/master/fcbi.js">https://github.com/yoya/image.js/blob/master/fcbi.js</a></li>
+<li>(アルゴリズムに対応する function は drawFCBI_Phase[123] です)
+<br /></li>
 </ul></li>
 </ul>
 
@@ -127,15 +129,17 @@
 
 <p>初期状態では画像の一片を320pxに制限しています。</p>
 
-<h3 id="2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整">(2) edge モードで輪郭が期待通りに出るよう TM 値を調整</h3>
+<h3 id="2-edge-モードで-tm-値を調整">(2) edge モードで TM 値を調整</h3>
 
 <p><center> <img src="../demo01.png" /> </center></p>
 
-<p>尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。</p>
+<p>輪郭が期待通りに出るよう TM 値を調整します。
+イラストだと大抵は小さい値にすれば良いのですが、自然画だと丁度良い値を探すのが難しいです。</p>
 
 <h3 id="3-maxwidthheight-を最大値にする">(3) maxWidthHeight を最大値にする</h3>
 
-<p>輪郭が期待と違う場合は TM を再調整。</p>
+<p>大きなサイズの画像は320以下に制限しているので、その制限値を引き上げます。
+輪郭が期待と違っている場合は TM を再調整します。</p>
 
 <p><center> <img src="../demo02.png" /> </center></p>
 
@@ -145,7 +149,9 @@
 
 <p><center> <img src="../demo03.png" /> </center></p>
 
-<h1 id="既存の方法と比較">既存の方法と比較</h1>
+<h1 id="既存のリサイズ手法と比較">既存のリサイズ手法と比較</h1>
+
+<p>ドット絵とイラスト絵で実験しました。</p>
 
 <h2 id="ドット絵">ドット絵</h2>
 
@@ -158,7 +164,7 @@
 % convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
 </code></pre>
 
-<p>ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。</p>
+<p>ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。</p>
 
 <table>
 <thead>
