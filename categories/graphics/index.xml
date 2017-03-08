@@ -80,8 +80,8 @@
 &lt;pre&gt;&lt;code&gt;% convert Opaopa.png -filter box      -resize 400%x400% Opaopa-box.png # N-Neighbor
 % convert Opaopa.png -filter triangle -resize 400%x400% Opaopa-triangle.png # Bi-Linear
 % convert Opaopa.png -filter cubic    -resize 400%x400% Opaopa-cubic.png
-% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
 % convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
+% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。&lt;/p&gt;
@@ -105,7 +105,7 @@
 &lt;tr&gt;
 &lt;td&gt;Lanczoz&lt;/td&gt;
 &lt;td&gt;Mitchell&lt;/td&gt;
-&lt;td&gt;FCBI (TM:4 で2回)&lt;/td&gt;
+&lt;td&gt;FCBI (TM:4 で2回拡大)&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -133,8 +133,8 @@
 &lt;pre&gt;&lt;code&gt;% convert Kyo.png -filter box      -resize 200%x200% Kyo-box.png # N-Neighbor
 % convert Kyo.png -filter triangle -resize 200%x200% Kyo-triangle.png # Bi-Linear
 % convert Kyo.png -filter cubic    -resize 200%x200% Kyo-cubic.png
-% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
 % convert Kyo.png -filter lanczos  -resize 200%x200% Kyo-lanczos.png
+% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
