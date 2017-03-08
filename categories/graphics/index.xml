@@ -11,6 +11,190 @@
     
     <item>
       <title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
+      <link>https://blog.awm.jp/2017/03/07/fcbi/</link>
+      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/03/07/fcbi/</guid>
+      <description>
+
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回はアルゴリズム詳解の予定)&lt;/p&gt;
+
+&lt;p&gt;あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。&lt;/p&gt;
+
+&lt;h1 id=&#34;デモ&#34;&gt;デモ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://app.awm.jp/image.js/fcbi.html&#34;&gt;http://app.awm.jp/image.js/fcbi.html&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt; (アルゴリズムに対応する function は drawFCBI_Phase[123] です)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。&lt;/p&gt;
+
+&lt;p&gt;制限事項: 画像の一片は maxWidthHeight で指定できますが、 その最大値を 1000px 制限してます。そのうち上限を増やすかも。&lt;/p&gt;
+
+&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;同じ実験するのならできる限り可愛い絵の方が頑張れるので、こちらの世界一可愛いミクさん絵で綺麗な拡大を試みます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/rityulate/status/772006898279120896&#34;&gt;https://twitter.com/rityulate/status/772006898279120896&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-画像をドロップして渡す&#34;&gt;(1) 画像をドロップして渡す&lt;/h3&gt;
+
+&lt;p&gt;ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo00.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;初期状態では画像の一片を320pxに制限しています。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整&#34;&gt;(2) edge モードで輪郭が期待通りに出るよう TM 値を調整&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo01.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-maxwidthheight-を最大値にする&#34;&gt;(3) maxWidthHeight を最大値にする&lt;/h3&gt;
+
+&lt;p&gt;輪郭が期待と違う場合は TM を再調整。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo02.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;(この例だと元々、小さい画像なので意味はないです)&lt;/p&gt;
+
+&lt;h3 id=&#34;4-edge-を外して完成&#34;&gt;(4) edge を外して完成&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo03.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;既存の方法と比較&#34;&gt;既存の方法と比較&lt;/h1&gt;
+
+&lt;h2 id=&#34;ドット絵&#34;&gt;ドット絵&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../Opaopa.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% convert Opaopa.png -filter box      -resize 400%x400% Opaopa-box.png # N-Neighbor
+% convert Opaopa.png -filter triangle -resize 400%x400% Opaopa-triangle.png # Bi-Linear
+% convert Opaopa.png -filter cubic    -resize 400%x400% Opaopa-cubic.png
+% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
+% convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI (TM:4 で2回)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;線がいい感じにつながってます。&lt;/p&gt;
+
+&lt;h3 id=&#34;イラスト絵&#34;&gt;イラスト絵&lt;/h3&gt;
+
+&lt;p&gt;ドット絵だと極端なので、実際のイラスト絵でも比較してみます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=52877815&#34;&gt;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=52877815&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こちらから拝借して、目に注目して拡大。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../Kyo.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% convert Kyo.png -filter box      -resize 200%x200% Kyo-box.png # N-Neighbor
+% convert Kyo.png -filter triangle -resize 200%x200% Kyo-triangle.png # Bi-Linear
+% convert Kyo.png -filter cubic    -resize 200%x200% Kyo-cubic.png
+% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
+% convert Kyo.png -filter lanczos  -resize 200%x200% Kyo-lanczos.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI (TM:46)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;画像の一部に注目して拡大結果を比較します。
+Lanczos も良い勝負してますが、FCBI の方がドット感が消えて線が自然に繋がっているように見えます。&lt;/p&gt;
+
+&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
+
+&lt;p&gt;レベル補正で正規化したピクセルを元にエッジ判定すれば、TM はもう少し適当で良いかもしれません。&lt;/p&gt;
+
+&lt;p&gt;Bi-Cubic や Lanczos はパラメータで色々特徴を変えられるので、そこまでしないと実はフェアじゃない。今回は ImageMagick のデフォルト値をそのままで手抜きしてます。&lt;/p&gt;
+
+&lt;p&gt;次回で、自分なりにアルゴリズムを解説し直す予定です。インターフェース誌の解説だと多分、慣れてる人じゃないと &lt;strong&gt;&lt;em&gt;l&lt;/em&gt;&lt;/strong&gt; (エル変数) って具体的に何？テンソル積記号出てきたけどどうすれば良いの？で止まるはずで。その辺りの補足説明を考えています。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Interface 2015年6月号 (CQ出版)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.kumikomi.net/interface/contents/201506.php&#34;&gt;http://www.kumikomi.net/interface/contents/201506.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Comparative Analysis of Edge Based Single Image Superresolution
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&#34;&gt;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
       <link>https://blog.awm.jp/2017/03/06/fcbi/</link>
       <pubDate>Mon, 06 Mar 2017 12:53:31 +0900</pubDate>
       

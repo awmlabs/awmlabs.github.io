@@ -7,8 +7,192 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Mon, 06 Mar 2017 12:53:31 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Mar 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
+      <link>https://blog.awm.jp/2017/03/07/fcbi/</link>
+      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.awm.jp/2017/03/07/fcbi/</guid>
+      <description>
+
+&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+
+&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回はアルゴリズム詳解の予定)&lt;/p&gt;
+
+&lt;p&gt;あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。&lt;/p&gt;
+
+&lt;h1 id=&#34;デモ&#34;&gt;デモ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://app.awm.jp/image.js/fcbi.html&#34;&gt;http://app.awm.jp/image.js/fcbi.html&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ソースコード: &lt;a href=&#34;https://github.com/yoya/image.js/blob/master/fcbi.js&#34;&gt;https://github.com/yoya/image.js/blob/master/fcbi.js&lt;/a&gt; (アルゴリズムに対応する function は drawFCBI_Phase[123] です)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。&lt;/p&gt;
+
+&lt;p&gt;制限事項: 画像の一片は maxWidthHeight で指定できますが、 その最大値を 1000px 制限してます。そのうち上限を増やすかも。&lt;/p&gt;
+
+&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;同じ実験するのならできる限り可愛い絵の方が頑張れるので、こちらの世界一可愛いミクさん絵で綺麗な拡大を試みます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/rityulate/status/772006898279120896&#34;&gt;https://twitter.com/rityulate/status/772006898279120896&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-画像をドロップして渡す&#34;&gt;(1) 画像をドロップして渡す&lt;/h3&gt;
+
+&lt;p&gt;ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo00.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;初期状態では画像の一片を320pxに制限しています。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-edge-モードで輪郭が期待通りに出るよう-tm-値を調整&#34;&gt;(2) edge モードで輪郭が期待通りに出るよう TM 値を調整&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo01.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-maxwidthheight-を最大値にする&#34;&gt;(3) maxWidthHeight を最大値にする&lt;/h3&gt;
+
+&lt;p&gt;輪郭が期待と違う場合は TM を再調整。&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo02.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;(この例だと元々、小さい画像なので意味はないです)&lt;/p&gt;
+
+&lt;h3 id=&#34;4-edge-を外して完成&#34;&gt;(4) edge を外して完成&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../demo03.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;既存の方法と比較&#34;&gt;既存の方法と比較&lt;/h1&gt;
+
+&lt;h2 id=&#34;ドット絵&#34;&gt;ドット絵&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../Opaopa.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% convert Opaopa.png -filter box      -resize 400%x400% Opaopa-box.png # N-Neighbor
+% convert Opaopa.png -filter triangle -resize 400%x400% Opaopa-triangle.png # Bi-Linear
+% convert Opaopa.png -filter cubic    -resize 400%x400% Opaopa-cubic.png
+% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
+% convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI (TM:4 で2回)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Opaopa-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;線がいい感じにつながってます。&lt;/p&gt;
+
+&lt;h3 id=&#34;イラスト絵&#34;&gt;イラスト絵&lt;/h3&gt;
+
+&lt;p&gt;ドット絵だと極端なので、実際のイラスト絵でも比較してみます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=52877815&#34;&gt;http://www.pixiv.net/member_illust.php?mode=medium&amp;amp;illust_id=52877815&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こちらから拝借して、目に注目して拡大。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../Kyo.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% convert Kyo.png -filter box      -resize 200%x200% Kyo-box.png # N-Neighbor
+% convert Kyo.png -filter triangle -resize 200%x200% Kyo-triangle.png # Bi-Linear
+% convert Kyo.png -filter cubic    -resize 200%x200% Kyo-cubic.png
+% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
+% convert Kyo.png -filter lanczos  -resize 200%x200% Kyo-lanczos.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI (TM:46)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kyo-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;画像の一部に注目して拡大結果を比較します。
+Lanczos も良い勝負してますが、FCBI の方がドット感が消えて線が自然に繋がっているように見えます。&lt;/p&gt;
+
+&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
+
+&lt;p&gt;レベル補正で正規化したピクセルを元にエッジ判定すれば、TM はもう少し適当で良いかもしれません。&lt;/p&gt;
+
+&lt;p&gt;Bi-Cubic や Lanczos はパラメータで色々特徴を変えられるので、そこまでしないと実はフェアじゃない。今回は ImageMagick のデフォルト値をそのままで手抜きしてます。&lt;/p&gt;
+
+&lt;p&gt;次回で、自分なりにアルゴリズムを解説し直す予定です。インターフェース誌の解説だと多分、慣れてる人じゃないと &lt;strong&gt;&lt;em&gt;l&lt;/em&gt;&lt;/strong&gt; (エル変数) って具体的に何？テンソル積記号出てきたけどどうすれば良いの？で止まるはずで。その辺りの補足説明を考えています。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Interface 2015年6月号 (CQ出版)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.kumikomi.net/interface/contents/201506.php&#34;&gt;http://www.kumikomi.net/interface/contents/201506.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Comparative Analysis of Edge Based Single Image Superresolution
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&#34;&gt;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
@@ -1647,171 +1831,6 @@ Negative specification and the TIFF-EP standard.
 &lt;li&gt;&lt;a href=&#34;https://helpx.adobe.com/jp/lightroom/help/lightroom-mobile-desktop-features.html&#34;&gt;https://helpx.adobe.com/jp/lightroom/help/lightroom-mobile-desktop-features.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JPEG と ICC プロファイル</title>
-      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
-      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
-      
-      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
-      <description>
-
-&lt;h1 id=&#34;jpeg-と-icc-プロファイル&#34;&gt;JPEG と ICC プロファイル&lt;/h1&gt;
-
-&lt;p&gt;JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../jpeg-profile-icc.png&#34; /&gt; &lt;/br&gt;
-引用: &lt;a href=&#34;https://speakerdeck.com/yoya/jpegmeta&#34;&gt;https://speakerdeck.com/yoya/jpegmeta&lt;/a&gt;
- &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
- sRGB, Adobe RGB 補正の例 &lt;/br&gt;
- &lt;img src=&#34;../figure-srgb-adobergb.png&#34; /&gt;
- &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。&lt;/p&gt;
-
-&lt;h1 id=&#34;rgb-色空間&#34;&gt;RGB 色空間&lt;/h1&gt;
-
-&lt;p&gt;例えば赤を表す RGB:(255,0,0) 。
-世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。&lt;/p&gt;
-
-&lt;p&gt;一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-  Gamut(色域) &lt;br/&gt;
-  &lt;img src=&#34;../StandardProfilesGamutCoverage.jpg&#34; aligh=&#34;center&#34; /&gt; &lt;br/&gt;
-  ( 引用元: &lt;a href=&#34;http://wiki.nuaj.net/index.php?title=Color_Profile&#34;&gt;http://wiki.nuaj.net/index.php?title=Color_Profile&lt;/a&gt; )
-&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../Gamma06_300.png&#34; /&gt; &lt;br /&gt;
-引用元: &lt;a href=&#34;https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4&#34;&gt; &lt;a href=&#34;https://ja.wikipedia.org/wiki/ガンマ値&#34;&gt;https://ja.wikipedia.org/wiki/ガンマ値&lt;/a&gt; &lt;/a&gt;
- &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。&lt;/p&gt;
-
-&lt;h2 id=&#34;rgb-のデフォルト&#34;&gt;RGB のデフォルト&lt;/h2&gt;
-
-&lt;p&gt;Web の世界では sRGB が標準です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A Standard Default Color Space for the Internet - sRGB
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.w3.org/Graphics/Color/sRGB.html&#34;&gt;https://www.w3.org/Graphics/Color/sRGB.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt; &lt;img src=&#34;../figure-noicc.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。&lt;/p&gt;
-
-&lt;h1 id=&#34;cmyk-色空間&#34;&gt;CMYK 色空間&lt;/h1&gt;
-
-&lt;p&gt;プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; で各々インクの量です。&lt;/p&gt;
-
-&lt;p&gt;CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Japan Color, US SWOP, FOGRA, ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)&lt;/p&gt;
-
-&lt;p&gt;RGB と CMYK は大雑把に以下の関係にあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
- &lt;img src=&#34;../CMYRGBv3.png&#34; /&gt; &lt;br /&gt;
-   (引用元: &lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt; )
- &lt;img src=&#34;../fig14-half.jpg&#34; /&gt; &lt;br /&gt;
-   (引用元: &lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt; )
-&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ImageMagick: magick/colorspace-private.h&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;cyan    = 1.0 - red;
-magenta = 1.0 - green;
-yellow  = 1.0 - blue;
-(一番小さな値を black にしてその分補正)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。
-&lt;center&gt;
- Japan Color 2001 Coated &lt;br /&gt;
- &lt;img src=&#34;../10993-04-JapanColor-crop.jpg&#34; /&gt; &lt;br /&gt;
-   (引用元: &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt; )
-&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;cyan = 1.0 - red&amp;rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。&lt;/p&gt;
-
-&lt;h2 id=&#34;cmyk-のデフォルト&#34;&gt;CMYK のデフォルト(?)&lt;/h2&gt;
-
-&lt;p&gt;RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。&lt;/p&gt;
-
-&lt;p&gt;ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。&lt;/p&gt;
-
-&lt;p&gt;例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;を用いるようです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; は大丈夫でしょう。&lt;/p&gt;
-
-&lt;p&gt;Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&amp;gt; RGB 処理を行うようで、話が少し面倒だったりします。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;カラーマネージメントとプロファイル変換
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&#34;&gt;http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;まだCMYKで消耗してるの？〜大幅な色補正をCMYKで行ってはいけない理由〜
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.iwashi.org/archives/4108&#34;&gt;http://www.iwashi.org/archives/4108&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;紙デザイナーのためのrgbカラー超入門
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80&#34;&gt;http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;JPEG は RGB 値をYCbCrに変換して保存します
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;最近の FireFox のデフォルト設定だと、ICC プロファイルが入っていないと何も補正しないそうです。そのままディスプレイのプロファイルで解釈されます。辛い。。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:3&#34;&gt;blacK の K という説より、Key の略という方が多勢のようです。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:4&#34;&gt;この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:5&#34;&gt;Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) &lt;a href=&#34;https://www.jagat.or.jp/past_archives/content/view/3083.html&#34;&gt;https://www.jagat.or.jp/past_archives/content/view/3083.html&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
