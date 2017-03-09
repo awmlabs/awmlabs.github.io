@@ -20,7 +20,7 @@
 
 &lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説します。&lt;/p&gt;
+&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説し直します。&lt;/p&gt;
 
 &lt;p&gt;ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので、知っておいて損はないです。&lt;/p&gt;
 
@@ -30,7 +30,11 @@
 &lt;li&gt;エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.awm.jp/2017/03/07/fcbi/&#34;&gt;http://blog.awm.jp/2017/03/07/fcbi/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt;https://blog.awm.jp/2017/03/07/fcbi/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://app.awm.jp/image.js/fcbi.html&#34;&gt;https://app.awm.jp/image.js/fcbi.html&lt;/a&gt; (デモ)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -54,7 +58,9 @@
 
 &lt;h2 id=&#34;実装のポイント&#34;&gt;実装のポイント&lt;/h2&gt;
 
-&lt;p&gt;モノクロ画像のアルゴリズムなので、RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。&lt;/p&gt;
+&lt;h3 id=&#34;カラー対応&#34;&gt;カラー対応&lt;/h3&gt;
+
+&lt;p&gt;FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L75&#34;&gt;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L75&lt;/a&gt;
@@ -67,7 +73,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;インターフェース誌の記事だと非エッジの勾配を調べる演算がテンソル積(&lt;img src=&#34;../tensor_product.png&#34; alt=&#34;バツをマルで囲う記号&#34; align=center /&gt;)で示されていますが、単なる畳み込みの計算なのでプログラム的には簡単です。&lt;/p&gt;
+&lt;h3 id=&#34;フィルタ行列&#34;&gt;フィルタ行列&lt;/h3&gt;
+
+&lt;p&gt;インターフェース誌の記事だと非エッジの勾配を調べる演算がフィルタ行列とのテンソル積(&lt;img src=&#34;../tensor_product.png&#34; alt=&#34;バツをマルで囲う記号&#34; align=center /&gt;)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L85&#34;&gt;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L85&lt;/a&gt;
@@ -83,8 +91,21 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&#34;abs-h1-h2&#34;&gt;abs - H1, H2&lt;/h3&gt;
+
 &lt;p&gt;インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、H1 &amp;lt; H2 でなく abs(H1) &amp;lt; abs(H2) です。
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのを確認しました。&lt;/p&gt;
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L234&#34;&gt;https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L234&lt;/a&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(Math.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;abs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;H1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Math.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;abs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;H2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rgba&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;meanRGBA&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;rgba1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rgba4&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rgba&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;meanRGBA&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;rgba2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rgba3&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;既存のメソッドとの比較&#34;&gt;既存のメソッドとの比較&lt;/h2&gt;
 
@@ -472,6 +493,36 @@ V1(上記の例だと白-白) と V2（黒-黒) が同じ為に、
 - FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に見えるようになって、悲しい事もある&lt;/p&gt;
 
 &lt;p&gt;漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Interface 2015年6月号 (CQ出版)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.kumikomi.net/interface/contents/201506.php&#34;&gt;http://www.kumikomi.net/interface/contents/201506.php&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ICBI page
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andreagiachetti.it/icbi/&#34;&gt;http://www.andreagiachetti.it/icbi/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Real time artifact-free image upscaling
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andreagiachetti.it/icbi/InterTIPmod2c.pdf&#34;&gt;http://www.andreagiachetti.it/icbi/InterTIPmod2c.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Comparative Analysis of Edge Based Single Image Superresolution
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&#34;&gt;http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Parameter Optimization Of Fast Curvature Based Interpolation Using Genetic Algorithm
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf&#34;&gt;https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
