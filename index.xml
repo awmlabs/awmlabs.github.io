@@ -299,7 +299,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 &lt;h3 id=&#34;非エッジの場合&#34;&gt;非エッジの場合&lt;/h3&gt;
 
-&lt;p&gt;補完するピクセルをどれにするか判断するのに、斜め２軸の隣どうしだけでなく、少し多めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。&lt;/p&gt;
+&lt;p&gt;補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。&lt;/p&gt;
 
 &lt;p&gt;h1 のフィルタ: &lt;img src=&#34;../phase2-h1Filter-7x7Dotty.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
@@ -349,6 +349,8 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;phase3-縦横方向からピクセルを埋める&#34;&gt;Phase3: 縦横方向からピクセルを埋める&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../phase3-l1234-3x3Dotty-14.png&#34; align=&#34;center&#34;/&gt; or &lt;img src=&#34;../phase3-l1234-3x3Dotty-23.png&#34; align=&#34;center&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;左45度傾けて、斜め方向を縦横に変えただけの処理です。
 Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。&lt;/p&gt;
@@ -427,7 +429,7 @@ Phase2 とほぼ同じですので、図だけにして細かい説明は省き�
 &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;サンプル画像でテスト&#34;&gt;サンプル画像でテスト&lt;/h1&gt;
+&lt;h1 id=&#34;ドット画像でテスト&#34;&gt;ドット画像でテスト&lt;/h1&gt;
 
 &lt;p&gt;実際の画像に適用するとこうなります。&lt;/p&gt;
 
@@ -444,6 +446,20 @@ Phase2 とほぼ同じですので、図だけにして細かい説明は省き�
 &lt;h2 id=&#34;phase3-縦横方向からピクセルを埋める-1&#34;&gt;Phase3: 縦横方向からピクセルを埋める&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../OpaopaPhase3-Dotize.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;気持ち悪いくらい、なめらかに補間されてます。&lt;/p&gt;
+
+&lt;h1 id=&#34;イラストでのテスト&#34;&gt;イラストでのテスト&lt;/h1&gt;
+
+&lt;p&gt;既存のリサイズ方式との比較表が、前編の後ろの方にあります。参考までに。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt;https://blog.awm.jp/2017/03/07/fcbi/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&#34;fcbi-の弱点&#34;&gt;FCBI の弱点&lt;/h1&gt;
 
@@ -494,10 +510,10 @@ Phase2 とほぼ同じですので、図だけにして細かい説明は省き�
 &lt;/p&gt;
 
 &lt;p&gt;単色塗りに width:1 の線が斜めに伸びる時、
-v1(上記の例だと白-白) と v2（黒-黒) が同じ為に、
+v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為に、
 どちらを補間すれば良いのか判断がつきません。&lt;/p&gt;
 
-&lt;p&gt;(図、2x2 の白黒チェックを 3x3 に引き伸ばした図)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../fail-l1234-3x3-Dotty.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;とりあえず l2, l3 (右肩上がりの斜め)を使ってしまいます。&lt;/p&gt;
 
