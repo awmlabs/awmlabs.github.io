@@ -564,21 +564,19 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
-&lt;p&gt;単色塗りに width:1 の線が斜めに伸びる時、
-v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為に、
-どちらを補間すれば良いのか判断がつきません。&lt;/p&gt;
+&lt;p&gt;エッジの時は近隣の４ピクセルしか見ないので、このケースだと
+v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくなって、
+どちらを補間すれば良いのか判断がつかなくなります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../fail-l1234-3x3-Dotty.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;この場合、l2, l3 (右肩上がりの斜め)を使ってしまいます。&lt;/p&gt;
+&lt;p&gt;(v1 &amp;lt; v2) の条件式なので、 l2, l3 (右肩上がりの斜め)を使ってしまいます。&lt;/p&gt;
 
 &lt;p&gt;つまり、フラットな塗りの上に右肩下がりの細い線があると、うまく補間できないという事です。&lt;/p&gt;
 
-&lt;h2 id=&#34;対処&#34;&gt;対処&lt;/h2&gt;
+&lt;h2 id=&#34;改善&#34;&gt;改善&lt;/h2&gt;
 
-&lt;p&gt;単色塗りの上に width:1 の線があると破綻する件。少し改善しました。&lt;/p&gt;
-
-&lt;p&gt;v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜます。&lt;/p&gt;
+&lt;p&gt;v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜると良い感じになりました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241&lt;/a&gt;
