@@ -61,7 +61,7 @@
 
 &lt;h3 id=&#34;カラー対応&#34;&gt;カラー対応&lt;/h3&gt;
 
-&lt;p&gt;FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。 今回は JPEG の YCbCr の計算式を元にしてみます。&lt;/p&gt;
+&lt;p&gt;FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式を元にしてます。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75&lt;/a&gt;
