@@ -19,9 +19,9 @@
 
 &lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説し直します。&lt;/p&gt;
+&lt;p&gt;インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、分かりにくかった点を補足しつつ、全面的に一から解説し直します。&lt;/p&gt;
 
-&lt;p&gt;ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので、知っておいて損はないです。&lt;/p&gt;
+&lt;p&gt;ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので知っておいて損はないです。&lt;/p&gt;
 
 &lt;p&gt;尚、こちらのエントリの続きです。&lt;/p&gt;
 
@@ -38,21 +38,21 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;デモを見た方が実感が湧くはずですので、この記事を読む前に出来ればお試しください。&lt;/p&gt;
+&lt;p&gt;デモを見た方が実感が湧くはずですので、出来ればこの記事の前に前編をお読み下さい。&lt;/p&gt;
 
 &lt;h1 id=&#34;アルゴリズム概要&#34;&gt;アルゴリズム概要&lt;/h1&gt;
 
 &lt;h2 id=&#34;ポイント&#34;&gt;ポイント&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;エッジが残るように勾配の少ない軸方向で補間する。&lt;/li&gt;
-&lt;li&gt;倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可。
+&lt;li&gt;エッジが残るように勾配の少ない軸方向で補間する&lt;/li&gt;
+&lt;li&gt;倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可
 
 &lt;ul&gt;
-&lt;li&gt;尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています。&lt;/li&gt;
+&lt;li&gt;尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり。&lt;/li&gt;
-&lt;li&gt;モノクロ画像のアルゴリズム。つまり色差は見ない。&lt;/li&gt;
+&lt;li&gt;画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり&lt;/li&gt;
+&lt;li&gt;モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない&lt;/li&gt;
 &lt;li&gt;イラスト画像は少し苦手 (最後の方で解説)&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -60,7 +60,7 @@
 
 &lt;h3 id=&#34;カラー対応&#34;&gt;カラー対応&lt;/h3&gt;
 
-&lt;p&gt;FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式を元にしてます。&lt;/p&gt;
+&lt;p&gt;FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為にサンプルコードでは RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式に alpha を乗算します。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75&lt;/a&gt;
@@ -75,14 +75,14 @@
 
 &lt;h3 id=&#34;フィルタ行列&#34;&gt;フィルタ行列&lt;/h3&gt;
 
-&lt;p&gt;インターフェース誌の記事だと非エッジの勾配を調べる演算がフィルタ行列とのテンソル積(&lt;img src=&#34;../tensor_product.png&#34; alt=&#34;バツをマルで囲う記号&#34; align=center /&gt;)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。&lt;/p&gt;
+&lt;p&gt;インターフェース誌の記事では非エッジの勾配を調べるフィルタ行列との演算がテンソル積(&lt;img src=&#34;../tensor_product.png&#34; alt=&#34;バツをマルで囲う記号&#34; align=center /&gt;)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。&lt;/p&gt;
 
-&lt;p&gt;つまり、フィルターで場所に応じた重み付けをした足し算です。&lt;/p&gt;
+&lt;p&gt;つまり、ピクセルの場所に応じて重み付けをした足し算です。&lt;/p&gt;
 
 &lt;h3 id=&#34;abs-h1-h2&#34;&gt;abs - h1, h2&lt;/h3&gt;
 
-&lt;p&gt;インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 &amp;lt; h2 でなく abs(h1) &amp;lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、参照実装(icbi.m)で abs で括っているのを確認済みです。&lt;/p&gt;
+&lt;p&gt;インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 &amp;lt; h2 でなく abs(h1) &amp;lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231&lt;/a&gt;
@@ -97,13 +97,13 @@
 
 &lt;h2 id=&#34;既存のメソッドとの比較&#34;&gt;既存のメソッドとの比較&lt;/h2&gt;
 
-&lt;p&gt;画像の拡大では、ピクセルを広げて出来た隙間をどう埋めるのかが勝負です。&lt;/p&gt;
+&lt;p&gt;画像の拡大はピクセルを広げて出来た隙間をどう埋めるのかが勝負です。色んな方法があります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../test-3x2Dotty.png&#34; align=&#34;top&#34;/&gt; &lt;span style=&#34;padding: 1em;&#34;&gt; =&amp;gt; &lt;/span&gt; &lt;img src=&#34;../testPhase1-5x3Dotty.png&#34; align=&#34;center&#34;/&gt; &lt;/center&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;nearest-neighbor&#34;&gt;Nearest-Neighbor&lt;/h3&gt;
 
-&lt;p&gt;近隣(Nearest-Neighbor)のピクセルをコピーします。&lt;/p&gt;
+&lt;p&gt;恐らくもっとも速い方法です。近隣(Nearest-Neighbor)のピクセルをコピーします。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../test-NN-5x3Dotty.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
@@ -113,15 +113,16 @@
 
 &lt;h3 id=&#34;bi-linear&#34;&gt;Bi-Linear&lt;/h3&gt;
 
-&lt;p&gt;線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。この例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。&lt;/p&gt;
+&lt;p&gt;線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。
+丁度２倍にする例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../test-BL-5x3Dotty.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;RGB 値が色味に対して線形では無いので違和感のある結果ですが、そこは目を瞑って頂ければ。。RGB の数値的にはちゃんと平均、真ん中の値です。&lt;/p&gt;
+&lt;p&gt;RGB 値が色味に対して線形では無いので違和感がありますが、そこは目を瞑って頂ければ。。RGB の数値はちゃんと平均、真ん中の値です。&lt;/p&gt;
 
 &lt;h3 id=&#34;fcbi&#34;&gt;FCBI&lt;/h3&gt;
 
-&lt;p&gt;Bi-Linear の亜種とも言えます。Bi-Linear だと単純に上下左右の４つから混ぜますが、FCBI ではエッジをなるべく残すよう、４つのうち２つを選択して混ぜます。&lt;/p&gt;
+&lt;p&gt;Bi-Linear の亜種とも言えます。Bi-Linear だと単純に上下左右の４つから混ぜますが、FCBI はエッジをなるべく残すよう、４つのうち２つを選択して混ぜます。&lt;/p&gt;
 
 &lt;h1 id=&#34;fcbi-の全体的な流れ&#34;&gt;FCBI の全体的な流れ&lt;/h1&gt;
 
@@ -156,7 +157,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 &lt;h2 id=&#34;大まかなアルゴリズム&#34;&gt;大まかなアルゴリズム&lt;/h2&gt;
 
-&lt;p&gt;詳細は後で、まず処理の大雑把な流れです。&lt;/p&gt;
+&lt;p&gt;詳細は後にして、まず処理の大雑把な流れです。&lt;/p&gt;
 
 &lt;h3 id=&#34;phase1&#34;&gt;Phase1&lt;/h3&gt;
 
@@ -187,7 +188,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 &lt;h3 id=&#34;phase3&#34;&gt;Phase3&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;上下左右を見てエッジかどうか判定する
+&lt;li&gt;上下左右の隣を見てエッジかどうか判定する
 
 &lt;ul&gt;
 &lt;li&gt;非エッジの場合
@@ -293,7 +294,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 &lt;h3 id=&#34;非エッジの場合&#34;&gt;非エッジの場合&lt;/h3&gt;
 
-&lt;p&gt;補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。&lt;/p&gt;
+&lt;p&gt;補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないです。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -360,8 +361,8 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../phase3-l1234-3x3Dotty-14.png&#34; align=&#34;center&#34;/&gt;  &lt;span style=&#34;padding:1em;&#34;&gt; or &lt;/span&gt; &lt;img src=&#34;../phase3-l1234-3x3Dotty-23.png&#34; align=&#34;center&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;左45度傾けて、斜め方向を縦横に変えただけの処理です。
-Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。&lt;/p&gt;
+&lt;p&gt;Phase2 で参照するピクセルのあった斜め方向を左45度傾けて縦横にしただけです。
+Phase2 とほぼ同じですので、図だけつけて細かい説明は省きます。&lt;/p&gt;
 
 &lt;h3 id=&#34;エッジ判定-1&#34;&gt;エッジ判定&lt;/h3&gt;
 
@@ -451,27 +452,27 @@ Phase2 とほぼ同じですので、図だけにして細かい説明は省き�
 
 &lt;h1 id=&#34;ドット画像でテスト&#34;&gt;ドット画像でテスト&lt;/h1&gt;
 
-&lt;p&gt;実際の画像に適用するとこうなります。&lt;/p&gt;
+&lt;p&gt;実際の画像に適用してみます。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;../Opaopa-Dotize.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../Opaopa.png&#34; /&gt; &lt;img src=&#34;../Opaopa-Dotize.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;phase1-ピクセルを拡げる-1&#34;&gt;Phase1: ピクセルを拡げる&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;../OpaopaPhase1-Dotize.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../OpaopaPhase1.png&#34; /&gt; &lt;img src=&#34;../OpaopaPhase1-Dotize.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;phase2-斜め方向からピクセルを埋める-1&#34;&gt;Phase2: 斜め方向からピクセルを埋める&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;../OpaopaPhase2-Dotize.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../OpaopaPhase2.png&#34; /&gt; &lt;img src=&#34;../OpaopaPhase2-Dotize.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;phase3-縦横方向からピクセルを埋める-1&#34;&gt;Phase3: 縦横方向からピクセルを埋める&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;../OpaopaPhase3-Dotize.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../OpaopaPhase3.png&#34; /&gt; &lt;img src=&#34;../OpaopaPhase3-Dotize.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;気持ち悪いくらい、なめらかに補間されてます。&lt;/p&gt;
 
 &lt;h1 id=&#34;イラストでのテスト&#34;&gt;イラストでのテスト&lt;/h1&gt;
 
-&lt;p&gt;既存のリサイズ方式との比較表が、&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt; 前編&lt;/a&gt;の後ろの方にありますが、改めて実験。&lt;/p&gt;
+&lt;p&gt;既存のリサイズ方式との比較表が、&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt;前編&lt;/a&gt;の後半にありますが、改めて別のイラストで実験します。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;../Kotori.png&#34; /&gt;
 Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549376&#34;&gt;https://twitter.com/myuton0407/status/693361955000549376&lt;/a&gt;&lt;/p&gt;
@@ -482,6 +483,8 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 % convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
 % convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに、ImageMagick の画像拡大のデフォルトが Mitchell です。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -501,7 +504,7 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 
 &lt;tr&gt;
 &lt;td&gt;Lanczoz (lobes:3)&lt;/td&gt;
-&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;Mitchell-Netravali&lt;/td&gt;
 &lt;td&gt;FCBI (TM:12)&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -513,11 +516,11 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;ぱっと見では Mitchell フィルタが良い勝負をしていますが、細かいところをみると FCBI に分配があがります。&lt;/p&gt;
+&lt;p&gt;ぱっと見では Mitchell-Netravali  フィルタが良い勝負をしていますが、細かいところまで見ると FCBI に分配があがります。&lt;/p&gt;
 
 &lt;h1 id=&#34;fcbi-の弱点&#34;&gt;FCBI の弱点&lt;/h1&gt;
 
-&lt;p&gt;FCBI は width:1 の線が苦手です。実写の画像だと殆ど問題ないのですが、イラストだと結構このパターンが出てきます。&lt;/p&gt;
+&lt;p&gt;FCBI はベタ塗りの上に引いた width:1 の線が苦手です。実写の画像だと殆ど問題ないのですが、イラストだと結構このパターンが出てきます。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -571,11 +574,11 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 &lt;p&gt;(v1 &amp;lt; v2) の条件式なので、 l2, l3 (右肩上がりの斜め)を使ってしまいます。&lt;/p&gt;
 
-&lt;p&gt;つまり、フラットな塗りの上に右肩下がりの細い線があると、うまく補間できないという事です。&lt;/p&gt;
+&lt;p&gt;つまり、グラデーションの少ないベタ塗り部分に右肩下がりの細い線があると、うまく補間できないという事です。&lt;/p&gt;
 
 &lt;h2 id=&#34;改善&#34;&gt;改善&lt;/h2&gt;
 
-&lt;p&gt;v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜると良い感じになりました。&lt;/p&gt;
+&lt;p&gt;v1 と v2 の値が近い時は、単純な Bi-Linear にように4隅を混ぜると良い感じになりました。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241&lt;/a&gt;
@@ -625,7 +628,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;実際のイラストでも線が千切れる割合が減っています。&lt;/p&gt;
+&lt;p&gt;実際のイラストでも線が途切れる箇所が減っています。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -654,12 +657,12 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 &lt;p&gt;思った事をつらつらと。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;h1, h2 は行列表現で考えた方が良いかも&lt;/li&gt;
+&lt;li&gt;h1, h2 のフィルタは行列表現で考えた方が良いかも&lt;/li&gt;
 &lt;li&gt;輝度Yでなく色差も使った方が良いはず。イラストだと特に&lt;/li&gt;
-&lt;li&gt;FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って、悲しい事もある&lt;/li&gt;
+&lt;li&gt;FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って悲しい事もある&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。&lt;/p&gt;
+&lt;p&gt;漏れや間違いに気付き次第、なるべく全部直します。ご指摘頂けると幸いです。&lt;/p&gt;
 
 &lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 
