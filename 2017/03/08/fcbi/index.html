@@ -197,7 +197,7 @@
 <h3 id="abs-h1-h2">abs - h1, h2</h3>
 
 <p>インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 &lt; h2 でなく abs(h1) &lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。</p>
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、参照実装(icbi.m)で abs で括っているのを確認済みです。</p>
 
 <ul>
 <li><a href="https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231">https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231</a>
@@ -330,7 +330,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 <li><a href="https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173">https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173</a>
 
 <ul>
-<li>読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
+<li>(読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">function</span> <span style="color: #a6e22e">drawFCBI_Phase1</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">srcImageData</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">dstImageData</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">edge</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">dstWidth</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">dstImageData</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">width</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">dstHeight</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">dstImageData</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">height</span><span style="color: #f8f8f2">;</span>
     <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">dstY</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">dstY</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">dstHeight</span> <span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">dstY</span><span style="color: #f92672">+=</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
@@ -414,13 +414,13 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 <h3 id="非エッジの場合">非エッジの場合</h3>
 
-<p>補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。</p>
+<p>補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。</p>
 
 <p>h1 のフィルタ: <img src="../phase2-h1Filter-7x7Dotty.png" align="top" /></p>
 
 <p>h2 のフィルタ: <img src="../phase2-h2Filter-7x7Dotty.png" align="top" /></p>
 
-<p>補間したいピクセルの周辺の輝度を、上記の重み付けで計算を行い、h1 と h2 の大小で、勾配の向きを判定します。</p>
+<p>補間したいピクセルの周辺の輝度を上記の重み付けで計算を行い、h1 と h2 の大小で勾配の向きを判定します。</p>
 
 <ul>
 <li><a href="https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216">https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216</a>
@@ -583,7 +583,7 @@ Copyright: <a href="https://twitter.com/myuton0407/status/693361955000549376">ht
 <tr>
 <th>Nearest-Neighbor</th>
 <th>Bi-Linear</th>
-<th>Bi-Cubic</th>
+<th>Bi-Cubic (B,C = 1,0)</th>
 </tr>
 </thead>
 
@@ -595,7 +595,7 @@ Copyright: <a href="https://twitter.com/myuton0407/status/693361955000549376">ht
 </tr>
 
 <tr>
-<td>Lanczoz</td>
+<td>Lanczoz (lobes:3)</td>
 <td>Mitchell</td>
 <td>FCBI (TM:12)</td>
 </tr>

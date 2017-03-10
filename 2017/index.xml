@@ -83,7 +83,7 @@
 &lt;h3 id=&#34;abs-h1-h2&#34;&gt;abs - h1, h2&lt;/h3&gt;
 
 &lt;p&gt;インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 &amp;lt; h2 でなく abs(h1) &amp;lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。&lt;/p&gt;
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、参照実装(icbi.m)で abs で括っているのを確認済みです。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231&lt;/a&gt;
@@ -216,7 +216,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173&lt;/a&gt;
 
 &lt;ul&gt;
-&lt;li&gt;読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
+&lt;li&gt;(読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;drawFCBI_Phase1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;srcImageData&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstImageData&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;edge&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstWidth&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstImageData&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstHeight&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstImageData&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
     &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstY&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstY&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstHeight&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dstY&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
@@ -300,13 +300,13 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 &lt;h3 id=&#34;非エッジの場合&#34;&gt;非エッジの場合&lt;/h3&gt;
 
-&lt;p&gt;補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。&lt;/p&gt;
+&lt;p&gt;補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。&lt;/p&gt;
 
 &lt;p&gt;h1 のフィルタ: &lt;img src=&#34;../phase2-h1Filter-7x7Dotty.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;h2 のフィルタ: &lt;img src=&#34;../phase2-h2Filter-7x7Dotty.png&#34; align=&#34;top&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;補間したいピクセルの周辺の輝度を、上記の重み付けで計算を行い、h1 と h2 の大小で、勾配の向きを判定します。&lt;/p&gt;
+&lt;p&gt;補間したいピクセルの周辺の輝度を上記の重み付けで計算を行い、h1 と h2 の大小で勾配の向きを判定します。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216&#34;&gt;https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216&lt;/a&gt;
@@ -469,7 +469,7 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 &lt;tr&gt;
 &lt;th&gt;Nearest-Neighbor&lt;/th&gt;
 &lt;th&gt;Bi-Linear&lt;/th&gt;
-&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;th&gt;Bi-Cubic (B,C = 1,0)&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
@@ -481,7 +481,7 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Lanczoz (lobes:3)&lt;/td&gt;
 &lt;td&gt;Mitchell&lt;/td&gt;
 &lt;td&gt;FCBI (TM:12)&lt;/td&gt;
 &lt;/tr&gt;
@@ -770,7 +770,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 &lt;tr&gt;
 &lt;th&gt;Nearest-Neighbor&lt;/th&gt;
 &lt;th&gt;Bi-Linear&lt;/th&gt;
-&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;th&gt;Bi-Cubic (B,C = 1,0)&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
@@ -782,7 +782,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Lanczoz (lobes:3)&lt;/td&gt;
 &lt;td&gt;Mitchell&lt;/td&gt;
 &lt;td&gt;FCBI (TM:4 で2回拡大)&lt;/td&gt;
 &lt;/tr&gt;
@@ -821,7 +821,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 &lt;tr&gt;
 &lt;th&gt;Nearest-Neighbor&lt;/th&gt;
 &lt;th&gt;Bi-Liner&lt;/th&gt;
-&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;th&gt;Bi-Cubic (B,C = 1,0)&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
@@ -833,7 +833,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Lanczoz (lobes:3)&lt;/td&gt;
 &lt;td&gt;Mitchell&lt;/td&gt;
 &lt;td&gt;FCBI (TM:46)&lt;/td&gt;
 &lt;/tr&gt;
