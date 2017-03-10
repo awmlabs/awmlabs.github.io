@@ -450,15 +450,47 @@ Phase2 とほぼ同じですので、図だけにして細かい説明は省き�
 
 &lt;h1 id=&#34;イラストでのテスト&#34;&gt;イラストでのテスト&lt;/h1&gt;
 
-&lt;p&gt;既存のリサイズ方式との比較表が、前編の後ろの方にあります。参考までに。&lt;/p&gt;
+&lt;p&gt;既存のリサイズ方式との比較表が、&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt; 前編&lt;/a&gt;の後ろの方にありますが、改めて実験。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
+&lt;p&gt;&lt;img src=&#34;../Kotori.png&#34; /&gt;
+Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549376&#34;&gt;https://twitter.com/myuton0407/status/693361955000549376&lt;/a&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2017/03/07/fcbi/&#34;&gt;https://blog.awm.jp/2017/03/07/fcbi/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;% convert Kotori.png -filter box      -resize 200%x200% Kotori-box.png # N-Neighbor
+% convert Kotori.png -filter triangle -resize 200%x200% Kotori-triangle.png # Bi-Linear
+% convert Kotori.png -filter cubic    -resize 200%x200% Kotori-cubic.png
+% convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
+% convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nearest-Neighbor&lt;/th&gt;
+&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Cubic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-box.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-triangle.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-cubic.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Lanczoz&lt;/td&gt;
+&lt;td&gt;Mitchell&lt;/td&gt;
+&lt;td&gt;FCBI (TM:46)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-lanczos.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-mitchell.png&#34;/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../Kotori-fcbi.png&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h1 id=&#34;fcbi-の弱点&#34;&gt;FCBI の弱点&lt;/h1&gt;
 
