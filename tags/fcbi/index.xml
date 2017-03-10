@@ -466,7 +466,7 @@ Copyright: &lt;a href=&#34;https://twitter.com/myuton0407/status/693361955000549
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Nearest-Neighbor&lt;/th&gt;
-&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Linear&lt;/th&gt;
 &lt;th&gt;Bi-Cubic&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
@@ -755,7 +755,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Nearest-Neighbor&lt;/th&gt;
-&lt;th&gt;Bi-Liner&lt;/th&gt;
+&lt;th&gt;Bi-Linear&lt;/th&gt;
 &lt;th&gt;Bi-Cubic&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
