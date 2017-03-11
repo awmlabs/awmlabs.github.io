@@ -73,18 +73,65 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#はじめに">はじめに</a>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#弱点">弱点</a>
 <ul>
 <li><a href="#改造-take1">改造 take1</a></li>
 <li><a href="#改造-take2">改造 take2</a></li>
 </ul></li>
+<li><a href="#まとめ">まとめ</a></li>
 </ul>
 </nav>
     
 
 <h1 id="はじめに">はじめに</h1>
 
-<p>弱点として指摘した部分を改良したので、その件です。</p>
+<p>この記事の続きです。</p>
+
+<ul>
+<li>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解
+
+<ul>
+<li><a href="https://blog.awm.jp/2017/03/08/fcbi/">https://blog.awm.jp/2017/03/08/fcbi/</a></li>
+</ul></li>
+</ul>
+
+<p>弱点の部分を改造したら、なんとなく良い結果を得られたので、その説明です。</p>
+
+<h1 id="弱点">弱点</h1>
+
+<p>勾配のないフラットな塗りに、width:1 の線があると補間が崩れます。</p>
+
+<table>
+<thead>
+<tr>
+<th>テスト画像</th>
+<th>ドット拡大表示</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="../test00.png" /></td>
+<td><img src="../test00-dotty.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../test01.png" /></td>
+<td><img src="../test01-dotty.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../test02.png" /></td>
+<td><img src="../test02-dotty.png" /></td>
+</tr>
+
+<tr>
+<td><img src="../test03.png" /></td>
+<td><img src="../test03-dotty.png" /></td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="改造-take1">改造 take1</h2>
 
@@ -233,6 +280,14 @@
 
 <ul>
 <li>copyright: <a href="https://twitter.com/rityulate/status/772006898279120896">https://twitter.com/rityulate/status/772006898279120896</a></li>
+</ul>
+
+<h1 id="まとめ">まとめ</h1>
+
+<ul>
+<li>イラストだとそのままのアルゴリズムより、少し弄って使った方が良さそう</li>
+<li>非エッジの処理でもエッジは残せるので、おそらく高速化の為に分けてると思われる</li>
+<li>分岐がもったいない環境だと、全部非エッジとして処理した方が速いかも。</li>
 </ul>
 
   </section>

@@ -19,7 +19,52 @@
 
 &lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
 
-&lt;p&gt;弱点として指摘した部分を改良したので、その件です。&lt;/p&gt;
+&lt;p&gt;この記事の続きです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.awm.jp/2017/03/08/fcbi/&#34;&gt;https://blog.awm.jp/2017/03/08/fcbi/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;弱点の部分を改造したら、なんとなく良い結果を得られたので、その説明です。&lt;/p&gt;
+
+&lt;h1 id=&#34;弱点&#34;&gt;弱点&lt;/h1&gt;
+
+&lt;p&gt;勾配のないフラットな塗りに、width:1 の線があると補間が崩れます。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;テスト画像&lt;/th&gt;
+&lt;th&gt;ドット拡大表示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../test00.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../test00-dotty.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../test01.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../test01-dotty.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../test02.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../test02-dotty.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;../test03.png&#34; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&#34;../test03-dotty.png&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h2 id=&#34;改造-take1&#34;&gt;改造 take1&lt;/h2&gt;
 
@@ -168,6 +213,14 @@
 
 &lt;ul&gt;
 &lt;li&gt;copyright: &lt;a href=&#34;https://twitter.com/rityulate/status/772006898279120896&#34;&gt;https://twitter.com/rityulate/status/772006898279120896&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;イラストだとそのままのアルゴリズムより、少し弄って使った方が良さそう&lt;/li&gt;
+&lt;li&gt;非エッジの処理でもエッジは残せるので、おそらく高速化の為に分けてると思われる&lt;/li&gt;
+&lt;li&gt;分岐がもったいない環境だと、全部非エッジとして処理した方が速いかも。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
