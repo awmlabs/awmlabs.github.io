@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解 - awm-Tech</title>
+<title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解 - awm-Tech</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
         fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href=" https://blog.awm.jp/2017/03/08/fcbi/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
-<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/08/fcbi/" class="hatena-bookmark-button" data-hatena-bookmark-title="エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/08/fcbi/" class="hatena-bookmark-button" data-hatena-bookmark-title="エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
 をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/03/08/fcbi/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -68,7 +68,7 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解</h1>
+  <h1 class="headline" itemprop="headline">エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解</h1>
 
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
@@ -153,19 +153,39 @@
 </ul></li>
 </ul>
 
-<p>デモを見た方が実感が湧くはずですので、出来ればこの記事の前に前編をお読み下さい。</p>
+<p>デモを見た方が実感が湧くので、出来ればこの記事の前に前編をお読み下さい。</p>
 
 <h1 id="アルゴリズム概要">アルゴリズム概要</h1>
+
+<p>本家はこちらです。</p>
+
+<ul>
+<li>ICBI page
+
+<ul>
+<li><a href="http://www.andreagiachetti.it/icbi/">http://www.andreagiachetti.it/icbi/</a>
+
+<ul>
+<li><a href="http://www.andreagiachetti.it/icbi/icbi.zip">http://www.andreagiachetti.it/icbi/icbi.zip</a> (matlab 実装)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>ICBI の 1st step が FCBI なので、その解説や実装も見つかります。</p>
 
 <h2 id="ポイント">ポイント</h2>
 
 <ul>
-<li>エッジが残るように勾配の少ない軸方向で補間する</li>
-<li>エッジ以外の場所は勾配の変化が少ない軸方向で補完</li>
+<li>エッジを残しつつエネルギーが最小になるよう選択的に補間する
+
+<ul>
+<li>エッジの場所は勾配(輝度の微分)の少ない軸方向で補間する</li>
+<li>非エッジは勾配の変化(輝度の2次微分)が少ない軸方向で補完</li>
+</ul></li>
 <li>倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可
 
 <ul>
-<li>尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています</li>
+<li>尚、本家の参照実装(icbi.m)の拡大は (SIZE * 2^ZK) - (2^ZK-1) に対応しています。(ZK は zoom factor)</li>
 </ul></li>
 <li>画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり</li>
 <li>モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない</li>
@@ -193,7 +213,7 @@
 
 <p>インターフェース誌の記事では非エッジの勾配を調べるフィルタ行列との演算がテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。</p>
 
-<p>つまり、ピクセルの場所に応じて重み付けをした足し算です。</p>
+<p>つまり、近辺のピクセルの場所に応じて重み付けをした足し算です。</p>
 
 <h3 id="abs-h1-h2">abs - h1, h2</h3>
 
@@ -376,7 +396,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 <p><center>
   <img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> v1 = abs(l1 - l4) <span style="padding:1em;">  </span> <img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> v2 = abs(l2 - l3)</p>
 
-<p><img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2;
+<p><img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2) ; p1=(l1+l4)/2, p2=(l2+l3)/2;
 </center></p>
 
 <p>隣り合うピクセルの輝度に急激な変化があればエッジで、それ以外を非エッジだと判定します。</p>
@@ -410,7 +430,7 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 <h3 id="非エッジの場合">非エッジの場合</h3>
 
-<p>補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないです。</p>
+<p>補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないのと、単なる勾配でなく勾配の変化をみる為です。</p>
 
 <table>
 <thead>
