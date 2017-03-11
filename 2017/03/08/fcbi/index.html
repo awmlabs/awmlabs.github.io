@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
-<title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解 - awm-Tech</title>
+<title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解 - awm-Tech</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
         fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href=" https://blog.awm.jp/2017/03/08/fcbi/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
-<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/08/fcbi/" class="hatena-bookmark-button" data-hatena-bookmark-title="エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/08/fcbi/" class="hatena-bookmark-button" data-hatena-bookmark-title="エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
 をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/03/08/fcbi/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -68,7 +68,7 @@
     </span>
 
   </div>
-  <h1 class="headline" itemprop="headline">エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解</h1>
+  <h1 class="headline" itemprop="headline">エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解</h1>
 
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
@@ -743,72 +743,34 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 <h2 id="改善">改善</h2>
 
-<p>v1 と v2 の値が近い時は、単純な Bi-Linear にように4隅を混ぜると良い感じになりました。</p>
+<p>改善のエントリが長くなったので、別にしました。</p>
 
 <ul>
-<li><a href="https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241">https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241</a>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(Math.</span><span style="color: #a6e22e">abs</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">v1</span> <span style="color: #f92672">-</span> <span style="color: #a6e22e">v2</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">TM</span><span style="color: #f8f8f2">)</span>  <span style="color: #f8f8f2">{</span> <span style="color: #75715e">// yoya custom</span>
-    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rgba</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba4</span><span style="color: #f8f8f2">),</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba3</span><span style="color: #f8f8f2">));</span>
-<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">v1</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">v2</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rgba</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba4</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rgba</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba3</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
-</li>
+<li>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) おまけ:アルゴリズム改造
+
+<ul>
+<li><a href="https://blog.awm.jp/2017/03/11/fcbi/">https://blog.awm.jp/2017/03/11/fcbi/</a></li>
+</ul></li>
 </ul>
 
-<p>結果。</p>
+<p>結果</p>
+
+<p>元画像: <img src="../miku.png" /></p>
 
 <table>
 <thead>
 <tr>
-<th>テスト画像</th>
-<th>ドット拡大表示</th>
+<th>FCBI オリジナル</th>
+<th>改造 take1</th>
+<th>改造 take2</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td><img src="../test00.png" /></td>
-<td><img src="../test00-dotty.png" /></td>
-</tr>
-
-<tr>
-<td><img src="../testYoya-Phase1.png" /></td>
-<td><img src="../testYoya-Phase1-Dotty.png" /></td>
-</tr>
-
-<tr>
-<td><img src="../testYoya-Phase2.png" /></td>
-<td><img src="../testYoya-Phase2-Dotty.png" /></td>
-</tr>
-
-<tr>
-<td><img src="../testYoya-Phase3.png" /></td>
-<td><img src="../testYoya-Phase3-Dotty.png" /></td>
-</tr>
-</tbody>
-</table>
-
-<p>実際のイラストでも線が途切れる箇所が減っています。</p>
-
-<table>
-<thead>
-<tr>
-<th>元画像</th>
-<th>オリジナル</th>
-<th>改造版</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><img src="../miku.png" /></td>
 <td><img src="../miku-v1.0.png" /></td>
 <td><img src="../miku-v1.2.png" /></td>
+<td><img src="../miku-v1.4.png" /></td>
 </tr>
 </tbody>
 </table>
