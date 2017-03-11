@@ -52,6 +52,7 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.andreagiachetti.it/icbi/icbi.zip&#34;&gt;http://www.andreagiachetti.it/icbi/icbi.zip&lt;/a&gt; (matlab 実装)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/yoya/icbi.m&#34;&gt;https://github.com/yoya/icbi.m&lt;/a&gt; (zip を展開したもの。GPLv2 です)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -741,6 +742,15 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf&#34;&gt;https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Performance Evaluation of Edge‐Directed Interpolation Methods for Images Abstract
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1303.6455v1&#34;&gt;https://arxiv.org/abs/1303.6455v1&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1303.6455v1.pdf&#34;&gt;https://arxiv.org/pdf/1303.6455v1.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
