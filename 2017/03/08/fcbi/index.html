@@ -169,7 +169,12 @@
 
 <ul>
 <li><a href="http://www.andreagiachetti.it/icbi/icbi.zip">http://www.andreagiachetti.it/icbi/icbi.zip</a> (matlab 実装)</li>
-<li><a href="https://github.com/yoya/ICBI/tree/master/icbi">https://github.com/yoya/ICBI/tree/master/icbi</a> (zip を展開したもの。GPLv2 です)</li>
+<li><a href="https://github.com/yoya/ICBI/tree/master/icbi">https://github.com/yoya/ICBI/tree/master/icbi</a> (zip を展開したもの。GPLv2 です)
+
+<ul>
+<li><a href="https://github.com/yoya/ICBI/blob/master/icbi/icbi.m">icbi/icbi.m</a></li>
+<li><a href="https://github.com/yoya/ICBI/blob/master/ICBICUDA/interpolation_fcbi_kernel.cu">ICBICUDA/interpolation_fcbi_kernel.cu</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -190,7 +195,7 @@
 <ul>
 <li>尚、本家の参照実装(icbi.m)の拡大は (SIZE * 2^ZK) - (2^ZK-1) に対応しています。(ZK は zoom factor)</li>
 </ul></li>
-<li>画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり</li>
+<li>画像によって適切な値が異なる閾値 TM(Maximun edge step) を調整する必要がある。手動なり自動なり</li>
 <li>モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない</li>
 <li>イラスト画像は少し苦手 (最後の方で解説)</li>
 </ul>
@@ -220,8 +225,7 @@
 
 <h3 id="abs-h1-h2">abs - h1, h2</h3>
 
-<p>インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 &lt; h2 でなく abs(h1) &lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。</p>
+<p>インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 &lt; h2 でなく abs(h1) &lt; abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式、論文だと I<sub>11</sub>, I<sub>22</sub>)</p>
 
 <ul>
 <li><a href="https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231">https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231</a>
@@ -230,6 +234,17 @@
 <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
 	<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rgba</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba3</span><span style="color: #f8f8f2">);</span>
 <span style="color: #f8f8f2">}</span>
+</pre></div>
+</li>
+</ul>
+
+<p>直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。</p>
+
+<ul>
+<li><a href="https://github.com/yoya/ICBI/blob/master/icbi/icbi.m#L289">https://github.com/yoya/ICBI/blob/master/icbi/icbi.m#L289</a>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span> <span style="color: #a6e22e">abs</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">-</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">j</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f92672">+</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">j</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f92672">+</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">j</span><span style="color: #f92672">+</span><span style="color: #ae81ff">3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">3</span><span style="color: #f92672">-</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">j</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">*</span> <span style="color: #a6e22e">p2</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">6</span> <span style="color: #f92672">*</span> <span style="color: #a6e22e">p1</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">...</span>
+        <span style="color: #a6e22e">abs</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">),</span><span style="color: #a6e22e">j</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f92672">+</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">),</span><span style="color: #a6e22e">j</span><span style="color: #f92672">+</span><span style="color: #ae81ff">3</span><span style="color: #f92672">-</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">),</span><span style="color: #a6e22e">j</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">-</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">),</span><span style="color: #a6e22e">j</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f92672">+</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">*</span> <span style="color: #a6e22e">p1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">6</span> <span style="color: #f92672">*</span> <span style="color: #a6e22e">p2</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">)</span>
+    <span style="color: #a6e22e">IMGEXP</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">j</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">p1</span><span style="color: #f8f8f2">;</span>
 </pre></div>
 </li>
 </ul>
@@ -722,7 +737,8 @@ Copyright: <a href="https://twitter.com/myuton0407/status/693361955000549376">ht
 </tbody>
 </table>
 
-<p>これは補間するピクセルを決定する際に、
+<p>これはエッジの時は近隣の４ピクセルしか見ない為です。</p>
+
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/*  l1     l2</span>
 <span style="color: #75715e"> *      x  </span>
 <span style="color: #75715e"> *  l3     l4</span>
@@ -733,10 +749,9 @@ Copyright: <a href="https://twitter.com/myuton0407/status/693361955000549376">ht
 	<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rgba</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">meanRGBA</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rgba2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">rgba3</span><span style="color: #f8f8f2">);</span>
 <span style="color: #f8f8f2">}</span>
 </pre></div>
-</p>
 
-<p>エッジの時は近隣の４ピクセルしか見ないので、このケースだと
-v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくなって、
+
+<p>このケースだと v1(上記の例だと白-白) と v2（黒-黒) の差がなくなるので、
 どちらを補間すれば良いのか判断がつかなくなります。</p>
 
 <p><center> <img src="../fail-l1234-3x3-Dotty.png" /> </center></p>
@@ -783,21 +798,23 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 <li>copyright: <a href="https://twitter.com/rityulate/status/772006898279120896">https://twitter.com/rityulate/status/772006898279120896</a></li>
 </ul>
 
+<p>途切れ途切れになっていた線が、スムーズに繋がりました。</p>
+
 <h2 id="問題2-星空">問題2) 星空</h2>
 
-<p>こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がります。</p>
+<p>こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がる事があります。</p>
 
 <p><img src="../star01.jpg" align="center"/> =&gt; <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.4.png" align="top"/>(改造後)</p>
 
-<p>これはどうしようもないかも。。</p>
+<p>ただ、元の写真に無視できないレベルの歪みがあるので、高精度な写真だとまた話が違うかもしれません。</p>
 
 <h1 id="さいごに">さいごに</h1>
 
 <p>思った事をつらつらと。</p>
 
 <ul>
-<li>h1, h2 のフィルタは行列表現で考えた方が良いかも</li>
-<li>画像全体の明るさ次第で TM が極端に変わるので、ヒストグラム平均化した方がよいかも</li>
+<li>h1, h2 のフィルタは今後 ICBI に話を繋げる為に行列表現で考えた方が良いかも。</li>
+<li>画像全体の明るさ次第で TM が極端に変わるので、ヒストグラム平均化した方がよさそう</li>
 <li>輝度Yでなく色差も使った方が良いはず。イラストだと特に</li>
 <li>FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って悲しい事もある</li>
 </ul>
