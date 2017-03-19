@@ -47,6 +47,23 @@
     
       
 <article class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="/2017/02/09/imagemagick-en/">Behavior of policy changed from ImageMagick 6.9.7-7</a></h2>
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-02-09">February 09, 2017</time></span>
+
+  </div>
+  <section class="summary">
+    Introduction ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml 1 in the setting file to instruct permission(OK)/non-permission(NG) for each image format(domain=coder).
+From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.
+ ImageMagick 6.9.7-6 NG if there is even one NG (false winning) ImageMagick 6.  <a href="/2017/02/09/imagemagick-en/">Read More...</a>
+  </section>
+</article>
+
+    
+      
+<article class="list-item" itemscope itemtype="http://schema.org/Blog">
   <h2 class="headline" itemprop="headline"><a href="/2017/01/02/goimagick/">Go Imagick について</a></h2>
   <div class="meta">
 
@@ -101,21 +118,6 @@
   </div>
   <section class="summary">
     Google Apps Script 作成 まずは Google Drive 上で Apps Script のファイルを作成します。 フォルダの ID を調べます ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。 ls  <a href="/2016/11/08/gas/">Read More...</a>
-  </section>
-</article>
-
-    
-      
-<article class="list-item" itemscope itemtype="http://schema.org/Blog">
-  <h2 class="headline" itemprop="headline"><a href="/2016/11/07/policy/">ImageMagick の policy.xml でホワイトリスト？</a></h2>
-  <div class="meta">
-
-    <span class="key">published on</span>
-    <span class="val"><time itemprop="datePublished" datetime="2016-11-07">November 07, 2016</time></span>
-
-  </div>
-  <section class="summary">
-    policy.xml ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。 $ convert -list configure | grep etc CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/ $ ls /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/ coder.xml mime.xml type-dejavu.xml colors.xml policy.xml type-ghostscript.xml delegates.xml quantization-table.xml type-windows.xml log.xml thresholds.xml type.xml magic.xml type-apple.xml policy.xml で何が出来るかについては、こちら  <a href="/2016/11/07/policy/">Read More...</a>
   </section>
 </article>
 
@@ -188,7 +190,7 @@
     
     <h2 class="category">
       <a href="https://blog.awm.jp/categories/jpeg">Jpeg</a>
-      <small>(4)</small>
+      <small>(5)</small>
     </h2>
     
     <h2 class="category">
@@ -308,7 +310,12 @@
     
     <span class="tag">
       <a href="https://blog.awm.jp/tags/graphics">graphics</a>
-      <small>(2)</small>
+      <small>(3)</small>
+    </span>
+    
+    <span class="tag">
+      <a href="https://blog.awm.jp/tags/guetzli">guetzli</a>
+      <small>(1)</small>
     </span>
     
     <span class="tag">
@@ -338,7 +345,7 @@
     
     <span class="tag">
       <a href="https://blog.awm.jp/tags/jpeg">jpeg</a>
-      <small>(11)</small>
+      <small>(12)</small>
     </span>
     
     <span class="tag">
