@@ -180,6 +180,8 @@ sys	0m0.212s
 
 &lt;h3 id=&#34;ファイルサイズ削減&#34;&gt;ファイルサイズ削減&lt;/h3&gt;
 
+&lt;p&gt;横軸が元サイズ、縦軸が圧縮後のサイズです。どちらも KB 単位。&lt;/p&gt;
+
 &lt;p&gt;ちょっと異常な削減率です。半分以下になることさえあります。&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt; &lt;img src=&#34;../filesize-graph-small.png&#34; /&gt; &lt;/center&gt;&lt;/p&gt;
