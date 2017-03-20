@@ -18,7 +18,7 @@
       <guid>https://blog.awm.jp/2017/03/17/guetzli/</guid>
       <description>
 
-&lt;h1 id=&#34;公式サイト&#34;&gt;公式サイト&lt;/h1&gt;
+&lt;h1 id=&#34;公式情報&#34;&gt;公式情報&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/google/guetzli&#34;&gt;https://github.com/google/guetzli&lt;/a&gt;&lt;/li&gt;
@@ -26,6 +26,16 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html&#34;&gt;https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Guetzli: Perceptually Guided JPEG Encoder
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1703.04421v1&#34;&gt;https://arxiv.org/abs/1703.04421v1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Users prefer Guetzli JPEG over same-sized libjpeg
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1703.04416v1&#34;&gt;https://arxiv.org/abs/1703.04416v1&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -51,7 +61,7 @@
 
 &lt;h2 id=&#34;quality-84&#34;&gt;quality &amp;gt;= 84&lt;/h2&gt;
 
-&lt;p&gt;quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。 (ちなみにデフォルトは 95)&lt;/p&gt;
+&lt;p&gt;quality は 84 以上しか指定できません。それ以下だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;guetzli/processor.cc
@@ -72,7 +82,7 @@
 
 &lt;h2 id=&#34;cmyk-未対応&#34;&gt;CMYK 未対応&lt;/h2&gt;
 
-&lt;p&gt;YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。&lt;/p&gt;
+&lt;p&gt;YCbCr JPEG のみ対応です。CMYK や (Adobe)CYYK は未対応。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;参考) &lt;a href=&#34;https://blog.awm.jp/2016/02/06/ycbcr/&#34;&gt;https://blog.awm.jp/2016/02/06/ycbcr/&lt;/a&gt; YCbCr について&lt;/p&gt;&lt;/li&gt;
@@ -92,7 +102,7 @@
 
 &lt;h2 id=&#34;yuv-444-420-only&#34;&gt;YUV 444,420 only&lt;/h2&gt;
 
-&lt;p&gt;YUV444, 420 のみ対応。422,411,440 は NG。&lt;/p&gt;
+&lt;p&gt;YUV444, 420 のみ対応。422,411,440 は未対応。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;参考) &lt;a href=&#34;https://blog.awm.jp/2016/02/10/yuv/&#34;&gt;https://blog.awm.jp/2016/02/10/yuv/&lt;/a&gt; YUV の種類&lt;/p&gt;&lt;/li&gt;

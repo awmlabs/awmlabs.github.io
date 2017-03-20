@@ -75,7 +75,7 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#公式サイト">公式サイト</a></li>
+<li><a href="#公式情報">公式情報</a></li>
 <li><a href="#はじめに">はじめに</a></li>
 <li><a href="#制限事項">制限事項</a>
 <ul>
@@ -100,7 +100,7 @@
 </nav>
     
 
-<h1 id="公式サイト">公式サイト</h1>
+<h1 id="公式情報">公式情報</h1>
 
 <ul>
 <li><a href="https://github.com/google/guetzli">https://github.com/google/guetzli</a></li>
@@ -108,6 +108,16 @@
 
 <ul>
 <li><a href="https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html">https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html</a></li>
+</ul></li>
+<li>Guetzli: Perceptually Guided JPEG Encoder
+
+<ul>
+<li><a href="https://arxiv.org/abs/1703.04421v1">https://arxiv.org/abs/1703.04421v1</a></li>
+</ul></li>
+<li>Users prefer Guetzli JPEG over same-sized libjpeg
+
+<ul>
+<li><a href="https://arxiv.org/abs/1703.04416v1">https://arxiv.org/abs/1703.04416v1</a></li>
 </ul></li>
 </ul>
 
@@ -133,7 +143,7 @@
 
 <h2 id="quality-84">quality &gt;= 84</h2>
 
-<p>quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。 (ちなみにデフォルトは 95)</p>
+<p>quality は 84 以上しか指定できません。それ以下だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)</p>
 
 <ul>
 <li>guetzli/processor.cc
@@ -154,7 +164,7 @@
 
 <h2 id="cmyk-未対応">CMYK 未対応</h2>
 
-<p>YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。</p>
+<p>YCbCr JPEG のみ対応です。CMYK や (Adobe)CYYK は未対応。</p>
 
 <ul>
 <li><p>参考) <a href="https://blog.awm.jp/2016/02/06/ycbcr/">https://blog.awm.jp/2016/02/06/ycbcr/</a> YCbCr について</p></li>
@@ -174,7 +184,7 @@
 
 <h2 id="yuv-444-420-only">YUV 444,420 only</h2>
 
-<p>YUV444, 420 のみ対応。422,411,440 は NG。</p>
+<p>YUV444, 420 のみ対応。422,411,440 は未対応。</p>
 
 <ul>
 <li><p>参考) <a href="https://blog.awm.jp/2016/02/10/yuv/">https://blog.awm.jp/2016/02/10/yuv/</a> YUV の種類</p></li>
