@@ -42,8 +42,8 @@
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Guetzli is a chicken race technology that degrades JPEG images until it is unlikely that people will perceive perceptually.&lt;/li&gt;
-&lt;li&gt;Even if people see it. Butteraugli is used for the evaluation. Although it often sees MSE, PNSR, SSIM in the paper of image processing, these are pretty good estimates, but Butteraugli has human visual characteristics (for example, luminance and color tone are different indicators, color tone is the color difference axis of opposite color theory) Calculate to original.&lt;/li&gt;
+&lt;li&gt;Guetzli is a chicken race technology that degrades JPEG image data until it is unlikely that people will perceive perceptually.&lt;/li&gt;
+&lt;li&gt;Butteraugli is used for the evaluation instead of human eyes. Although it often sees MSE, PNSR, SSIM in the paper of image processing, these are pretty good estimates, Butteraugli has human visual characteristics (for example, luminance and color tone are different indicators, color tone is the color difference axis of opposite color theory).&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;center&gt;
@@ -52,8 +52,8 @@
 &lt;/center&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;It is common to change the JPEG quality to find trade-offs between image size and image quality, but it seems like a fully automatic version of it. In addition, it tinkers DQT (quantization parameter for each frequency component) in detail.&lt;/li&gt;
-&lt;li&gt;It is a method of generating JPEG repeatedly and repeatedly so as to hit a good result, so it takes time anyway. I can not translate libjpeg or mozjpeg. I want to reduce even a little size for important images with a lot of access. Usage like zopflipng looks good.&lt;/li&gt;
+&lt;li&gt;It is common to change the JPEG quality to find trade-offs between image size and image quality, but it seems like a fully automatic version of it. In addition, it fine tuning DQT (quantization parameter for each frequency component).&lt;/li&gt;
+&lt;li&gt;It is a method of generating JPEG repeatedly and repeatedly so as to hit a good result, so it takes very long time anyway. I can not supersede libjpeg or mozjpeg. We can reduce image size effective for important images with a lot of access. Usage like zopflipng looks good.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&#34;spec-limitetions&#34;&gt;Spec limitetions&lt;/h1&gt;
@@ -308,13 +308,13 @@ sys	0m0.212s
 
 &lt;p&gt;Even if I visually checked the image with a large reduction rate, I did not know the difference at first glance. great. .&lt;/p&gt;
 
-&lt;h1 id=&#34;finally&#34;&gt;Finally&lt;/h1&gt;
+&lt;h1 id=&#34;impression&#34;&gt;Impression&lt;/h1&gt;
 
 &lt;p&gt;In the illustration image, when considering the line (frequency high) and the gradation (frequency low) are the lives, the mid range of the frequency seems to be rough and good, maybe it is easy to cut off other than visual characteristics.&lt;/p&gt;
 
 &lt;p&gt;Processing with Guetzli will degrade the data, so it may be visible, for example, when stretching the image or filtering the image. When setting a threshold in the image quality evaluation, it is inevitable that the viewing environment model such as the DPI of the monitor, the viewing distance, and the colorimetric standard to be adopted is on the premise, and it is inevitable that roughness can be seen when the situation is substantially deviated from that .&lt;/p&gt;
 
-&lt;p&gt;Although it compares with MozJPEG, since it is different in the ring, it seems to make sense even if it is put together a lot. .&lt;/p&gt;
+&lt;p&gt;The comparison with MozJPEG seems to make no sense even if it is summarized because the ring is different in the first place.&lt;/p&gt;
 </description>
     </item>
     
@@ -613,13 +613,13 @@ sys	0m0.212s
 
 &lt;p&gt;削減率の多い画像を目視で確認しても、ぱっと見で違いは分かりませんでした。凄い。。&lt;/p&gt;
 
-&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
+&lt;h1 id=&#34;所感&#34;&gt;所感&lt;/h1&gt;
 
 &lt;p&gt;イラスト画像は線(周波数高)とグラデーション(周波数低)が命だと考えると周波数の中域は荒くて良さそうで、視覚特性以外でも削り易いかもしれません。&lt;/p&gt;
 
 &lt;p&gt;Guetzli で処理するとデータの劣化はするので、例えば画像を引き伸ばした時や画像にフィルタをかけた時に、違いが目に見える可能性があります。画質評価で閾値を立てる場合、そこにはモニタのDPI、視距離、採用する測色標準といった視聴環境モデルが前提にあるはずで、実質的にそことずれる状況になると荒が見えるのは必然です。&lt;/p&gt;
 
-&lt;p&gt;MozJPEG と比較してたりはするけど、土俵が違うのであんまりまとめても意味なさそうかな。。&lt;/p&gt;
+&lt;p&gt;MozJPEG との比較は、そもそも土俵が違うのでまとめても意味なさそうかな。。&lt;/p&gt;
 </description>
     </item>
     
