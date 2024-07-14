@@ -1,0 +1,176 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="Blog の Deploy で Circle CI | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>Blog の Deploy で Circle CI - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/02/circleci/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/02/circleci/" class="hatena-bookmark-button" data-hatena-bookmark-title="Blog の Deploy で Circle CI" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/02/circleci/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-02">January 02, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/circleci">CircleCI</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/blog">Blog</a>
+
+        <a href="https://blog.awm.jp/tags/github">Github</a>
+
+        <a href="https://blog.awm.jp/tags/circleci">CircleCI</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Blog の Deploy で Circle CI</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pygments">Pygments</a></li>
+  </ul>
+</nav>
+    <h1 id="blog-の-deploy-で-circle-ci">Blog の Deploy で Circle CI</h1>
+<p>昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。</p>
+<h1 id="はじめに">はじめに</h1>
+<p>前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。</p>
+<ul>
+<li>× <a href="https://github.com/awmcorp/blog.awm.jp">https://github.com/awmcorp/blog.awm.jp</a></li>
+<li>○ <a href="https://github.com/awmlabs/blog.awm.jp">https://github.com/awmlabs/blog.awm.jp</a> blog のソース</li>
+<li><a href="https://github.com/awmlabs/awmlabs.github.io">https://github.com/awmlabs/awmlabs.github.io</a> blog の公開ファイル</li>
+</ul>
+<h1 id="circleyaml">circle.yaml</h1>
+<p>連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。</p>
+<ul>
+<li><a href="https://github.com/nobu666/nobu666.com/blob/master/circle.yml">https://github.com/nobu666/nobu666.com/blob/master/circle.yml</a></li>
+<li><a href="https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml">https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">machine</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">timezone</span>: <span style="color:#ae81ff">Asia/Tokyo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">checkout</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">post</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">git submodule update --init --recursive</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pre</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">go get -v github.com/spf13/hugo</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">git config --global user.name &#34;awm labs&#34;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">git config --global user.email &#34;labs@awm.jp&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">override</span>:
+</span></span><span style="display:flex;"><span>   - <span style="color:#ae81ff">echo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">deployment</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">master</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">master</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">commands</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">git clone git@github.com:awmlabs/awmlabs.github.io.git public</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">pip install Pygments --user</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">hugo</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">cd public &amp;&amp; git add . &amp;&amp; git commit -m &#34;[ci skip] publish&#34;; if [ $? -eq 0 ]; then git push origin master; else :; fi</span></span></span></code></pre></div>
+<p>神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)</p>
+<h2 id="pygments">Pygments</h2>
+<p>Syntax Highlight を使いたいので、Pygments を入れたいけど、</p>
+<pre tabindex="0"><code>pip install Pygments
+</code></pre><p>を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので &ndash;user を後ろにつけてます。</p>
+<h1 id="circle-ci-アカウント作成">Circle CI アカウント作成</h1>
+<p>連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。</p>
+<ul>
+<li><a href="https://circleci.com/">https://circleci.com/</a></li>
+</ul>
+<p>Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するアカウントでの連携は避けたい。という人は新しい Github アカウントを作って設定すると良さそうです。</p>
+<p>Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。</p>
+<h1 id="circle-ci-での連携設定">Circle CI での連携設定</h1>
+<ul>
+<li>Add Project で監視するレポジトリを選択します。</li>
+<li>Project Settings の Permissions (SSH, API, AWS のでなく、唯の Permissions) から Authorize ＞ Create and add とボタンを押してく。</li>
+<li><a href="https://github.com/settings/applications">https://github.com/settings/applications</a> で連携を確認 (revoke 押すと戻すのが少し面倒なので気をつけて)</li>
+</ul>
+<p>(あと一手間あった気がするので、思い出したら後で追記します)</p>
+<h1 id="異なる-github-アカウントでの連携-推測">異なる Github アカウントでの連携 (推測)</h1>
+<p>同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id_rsa_(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。</p>
+<ul>
+<li><a href="https://circleci.com/gh/">https://circleci.com/gh/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名&gt;/edit#ssh</li>
+<li><a href="https://github.com/">https://github.com/</a>&lt;ユーザor組織名&gt;/&lt;リポジトリ名/settings/keys</li>
+</ul>
+<p>必要に迫られた時にでも、もう少し試行錯誤してみます。</p>
+<h1 id="備考">備考</h1>
+<ul>
+<li>当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。</li>
+<li>別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。</li>
+</ul>
+<h1 id="参考url">参考URL</h1>
+<ul>
+<li><a href="http://qiita.com/xlune/items/f5248a6cdddfb011c2ac">http://qiita.com/xlune/items/f5248a6cdddfb011c2ac</a></li>
+<li><a href="http://tdoc.info/blog/2014/01/15/pip.html">http://tdoc.info/blog/2014/01/15/pip.html</a></li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

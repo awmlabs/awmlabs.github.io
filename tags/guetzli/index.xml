@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guetzli on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/guetzli/</link>
+    <description>Recent content in Guetzli on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Fri, 17 Mar 2017 17:34:14 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/guetzli/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guetzli - Perceptual JPEG encoder</title>
+      <link>https://blog.awm.jp/2017/03/17/guetzli/</link>
+      <pubDate>Fri, 17 Mar 2017 17:34:14 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/03/17/guetzli/</guid>
+      <description>公式情報 https://github.com/google/guetzli Announcing Guetzli: A New Open Source JPEG Encoder https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html Guetzli: Perceptually Guided JPEG Encoder https://arxiv.org/abs/1703.04421v1 Users prefer Guetzli JPEG over same-sized libjpeg https://arxiv.org/abs/1703.04416v1 はじめに Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DNG on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/dng/</link>
+    <description>Recent content in DNG on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Fri, 04 Nov 2016 23:14:09 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/dng/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DNG 画像のフォーマット (コンテナ編)</title>
+      <link>https://blog.awm.jp/2016/11/04/dng/</link>
+      <pubDate>Fri, 04 Nov 2016 23:14:09 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/04/dng/</guid>
+      <description>DNG 仕様書 Adobe DNG ヘルプにリンクがあります。 https://helpx.adobe.com/jp/photoshop/digital-negative.html http://wwwimages.adobe.com/content/dam/Adobe/en/products/photoshop/pdfs/dng_spec_1.4.0.0.pdf TIFF Compatible DNG is an extension of the TIFF 6.0 format, and is compatible with the TIFF-EP standard. It is possible (but not required) for a DNG file to simultaneously comply with both the Digital Negative specification and the TIFF-EP standard. TIFF のフォーマット</description>
+    </item>
+    <item>
+      <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
+      <link>https://blog.awm.jp/2016/11/02/dng/</link>
+      <pubDate>Wed, 02 Nov 2016 21:09:00 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
+      <description>はじめに 利用するもの PC (MacBook Pro) 以下のどちらか Adobe Lightroom CC Adobe Photoshop CC DNG 画像の入手法 iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。 iPhone7 Plus で撮影した DNG 画像を</description>
+    </item>
+    <item>
+      <title>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法</title>
+      <link>https://blog.awm.jp/2016/11/01/dng/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
+      <description>必要なもの 実機 iPhone7 Plus (iPhone7 は試してません。所持してないので) PC (MacBook Pro で確認しました) アカウント Adobe Cloud アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有</description>
+    </item>
+  </channel>
+</rss>

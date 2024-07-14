@@ -1,0 +1,397 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick で GIF の形式を変換 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick で GIF の形式を変換 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/26/gif/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/26/gif/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で GIF の形式を変換" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/26/gif/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-26">January 26, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/gif">GIF</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/gif">GIF</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/format">Format</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で GIF の形式を変換</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ピクセルの並ぶ順番">ピクセルの並ぶ順番</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#delay">Delay</a></li>
+    <li><a href="#ループ回数">ループ回数</a></li>
+    <li><a href="#global--localimage-colormap">Global &amp; Local(Image) ColorMap</a></li>
+    <li><a href="#optimize">Optimize</a>
+      <ul>
+        <li><a href="#optimizeframe">OptimizeFrame</a></li>
+        <li><a href="#optimize-transparency">Optimize Transparency</a></li>
+        <li><a href="#最強の-optimize">(最強の) Optimize</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="imagemagick-で-gif-の形式を変換">ImageMagick で GIF の形式を変換</h1>
+<p>GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
+<h1 id="インターレースgif">インターレースGIF</h1>
+<pre tabindex="0"><code>$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
+</code></pre><!-- raw HTML omitted -->
+<h3 id="ピクセルの並ぶ順番">ピクセルの並ぶ順番</h3>
+<ul>
+<li>8行ごとに1行</li>
+<li>4行ごとに1行</li>
+<li>2行ごとに1行</li>
+<li>残り全部</li>
+</ul>
+<p>という順でピクセルを保存する事で、ネットワークが遅い場合でもはじめに全体像を表示してから、データが取得しながら少しずつ細部を表示できます。</p>
+<table>
+<thead>
+<tr>
+<th>ピクセル</th>
+<th>実際の表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)</p>
+<ul>
+<li>インターレースのフェーズ別画像</li>
+</ul>
+<pre tabindex="0"><code>$ convert Opaopa-dot1.png -filter Point -fx &#34;!(j%8)*u&#34; Opaopa-dot1-interlace-1.png
+$ convert Opaopa-dot1.png -filter Point -fx &#34;!(j%4)*u&#34; Opaopa-dot1-interlace-2.png
+$ convert Opaopa-dot1.png -filter Point -fx &#34;!(j%2)*u&#34; Opaopa-dot1-interlace-3.png
+</code></pre><ul>
+<li>フェーズ別画像ピクセル補完あり</li>
+</ul>
+<pre tabindex="0"><code>convert Opaopa-dot1.png -filter Point -fx &#34;p{i,j-j%8}&#34; Opaopa-dot1-interlace-1-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &#34;p{i,j-j%4}&#34; Opaopa-dot1-interlace-2-cmpl.png
+convert Opaopa-dot1.png -filter Point -fx &#34;p{i,j-j%2}&#34; Opaopa-dot1-interlace-3-cmpl.png
+</code></pre><ul>
+<li>ドット絵風の拡大画像</li>
+</ul>
+<pre tabindex="0"><code>$ convert Opaopa-dot1-interlace-1.png -filter Point -resize 800% -fx &#34;(i%8&gt;0)*(j%8&gt;0)*u&#34; Opaopa-dot8-interlace-1.png
+＜略＞
+</code></pre><h1 id="ポジション指定">ポジション指定</h1>
+<p>GIF は描画場所の Screen と実際に描画する Image の位置を別に持つので、その描画場所を指定できます。</p>
+<pre tabindex="0"><code>$ convert Opaopa.png -page +50+30 Opaopa-posi.gif
+$ identify Opaopa-posi.gif
+Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
+</code></pre><!-- raw HTML omitted -->
+<p>上記の画像は table タグの中に入れてますが、(50,30) から描画されます。(ブラウザによって微妙に表示が変わります)</p>
+<h1 id="透明色">透明色</h1>
+<p>インデックスの一つを透明色として扱えます。尚、半透明は扱えません。</p>
+<pre tabindex="0"><code>$ convert Opaopa.png -transparent &#34;#00d342&#34; Opaopa-transparent.gif
+</code></pre><!-- raw HTML omitted -->
+<h1 id="アニメーションgif">アニメーションGIF</h1>
+<p>各コマの画像を作って convert で繋いで作成できます。</p>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>$ convert Opaopa-anime-dot1-[0-7].png Opaopa-anime-dot1.gif
+</code></pre><!-- raw HTML omitted -->
+<pre tabindex="0"><code>$ for n in `seq 0 7`
+do convert Opaopa-anime-dot1-$n.png -filter Point -resize 800% -fx &#34;(i%8&gt;0)*(j%8&gt;0)*u&#34; Opaopa-anime-dot8-$n.png
+done
+$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
+</code></pre><h2 id="delay">Delay</h2>
+<p>-delay オプションでコマ間の時間を指定できます。1/100 単位なので、例えば -delay 100 を指定すると 1 frame/sec です。</p>
+<pre tabindex="0"><code>$ convert -delay 100  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay100.gif
+$ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
+</code></pre><!-- raw HTML omitted -->
+<p>(-delay を入力画像より前に置かないと反映されない事に注意)</p>
+<h2 id="ループ回数">ループ回数</h2>
+<p>例えば、ループ回数に 1 を指定すると、ループしない GIF アニメが作れます。</p>
+<pre tabindex="0"><code>$ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
+</code></pre><!-- raw HTML omitted -->
+<h2 id="global--localimage-colormap">Global &amp; Local(Image) ColorMap</h2>
+<p>ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<pre tabindex="0"><code>$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
+$ giftext Opaopa-anime-dot8.gif | grep &#34;Color Map&#34;
+  Has Global Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+</code></pre><p>今回は１コマ目で使う色パレットで、残り全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。</p>
+<p>尚、Local Color Map があるけど全部消したい場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h2 id="optimize">Optimize</h2>
+<p>GIF アニメーションには dispose メソッドというものがあり、透明ピクセルの場合に前のコマの色をそのまま使う事ができます。逆にいうと前のコマで透明じゃないピクセルを透明ピクセルに変えられなうなるのですが、それがデメリットになる事は殆どないでしょう。</p>
+<p>最適化手法のうち２種類を紹介して、最後にそれらを両方適用する方法も紹介します。</p>
+<h3 id="optimizeframe">OptimizeFrame</h3>
+<p>変化のあるピクセルを全部囲う四角(いわゆる Dirty Rectangle)でクロップした画像を持つ事で、GIF のデータサイズを減らせます。</p>
+<pre tabindex="0"><code>$ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
+% identify -format &#34;size=%wx%h geom:%g\n&#34; Opaopa-anime-dot1-optframe.gif
+size=41x18 geom:41x18+0+0
+size=15x5 geom:41x18+4+7
+size=14x7 geom:41x18+3+6
+size=8x7 geom:41x18+6+6
+size=8x7 geom:41x18+6+6
+size=5x3 geom:41x18+5+8
+size=15x3 geom:41x18+4+8
+size=16x5 geom:41x18+3+7
+</code></pre><!-- raw HTML omitted -->
+<p>コマを分解します。</p>
+<pre tabindex="0"><code>$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.png
+</code></pre><table>
+<thead>
+<tr>
+<th>元画像</th>
+<th>フレーム最適化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>＜以下 5-7 は省略＞</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optimize-transparency">Optimize Transparency</h3>
+<pre tabindex="0"><code>$ convert  Opaopa-anime-dot8.gif  -layers OptimizeTransparency Opaopa-anime-dot8-opttrans.gif
+</code></pre><!-- raw HTML omitted -->
+<p>コマを分解します。</p>
+<pre tabindex="0"><code>$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
+</code></pre><table>
+<thead>
+<tr>
+<th>元画像</th>
+<th>透明最適化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>＜以下 5-7 は省略＞</td>
+<td></td>
+</tr>
+<tr>
+<td>(分かりやすくする為に透明部を黒にしてます)</td>
+<td></td>
+</tr>
+<tr>
+<td>１つ前のコマと色が変わらないピクセルを透明にする事で、色数を減らして圧縮の効率が上がるのが期待出来ます。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>尚、透明にするだけで画像のクロップはしません。</p>
+<pre tabindex="0"><code>$ identify -format &#34;size=%wx%h geom:%g\n&#34; Opaopa-anime-dot1-opttrans.gif
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+</code></pre><h3 id="最強の-optimize">(最強の) Optimize</h3>
+<p>それらが合わさり最強になった Optimize がこちらです。</p>
+<pre tabindex="0"><code>$ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
+</code></pre><!-- raw HTML omitted -->
+<p>分解します。</p>
+<table>
+<thead>
+<tr>
+<th>元画像</th>
+<th>最適化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>＜以下 5-7 は省略＞</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>見た目は透明Optimizeと同じですが、画像のサイズがフレーム最適化と同様小さくなっています。</p>
+<pre tabindex="0"><code>% identify -format &#34;size=%wx%h geom:%g\n&#34; Opaopa-anime-dot1-optimize.gif
+size=41x18 geom:41x18+0+0
+size=15x5 geom:41x18+4+7
+size=14x7 geom:41x18+3+6
+size=8x7 geom:41x18+6+6
+size=8x7 geom:41x18+6+6
+size=5x3 geom:41x18+5+8
+size=15x3 geom:41x18+4+8
+size=16x5 geom:41x18+3+7
+</code></pre><p>とりあえず GIF 画像のサイズを減らしたい場合には -layers optimize 指定するのがお勧めです。</p>
+<h1 id="参考-url">参考 URL</h1>
+<ul>
+<li>ImageMagick v6 Examples &ndash; Animation Optimization
+<ul>
+<li><a href="http://www.imagemagick.org/Usage/anim_opt/">http://www.imagemagick.org/Usage/anim_opt/</a></li>
+</ul>
+</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>公式ページでは giftrans を使って説明してます &gt; <a href="http://www.imagemagick.org/Usage/anim_opt/#colortables">http://www.imagemagick.org/Usage/anim_opt/#colortables</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>たしか大昔、Local ColorMap を読まないガラケー端末があって +map が必須だった時代があったかも。。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

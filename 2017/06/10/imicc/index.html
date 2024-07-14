@@ -1,0 +1,176 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick で ICC プロファイルを扱う #1 前置き | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick で ICC プロファイルを扱う #1 前置き - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/06/10/imicc/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/06/10/imicc/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で ICC プロファイルを扱う #1 前置き" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/06/10/imicc/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-06-10">June 10, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で ICC プロファイルを扱う #1 前置き</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#色空間color-spaceと色域gamut">色空間(Color Space)と色域(Gamut)</a></li>
+    <li><a href="#icc-プロファイル">ICC プロファイル</a></li>
+    <li><a href="#jpegと-icc-プロファイル">JPEGと ICC プロファイル</a></li>
+  </ul>
+</nav>
+    <h1 id="はじめに">はじめに</h1>
+<p>前置きは要らない。ImageMagick コマンドの実行例を知りたいという人は、次のエントリをどうぞ。</p>
+<ul>
+<li>ImageMagick で ICC プロファイルを扱う #2 コマンド実例行 〜 JPEG のメタデータ削除
+<ul>
+<li><a href="http://blog.awm.jp/2017/06/11/imicc/">http://blog.awm.jp/2017/06/11/imicc/</a></li>
+</ul>
+</li>
+</ul>
+<p>尚、当エントリでは ImageMagick の使い方は一切解説しません。</p>
+<h1 id="色域と-icc-プロファイルと-jpeg">色域と ICC プロファイルと JPEG</h1>
+<p>コンピュータ画像が色を表現するのに用いるRGB(red,gree,blue)の数値。例えば、RGB=(<!-- raw HTML omitted -->255<!-- raw HTML omitted -->,<!-- raw HTML omitted -->0<!-- raw HTML omitted -->,<!-- raw HTML omitted -->0<!-- raw HTML omitted -->)は赤色を表しますが、実際にどこまで鮮やかな赤を出せるのかはモニタや印刷機によります。
+そこで表示デバイスの発色性能に合わせて、RGB の値が具体的にどの色に対応するかを規定する色空間が多く存在します。色域は各々の色空間で表現できる色の範囲です。</p>
+<h2 id="色空間color-spaceと色域gamut">色空間(Color Space)と色域(Gamut)</h2>
+<p>よく知られている色空間を並べます。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sRGB</td>
+<td>古くからの規格で多くのモニタはこれに従います。Web の実質的な標準です。</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>映画業界でよく使われます。鮮やかな赤が表現できます。特に最近はAppleが普及に熱心です</td>
+</tr>
+<tr>
+<td>Adobe RGB</td>
+<td>印刷業界でよく使われます。鮮やかな緑が表現できます。</td>
+</tr>
+<tr>
+<td>ProPhoto RGB</td>
+<td>少し高価なデジカメで保存する時に選択できます。上記3つより更に鮮やかな色を表現できます</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<p>このグラフは色度図(CIE Chromaticity Diagram) です。馬蹄型の輪郭線は人間が視覚に捉える事のできる色の鮮やかさの限界を示し、その中の三角形は RGB 値が表現できる色の範囲(色域)です。赤(<!-- raw HTML omitted -->255<!-- raw HTML omitted -->,0,0)、緑(0,<!-- raw HTML omitted -->255<!-- raw HTML omitted -->,0)、青(0,0,<!-- raw HTML omitted -->255<!-- raw HTML omitted -->)が３つの頂点に対応します。</p>
+<h2 id="icc-プロファイル">ICC プロファイル</h2>
+<p>ICC プロファイルは、画像のRGB値(もしくはCMYK値)が具体的にどんな色なのかを示す対応データです。</p>
+<!-- raw HTML omitted -->
+<h2 id="jpegと-icc-プロファイル">JPEGと ICC プロファイル</h2>
+<p>JPEG の画像データに ICC プロファイルを付加する事で、画像ビューアにカラーマネジメントシステムがあればそれを補正データとして用い、発色の良いモニタは性能を生かして目一杯、元の色を忠実に再現し、古いモニタでは表示できない色を妥協しつつ出来る限り本来の色に近くなるよう色の補正を行います。</p>
+<p>JPEG と ICC プロファイルについて、より詳しくは以下のエントリをどうぞ。</p>
+<ul>
+<li>JPEG と ICC プロファイル
+<ul>
+<li><a href="https://blog.awm.jp/2016/09/10/jpegicc/">https://blog.awm.jp/2016/09/10/jpegicc/</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="最後に">最後に</h1>
+<p>sRGB は大昔の規格である為、今どきの感覚では色域がかなり狭い範囲に制限されます。つまり、鮮やかな色の表示を諦める事があります。 今までは一般に普及している殆どのモニタで sRGB をカバーするのが精一杯でしたので、sRGB のみを考えるのも手でしたが、最近では P3 や AdobeRGB といったより広い色域に対応したモニタが普及価格帯に落ちて来ているので、正面から向き合う必要があるでしょう。</p>
+<p>さて、前置きは以上で、本題のエントリをどうぞ。</p>
+<ul>
+<li>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例
+<ul>
+<li><a href="http://blog.awm.jp/2017/06/11/imicc/">http://blog.awm.jp/2017/06/11/imicc/</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="蛇足">蛇足？</h1>
+<p>色々書きましたが、こっちの解説見た方が良いかも。具体的ですし。</p>
+<ul>
+<li>Webブラウザのカラーマネジメント対応まとめ（2月4日更新）
+<ul>
+<li><a href="http://blog.livedoor.jp/yamma_ma/archives/3368577.html">http://blog.livedoor.jp/yamma_ma/archives/3368577.html</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

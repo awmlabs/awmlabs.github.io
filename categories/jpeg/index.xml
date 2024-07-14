@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JPEG on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/jpeg/</link>
+    <description>Recent content in JPEG on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Fri, 17 Mar 2017 17:34:14 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/jpeg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guetzli - Perceptual JPEG encoder</title>
+      <link>https://blog.awm.jp/2017/03/17/guetzli/</link>
+      <pubDate>Fri, 17 Mar 2017 17:34:14 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/03/17/guetzli/</guid>
+      <description>公式情報 https://github.com/google/guetzli Announcing Guetzli: A New Open Source JPEG Encoder https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html Guetzli: Perceptually Guided JPEG Encoder https://arxiv.org/abs/1703.04421v1 Users prefer Guetzli JPEG over same-sized libjpeg https://arxiv.org/abs/1703.04416v1 はじめに Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで</description>
+    </item>
+    <item>
+      <title>JPEG と ICC プロファイル</title>
+      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 尚</description>
+    </item>
+    <item>
+      <title>JPEG の YCbCr について</title>
+      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <description>JPEG の YCbCr について JPEG で保存する色は RGB でなく YCbCr なので、その話。 RGB &amp;lt;=&amp;gt; YCbCr RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式</description>
+    </item>
+    <item>
+      <title>ImageMagick で JPEG の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <description>ImageMagick で JPEG の形式を変換 JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
+    </item>
+    <item>
+      <title>JPEG Exif Orientation の操作</title>
+      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <description>JPEG Exif Orientation の操作 Orientation とは JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。 その中に、画像を表示</description>
+    </item>
+  </channel>
+</rss>

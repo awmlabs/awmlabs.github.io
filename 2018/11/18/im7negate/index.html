@@ -1,0 +1,264 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick7 negate(nega/posi-trans) invert transparency as default | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick7 negate(nega/posi-trans) invert transparency as default - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2018/11/18/im7negate/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2018/11/18/im7negate/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick7 negate(nega/posi-trans) invert transparency as default" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2018/11/18/im7negate/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2018-11-18">November 18, 2018</time></span>
+
+
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick7 negate(nega/posi-trans) invert transparency as default</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#actual-operation">Actual operation</a></li>
+    <li><a href="#expected-usage">Expected Usage</a></li>
+    <li><a href="#examination">Examination</a></li>
+    <li><a href="#consideration">Consideration</a></li>
+    <li><a href="#lastly">Lastly</a></li>
+  </ul>
+</nav>
+    <h1 id="imagemagick7-negatenegaposi-trans-invert-transparency-as-default">ImageMagick7 negate(nega/posi-trans) invert transparency as default</h1>
+<ul>
+<li>(original text in japanese) <a href="https://qiita.com/yoya/items/9301c447093354d92185">https://qiita.com/yoya/items/9301c447093354d92185</a></li>
+</ul>
+<p>When using the -negate option with ImageMagick7, images may disappear sometimes
+.
+This is the intended behavior, not a bug.</p>
+<h2 id="actual-operation">Actual operation</h2>
+<p>There is no problem if it is an RGB image without transparency.</p>
+<pre tabindex="0"><code>% convert rose: rose.png
+% identify -verbose rose.png | grep Type
+  Type: TrueColor
+% convert rose.png -negate rose-negate.png
+</code></pre><table>
+<thead>
+<tr>
+<th>rose.png</th>
+<th>rose-negate.png</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<p>If it is an RGBA image with transparency, &hellip;</p>
+<pre tabindex="0"><code>% convert rose: -matte rose-matte.png
+% identify -verbose rose-matte.png | grep Type
+  Type: TrueColorAlpha
+% convert rose-matte.png -negate rose-matte-negate.png
+</code></pre><table>
+<thead>
+<tr>
+<th>rose-matte.png</th>
+<th>rose-matte-negate.png</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<p>This is because the alpha value is also negated from A: 255(opaque) to A:0 (transparent).</p>
+<p>ImageMagick6 negate, there is no problem.</p>
+<pre tabindex="0"><code>% convert6 rose-matte.png -negate rose-matte-negate6.png
+</code></pre><table>
+<thead>
+<tr>
+<th>rose-matte.png</th>
+<th>rose-matte-negate6.png</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<h2 id="expected-usage">Expected Usage</h2>
+<p>By specifying -channel RGB, negate only RGB, A can go through.
+ImageMagick6 can also behave like ImageMagick7 by specifying -channel RGBA.</p>
+<pre tabindex="0"><code>% convert rose-matte.png -channel RGB -negate rose-matte-negate-rgb.png
+% convert6 rose-matte.png -channel RGBA -negate rose-matte-negate-rgba6.png
+</code></pre><table>
+<thead>
+<tr>
+<th>rose-matte-negate-rgb.png</th>
+<th>rose-matte-negate-rgba6.png</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<p>Also, it seems that it is possible to specify all color components except A.</p>
+<pre tabindex="0"><code>% convert rose-matte.png -channel &#39;All,!A&#39; -negate rose-matte-negate-all-A.png
+</code></pre><table>
+<thead>
+<tr>
+<th>rose-matte-negate-all-A.png</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<h2 id="examination">Examination</h2>
+<p>negate execution code is here.</p>
+<ul>
+<li>ImageMagick-7 MagickCore/enhance.c</li>
+</ul>
+<pre tabindex="0"><code>MagickExport MagickBooleanType NegateImage(Image *image,
+  const MagickBooleanType grayscale,ExceptionInfo *exception)
+＜略＞
+          for (j=0; j &lt; (ssize_t) GetPixelChannels(image); j++)
+          {
+            PixelChannel channel = GetPixelChannelChannel(image,j);
+            PixelTrait traits = GetPixelChannelTraits(image,channel);
+            if ((traits &amp; UpdatePixelTrait) == 0)
+              continue;
+            q[j]=QuantumRange-q[j];
+          }
+</code></pre><ul>
+<li>ImageMagick6 magick/enhance.c</li>
+</ul>
+<pre tabindex="0"><code>MagickExport MagickBooleanType NegateImage(Image *image,
+  const MagickBooleanType grayscale)
+{
+  MagickBooleanType
+    status;
+
+  status=NegateImageChannel(image,DefaultChannels,grayscale);
+  return(status);
+}
+
+MagickExport MagickBooleanType NegateImageChannel(Image *image,
+  const ChannelType channel,const MagickBooleanType grayscale)
+{
+(omit)
+          if ((channel &amp; RedChannel) != 0)
+            SetPixelRed(q,QuantumRange-GetPixelRed(q));
+          if ((channel &amp; GreenChannel) != 0)
+            SetPixelGreen(q,QuantumRange-GetPixelGreen(q));
+          if ((channel &amp; BlueChannel) != 0)
+            SetPixelBlue(q,QuantumRange-GetPixelBlue(q));
+          if ((channel &amp; OpacityChannel) != 0)
+            SetPixelOpacity(q,QuantumRange-GetPixelOpacity(q));
+          if (((channel &amp; IndexChannel) != 0) &amp;&amp;
+              (image-&gt;colorspace == CMYKColorspace))
+            SetPixelIndex(indexes+x,QuantumRange-GetPixelIndex(indexes+x));
+          q++;
+</code></pre><p>The definition of DefaultChannels affecting these operations has changed to ImageMagick7.</p>
+<ul>
+<li>ImageMagick7 MagickCore/pixel.h</li>
+</ul>
+<pre tabindex="0"><code>  AllChannels = 0x7ffffff,
+  DefaultChannels = AllChannels
+</code></pre><ul>
+<li>ImageMagick6 magick/magick-type.h</li>
+</ul>
+<pre tabindex="0"><code>  DefaultChannels = ((AllChannels | SyncChannels) &amp;~ OpacityChannel)
+</code></pre><p>ImageMagick6 does not include A with DefaultChannels &ldquo;RGB, Sync&rdquo;, but ImageMagick7 definition has been changed to AllChannels and all RGBA is included in processing target as default.</p>
+<h2 id="consideration">Consideration</h2>
+<p>It is the intended behavior, as shown in the porting manual, to handle alpha values by negate by default.</p>
+<ul>
+<li><a href="https://imagemagick.org/script/porting.php#cli">https://imagemagick.org/script/porting.php#cli</a></li>
+</ul>
+<blockquote>
+<p>Most algorithms update the red, green, blue, black (for CMYK), and alpha channels. Most operators will blend alpha the other color channels, but other operators (and situations) may require this blending to be disabled, and is currently done by removing alpha from the active channels via -channel option. (e.g. convert castle.gif -channel RGB -negate castle.png).</p>
+</blockquote>
+<p>It seems that it is more convenient for most image processing algorithms to deal with four RGBAs equally, ImageMagick7 has changed DefaultChannels to include A. There are also inconvenient things like this negate, but on the whole it will be judged that this one is better.</p>
+<ul>
+<li><a href="https://imagemagick.org/script/command-line-options.php#negate">https://imagemagick.org/script/command-line-options.php#negate</a></li>
+</ul>
+<blockquote>
+<p>The red, green, and blue intensities of an image are negated.</p>
+</blockquote>
+<p>What about calling alpha values as intensities(color component strength)?
+But I can&rsquo;t say anything.
+However, the explanation of color_mods is clearly different from the actual operation.</p>
+<ul>
+<li><a href="https://www.imagemagick.org/Usage/color_mods/#negate">https://www.imagemagick.org/Usage/color_mods/#negate</a></li>
+</ul>
+<blockquote>
+<p>by default ignores the alpha channel.</p>
+</blockquote>
+<p>This is the behavior of ImageMagick6.</p>
+<h2 id="lastly">Lastly</h2>
+<p>I also want other notes in the manual other than porting so it seems good to ask them on the official side.</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

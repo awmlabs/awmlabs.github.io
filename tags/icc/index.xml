@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ICC on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/icc/</link>
+    <description>Recent content in ICC on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 06 Aug 2017 11:59:20 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/icc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ImageMagick で ICC プロファイルを扱う #3 コマンド解説</title>
+      <link>https://blog.awm.jp/2017/08/06/imicc/</link>
+      <pubDate>Sun, 06 Aug 2017 11:59:20 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/08/06/imicc/</guid>
+      <description>はじめに このエントリの続きです。 ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜 JPEG のメタデータ削除 http://blog.awm.jp/2017/06/11/imicc/ ImageMagick で JPEG に埋め込まれた ICC プロファイルを操作する JPEG</description>
+    </item>
+    <item>
+      <title>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除</title>
+      <link>https://blog.awm.jp/2017/06/11/imicc/</link>
+      <pubDate>Sun, 11 Jun 2017 01:13:05 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/06/11/imicc/</guid>
+      <description>はじめに 色域って何？ ICC プロファイルって何？という人は、 前置きのエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #1 前置き http://blog.awm.jp/2017/06/10/imicc/ 本エントリでは、Image</description>
+    </item>
+    <item>
+      <title>ImageMagick で ICC プロファイルを扱う #1 前置き</title>
+      <link>https://blog.awm.jp/2017/06/10/imicc/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2017/06/10/imicc/</guid>
+      <description>はじめに 前置きは要らない。ImageMagick コマンドの実行例を知りたいという人は、次のエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #2 コマン</description>
+    </item>
+    <item>
+      <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
+      <link>https://blog.awm.jp/2016/11/02/dng/</link>
+      <pubDate>Wed, 02 Nov 2016 21:09:00 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
+      <description>はじめに 利用するもの PC (MacBook Pro) 以下のどちらか Adobe Lightroom CC Adobe Photoshop CC DNG 画像の入手法 iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。 iPhone7 Plus で撮影した DNG 画像を</description>
+    </item>
+    <item>
+      <title>JPEG と ICC プロファイル</title>
+      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 尚</description>
+    </item>
+  </channel>
+</rss>

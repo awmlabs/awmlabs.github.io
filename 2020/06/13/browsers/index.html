@@ -1,0 +1,211 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="各種ブラウザーの画像フォーマット対応 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>各種ブラウザーの画像フォーマット対応 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2020/06/13/browsers/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2020/06/13/browsers/" class="hatena-bookmark-button" data-hatena-bookmark-title="各種ブラウザーの画像フォーマット対応" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2020/06/13/browsers/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2020-06-13">June 13, 2020</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/browser">Browser</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/browser">Browser</a>
+
+        <a href="https://blog.awm.jp/tags/image">Image</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">各種ブラウザーの画像フォーマット対応</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#対応テーブル">対応テーブル</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#jpeg-xr">JPEG XR</a></li>
+    <li><a href="#animation-gif">animation GIF</a></li>
+    <li><a href="#apng">APNG</a></li>
+    <li><a href="#heif">HEIF</a></li>
+  </ul>
+</nav>
+    <h1 id="各種ブラウザーの画像フォーマット対応">各種ブラウザーの画像フォーマット対応</h1>
+<h2 id="はじめに">はじめに</h2>
+<ul>
+<li><a href="http://yosbits.com/wordpress/?p=1683">http://yosbits.com/wordpress/?p=1683</a> 画像のブラウザ対応</li>
+</ul>
+<p>こちらのテーブルの最新版が欲しかったので、2020年版を作りました。Wikipedia からのほぼコピペです。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support">https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support</a></li>
+</ul>
+<h2 id="対応テーブル">対応テーブル</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>ここでいう、新 Edge は Chromium 版 Edge 、旧 Edge はそれ以前の MS 独自実装のブラウザを示します。</li>
+</ul>
+<h1 id="備考">備考</h1>
+<ul>
+<li>Wikipedia では Safari が JPEG2000 対応をやめたとありますが、実際には表示できます。恐らく Windows 版の話でかつ Windows 版 Safari はもう存在しません。</li>
+<li>Wikipedia では Safari は HEIF 対応としてますが実際には表示できません。WWDC2017 で JPEG は終わり次は HEIF みたいなノリで話してたので誤解したのかも？</li>
+<li>旧 Edge  の WebP 表示は Win10 1809 更新で対応しました。1803 以前だと表示しません。</li>
+<li>旧 Edge / IE11 の APNG 表示は最初の一コマ目だけ表示します。恐らく普通の PNG 扱いでしょう。</li>
+</ul>
+<h1 id="画像ファイル作成">画像ファイル作成</h1>
+<p>参考までに。ImageMagick と gif2apng を使った各形式の画像作成方法です。</p>
+<p>大体の形式は ImageMagick で生成できます。</p>
+<ul>
+<li><a href="https://imagemagick.org/">https://imagemagick.org/</a></li>
+</ul>
+<pre tabindex="0"><code>% for f in jpg jp2 jxr webp png bmp ;
+    do convert rose: rose.$f ;
+    done
+% identify  rose.*
+rose.bmp BMP 70x46 70x46+0+0 8-bit sRGB 9890B 0.000u 0:00.000
+rose.jp2 JP2 70x46 70x46+0+0 8-bit sRGB 0.000u 0:00.000
+rose.jpg JPEG 70x46 70x46+0+0 8-bit sRGB 2663B 0.000u 0:00.000
+rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+rose.png PNG 70x46 70x46+0+0 8-bit sRGB 6975B 0.000u 0:00.000
+%
+</code></pre><p>identify で rose.jxr が PPM と表示されますが、これは変換に失敗したので無く Delegate の都合です。</p>
+<h2 id="jpeg-xr">JPEG XR</h2>
+<p>ImageMagick は自前で JPEG XR を処理出来ず、外部コマンドを使って変換します。この仕組みを Delegate と呼びます。</p>
+<p>JPEG XR を以下のようにして生成する場合、</p>
+<pre tabindex="0"><code>% convert rose: rose.jxr
+</code></pre><p>内部的には jxrlib の JxrEncApp コマンドを以下のように呼び出します。</p>
+<pre tabindex="0"><code>% convert rose: rose.bmp
+% JxrEncApp -i rose.bmp -o rose.jxr
+</code></pre><p>逆にデコードする際は、JxrDecApp コマンドが呼ばれます。</p>
+<pre tabindex="0"><code>% JxrDecApp  -i rose.jxr -o rose.pnm
+</code></pre><p>ImageMagick は JPEG XR を理解できないので、代わりに PPM を解析表示するという事です。</p>
+<pre tabindex="0"><code>% identify  rose.jxr
+rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+</code></pre><p>なお、拡張子の PNM は PPM 以外にも PBM, PGM 等を含めたいくつかの画像形式の総称です。</p>
+<p>(参考)</p>
+<ul>
+<li>PNM と ImageMagick で画像ファイルを手作り生成
+<ul>
+<li><a href="https://blog.awm.jp/2016/01/04/pnm/">https://blog.awm.jp/2016/01/04/pnm/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="animation-gif">animation GIF</h2>
+<pre tabindex="0"><code>% for h in  60 120 180 240 ;
+    do convert rose.png -modulate 100,100,$h $h.png ;
+    done
+% convert -delay 100 rose.png ??.png ???.png  rose.gif
+% identify rose.gif
+rose.gif[0] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[1] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[2] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[3] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[4] GIF 70x46 70x46+0+0 8-bit sRGB 256c 20982B 0.000u 0:00.000
+%
+</code></pre><p>ちなみに、ImageMagick の modulate のhue(色相)は 360でなく 300 で一回転します。</p>
+<h2 id="apng">APNG</h2>
+<p>ImageMagick は APNG に対応していません。(追記: 2020年10月リリース 7.0.10-31 で APNG も変換できるようになりました。apng:out.png のように指定します)</p>
+<ul>
+<li><a href="https://gif2apng.sourceforge.net/">https://gif2apng.sourceforge.net/</a></li>
+</ul>
+<p>こちらの gif2png を使うと楽です。</p>
+<pre tabindex="0"><code>% gif2apng  rose.gif  rose.apng
+
+gif2apng 1.9 using 7ZIP with 15 iterations
+
+Reading &#39;rose.gif&#39;...
+5 frames.
+Writing &#39;rose.apng&#39;...
+5 frames.
+% 
+</code></pre><h2 id="heif">HEIF</h2>
+<p>ImageMagick が HEIF 生成の為に利用する libheif - x265 は 64x64 を下回るサイズの HEIF は作れません。(空ファイルが出来ます)</p>
+<pre tabindex="0"><code>% convert rose.png rose.heic
+convert: Encoder plugin generated an error: Invalid parameter value: Images smaller than 16 pixels are not supported `rose.heic&#39; @ error/heic.c/IsHeifSuccess/136.
+% ls -l  rose.heic
+-rw-r--r--  1 yoya  devel  0  6 13 22:29 rose.heic
+</code></pre><p>macOS のプレビュー.app を使うと簡単に作成できます。</p>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>% identify  rose.heic
+rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
+</code></pre><p>尚、拡張子は .heic です。ImageMagick で .heif 指定すると、エラーを出さずに失敗します。</p>
+<pre tabindex="0"><code>% convert rose: rose.heif
+% identify  rose.heif
+rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+</code></pre><p>先ほど、JPEG XR が PPM と表示されるのは Delegate の都合でしたが、
+HEIF の場合は rose: が内部的に PPM 形式で、そのまま何も変換しなかったという事です。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

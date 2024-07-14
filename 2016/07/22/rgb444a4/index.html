@@ -1,0 +1,113 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="RGBA4444 の追加実験 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>RGBA4444 の追加実験 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/07/22/rgb444a4/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/07/22/rgb444a4/" class="hatena-bookmark-button" data-hatena-bookmark-title="RGBA4444 の追加実験" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/07/22/rgb444a4/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-07-22">July 22, 2016</time></span>
+
+
+
+  </div>
+  <h1 class="headline" itemprop="headline">RGBA4444 の追加実験</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rgb444-a4-のディザ画像検証">RGB444, A4 のディザ画像検証</a>
+      <ul>
+        <li><a href="#パレット画像の準備">パレット画像の準備</a></li>
+        <li><a href="#実行コマンド">実行コマンド</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="rgba4444-の追加実験">RGBA4444 の追加実験</h1>
+<ul>
+<li>RGB444 変換で劣化しない画像を ImageMagick で作る
+<ul>
+<li><a href="https://blog.awm.jp/2016/07/21/rgb444/">https://blog.awm.jp/2016/07/21/rgb444/</a></li>
+</ul>
+</li>
+<li>RGBA4444 変換で劣化しない画像を ImageMagick で作る
+<ul>
+<li><a href="https://blog.awm.jp/2016/07/22/rgba4444/">https://blog.awm.jp/2016/07/22/rgba4444/</a></li>
+</ul>
+</li>
+</ul>
+<p>RGBA4444 のチャンネル分離してディザをかける方法だと色合いが変わってしまうので、A だけ分離する方法を試しました。</p>
+<p>結論としては、RGBA バラバラに処理した時と見た目が変わりません。唯の検証メモという扱いでどうぞ。</p>
+<h2 id="rgb444-a4-のディザ画像検証">RGB444, A4 のディザ画像検証</h2>
+<h3 id="パレット画像の準備">パレット画像の準備</h3>
+<ul>
+<li>RGB444 パレット作成</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="実行コマンド">実行コマンド</h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>特に改善されず。。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

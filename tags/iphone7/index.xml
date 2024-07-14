@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IPhone7 on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/iphone7/</link>
+    <description>Recent content in IPhone7 on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 01 Nov 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/iphone7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法</title>
+      <link>https://blog.awm.jp/2016/11/01/dng/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
+      <description>必要なもの 実機 iPhone7 Plus (iPhone7 は試してません。所持してないので) PC (MacBook Pro で確認しました) アカウント Adobe Cloud アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有</description>
+    </item>
+  </channel>
+</rss>

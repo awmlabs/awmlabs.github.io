@@ -1,0 +1,275 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="JPEG の size hinting について | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>JPEG の size hinting について - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/08/jpeghint/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/08/jpeghint/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG の size hinting について" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/08/jpeghint/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-08">January 08, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/resize">Resize</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG の size hinting について</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#jpeg-のデータの持ち方">JPEG のデータの持ち方</a></li>
+    <li><a href="#scaling-指定で-decode">scaling 指定で decode</a></li>
+    <li><a href="#やりたい事">やりたい事</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#小さくリサイズする場合">小さくリサイズする場合</a></li>
+    <li><a href="#大きくリサイズする場合-予想">大きくリサイズする場合 (予想)</a>
+      <ul>
+        <li><a href="#実際の動き">実際の動き</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <p>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。</p>
+<ul>
+<li>もうサムネイルで泣かないための ImageMagick ノウハウ集
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/01/06/080000">http://blog.cybozu.io/entry/2016/01/06/080000</a></li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>いつでもつければ良いというものではないので注意しましょう。
+弊社では、このオプションはサービスの安定運用のためには無用と判断し、
+現在このオプションは利用していません。
+</code></pre><p>確かに注意が要りますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。</p>
+<h1 id="前提知識">前提知識</h1>
+<h2 id="jpeg-のデータの持ち方">JPEG のデータの持ち方</h2>
+<p>JPEG はマクロブロック(8x8)毎に画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。</p>
+<p>(参考イメージ)</p>
+<!-- raw HTML omitted -->
+<p>左上の方が低周波、右下の方が高周波成分です。</p>
+<h2 id="scaling-指定で-decode">scaling 指定で decode</h2>
+<p>左上の低周波数成分だけ参照する事で、直接 1/2, 1/4, 1/8 サイズの画像にデコードするのが JPEG の scaling decode で、そのサイズを指示するのが size hinting です。高周波成分を無視出来る上に decode 直後の画像サイズが小さい事から、パフォーマンス向上が見込めます。</p>
+<!-- raw HTML omitted -->
+<p>(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)</p>
+<h2 id="やりたい事">やりたい事</h2>
+<p>リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を decode し。そこからリサイズする事で、メモリやCPUを節約したい。</p>
+<h1 id="jpeg-size-hinting-の動作イメージ">JPEG size hinting の動作イメージ</h1>
+<p>詳しくはこちらを参照して下さい。</p>
+<ul>
+<li>本当は速いImageMagick: サムネイル画像生成を10倍速くする方法</li>
+<li><a href="http://blog.mirakui.com/entry/20110123/1295795409">http://blog.mirakui.com/entry/20110123/1295795409</a></li>
+</ul>
+<h2 id="小さくリサイズする場合">小さくリサイズする場合</h2>
+<ul>
+<li>普通にリサイズ (-define jpeg:size 無し)</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>小さいサイズでデコードしてリサイズ (-define jpeg:size 有り)</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。</p>
+<h2 id="大きくリサイズする場合-予想">大きくリサイズする場合 (予想)</h2>
+<p>問題にしているケースです。</p>
+<ul>
+<li>普通にリサイズ (-define jpeg:size 無し)</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>大きなサイズでデコードしてリサイズ (-define jpeg:size 有り)</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。</p>
+<h3 id="実際の動き">実際の動き</h3>
+<p>jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>fprintf で表示させる</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>      <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;AAA: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, jpeg_info.image_width, jpeg_info.image_height, jpeg_info.output_width, jpeg_info.output_height, jpeg_info.scale_num, jpeg_info.scale_denom);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jpeg_calc_output_dimensions</span>(<span style="color:#f92672">&amp;</span>jpeg_info);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;ZZZ: jpeg_info:image_width,height:%d,%d output_width,height:%d,%d scale_num:%d scale_denom:%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, jpeg_info.image_width, jpeg_info.image_height, jpeg_info.output_width, jpeg_info.output_height, jpeg_info.scale_num, jpeg_info.scale_denom);</span></span></code></pre></div>
+<ul>
+<li>縮小では 1/8 まで scaling decode が効く</li>
+</ul>
+<pre tabindex="0"><code>$ convert -define jpeg:size=8x8 -resize 8x8 8000x8000.jpg 8x8.jpg
+AAA: jpeg_info:image_width,height:8000,8000 output_width,height:8000,8000 scale_num:1 scale_denom:1000
+ZZZ: jpeg_info:image_width,height:8000,8000 output_width,height:1000,1000 scale_num:1 scale_denom:1000
+</code></pre><ul>
+<li>拡大では 2倍までしか効かない</li>
+</ul>
+<pre tabindex="0"><code>$ convert -define jpeg:size=8000x8000 -resize 8000x8000 8x8.jpg 8000x8000.jpg
+AAA: jpeg_info:image_width,height:8,8 output_width,height:8,8 scale_num:1 scale_denom:0
+ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scale_denom:0
+</code></pre><h1 id="結論">結論</h1>
+<p>拡大時もそんなに極端にメモリは食わずとも 1.5 倍使われるのは場合によってキツイので、念の為、縮小リサイズする時だけ -define jpeg:size をつけるよう条件分けすれば良いと思います。</p>
+<h1 id="scaling-の該当コード">scaling の該当コード</h1>
+<ul>
+<li><a href="http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105">http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105</a>
+<ul>
+<li>ReadJPEGImage (coders/jpeg.c)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>      jpeg_info.scale_num<span style="color:#f92672">=</span><span style="color:#ae81ff">1U</span>;
+</span></span><span style="display:flex;"><span>      jpeg_info.scale_denom<span style="color:#f92672">=</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>) scale_factor;
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jpeg_calc_output_dimensions</span>(<span style="color:#f92672">&amp;</span>jpeg_info);</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>(scale_num/scale_denom) 倍で変換するので、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。</p>
+<ul>
+<li><a href="http://gt.awm.jp/jpeg-8/S/85.html#L52">http://gt.awm.jp/jpeg-8/S/85.html#L52</a>
+<ul>
+<li>jpeg_core_output_dimensions
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>  <span style="color:#75715e">/* Compute actual output image dimensions and DCT scaling choices. */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (cinfo<span style="color:#f92672">-&gt;</span>scale_num <span style="color:#f92672">*</span> cinfo<span style="color:#f92672">-&gt;</span>block_size <span style="color:#f92672">&lt;=</span> cinfo<span style="color:#f92672">-&gt;</span>scale_denom) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Provide 1/block_size scaling */</span>
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>output_width <span style="color:#f92672">=</span> (JDIMENSION)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jdiv_round_up</span>((<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>image_width, (<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>block_size);
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>output_height <span style="color:#f92672">=</span> (JDIMENSION)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jdiv_round_up</span>((<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>image_height, (<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>block_size);
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>min_DCT_h_scaled_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>min_DCT_v_scaled_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (cinfo<span style="color:#f92672">-&gt;</span>scale_num <span style="color:#f92672">*</span> cinfo<span style="color:#f92672">-&gt;</span>block_size <span style="color:#f92672">&lt;=</span> cinfo<span style="color:#f92672">-&gt;</span>scale_denom <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Provide 2/block_size scaling */</span>
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>output_width <span style="color:#f92672">=</span> (JDIMENSION)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jdiv_round_up</span>((<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>image_width <span style="color:#f92672">*</span> <span style="color:#ae81ff">2L</span>, (<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>block_size);
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>output_height <span style="color:#f92672">=</span> (JDIMENSION)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jdiv_round_up</span>((<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>image_height <span style="color:#f92672">*</span> <span style="color:#ae81ff">2L</span>, (<span style="color:#66d9ef">long</span>) cinfo<span style="color:#f92672">-&gt;</span>block_size);
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>min_DCT_h_scaled_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    cinfo<span style="color:#f92672">-&gt;</span>min_DCT_v_scaled_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (cinfo<span style="color:#f92672">-&gt;</span>scale_num <span style="color:#f92672">*</span> cinfo<span style="color:#f92672">-&gt;</span>block_size <span style="color:#f92672">&lt;=</span> cinfo<span style="color:#f92672">-&gt;</span>scale_denom <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span></span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>この 2/block_size scaling の条件にマッチしてそうです。(未確認)</p>
+<h1 id="使用上の注意">使用上の注意</h1>
+<ul>
+<li>scaling decode は libjpeg8c の新機能なので、libjpeg6 とかだと使えません。
+<ul>
+<li>libjpeb-turbo は API は v8 互換だけど、どうだろう。(誰か教えて)</li>
+<li>mozjpeg も知らない。(誰か教えて)</li>
+</ul>
+</li>
+<li>拡大時に size hint を使うとメモリを沢山使って逆効果なので、縮小時だけ使った方が良い。
+<ul>
+<li>拡大処理が殆ど使われない。その場合の最大サイズでもメモリが十分足りる。といったケースだと無視しても良い。</li>
+</ul>
+</li>
+<li>縮小時だけ動かす場合、デコード前にファイルの縦横サイズを調べる処理が必要なので、少し面倒。
+<ul>
+<li>ImageMagick だと先に ping する。</li>
+</ul>
+</li>
+<li>scaling decode はリサイズのアルゴリズムが既存のバイリニアやバイキュービックと異なるので、size hint を使った場合と使わない場合とで微妙に結果画像が異なる。基本的に問題はないが用途によっては注意。</li>
+</ul>
+<h1 id="参考-url">参考 URL</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Libjpeg">https://en.wikipedia.org/wiki/Libjpeg</a></li>
+<li>JPEG tutorial
+<ul>
+<li><a href="https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf">https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf</a></li>
+</ul>
+</li>
+<li>本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
+<ul>
+<li><a href="http://blog.mirakui.com/entry/20110123/1295795409">http://blog.mirakui.com/entry/20110123/1295795409</a></li>
+</ul>
+</li>
+<li>JPEGヒント(scale denom)とは
+<ul>
+<li><a href="http://kkoudev.github.io/blog/2014/06/15/imlib2/">http://kkoudev.github.io/blog/2014/06/15/imlib2/</a></li>
+</ul>
+</li>
+<li>JPEG ライブラリを試す
+<ul>
+<li><a href="http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/">http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/</a></li>
+</ul>
+</li>
+<li>New djpeg -scale N/8 with all N=1&hellip;16 feature
+<ul>
+<li><a href="http://jpegclub.org/djpeg/">http://jpegclub.org/djpeg/</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

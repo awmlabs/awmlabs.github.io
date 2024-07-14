@@ -1,0 +1,153 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick で画像を比較する | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick で画像を比較する - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/25/diff/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/25/diff/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で画像を比較する" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/25/diff/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-25">January 25, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/graphics">Graphics</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で画像を比較する</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#画像の差分">画像の差分</a>
+      <ul>
+        <li><a href="#compose-difference">compose difference</a></li>
+        <li><a href="#identify-mean">identify mean</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="imagemagick-で画像を比較する">ImageMagick で画像を比較する</h1>
+<ul>
+<li>もうサムネイルで泣かないための ImageMagick ノウハウ集
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/01/06/080000">http://blog.cybozu.io/entry/2016/01/06/080000</a></li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>サムネイル周りに何か修正を入れたら修正前後の画像を比較しましょう。
+機械によるバイト列の比較では画像の良し悪しがわかりません。
+頼れるのは人間の眼だけです。肉眼で確認しましょう。
+</code></pre><p>絵の間違い探しでの見落としを想像するに、画像認識の個人差はとても大きいです。
+最終的な判断は人間の眼とはいえ、その前段階のサポートがあると良いでしょう。</p>
+<p>計算でなるべく違いのありそうな画像やその違いのある場所を炙り出します。
+以下のサイトの説明が分かりやすいです。</p>
+<ul>
+<li>2枚の画像のdiff(差分)を超簡単に調べる方法</li>
+<li><a href="http://blog.mirakui.com/entry/20110326/1301111196">http://blog.mirakui.com/entry/20110326/1301111196</a></li>
+</ul>
+<h2 id="画像の差分">画像の差分</h2>
+<h3 id="compose-difference">compose difference</h3>
+<p>-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
+以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。</p>
+<h3 id="identify-mean">identify mean</h3>
+<p>difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>のように実行すると、</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>以上の方法は PSNR 方式に近いのですが、人の目で見る違いと掛け離れるケースが多くあり、SSIM 方式の方が主流です。</p>
+<h1 id="ssim">SSIM</h1>
+<ul>
+<li><a href="https://en.m.wikipedia.org/wiki/Structural_similarity">https://en.m.wikipedia.org/wiki/Structural_similarity</a></li>
+<li><a href="https://ece.uwaterloo.ca/~z70wang/research/ssim/">https://ece.uwaterloo.ca/~z70wang/research/ssim/</a></li>
+</ul>
+<p>画質の劣化の指標でよく使われる値で、その簡易版が ffmpeg で計算できます。類似度なので 1.0 が最大値で、違いがある分減って 0 に近づきます。</p>
+<p>2.6 系にはない機能です。2.8 系の ffmpeg でお試し下さい。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB 別になります。</p>
+<p>あと、ImageMagick のフィルタを駆使して SSIM を算出するスクリプトがあります。詳細は未検証ですが確かにそれっぽい値が出ます。</p>
+<ul>
+<li><a href="http://www.fmwconcepts.com/imagemagick/ssim/index.php">http://www.fmwconcepts.com/imagemagick/ssim/index.php</a></li>
+</ul>
+<p>SSIM アルゴリズムは有名な実装が沢山あるので、無理に ImageMagick を使わなくても良いとは思います。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

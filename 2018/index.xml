@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2018s on awm-Tech</title>
+    <link>https://blog.awm.jp/2018/</link>
+    <description>Recent content in 2018s on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 18 Nov 2018 01:45:11 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/2018/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ImageMagick7 negate(nega/posi-trans) invert transparency as default</title>
+      <link>https://blog.awm.jp/2018/11/18/im7negate/</link>
+      <pubDate>Sun, 18 Nov 2018 01:45:11 +0900</pubDate>
+      <guid>https://blog.awm.jp/2018/11/18/im7negate/</guid>
+      <description>ImageMagick7 negate(nega/posi-trans) invert transparency as default (original text in japanese) https://qiita.com/yoya/items/9301c447093354d92185 When using the -negate option with ImageMagick7, images may disappear sometimes . This is the intended behavior, not a bug. Actual operation There is no problem if it is an RGB image without transparency. % convert rose: rose.png % identify -verbose rose.png | grep Type Type: TrueColor % convert rose.png -negate rose-negate.png rose.png rose-negate.png If it is an RGBA</description>
+    </item>
+    <item>
+      <title>色空間 (Color Spaces) FAQ</title>
+      <link>https://blog.awm.jp/2018/06/22/colorspacesfaq/</link>
+      <pubDate>Fri, 22 Jun 2018 22:57:43 +0900</pubDate>
+      <guid>https://blog.awm.jp/2018/06/22/colorspacesfaq/</guid>
+      <description>色空間 (Color Spaces) FAQ http://www.ilkeratalay.com/colorspacesfaq.php Original document can be reached at: http://www.rmbwoc.com/vidpage/color_faq.html. Document background is normalized to &amp;lsquo;White&amp;rsquo; so that it&amp;rsquo;s easier to read now :) 元のドキュメントは http://www.rmbwoc.com/vidpage/color_faq.html から辿れます。 ドキュメントの背景を白ベースにしている今は読み易い</description>
+    </item>
+  </channel>
+</rss>

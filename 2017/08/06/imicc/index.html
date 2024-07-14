@@ -1,0 +1,208 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick で ICC プロファイルを扱う #3 コマンド解説 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick で ICC プロファイルを扱う #3 コマンド解説 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/08/06/imicc/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/08/06/imicc/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で ICC プロファイルを扱う #3 コマンド解説" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/08/06/imicc/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-08-06">August 06, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で ICC プロファイルを扱う #3 コマンド解説</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#存在チェック-check">存在チェック (check)</a>
+      <ul>
+        <li><a href="#icc-プロファイルが入っている場合">ICC プロファイルが入っている場合</a></li>
+        <li><a href="#icc-プロファイルが入っていない場合">ICC プロファイルが入っていない場合</a></li>
+      </ul>
+    </li>
+    <li><a href="#抽出-extract">抽出 (extract)</a></li>
+    <li><a href="#削除-delete">削除 (delete)</a></li>
+    <li><a href="#挿入-insert">挿入 (insert)</a>
+      <ul>
+        <li><a href="#注意点-cmyk-プロファイル">注意点: CMYK プロファイル</a></li>
+      </ul>
+    </li>
+    <li><a href="#iccプロファイルの変更-change-と画像ピクセルデータ補正">ICCプロファイルの変更 (change) と画像ピクセルデータ補正</a>
+      <ul>
+        <li><a href="#備考-cmyk-プロファイル">備考: CMYK プロファイル</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="はじめに">はじめに</h1>
+<p>このエントリの続きです。</p>
+<ul>
+<li>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜 JPEG のメタデータ削除
+<ul>
+<li><a href="http://blog.awm.jp/2017/06/11/imicc/">http://blog.awm.jp/2017/06/11/imicc/</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="imagemagick-で-jpeg-に埋め込まれた-icc-プロファイルを操作する">ImageMagick で JPEG に埋め込まれた ICC プロファイルを操作する</h1>
+<p>JPEG ファイルは ICC プロファイルを埋め込めます。ImageMagick でその ICC プロファイルを操作するコマンドについて整理しました。</p>
+<h2 id="存在チェック-check">存在チェック (check)</h2>
+<h3 id="icc-プロファイルが入っている場合">ICC プロファイルが入っている場合</h3>
+<pre tabindex="0"><code>% identify -format &#34;%[profiles]\n&#34; test.jpg
+icc
+</code></pre><!-- raw HTML omitted -->
+<h3 id="icc-プロファイルが入っていない場合">ICC プロファイルが入っていない場合</h3>
+<ul>
+<li>メタデータが何も入っていない場合</li>
+</ul>
+<pre tabindex="0"><code>% identify -format &#34;%[profiles]\n&#34; test2.jpg
+identify: unknown image property &#34;%[profiles]&#34; @ warning/property.c/InterpretImageProperties/3888.
+</code></pre><!-- raw HTML omitted -->
+<ul>
+<li>Exif や XMP が入っている場合</li>
+</ul>
+<pre tabindex="0"><code>% identify -format &#34;%[profiles]\n&#34; test2.jpg
+exif,xmp
+</code></pre><!-- raw HTML omitted -->
+<h2 id="抽出-extract">抽出 (extract)</h2>
+<pre tabindex="0"><code>% convert test.jpg test.icc
+%
+</code></pre><!-- raw HTML omitted -->
+<h2 id="削除-delete">削除 (delete)</h2>
+<pre tabindex="0"><code>% convert test.jpg +profile icc output.jpg
+%
+</code></pre><!-- raw HTML omitted -->
+<h2 id="挿入-insert">挿入 (insert)</h2>
+<pre tabindex="0"><code>% identify -format &#34;%[profiles]&#34; test.jpg
+identify: unknown image property &#34;%[profiles]&#34; @ warning/property.c/InterpretImageProperties/3888.
+% convert test.jpg -profile sRGB.icc output.jpg
+%
+</code></pre><!-- raw HTML omitted -->
+<h3 id="注意点-cmyk-プロファイル">注意点: CMYK プロファイル</h3>
+<p>尚、この挿入ケースのように、ICC プロファイルが入っていない RGB (YCbCr)JPEG に対しては、 CMYK の ICC プロファイルも適用すると、RGB JPEG のまま CMYK の ICC プロファイルが埋め込まれる、矛盾した JPEG ファイルが生成されるので注意が必要です。</p>
+<pre tabindex="0"><code>% identify rgb.jpg
+rgb.jpg JPEG 400x400 400x400+0+0 8-bit sRGB 5217B 0.000u 0:00.009
+% identify -verbose rgb.jpg | grep -i profile
+%
+% convert rgb.jpg -profile JapanColor2001Coated.icc cmyk.jpg
+% identify cmyk.jpg
+cmyk.jpg JPEG 400x400 400x400+0+0 8-bit sRGB 562549B 0.000u 0:00.000
+</code></pre><p>参考までに、ImageMagick の sRGB 表示は「 RGB 色空間で gamma != 1.0」を示していて、sRGB プロファイルが埋め込まれている事は保証しません。</p>
+<h2 id="iccプロファイルの変更-change-と画像ピクセルデータ補正">ICCプロファイルの変更 (change) と画像ピクセルデータ補正</h2>
+<p>単に ICC プロファイルを差し替えるだけでなく、画像ピクセルデータも補正します。具体的には、元々埋め込まれていた ICC プロファイルとしての RGB 値から、これから埋め込む ICC プロファイル相当の RGB 値に変更します。</p>
+<pre tabindex="0"><code>% identify -format &#34;%[profiles]\n&#34; test.jpg
+icc
+% convert test.jpg -profile sRGB.icc output.jpg
+%
+</code></pre><!-- raw HTML omitted -->
+<h3 id="備考-cmyk-プロファイル">備考: CMYK プロファイル</h3>
+<p>先の挿入ケースと異なり、ICC プロファイルが埋め込まれた RGB (YCbCr)JPEG に対しては、 CMYK の ICC プロファイルを適用すると、自動で CMYK JPEG に変換されるようです。</p>
+<pre tabindex="0"><code>% identify srgb.jpg
+srgb.jpg JPEG 400x400 400x400+0+0 8-bit sRGB 5217B 0.000u 0:00.009
+% identify -verbose srgb.jpg | grep -i profile
+  Profiles:
+    Profile-icc: 3212 bytes
+% convert srgb.jpg -profile JapanColor2001Coated.icc cmyk.jpg
+% identify cmyk.jpg
+cmyk.jpg JPEG 400x400 400x400+0+0 8-bit CMYK 563037B 0.000u 0:00.000
+</code></pre><p>CMYK については、こちらで少し解説しています。参考になれば幸いです。</p>
+<ul>
+<li>JPEG と ICC プロファイル # CMYK 色空間
+<ul>
+<li><a href="https://blog.awm.jp/2016/09/10/jpegicc/#cmyk-">https://blog.awm.jp/2016/09/10/jpegicc/#cmyk-</a>色空間</li>
+</ul>
+</li>
+</ul>
+<h1 id="最後に">最後に</h1>
+<p>-profile オプションを使った時の動作が、</p>
+<ul>
+<li>JPEG に ICC プロファイルが入っていない場合 =&gt; 単純に ICC プロファイルを追加するだけ</li>
+<li>JPEG に ICC プロファイルが入っている場合 =&gt; ICC プロファイルを差し替えると同時に、画像データの RGB値を、元の ICC から新しい ICC 相当に補正する</li>
+</ul>
+<p>といったところが注意点で、他は素直な使い方だと思います。</p>
+<h1 id="参考-url">参考 URL</h1>
+<ul>
+<li>RGB画像をCMYKに変換する（ImageMagick）
+<ul>
+<li><a href="http://blog.livedoor.jp/yamma_ma/archives/3368542.html">http://blog.livedoor.jp/yamma_ma/archives/3368542.html</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

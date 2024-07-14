@@ -1,0 +1,348 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="JPEG Exif Orientation の操作 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>JPEG Exif Orientation の操作 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/07/orient/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/07/orient/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG Exif Orientation の操作" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/07/orient/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-07">January 07, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/jpeg">JPEG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/exif">Exif</a>
+
+        <a href="https://blog.awm.jp/tags/orientation">Orientation</a>
+
+        <a href="https://blog.awm.jp/tags/exiftool">ExifTool</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG Exif Orientation の操作</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#orientation-とは">Orientation とは</a></li>
+    <li><a href="#orientation-の数値の対応">Orientation の数値の対応</a>
+      <ul>
+        <li><a href="#早見表1">早見表1</a></li>
+        <li><a href="#早見表2">早見表2</a></li>
+      </ul>
+    </li>
+    <li><a href="#編集ツール">編集ツール</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#インストール">インストール</a></li>
+    <li><a href="#exiftool-の使い方">ExifTool の使い方</a></li>
+    <li><a href="#まとめて-18を設定する">まとめて 1〜8を設定する</a></li>
+  </ul>
+</nav>
+    <h1 id="jpeg-exif-orientation-の操作">JPEG Exif Orientation の操作</h1>
+<h2 id="orientation-とは">Orientation とは</h2>
+<p>JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
+その中に、画像を表示する時に行う回転を表す Orientation タグがあります。</p>
+<!-- raw HTML omitted -->
+<p>例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
+撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。</p>
+<!-- raw HTML omitted -->
+<p>ImageMagick の identify コマンドで Orientation の値を参照出来ます。</p>
+<pre tabindex="0"><code>$ identify -verbose orient-6.jpg | grep Orient
+  Orientation: RightTop
+    exif:Orientation: 6
+</code></pre><h2 id="orientation-の数値の対応">Orientation の数値の対応</h2>
+<p>以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)</p>
+<h3 id="早見表1">早見表1</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>2: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>3: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>4: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>5: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>6: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>7: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>8: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>(補正で行う回転する向きでない事に注意。これらはその真逆です)</p>
+<p>尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]</p>
+<p>こうして素直に 1 から順に並べてみると、</p>
+<pre tabindex="0"><code> * 1 を基準として、
+ * 1の左右反転 =&gt; 2 、1の上下反転 =&gt; 4、 1の左右と上下反転 =&gt; 3、
+ * 1,2,3,4 各々を斜め軸で反転 =&gt; 5,6,7,8
+</code></pre><p>となっていて、右回転、左回転の定義が不要なのが面白いです。尚、1を引くとビット毎に、どの軸で鏡像回転するかのフラグになります)</p>
+<p>これらは処理系の都合であって、実際には以下のように利用されます。</p>
+<pre tabindex="0"><code> * 1 を基準として、90度回転 =&gt; 8, 180度回転 = 3, 270度回転 =&gt; 6
+ * 1 の鏡反転 =&gt; 2、8 の鏡反転 =&gt; 5, 3の鏡反転=&gt; 4、6 の鏡反転 =&gt; 7
+</code></pre><h3 id="早見表2">早見表2</h3>
+<p>変換の方向がわかりやすい図もつけます。</p>
+<table>
+<thead>
+<tr>
+<th>Orient</th>
+<th>画像の実データ</th>
+<th>Exif-Orient を解釈して表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>2</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>3</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>4</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>5</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>6</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>7</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>8</td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+</tbody>
+</table>
+<h2 id="編集ツール">編集ツール</h2>
+<p>Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。</p>
+<p>ExifTool が便利なのでこちらを使う事にします。</p>
+<h1 id="exiftool">ExifTool</h1>
+<ul>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/">http://www.sno.phy.queensu.ca/~phil/exiftool/</a></li>
+</ul>
+<h2 id="インストール">インストール</h2>
+<p>MacOS は</p>
+<pre tabindex="0"><code>$ brew install exiftool
+</code></pre><p>Debian Linux は</p>
+<pre tabindex="0"><code># apt-get install exiftool
+</code></pre><p>でインストールできます。</p>
+<p>Perl なので他のプラットフォームでも入れるのは難しくないでしょう。</p>
+<h2 id="exiftool-の使い方">ExifTool の使い方</h2>
+<p>Orientation は以下のコマンドで書き換えられます。</p>
+<pre tabindex="0"><code>$ exiftool -Orientation=6 -n test.jpg
+test.jpg
+    1 image files updated
+</code></pre><h2 id="まとめて-18を設定する">まとめて 1〜8を設定する</h2>
+<p>ついでに表示の時に元の画像の向きを維持するようにします。</p>
+<ul>
+<li><a href="https://github.com/yoya/misc/blob/master/bash/severalorientation.sh">https://github.com/yoya/misc/blob/master/bash/severalorientation.sh</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>set -u
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ORIGINAL_SUFFIX<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_original&#34;</span> <span style="color:#75715e"># exiftool の-delete-original が動かないので</span>
+</span></span><span style="display:flex;"><span>SUFFIX<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.jpg&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FILE<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>PREFIX<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>basename $FILE $SUFFIX<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>seq <span style="color:#ae81ff">1</span> 8<span style="color:#e6db74">`</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  FILE_ORIENT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PREFIX<span style="color:#e6db74">-</span>$i$SUFFIX<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  echo $FILE_ORIENT
+</span></span><span style="display:flex;"><span>  cp $FILE $FILE_ORIENT
+</span></span><span style="display:flex;"><span>  exiftool -Orientation<span style="color:#f92672">=</span>$i -n $FILE_ORIENT
+</span></span><span style="display:flex;"><span>  rm $FILE_ORIENT$ORIGINAL_SUFFIX
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">case</span> $i in
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;2&#34;</span><span style="color:#f92672">)</span> mogrify             -flop $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;3&#34;</span><span style="color:#f92672">)</span> mogrify       -flip -flop $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;4&#34;</span><span style="color:#f92672">)</span> mogrify             -flop $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;5&#34;</span><span style="color:#f92672">)</span> mogrify -rotate  <span style="color:#ae81ff">90</span> -flop $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">)</span> mogrify -rotate -90       $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;7&#34;</span><span style="color:#f92672">)</span> mogrify -rotate -90 -flop $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;8&#34;</span><span style="color:#f92672">)</span> mogrify -rotate  <span style="color:#ae81ff">90</span>       $FILE_ORIENT ;;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">esac</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span></span></span></code></pre></div>
+<ul>
+<li>実行</li>
+</ul>
+<pre tabindex="0"><code>$ severalorientation.sh orient.jpg
+$ identify -verbose orient-?.jpg | grep Orient
+  Orientation: TopLeft
+    exif:Orientation: 1
+  Orientation: TopRight
+    exif:Orientation: 2
+  Orientation: BottomRight
+    exif:Orientation: 3
+  Orientation: BottomLeft
+    exif:Orientation: 4
+  Orientation: LeftTop
+    exif:Orientation: 5
+  Orientation: RightTop
+    exif:Orientation: 6
+  Orientation: RightBottom
+    exif:Orientation: 7
+  Orientation: LeftBottom
+    exif:Orientation: 8
+</code></pre><ul>
+<li>結果</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>2: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>3: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>4: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>5: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>6: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>7: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>8: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。(テーブルに表示するのもクリックして表示されるのも同じ JPEG 画像です)</p>
+<p>ちなみに、前半の方の表に貼り付けた画像は、更に</p>
+<pre tabindex="0"><code>for i in *-?.jpg ; do
+  o=`basename $i .jpg` ;
+  convert -strip $i $o-strip.jpg;
+done
+</code></pre><p>として Exif タグを削除したものです。</p>
+<h1 id="参考-url">参考 URL</h1>
+<ul>
+<li>Exif 2.3 規格書
+<ul>
+<li><a href="http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf">http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf</a></li>
+</ul>
+</li>
+<li>ExifのOrientationを見て画像を回転させる
+<ul>
+<li><a href="http://hackmylife.net/archives/7400448.html">http://hackmylife.net/archives/7400448.html</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

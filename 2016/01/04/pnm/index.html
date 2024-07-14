@@ -1,0 +1,287 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="PNM と ImageMagick で画像ファイルを手作り生成 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>PNM と ImageMagick で画像ファイルを手作り生成 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/01/04/pnm/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/01/04/pnm/" class="hatena-bookmark-button" data-hatena-bookmark-title="PNM と ImageMagick で画像ファイルを手作り生成" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/01/04/pnm/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-01-04">January 04, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/graphics">Graphics</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/pnm">PNM</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/pbm">PBM</a>
+
+        <a href="https://blog.awm.jp/tags/pgm">PGM</a>
+
+        <a href="https://blog.awm.jp/tags/ppm">PPM</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">PNM と ImageMagick で画像ファイルを手作り生成</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#拡張フォーマット">拡張フォーマット</a></li>
+  </ul>
+</nav>
+    <h1 id="pnm-と-imagemagick-で画像ファイルを手作り生成">PNM と ImageMagick で画像ファイルを手作り生成</h1>
+<p>何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。</p>
+<h1 id="pnm-とは">PNM とは</h1>
+<p>古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。</p>
+<ul>
+<li>Wikiedia: <a href="https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)">PNM (画像フォーマット)</a></li>
+</ul>
+<p>PNM は 以下の３つのフォーマットをまとめた呼び方です。</p>
+<ul>
+<li>PBM (portable bitmap)
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pbm.html">http://netpbm.sourceforge.net/doc/pbm.html</a></li>
+</ul>
+</li>
+<li>PGM (portable graymap)
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pgm.html">http://netpbm.sourceforge.net/doc/pgm.html</a></li>
+</ul>
+</li>
+<li>PPM (portable pixmap)
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/ppm.html">http://netpbm.sourceforge.net/doc/ppm.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="拡張フォーマット">拡張フォーマット</h2>
+<p>PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。</p>
+<ul>
+<li>PAM (portable arbitrary map)
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pam.html">http://netpbm.sourceforge.net/doc/pam.html</a></li>
+</ul>
+</li>
+<li>PFM (portable float map)
+<ul>
+<li><a href="http://netpbm.sourceforge.net/doc/pfm.html">http://netpbm.sourceforge.net/doc/pfm.html</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="フォーマット概要">フォーマット概要</h1>
+<p>ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。(尚、PAM形式は P7 で、PFM形式は PF, Pf です)</p>
+<table>
+<thead>
+<tr>
+<th>ファイル先頭</th>
+<th>フォーマット</th>
+<th>データ表現</th>
+<th>画像表現</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>PBM</td>
+<td>ASCII</td>
+<td>白黒画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P2</td>
+<td>PGM</td>
+<td>ASCII</td>
+<td>グレー画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P3</td>
+<td>PPM</td>
+<td>ASCII</td>
+<td>カラー画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P4</td>
+<td>PBM</td>
+<td>Binary</td>
+<td>白黒画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P5</td>
+<td>PGM</td>
+<td>Binary</td>
+<td>グレー画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P6</td>
+<td>PPM</td>
+<td>Binary</td>
+<td>カラー画像 <!-- raw HTML omitted --></td>
+</tr>
+<tr>
+<td>P7</td>
+<td>PAM</td>
+<td>Binary</td>
+<td>アルファ付きカラー画像</td>
+</tr>
+<tr>
+<td>Pf</td>
+<td>PFM</td>
+<td>Binary</td>
+<td>浮動小数点形式グレースケール画像</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>PFM</td>
+<td>Binary</td>
+<td>浮動小数点形式カラー画像</td>
+</tr>
+</tbody>
+</table>
+<p>データ表現が ASCII の場合は以下のフォーマットをとります。</p>
+<pre tabindex="0"><code>フォーマット種別 # P1〜P6のいずれか。
+横サイズ 縦サイズ
+最大値             # P1 の時は1固定なので省略
+画像データの並び
+.....
+</code></pre><h1 id="pbm-portable-bitmap-format">PBM (portable bitmap format)</h1>
+<p>画像の白黒を 0,1 で表現します。(0:白、1:黒である事に注意)</p>
+<ul>
+<li>batsu.pbm</li>
+</ul>
+<pre tabindex="0"><code>P1
+7 7
+P1
+7 7
+1 0 0 0 0 0 1
+0 1 0 0 0 1 0
+0 0 1 0 1 0 0
+0 0 0 1 0 0 0
+0 0 1 0 1 0 0
+0 1 0 0 0 1 0
+1 0 0 0 0 0 1
+</code></pre><p>ImageMagick の convert で変換します。ついでに8倍に拡大したものも。</p>
+<pre tabindex="0"><code>$ convert batsu.pbm batsu.png
+$ convert -resize 800% -filter point batsu.png batsu_8.png
+</code></pre><!-- raw HTML omitted -->
+<h1 id="pgm-portable-graymap-format">PGM (portable graymap format)</h1>
+<p>白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。</p>
+<ul>
+<li>batsu_gray.pgm</li>
+</ul>
+<pre tabindex="0"><code>P2
+7 7
+4
+4 0 0 0 0 0 4
+0 3 0 0 0 3 0
+0 0 2 0 2 0 0
+0 0 0 1 0 0 0
+0 0 2 0 2 0 0
+0 3 0 0 0 3 0
+4 0 0 0 0 0 4
+</code></pre><p>convert で変換 &amp; 8倍画像</p>
+<pre tabindex="0"><code>$ convert batsu_gray.pgm batsu_gray.png
+$ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
+</code></pre><!-- raw HTML omitted -->
+<h1 id="ppm-portable-pixmap-format">PPM (portable pixmap format)</h1>
+<p>RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。</p>
+<ul>
+<li>batsu_rgb.ppm</li>
+</ul>
+<pre tabindex="0"><code>P3
+7 7
+4
+4 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 4
+0 0 0  3 0 0  0 0 0  0 0 0  0 0 0  0 0 3  0 0 0
+0 0 0  0 0 0  2 0 0  0 0 0  0 0 3  0 0 0  0 0 0
+0 0 0  0 0 0  0 0 0  1 1 1  0 0 0  0 0 0  0 0 0
+0 0 0  0 0 0  0 2 0  0 0 0  2 2 0  0 0 0  0 0 0
+0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
+0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
+</code></pre><p>convert で変換</p>
+<pre tabindex="0"><code>$ convert batsu_rgb.ppm batsu_rgb.png
+$ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
+</code></pre><!-- raw HTML omitted -->
+<h1 id="さいごに">さいごに</h1>
+<p>エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。</p>
+<h1 id="参考-url">参考 URL</h1>
+<ul>
+<li>Wikipedia: <a href="https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)">PNM (画像フォーマット)</a></li>
+<li>碧色工房 〜 PNM ( PPM / PGM / PBM ) ファイルフォーマット
+<ul>
+<li><a href="http://www.mm2d.net/main/prog/c/image_io-01.html">http://www.mm2d.net/main/prog/c/image_io-01.html</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c">https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c</a></li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

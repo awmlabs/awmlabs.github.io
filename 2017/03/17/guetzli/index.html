@@ -1,0 +1,351 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="Guetzli - Perceptual JPEG encoder | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>Guetzli - Perceptual JPEG encoder - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/03/17/guetzli/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/03/17/guetzli/" class="hatena-bookmark-button" data-hatena-bookmark-title="Guetzli - Perceptual JPEG encoder" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/03/17/guetzli/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-03-17">March 17, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/jpeg">JPEG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/graphics">Graphics</a>
+
+        <a href="https://blog.awm.jp/tags/guetzli">Guetzli</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">Guetzli - Perceptual JPEG encoder</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quality--84">quality &gt;= 84</a></li>
+    <li><a href="#cmyk-未対応">CMYK 未対応</a></li>
+    <li><a href="#yuv-444420-only">YUV 444,420 only</a></li>
+    <li><a href="#噂話-icc-プロファイル">噂話 (ICC プロファイル)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#実行">実行</a></li>
+    <li><a href="#集計スクリプト">集計スクリプト</a></li>
+    <li><a href="#集計結果のグラフ">集計結果のグラフ</a>
+      <ul>
+        <li><a href="#処理時間">処理時間</a></li>
+        <li><a href="#ファイルサイズ削減">ファイルサイズ削減</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="公式情報">公式情報</h1>
+<ul>
+<li><a href="https://github.com/google/guetzli">https://github.com/google/guetzli</a></li>
+<li>Announcing Guetzli: A New Open Source JPEG Encoder
+<ul>
+<li><a href="https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html">https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html</a></li>
+</ul>
+</li>
+<li>Guetzli: Perceptually Guided JPEG Encoder
+<ul>
+<li><a href="https://arxiv.org/abs/1703.04421v1">https://arxiv.org/abs/1703.04421v1</a></li>
+</ul>
+</li>
+<li>Users prefer Guetzli JPEG over same-sized libjpeg
+<ul>
+<li><a href="https://arxiv.org/abs/1703.04416v1">https://arxiv.org/abs/1703.04416v1</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="はじめに">はじめに</h1>
+<ul>
+<li>Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで JPEG 画像を劣化させるチキンレース技術です。</li>
+<li>人間が見ても。という評価には Butteraugli を用います。 画像処理の論文では MSE, PNSR, SSIM をよく見かけますが結構これらは雑な評価で、Butteraugli は人間の視覚特性(例えば輝度と色味は別指標、色味も反対色説の色差軸)を元に計算します。</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>JPEG quality を色々変えて画像サイズと画質のトレードオフを探る事はよくありますが、それの全自動版みたいな感じです。更に DQT (周波数成分毎の量子化パラメータ) を細かくいじります。</li>
+<li>良い結果に当たるよう何度も繰り返し JPEG 生成する方式なので、とにかく時間がかかります。libjpeg や mozjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。</li>
+</ul>
+<h1 id="制限事項">制限事項</h1>
+<p>ソースを読んで気づいた制限事項です。(README に記述して欲しいなぁ。)</p>
+<h2 id="quality--84">quality &gt;= 84</h2>
+<p>quality は 84 以上しか指定できません。それ未満だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)</p>
+<ul>
+<li>guetzli/processor.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> Processor<span style="color:#f92672">::</span>ProcessJpegData(<span style="color:#66d9ef">const</span> Params<span style="color:#f92672">&amp;</span> params, <span style="color:#66d9ef">const</span> JPEGData<span style="color:#f92672">&amp;</span> jpg_in,
+</span></span><span style="display:flex;"><span>                                Comparator<span style="color:#f92672">*</span> comparator, GuetzliOutput<span style="color:#f92672">*</span> out,
+</span></span><span style="display:flex;"><span>                                ProcessStats<span style="color:#f92672">*</span> stats) {
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (params.butteraugli_target <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2.0f</span>) {
+</span></span><span style="display:flex;"><span>    fprintf(stderr,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;Guetzli should be called with quality &gt;= 84, otherwise the</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;output will have noticeable artifacts. If you want to</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;proceed anyway, please edit the source code.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div></li>
+</ul>
+<h2 id="cmyk-未対応">CMYK 未対応</h2>
+<p>YCbCr JPEG のみ対応です。CMYK や (Adobe)CYYK は未対応。</p>
+<ul>
+<li>
+<p>参考) <a href="https://blog.awm.jp/2016/02/06/ycbcr/">https://blog.awm.jp/2016/02/06/ycbcr/</a> YCbCr について</p>
+</li>
+<li>
+<p>guetzli/processor.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> Processor<span style="color:#f92672">::</span>ProcessJpegData(<span style="color:#66d9ef">const</span> Params<span style="color:#f92672">&amp;</span> params, <span style="color:#66d9ef">const</span> JPEGData<span style="color:#f92672">&amp;</span> jpg_in,
+</span></span><span style="display:flex;"><span>                                Comparator<span style="color:#f92672">*</span> comparator, GuetzliOutput<span style="color:#f92672">*</span> out,
+</span></span><span style="display:flex;"><span>                                ProcessStats<span style="color:#f92672">*</span> stats) {
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (jpg_in.components.size() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>HasYCbCrColorSpace(jpg_in)) {
+</span></span><span style="display:flex;"><span>  fprintf(stderr, <span style="color:#e6db74">&#34;Only YUV color space input jpeg is supported</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></p>
+</li>
+</ul>
+<h2 id="yuv-444420-only">YUV 444,420 only</h2>
+<p>YUV444, 420 のみ対応。422,411,440 は未対応。</p>
+<ul>
+<li>
+<p>参考) <a href="https://blog.awm.jp/2016/02/10/yuv/">https://blog.awm.jp/2016/02/10/yuv/</a> YUV の種類</p>
+</li>
+<li>
+<p>guetzli/processor.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> Processor<span style="color:#f92672">::</span>ProcessJpegData(<span style="color:#66d9ef">const</span> Params<span style="color:#f92672">&amp;</span> params, <span style="color:#66d9ef">const</span> JPEGData<span style="color:#f92672">&amp;</span> jpg_in,
+</span></span><span style="display:flex;"><span>                                Comparator<span style="color:#f92672">*</span> comparator, GuetzliOutput<span style="color:#f92672">*</span> out,
+</span></span><span style="display:flex;"><span>                                ProcessStats<span style="color:#f92672">*</span> stats) {
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (jpg_in.Is444()) {
+</span></span><span style="display:flex;"><span>    input_is_420 <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (jpg_in.Is420()) {
+</span></span><span style="display:flex;"><span>    input_is_420 <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    fprintf(stderr, <span style="color:#e6db74">&#34;Unsupported sampling factors:&#34;</span>);</span></span></code></pre></div></p>
+</li>
+</ul>
+<p>うーん。YUV422 の JPEG は世に溢れてるはずだけど、大丈夫なのでしょうか。420 なんかよりずっと多そうだけど。デジカメで普通の画質設定だと 422 になりそうですし。(自分は高画質しか興味ないので、よく分からない)</p>
+<h2 id="噂話-icc-プロファイル">噂話 (ICC プロファイル)</h2>
+<p>あと、ICC プロファイルを引き継がないという噂がありますが、自分が試した限りではちゃんと引き継ぎます。ソースコードを見ても APPn を 丸々コピーする処理があります。</p>
+<ul>
+<li>
+<p>guetzli/jpeg_data_reader.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Saves the APP marker segment as a string to *jpg.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">ProcessAPP</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> data, <span style="color:#66d9ef">const</span> size_t len, size_t<span style="color:#f92672">*</span> pos,
+</span></span><span style="display:flex;"><span>                JPEGData<span style="color:#f92672">*</span> jpg) {
+</span></span><span style="display:flex;"><span>  VERIFY_LEN(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  size_t marker_len <span style="color:#f92672">=</span> ReadUint16(data, pos);
+</span></span><span style="display:flex;"><span>  VERIFY_INPUT(marker_len, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">65535</span>, MARKER_LEN);
+</span></span><span style="display:flex;"><span>  VERIFY_LEN(marker_len <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Save the marker type together with the app data.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>string app_str(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&amp;</span>data[<span style="color:#f92672">*</span>pos <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>]), marker_len <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">*</span>pos <span style="color:#f92672">+=</span> marker_len <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  jpg<span style="color:#f92672">-&gt;</span>app_data.push_back(app_str);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> ReadJpeg(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> data, <span style="color:#66d9ef">const</span> size_t len, JpegReadMode mode,
+</span></span><span style="display:flex;"><span>              JPEGData<span style="color:#f92672">*</span> jpg) {
+</span></span><span style="display:flex;"><span> <span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe0</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe1</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe2</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe3</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe4</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe5</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe6</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe7</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe8</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xe9</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xea</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xeb</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xec</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xed</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xee</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0xef</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (mode <span style="color:#f92672">!=</span> JPEG_READ_TABLES) {
+</span></span><span style="display:flex;"><span>          ok <span style="color:#f92672">=</span> ProcessAPP(data, len, <span style="color:#f92672">&amp;</span>pos, jpg);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;</span></span></code></pre></div></p>
+</li>
+<li>
+<p>guetzli/jpeg_data_writer.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">EncodeMetadata</span>(<span style="color:#66d9ef">const</span> JPEGData<span style="color:#f92672">&amp;</span> jpg, <span style="color:#66d9ef">bool</span> strip_metadata, JPEGOutput out) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (strip_metadata) {
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">＜略＞</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> ok <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> jpg.app_data.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint8_t</span> data[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0xff</span> };
+</span></span><span style="display:flex;"><span>    ok <span style="color:#f92672">=</span> ok <span style="color:#f92672">&amp;&amp;</span> JPEGWrite(out, data, <span style="color:#66d9ef">sizeof</span>(data));
+</span></span><span style="display:flex;"><span>    ok <span style="color:#f92672">=</span> ok <span style="color:#f92672">&amp;&amp;</span> JPEGWrite(out, jpg.app_data[i]);
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div></p>
+</li>
+</ul>
+<p>どなたか Exif や ICC プロファイルを引き継がない JPEG ファイルをお持ちでしたら頂けないでしょうか。(修正コミットしてコントリビュータに紛れ込みたい！)</p>
+<h1 id="インストール">インストール</h1>
+<p>macOS だと brew install guetzli で入りますが、一応 git レポジトリを使う方法のメモです。</p>
+<p>libpng(libpng-dev) と gflags (libgflags-dev) のパッケージを入れて make するだけです。macOS Sierra と Linux Ubuntu16 で動作しました。</p>
+<pre tabindex="0"><code>% git clone git@github.com:google/guetzli.git
+% cd guetzli
+% make
+==== Building guetzli (release) ====
+Creating bin/Release
+Creating obj/Release
+＜略＞
+butteraugli.cc
+Linking guetzli
+ld: warning: option -s is obsolete and being ignored
+% ls -l bin/Release/guetzli
+-rwxr-xr-x  1 yoya  staff  280856  3 17 17:34 bin/Release/guetzli
+% 
+</code></pre><h1 id="実験">実験</h1>
+<p>様々なサイズの2Dイラスト画像1406枚で Guetzli を動かして計測しました。
+何枚かは制限事項に引っかかるようで、実際に処理できたのは 1360枚です。</p>
+<h2 id="実行">実行</h2>
+<pre tabindex="0"><code>% ls illust | wc
+   1406    1406   26445
+% mkdir tmp
+% cd illust
+% (for i in *.jpg ; do o=&#34;../tmp/$i&#34; ; identify $i ; time guetzli $i $o ; identify $o ; done &gt;&amp; ../log.txt )
+% ls -l ../tmp | wc
+   1360   12233   86837
+</code></pre><ul>
+<li>ログデータ(の一部)</li>
+</ul>
+<pre tabindex="0"><code>3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 59.4KB 0.000u 0:00.000
+
+real	0m7.194s
+user	0m6.976s
+sys	0m0.212s
+../tmp/3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 56KB 0.000u 0:00.000
+</code></pre><h2 id="集計スクリプト">集計スクリプト</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">filesizeUnit</span>($filesize, $unit) { <span style="color:#75715e">// to KB
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> ($unit <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;KB&#34;</span>) {
+</span></span><span style="display:flex;"><span>        ;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ($unit <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;MB&#34;</span>) {
+</span></span><span style="display:flex;"><span>        $filesize <span style="color:#f92672">*=</span> <span style="color:#ae81ff">1024</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ($unit <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;GB&#34;</span>) {
+</span></span><span style="display:flex;"><span>        $filesize <span style="color:#f92672">*=</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;ERROR: </span><span style="color:#e6db74">$filesize</span><span style="color:#e6db74">, </span><span style="color:#e6db74">$unit\n</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $filesize;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> (<span style="color:#a6e22e">file</span>($argv[<span style="color:#ae81ff">1</span>]) <span style="color:#66d9ef">as</span> $line) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#34;/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/&#34;</span>, $line, $matches)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">list</span>($all, $file, $width, $height, $filesize, $unit) <span style="color:#f92672">=</span> $matches;
+</span></span><span style="display:flex;"><span>        $nPixel <span style="color:#f92672">=</span> $width <span style="color:#f92672">*</span> $height;
+</span></span><span style="display:flex;"><span>        $size <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>) <span style="color:#a6e22e">sqrt</span>($nPixel);
+</span></span><span style="display:flex;"><span>    $filesize <span style="color:#f92672">=</span> <span style="color:#a6e22e">filesizeUnit</span>($filesize, $unit);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#34;/^user\s+(\d+)m([\d\.]+)s/&#34;</span>, $line, $matches)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">list</span>($all, $minutes, $seconds) <span style="color:#f92672">=</span> $matches;
+</span></span><span style="display:flex;"><span>        $t <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> $minutes <span style="color:#f92672">+</span> $seconds;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($t <span style="color:#f92672">===</span> <span style="color:#ae81ff">0.01</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// echo &#34;ERROR: $size $t\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//  echo &#34;$size,$t\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#34;/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/&#34;</span>, $line, $matches)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">list</span>($all, $file, $width, $height, $filesize2, $unit) <span style="color:#f92672">=</span> $matches;
+</span></span><span style="display:flex;"><span>        $filesize2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">filesizeUnit</span>($filesize2, $unit);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$filesize</span><span style="color:#e6db74">,</span><span style="color:#e6db74">$filesize2\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ($filesize <span style="color:#f92672">&lt;</span> $filesize2) {
+</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="集計結果のグラフ">集計結果のグラフ</h2>
+<h3 id="処理時間">処理時間</h3>
+<!-- raw HTML omitted -->
+<ul>
+<li>横がsqrt(width*height) 。正方形と仮定した場合の一辺の長さ相当</li>
+<li>縦が user 時間の秒数</li>
+</ul>
+<p>一辺2000px で100秒弱〜200秒が目安になりそうです。</p>
+<p>ちなみにそこそこ高性能なゲームPCで実験してます。</p>
+<h3 id="ファイルサイズ削減">ファイルサイズ削減</h3>
+<p>横軸が元サイズ、縦軸が圧縮後のサイズです。どちらも KB 単位。</p>
+<p>期待以上の異常なレベルでの削減率です。半分以下になることさえあります。</p>
+<!-- raw HTML omitted -->
+<p>削減率の多い画像を目視で確認しても、ぱっと見で違いは分かりませんでした。凄い。。</p>
+<h1 id="所感">所感</h1>
+<p>イラスト画像は線(周波数高)とグラデーション(周波数低)が命だと考えると周波数の中域は荒くて良さそうで、視覚特性以外でも削り易いかもしれません。</p>
+<p>Guetzli で処理するとデータの劣化はするので、例えば画像を引き伸ばした時や画像にフィルタをかけた時に、違いが目に見える可能性があります。画質評価で閾値を立てる場合、そこにはモニタのDPI、視距離、採用する測色標準といった視聴環境モデルが前提にあるはずで、実質的にそことずれる状況になると荒が見えるのは必然です。</p>
+<p>MozJPEG との比較は、そもそも土俵が違うのでまとめても意味なさそうかな。。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

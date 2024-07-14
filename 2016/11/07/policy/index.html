@@ -1,0 +1,230 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick の policy.xml でホワイトリスト？ | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick の policy.xml でホワイトリスト？ - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/11/07/policy/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/11/07/policy/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick の policy.xml でホワイトリスト？" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/11/07/policy/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-11-07">November 07, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick の policy.xml でホワイトリスト？</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#policyxml-を書き換えて実験">policy.xml を書き換えて実験</a>
+      <ul>
+        <li><a href="#先勝ちルールでは">先勝ちルールでは？</a></li>
+        <li><a href="#後勝ちルールでは">後勝ちルールでは？</a></li>
+      </ul>
+    </li>
+    <li><a href="#magickpolicyxml">magick/policy.xml</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#結局どうすればいいの">結局、どうすればいいの？</a>
+      <ul>
+        <li><a href="#シグネチャを自分でチェック">シグネチャを自分でチェック</a></li>
+        <li><a href="#ブラックリストで頑張る">ブラックリストで頑張る</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="追記-20181120">追記 (2018/11/20)</h1>
+<p>ImageMagick 6.9.7-7 で policy.xml がホワイトリストに対応しました。</p>
+<ul>
+<li>ImageMagick 6.9.7-7 から policy の挙動が変わりました
+<ul>
+<li><a href="https://blog.awm.jp/2017/02/09/imagemagick/">https://blog.awm.jp/2017/02/09/imagemagick/</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="policyxml">policy.xml</h1>
+<p>ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。</p>
+<pre tabindex="0"><code>$ convert -list configure | grep etc
+CONFIGURE_PATH /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+$ ls /usr/local/Cellar/imagemagick/6.9.5-7/etc/ImageMagick-6/
+coder.xml		mime.xml		type-dejavu.xml
+colors.xml		policy.xml		type-ghostscript.xml
+delegates.xml		quantization-table.xml	type-windows.xml
+log.xml			thresholds.xml		type.xml
+magic.xml		type-apple.xml
+</code></pre><p>policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。</p>
+<ul>
+<li>ImageMagickのピクセルキャッシュとリソース制限
+<ul>
+<li><a href="http://techlife.cookpad.com/entry/2016/05/18/180703">http://techlife.cookpad.com/entry/2016/05/18/180703</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="受理する画像のホワイトリストを設定したい">受理する画像のホワイトリストを設定したい</h1>
+<p>以前、このような事を呟きました。</p>
+<ul>
+<li><a href="https://twitter.com/yoya/status/727867440412024832">https://twitter.com/yoya/status/727867440412024832</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<p>policy.xml で domain=&ldquo;coder&rdquo; を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリスト方式で設定したいですよね。</p>
+<p>結論を先にいうと無理でしたが。調べた事を以下にメモします。</p>
+<h2 id="policyxml-を書き換えて実験">policy.xml を書き換えて実験</h2>
+<p>以下のように実験しました。</p>
+<h3 id="先勝ちルールでは">先勝ちルールでは？</h3>
+<pre tabindex="0"><code>  &lt;policy domain=&#34;coder&#34; rights=&#34;read|write&#34; pattern=&#34;PNG&#34; /&gt;
+  &lt;policy domain=&#34;coder&#34; rights=&#34;none&#34; pattern=&#34;*&#34; /&gt;
+</code></pre><pre tabindex="0"><code> $ convert t.png t2.png
+convert: not authorized `t.png&#39; @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png&#39; @ error/convert.c/ConvertImageCommand/3257.
+</code></pre><h3 id="後勝ちルールでは">後勝ちルールでは？</h3>
+<pre tabindex="0"><code>  &lt;policy domain=&#34;coder&#34; rights=&#34;none&#34; pattern=&#34;*&#34; /&gt;
+  &lt;policy domain=&#34;coder&#34; rights=&#34;read|write&#34; pattern=&#34;PNG&#34; /&gt;
+</code></pre><pre tabindex="0"><code>$ convert t.png t2.png
+convert: not authorized `t.png&#39; @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png&#39; @ error/convert.c/ConvertImageCommand/3257.
+</code></pre><p>どちらも駄目でした。
+さて、コードを見てみましょう。</p>
+<h2 id="magickpolicyxml">magick/policy.xml</h2>
+<ul>
+<li>エラーの発生箇所はここで</li>
+</ul>
+<pre tabindex="0"><code>domain=CoderPolicyDomain;
+rights=ReadPolicyRights;
+if (IsRightsAuthorized(domain,rights,read_info-&gt;magick) == MagickFalse)
+  {
+    errno=EPERM;
+    (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
+      &#34;NotAuthorized&#34;,&#34;`%s&#39;&#34;,read_info-&gt;filename);
+    read_info=DestroyImageInfo(read_info);
+    return((Image *) NULL);
+  }
+</code></pre><ul>
+<li>IsRightsAuthorized の処理はこれです。</li>
+</ul>
+<pre tabindex="0"><code>p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
+while ((p != (PolicyInfo *) NULL) &amp;&amp; (authorized != MagickFalse))
+{
+  if ((p-&gt;domain == domain) &amp;&amp;
+      (GlobExpression(pattern,p-&gt;pattern,MagickFalse) != MagickFalse))
+    {
+      if (((rights &amp; ReadPolicyRights) != 0) &amp;&amp;
+          ((p-&gt;rights &amp; ReadPolicyRights) == 0))
+        authorized=MagickFalse;
+      if (((rights &amp; WritePolicyRights) != 0) &amp;&amp;
+          ((p-&gt;rights &amp; WritePolicyRights) == 0))
+        authorized=MagickFalse;
+      if (((rights &amp; ExecutePolicyRights) != 0) &amp;&amp;
+          ((p-&gt;rights &amp; ExecutePolicyRights) == 0))
+        authorized=MagickFalse;
+    }
+  p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
+}
+</code></pre><p>先勝ちでも後がちでもなく False 勝ちルールのようです。。</p>
+<h1 id="true-は何のため">True は何のため？</h1>
+<p>False が一つでもマッチすると拒否するのだったら、True は何の為にあるの？と一瞬戸惑いましたが、write だけ、read だけといった区別で使っているようです。</p>
+<h1 id="結論">結論</h1>
+<p>残念でした</p>
+<ul>
+<li><a href="https://twitter.com/yoya/status/795515839042580481">https://twitter.com/yoya/status/795515839042580481</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="結局どうすればいいの">結局、どうすればいいの？</h2>
+<h3 id="シグネチャを自分でチェック">シグネチャを自分でチェック</h3>
+<p>画像ファイルは先頭の3,4バイトを見れば、だいたい区別出来るので。ImageMagick に画像ファイルを渡す前に自分でチェックする方法があります。</p>
+<ul>
+<li>JPEG: &ldquo;\xff\xd8\xff&rdquo;</li>
+<li>PNG: &ldquo;\x89PNG&rdquo;</li>
+<li>GIF: &ldquo;GIF&rdquo;</li>
+</ul>
+<h3 id="ブラックリストで頑張る">ブラックリストで頑張る</h3>
+<p>あとは、</p>
+<pre tabindex="0"><code>$ convert -list coder
+
+Path: [built-in]
+
+Magick      Coder
+-------------------------------------------------------------------------------
+IMPLICIT    ***
+BGRA        BGR
+BGRO        BGR
+BMP3        BMP
+BMP2        BMP
+＜略＞
+</code></pre><p>で出てくる符号化を全部ブラックリストとして列挙して、必要なものだけコメントアウトする方法があります。</p>
+<p>ちょっと辛いし、ImageMagick に新規フォーマットが追加された時の追随が面倒。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

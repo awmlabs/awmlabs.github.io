@@ -1,0 +1,193 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="JPEG と ICC プロファイル | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>JPEG と ICC プロファイル - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/09/10/jpegicc/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/09/10/jpegicc/" class="hatena-bookmark-button" data-hatena-bookmark-title="JPEG と ICC プロファイル" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/09/10/jpegicc/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-09-10">September 10, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/jpeg">JPEG</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">JPEG と ICC プロファイル</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rgb-のデフォルト">RGB のデフォルト</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#cmyk-のデフォルト">CMYK のデフォルト(?)</a></li>
+  </ul>
+</nav>
+    <h1 id="jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</h1>
+<p>JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。</p>
+<h1 id="rgb-色空間">RGB 色空間</h1>
+<p>例えば赤を表す RGB:(255,0,0) 。
+世の中に数あるディスプレイが各々全力で鮮やかな赤を表示すると全部色が違ってしまうので、そこそこ鮮やかな赤色に抑える事で実際に表示する色を統一する規格が色々と存在します。</p>
+<p>一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。</p>
+<pre tabindex="0"><code>sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
+</code></pre><p>これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。</p>
+<!-- raw HTML omitted -->
+<p>又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。</p>
+<!-- raw HTML omitted -->
+<p>あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。</p>
+<h2 id="rgb-のデフォルト">RGB のデフォルト</h2>
+<p>Web の世界では sRGB が標準です。</p>
+<ul>
+<li>A Standard Default Color Space for the Internet - sRGB
+<ul>
+<li><a href="https://www.w3.org/Graphics/Color/sRGB.html">https://www.w3.org/Graphics/Color/sRGB.html</a></li>
+</ul>
+</li>
+</ul>
+<p>ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。(少なくとも Safari では) <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<!-- raw HTML omitted -->
+<p>高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。</p>
+<h1 id="cmyk-色空間">CMYK 色空間</h1>
+<p>プリンタに出力する色は CMYK で表現します。
+Cyan, Magenta, Yellow, blacK <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> で各々インクの量です。</p>
+<p>CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。</p>
+<pre tabindex="0"><code>Japan Color, US SWOP, FOGRA, ...
+</code></pre><p>(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)</p>
+<p>RGB と CMYK は大雑把に以下の関係にあります。</p>
+<!-- raw HTML omitted -->
+<p>なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。</p>
+<ul>
+<li>ImageMagick: magick/colorspace-private.h</li>
+</ul>
+<pre tabindex="0"><code>cyan    = 1.0 - red;
+magenta = 1.0 - green;
+yellow  = 1.0 - blue;
+(一番小さな値を black にしてその分補正)
+</code></pre><p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。</p>
+<!-- raw HTML omitted -->
+<p>&ldquo;cyan = 1.0 - red&rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。</p>
+<h2 id="cmyk-のデフォルト">CMYK のデフォルト(?)</h2>
+<p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。</p>
+<p>ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。</p>
+<p>例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>を用いるようです。</p>
+<pre tabindex="0"><code>/System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
+</code></pre><p>CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> は大丈夫でしょう。</p>
+<p>Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK =&gt; RGB 処理を行うようで、話が少し面倒だったりします。</p>
+<h1 id="参考">参考</h1>
+<ul>
+<li>カラーマネージメントとプロファイル変換
+<ul>
+<li><a href="http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html">http://w3.kcua.ac.jp/~fujiwara/infosci/colorman/color_manage.html</a></li>
+</ul>
+</li>
+<li>まだCMYKで消耗してるの？〜大幅な色補正をCMYKで行ってはいけない理由〜
+<ul>
+<li><a href="http://www.iwashi.org/archives/4108">http://www.iwashi.org/archives/4108</a></li>
+</ul>
+</li>
+<li>紙デザイナーのためのrgbカラー超入門
+<ul>
+<li><a href="http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80">http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門</a></li>
+</ul>
+</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>JPEG は RGB 値をYCbCrに変換して保存します&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>最近の FireFox のデフォルト設定だと、ICC プロファイルが入っていないと何も補正しないそうです。そのままディスプレイのプロファイルで解釈されます。辛い。。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>blacK の K という説より、Key の略という方が多勢のようです。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) <a href="https://www.jagat.or.jp/past_archives/content/view/3083.html">https://www.jagat.or.jp/past_archives/content/view/3083.html</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

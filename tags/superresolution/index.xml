@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SuperResolution on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/superresolution/</link>
+    <description>Recent content in SuperResolution on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sat, 11 Mar 2017 21:37:25 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/superresolution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) おまけ:アルゴリズム改造</title>
+      <link>https://blog.awm.jp/2017/03/11/fcbi/</link>
+      <pubDate>Sat, 11 Mar 2017 21:37:25 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/03/11/fcbi/</guid>
+      <description>はじめに この記事の続きです。 エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解 https://blog.awm.jp/2017/03/08/fcbi/ 弱点の部分を改造したら、なんとなく良い結果を得ら</description>
+    </item>
+    <item>
+      <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解</title>
+      <link>https://blog.awm.jp/2017/03/08/fcbi/</link>
+      <pubDate>Wed, 08 Mar 2017 14:11:00 +0900</pubDate>
+      <guid>https://blog.awm.jp/2017/03/08/fcbi/</guid>
+      <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、分かりにくかった点を補足しつつ、全面的に一から解説し直します。</description>
+    </item>
+    <item>
+      <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
+      <link>https://blog.awm.jp/2017/03/07/fcbi/</link>
+      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2017/03/07/fcbi/</guid>
+      <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回は</description>
+    </item>
+  </channel>
+</rss>

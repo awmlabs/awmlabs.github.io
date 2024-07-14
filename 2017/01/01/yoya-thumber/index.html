@@ -1,0 +1,134 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="yoya-thumber と go-thumber | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>yoya-thumber と go-thumber - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/01/01/yoya-thumber/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/01/01/yoya-thumber/" class="hatena-bookmark-button" data-hatena-bookmark-title="yoya-thumber と go-thumber" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/01/01/yoya-thumber/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-01-01">January 01, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/graphics">Graphics</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/yoya-thumber">yoya-thumber</a>
+
+        <a href="https://blog.awm.jp/tags/go-thumber">go-thumber</a>
+
+        <a href="https://blog.awm.jp/tags/golang">Golang</a>
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">yoya-thumber と go-thumber</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents"></nav>
+    <h1 id="はじめに">はじめに</h1>
+<p>go-thumber は Pivix さんの公開している画像リサイズプロキシです。</p>
+<ul>
+<li><a href="https://github.com/pixiv/go-thumber">https://github.com/pixiv/go-thumber</a></li>
+</ul>
+<p>yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。
+Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ直し、文字入れや画像合成の機能を追加しました。</p>
+<ul>
+<li><a href="https://github.com/smartnews/yoya-thumber">https://github.com/smartnews/yoya-thumber</a></li>
+<li><a href="http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/">http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/</a></li>
+</ul>
+<h1 id="go-thumber">go-thumber</h1>
+<p>go-thumber を構成するディレクトリです。</p>
+<pre tabindex="0"><code>$ git clone git@github.com:pixiv/go-thumber.git
+$ cd go-thumber
+$ ls
+LICENSE		jpeg		swscale		thumberd
+README.md	mkthumb		test-image	thumbnail
+</code></pre><ul>
+<li>jpeg： libjpeg を使って JPEG 画像の処理</li>
+<li>mkthumb: テスト用コマンドラインツール</li>
+<li>swscale: ffmpeg の libswscale を使って画像リサイズ</li>
+<li>thumberd: net/http でサーバ機能を実装 (処理の起点)</li>
+<li>thumbnail: パラメータに応じた画像リサイズ処理</li>
+</ul>
+<p>このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale の C言語 API にアクセスします。</p>
+<!-- raw HTML omitted -->
+<p>運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や GIF も扱いたいですし、文字入れや画像の重ね合わせもしたいといった要望に応じて、go-thumber を素直に拡張すると、libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする、大工事が想定されます。</p>
+<!-- raw HTML omitted -->
+<p>見るからに大変そうです。また go-thumber は jpeg に特化して作られているので png や gif に合わせて抽象化するのも手間がかかります。</p>
+<h1 id="yoya-thumber">yoya-thumber</h1>
+<p>GoImagick を介して画像処理の殆どをImageMagick に丸投げしたのが yoya-thumber です。</p>
+<!-- raw HTML omitted -->
+<p>まとめると、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。</p>
+<h1 id="あとがき">あとがき</h1>
+<p>続くかもしれません。</p>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GAS on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/gas/</link>
+    <description>Recent content in GAS on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 08 Nov 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/gas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GAS で GoogleDrive のフォルダ一覧</title>
+      <link>https://blog.awm.jp/2016/11/08/gas/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/08/gas/</guid>
+      <description>Google Apps Script 作成 まずは Google Drive 上で Apps Script のファイルを作成します。 フォルダの ID を調べます ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。 ls</description>
+    </item>
+  </channel>
+</rss>

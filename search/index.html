@@ -1,0 +1,72 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="Search | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>Search - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+    <div class="container">
+      
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
+
+
+<script type="text/javascript" src="https://blog.awm.jp/js/search.min.a465281fb40d05653128e3ef30da391ab5d611649391f13eb9e31587d0aef4dd424b79e542aa0d2362d3129d71cdae16d6a8247d86cb37fddd92649baeb78b70.js" integrity="sha512-pGUoH7QNBWUxKOPvMNo5GrXWEWSTkfE&#43;ueMVh9Cu9N1CS3nlQqoNI2LTEp1xza4W1qgkfYbLN/3dkmSbrreLcA=="></script>
+<main role="main" class="article-list">
+  <span class="search">
+    <h1 class="list-title">Search</h1>
+    <form action="https://blog.awm.jp/search">
+      <input id="search-query" name="s" class="search-box"/>
+    </form>
+  </span>
+  <h1 class="list-title">Matching pages</h1>
+  <div id="search-results" class="article-list"></div>
+</main>
+
+<script id="search-result-template" type="text/x-js-template">
+<article id="summary-${key}" class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="${link}">${title}</a></h2>
+  <div class="meta">
+    ${ isset tags }<br><span class="key">Tags:</span><span class="val"> ${tags}</span>${ end }
+    ${ isset categories }<br><span class="key">Categories:</span><span class="val"> ${categories}</span>${ end }
+    ${ isset date }<br><span class="key">published on:</span><span class="val"> <time itemprop="datePublished" datetime="${ date }">${dateFmt}</time></span>${ end }
+    ${ isset author }<br><span class="key">author:</span> <span class="val">${author}</span>${ end }
+  </div>
+  <section class="summary">${snippet}</section>
+</article>
+</script>
+
+    </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

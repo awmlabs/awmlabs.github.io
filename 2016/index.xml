@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2016s on awm-Tech</title>
+    <link>https://blog.awm.jp/2016/</link>
+    <description>Recent content in 2016s on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Fri, 18 Nov 2016 17:02:28 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/2016/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>任意のファイルから PNG を抜き出す</title>
+      <link>https://blog.awm.jp/2016/11/18/png/</link>
+      <pubDate>Fri, 18 Nov 2016 17:02:28 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/18/png/</guid>
+      <description>はじめに Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内包されている絵文字の PNG 画像データを抽出する事が目的です。 カラー絵文字 カ</description>
+    </item>
+    <item>
+      <title>GAS で GoogleDrive のフォルダ一覧</title>
+      <link>https://blog.awm.jp/2016/11/08/gas/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/08/gas/</guid>
+      <description>Google Apps Script 作成 まずは Google Drive 上で Apps Script のファイルを作成します。 フォルダの ID を調べます ファイル詳細で調べられますが、面倒なので URL から ID をコピペします。 ls</description>
+    </item>
+    <item>
+      <title>ImageMagick の policy.xml でホワイトリスト？</title>
+      <link>https://blog.awm.jp/2016/11/07/policy/</link>
+      <pubDate>Mon, 07 Nov 2016 23:51:30 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/07/policy/</guid>
+      <description>追記 (2018/11/20) ImageMagick 6.9.7-7 で policy.xml がホワイトリストに対応しました。 ImageMagick 6.9.7-7 から policy の挙動が変わりました https://blog.awm.jp/2017/02/09/imagemagick/ policy.xml ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。 $ convert -list configure</description>
+    </item>
+    <item>
+      <title>TIFF と Exif と JPEG</title>
+      <link>https://blog.awm.jp/2016/11/06/tiff/</link>
+      <pubDate>Sun, 06 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/06/tiff/</guid>
+      <description>JPEG と Exif と TIFF の関係 TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのま</description>
+    </item>
+    <item>
+      <title>TIFF フォーマットの分解</title>
+      <link>https://blog.awm.jp/2016/11/05/tiff/</link>
+      <pubDate>Sat, 05 Nov 2016 23:00:11 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/05/tiff/</guid>
+      <description>TIFF フォーマットの分解 最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で) https://github.com/yoya/IO_TIFF TIFF フォーマット仕様 仕様はこちらですが</description>
+    </item>
+    <item>
+      <title>DNG 画像のフォーマット (コンテナ編)</title>
+      <link>https://blog.awm.jp/2016/11/04/dng/</link>
+      <pubDate>Fri, 04 Nov 2016 23:14:09 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/04/dng/</guid>
+      <description>DNG 仕様書 Adobe DNG ヘルプにリンクがあります。 https://helpx.adobe.com/jp/photoshop/digital-negative.html http://wwwimages.adobe.com/content/dam/Adobe/en/products/photoshop/pdfs/dng_spec_1.4.0.0.pdf TIFF Compatible DNG is an extension of the TIFF 6.0 format, and is compatible with the TIFF-EP standard. It is possible (but not required) for a DNG file to simultaneously comply with both the Digital Negative specification and the TIFF-EP standard. TIFF のフォーマット</description>
+    </item>
+    <item>
+      <title>DNG 画像とは</title>
+      <link>https://blog.awm.jp/2016/11/03/dng/</link>
+      <pubDate>Thu, 03 Nov 2016 21:06:03 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/03/dng/</guid>
+      <description>DNG 画像とは？ Adobe 社が規格した画像形式で、RAW 画像の一種です。 Photoshop ヘルプ / Digital Negative （DNG） https://helpx.adobe.com/jp/photoshop/digital-negative.html RAW 画像は、カメラメーカーが各々独自の規格を出しています</description>
+    </item>
+    <item>
+      <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
+      <link>https://blog.awm.jp/2016/11/02/dng/</link>
+      <pubDate>Wed, 02 Nov 2016 21:09:00 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
+      <description>はじめに 利用するもの PC (MacBook Pro) 以下のどちらか Adobe Lightroom CC Adobe Photoshop CC DNG 画像の入手法 iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。 iPhone7 Plus で撮影した DNG 画像を</description>
+    </item>
+    <item>
+      <title>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法</title>
+      <link>https://blog.awm.jp/2016/11/01/dng/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
+      <description>必要なもの 実機 iPhone7 Plus (iPhone7 は試してません。所持してないので) PC (MacBook Pro で確認しました) アカウント Adobe Cloud アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有</description>
+    </item>
+    <item>
+      <title>JPEG と ICC プロファイル</title>
+      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 尚</description>
+    </item>
+    <item>
+      <title>RGBA4444 の追加実験</title>
+      <link>https://blog.awm.jp/2016/07/22/rgb444a4/</link>
+      <pubDate>Fri, 22 Jul 2016 11:55:28 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/07/22/rgb444a4/</guid>
+      <description>RGBA4444 の追加実験 RGB444 変換で劣化しない画像を ImageMagick で作る https://blog.awm.jp/2016/07/21/rgb444/ RGBA4444 変換で劣化しない画像を ImageMagick で作る https://blog.awm.jp/2016/07/22/rgba4444/ RGBA4444 のチャンネル分離してディザをかける方法だと色合いが変わって</description>
+    </item>
+    <item>
+      <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
+      <link>https://blog.awm.jp/2016/07/22/rgba4444/</link>
+      <pubDate>Fri, 22 Jul 2016 09:10:28 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/07/22/rgba4444/</guid>
+      <description>RGBA4444 変換で劣化しない画像を ImageMagick で作る RGB444 変換で劣化しない画像を ImageMagick で作る http://blog.awm.jp/2016/07/21/rgb444/ 前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含</description>
+    </item>
+    <item>
+      <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
+      <link>https://blog.awm.jp/2016/07/21/rgb444/</link>
+      <pubDate>Thu, 21 Jul 2016 21:28:11 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
+      <description>RGB444 変換で劣化しない画像を ImageMagick で作る 詳しい話は以下のサイトに任せるとして、 Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた http://design.kayac.com/topics/2014/02/unity-RGBA4444.php P</description>
+    </item>
+    <item>
+      <title>JPEG のクロマサブサンプリングと YUVabc</title>
+      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <description>JPEG のクロマサブサンプリングと YUVabc YCbCr については以下のページで紹介しました。 JPEG の YCbCr について https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr のメリットとして説明したクロマサブサンプリングの種類</description>
+    </item>
+    <item>
+      <title>JPEG の YCbCr について</title>
+      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <description>JPEG の YCbCr について JPEG で保存する色は RGB でなく YCbCr なので、その話。 RGB &amp;lt;=&amp;gt; YCbCr RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式</description>
+    </item>
+    <item>
+      <title>ImageMagick で PNG の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/png/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:42 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/26/png/</guid>
+      <description>ImageMagick で PNG の形式を変換 PNG は見た目が同じ画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べて</description>
+    </item>
+    <item>
+      <title>ImageMagick で GIF の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <description>ImageMagick で GIF の形式を変換 GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
+    </item>
+    <item>
+      <title>ImageMagick で JPEG の形式を変換</title>
+      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <description>ImageMagick で JPEG の形式を変換 JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
+    </item>
+    <item>
+      <title>透明度を含む画像を JPEG に変換する時の背景色</title>
+      <link>https://blog.awm.jp/2016/01/25/flatten/</link>
+      <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
+      <description>透明度を含む画像を JPEG に変換する時の背景色 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 透過画像をそのまま JPEG に変換すると背景色が黒になるので、 白</description>
+    </item>
+    <item>
+      <title>ImageMagick で画像を比較する</title>
+      <link>https://blog.awm.jp/2016/01/25/diff/</link>
+      <pubDate>Mon, 25 Jan 2016 01:51:23 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/25/diff/</guid>
+      <description>ImageMagick で画像を比較する もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 サムネイル周りに何か修正を入れたら修正前後の画像を比較しましょう。 機械によるバ</description>
+    </item>
+    <item>
+      <title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</title>
+      <link>https://blog.awm.jp/2016/01/25/imagemagick/</link>
+      <pubDate>Mon, 25 Jan 2016 00:32:35 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
+      <description>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエ</description>
+    </item>
+    <item>
+      <title>JPEG の size hinting について</title>
+      <link>https://blog.awm.jp/2016/01/08/jpeghint/</link>
+      <pubDate>Fri, 08 Jan 2016 23:40:32 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
+      <description>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 いつでもつければ良いというものではないので</description>
+    </item>
+    <item>
+      <title>JPEG Exif Orientation の操作</title>
+      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <description>JPEG Exif Orientation の操作 Orientation とは JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。 その中に、画像を表示</description>
+    </item>
+    <item>
+      <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
+      <link>https://blog.awm.jp/2016/01/06/orient/</link>
+      <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
+      <description>-auto-orient でオフセットがズレる件 例のエントリにもう一件便乗。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 ただ、ImageMagick といえど Orientation 画像の</description>
+    </item>
+    <item>
+      <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
+      <link>https://blog.awm.jp/2016/01/06/gray/</link>
+      <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
+      <description>グレー形式JPEGをPNGに変換すると暗くなる件 画像サムネール界隈で話題のエントリ もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 -limit memory でのリソー</description>
+    </item>
+    <item>
+      <title>ImageMagick でサムネール画像生成</title>
+      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
+      <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
+      <description>ImageMagick でサムネール画像生成 初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。 ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自</description>
+    </item>
+    <item>
+      <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
+      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <description>PNM と ImageMagick で画像ファイルを手作り生成 何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマット</description>
+    </item>
+    <item>
+      <title>Hugo の post テンプレートのカスタマイズ</title>
+      <link>https://blog.awm.jp/2016/01/03/hugo/</link>
+      <pubDate>Sun, 03 Jan 2016 22:03:24 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/03/hugo/</guid>
+      <description>Hugo の記事テンプレート hugo new を実行すると Markdown ファイルが作られます。 $ hugo new 2016/01/03/hugo.md /yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created しかしデフォルトの記事テンプレートが date = &amp;#34;2016-01-03T22:12:24+09:00&amp;#34; title = &amp;#34;test&amp;#34; のように date と title だけで</description>
+    </item>
+    <item>
+      <title>Blog の Deploy で Circle CI</title>
+      <link>https://blog.awm.jp/2016/01/02/circleci/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
+      <description>Blog の Deploy で Circle CI 昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、</description>
+    </item>
+    <item>
+      <title>Hugo のサマリーが大きすぎる件</title>
+      <link>https://blog.awm.jp/2016/01/02/hugo/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/02/hugo/</guid>
+      <description>はじめに Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。 config.toml の頭に hasCJKLanguage = true を入れる もしくは、</description>
+    </item>
+    <item>
+      <title>Blog はじめました</title>
+      <link>https://blog.awm.jp/2016/01/01/blog/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
+      <description>Blog はじめました WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。 https://twitter.com/nobu666/status/680683739534393344 CircleCI 対応は時間かかりそうなので、デプ</description>
+    </item>
+  </channel>
+</rss>

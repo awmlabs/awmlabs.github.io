@@ -1,0 +1,196 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除 | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除 - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2017/06/11/imicc/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2017/06/11/imicc/" class="hatena-bookmark-button" data-hatena-bookmark-title="ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2017/06/11/imicc/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2017-06-11">June 11, 2017</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/icc">ICC</a>
+
+        <a href="https://blog.awm.jp/tags/jpeg">JPEG</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#お勧めコマンド">お勧めコマンド</a></li>
+    <li><a href="#メタデータを全て削除">メタデータを全て削除</a></li>
+    <li><a href="#exif-orientation">Exif Orientation</a></li>
+    <li><a href="#icc-プロファイル">ICC プロファイル</a>
+      <ul>
+        <li><a href="#最近の環境">最近の環境</a></li>
+        <li><a href="#古い環境-icc-プロファイルが無視される場合">古い環境 (ICC プロファイルが無視される場合)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h1 id="はじめに">はじめに</h1>
+<p>色域って何？ ICC プロファイルって何？という人は、 前置きのエントリをどうぞ。</p>
+<ul>
+<li>ImageMagick で ICC プロファイルを扱う #1 前置き
+<ul>
+<li><a href="http://blog.awm.jp/2017/06/10/imicc/">http://blog.awm.jp/2017/06/10/imicc/</a></li>
+</ul>
+</li>
+</ul>
+<p>本エントリでは、ImageMagick コマンドで JPEG のメタデータを消す時の ICC プロファイルへの配慮について説明します</p>
+<p>ImageMagick を使った ICC プロファイルの操作については、以下のエントリをどうぞ。(タイトルが不適切だったので、タイトルにあったエントリを作りました)</p>
+<ul>
+<li>ImageMagick で ICC プロファイルを扱う #3 コマンド解説
+<ul>
+<li><a href="http://blog.awm.jp/2017/08/06/imicc/">http://blog.awm.jp/2017/08/06/imicc/</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="jpeg-メタデータ">JPEG メタデータ</h1>
+<p>JPEG ファイルは画像データ以外にメタデータとして、プライベートな情報を含む事があります。</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>撮影日時</li>
+<li>撮影場所 (GPS情報)</li>
+<li>カメラの機種、レンズ。</li>
+<li>カメラの撮影設定詳細。露光とか</li>
+<li>サムネール画像 (上書き保存前の画像の事もある。。こわい。。)</li>
+<li>その他諸々。。。</li>
+</ul>
+<p>JPEG 画像を不特定多数に公開する時は、これらを削除する方が良いでしょう。
+尚、大手の画像投稿サービスであれば、少なくとも GPS 情報は自動で削除してくれるはずです。(自宅の住所を全世界に公開するのは怖すぎます)</p>
+<h1 id="imagemagick-で-jpeg-メタデータを削除">ImageMagick で JPEG メタデータを削除</h1>
+<h2 id="お勧めコマンド">お勧めコマンド</h2>
+<p>完璧な方法が無いのは後述しますが、先に結論を言うと、このコマンドがお勧めです。</p>
+<pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>ここから先の文章は、このコマンドに至るまでの解説です。</p>
+<h2 id="メタデータを全て削除">メタデータを全て削除</h2>
+<p>ImageMagick は -strip オプションで画像のメタデータを全て削除できます。
+ネットで検索して見つかるのは大体この方法です。</p>
+<pre tabindex="0"><code>$ convert in.jpg -strip out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>しかし、メタデータの中には表示に影響するものがあるので、単純に -strip するだけの方法はお勧めしません。</p>
+<h2 id="exif-orientation">Exif Orientation</h2>
+<p>撮影時にカメラの向きを Exif の Orientation タグに記録して、表示する際に画像を回転させる方式です。画像のメタデータを単純に削除すると、画像を表示する向きが意図しない方向に変わってしまう事があります。</p>
+<!-- raw HTML omitted -->
+<p>ImageMagick には Orientationタグに応じて画像データ自体を回転させた上で、このタグを削除するオプションがあります。</p>
+<pre tabindex="0"><code>$ convert in.jpg -auto-orient out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>こうしておけば、その後で -strip をしても(向きに関しては)大丈夫です。</p>
+<pre tabindex="0"><code>$ convert in.jpg -auto-orient -strip out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>ただし、-strip をすると ICC プロファイルまで削除してしまう問題があります。</p>
+<h2 id="icc-プロファイル">ICC プロファイル</h2>
+<p>ICC プロファイルを単純に消すと色味が変わる可能性があります。
+対処としては以下の２つの方法が考えられます。</p>
+<ul>
+<li>メタデータのうち ICC プロファイルだけ残す (最近の環境向け)</li>
+<li>画像のピクセルデータ自体の RGB 値を ICC プロファイルの色空間から sRGB 相当の RGB 値に変換した上で、ICC プロファイルを sRGB 相当に差し替える (古い環境向け)</li>
+</ul>
+<h3 id="最近の環境">最近の環境</h3>
+<p>今どきの PC 環境や新し目のスマートフォンであれば ICC プロファイルに対応したカラーマネジメントシステムが搭載されているはずなので、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残すと良いです。</p>
+<pre tabindex="0"><code>$ convert in.jpg +profile &#39;!icc,*&#39; out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除するオプションです。* (ワイルドカード)指定で全て削除しますが、!icc をつける事で ICC プロファイルだけ残せます。</p>
+<p>また、単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、-auto-orient も付けた方が良いでしょう。</p>
+<pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>これが冒頭で紹介したお勧めコマンドです。</p>
+<h3 id="古い環境-icc-プロファイルが無視される場合">古い環境 (ICC プロファイルが無視される場合)</h3>
+<p>古い PC やスマートフォンだと、ICC プロファイルで RGB を補正せずそのままモニタに出力する環境があります。具体的にはモニタが sRGB なら sRGBとして、AdobeRGB なら AdobeRGB として RGB の色を表示します。</p>
+<p>このケースへの完璧な対策はありませんが、世の中のディスプレイは sRGB 対応が多い事を考慮すると、画像データを埋め込まれた ICC プロファイルの色空間から sRGB 相当の RGB 値に変換した上で、sRGB の ICC プロファイルを埋め込むのが無難です。</p>
+<pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; -profile sRGB.icc out.jpg
+</code></pre><!-- raw HTML omitted -->
+<p>AdobeRGB  や P3 で撮影した画像だと sRGB の色域に押し込められて犠牲になる色も出ますが、どのみち古い環境だと表示できない事が多いと思って妥協するという状況になります。</p>
+<h1 id="最後に">最後に</h1>
+<p>これら以外にも DCF オプション色空間という規格があり、これでも色空間を指定できるのですが、今回は割愛させて下さい。</p>
+<h1 id="参考url">参考URL</h1>
+<ul>
+<li>拡張色空間の国際標準化動向と広色域ディスプレイ
+<ul>
+<li><a href="https://www.jsa.or.jp/datas/media/10000/md_796.pdf">https://www.jsa.or.jp/datas/media/10000/md_796.pdf</a></li>
+</ul>
+</li>
+<li>DCF 2.0 (2010年年版)
+<ul>
+<li><a href="http://www.cipa.jp/std/documents/j/DC-009-2010_J.pdf">http://www.cipa.jp/std/documents/j/DC-009-2010_J.pdf</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

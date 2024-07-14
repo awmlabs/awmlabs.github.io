@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Index on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/index/</link>
+    <description>Recent content in Index on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Tue, 26 Jan 2016 18:09:45 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/index/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>目次</title>
+      <link>https://blog.awm.jp/contents/</link>
+      <pubDate>Tue, 26 Jan 2016 18:09:45 +0900</pubDate>
+      <guid>https://blog.awm.jp/contents/</guid>
+      <description>ImageMagick ImageMagick でサムネール画像生成 https://blog.awm.jp/2016/01/05/thumbnail/ ImageMagick で画像を比較する https://blog.awm.jp/2016/01/25/diff/ もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 http://blog.awm.jp/2016/01/25/imagemagick/ グレー形式JPEGをPNGに変換すると暗くな</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on awm-Tech</title>
+    <link>https://blog.awm.jp/categories/hugo/</link>
+    <description>Recent content in Hugo on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 03 Jan 2016 22:03:24 +0900</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo の post テンプレートのカスタマイズ</title>
+      <link>https://blog.awm.jp/2016/01/03/hugo/</link>
+      <pubDate>Sun, 03 Jan 2016 22:03:24 +0900</pubDate>
+      <guid>https://blog.awm.jp/2016/01/03/hugo/</guid>
+      <description>Hugo の記事テンプレート hugo new を実行すると Markdown ファイルが作られます。 $ hugo new 2016/01/03/hugo.md /yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created しかしデフォルトの記事テンプレートが date = &amp;#34;2016-01-03T22:12:24+09:00&amp;#34; title = &amp;#34;test&amp;#34; のように date と title だけで</description>
+    </item>
+    <item>
+      <title>Hugo のサマリーが大きすぎる件</title>
+      <link>https://blog.awm.jp/2016/01/02/hugo/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/02/hugo/</guid>
+      <description>はじめに Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。 config.toml の頭に hasCJKLanguage = true を入れる もしくは、</description>
+    </item>
+  </channel>
+</rss>

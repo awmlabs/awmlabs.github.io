@@ -1,0 +1,186 @@
+<!doctype html5>
+<html lang="ja-JP">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="awmlabs"><meta name="theme-color" content="#2d2d2d">
+  <meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yoya"><meta property="og:type" content="blog">
+  <meta property="og:title"content="RGBA4444 変換で劣化しない画像を ImageMagick で作る | awm-Tech">
+  <meta property="og:url" content="https://blog.awm.jp/">
+  <meta property="og:site_name" content="Base16">
+  
+  
+  <link rel="stylesheet" href="https://blog.awm.jp/style.4bd310721b0b4df95fea15312794ee594430a1e9407d68d9efa75b4357f918950914b350d1b9f6bfe21dda649a99e6a8a71fbc6542f7b4b87465b936b56a4fed.css" type="text/css"integrity="sha512-S9MQchsLTflf6hUxJ5TuWUQwoelAfWjZ76dbQ1f5GJUJFLNQ0bn2v&#43;Id2mSameaopx&#43;8ZUL3tLh0Zbk2tWpP7Q==" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="awm-Tech">
+  <link rel="shortcut icon" type="image/x-icon" href="https://blog.awm.jp/favicon.ico">
+  <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る - awm-Tech</title>
+</head>
+
+  <body>
+    <header>
+  <div class="container clearfix">
+    <a class="path" href="https://blog.awm.jp/">[awm-Tech]</a>
+    <span class="caret">#_</span>
+    <div class="right">
+      
+      <a class="path" href="https://blog.awm.jp/search">/Search</a>
+    </div>
+  </div>
+</header>
+
+      <div class="container">
+        <main role="main" class="article">
+          
+
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+    <div style="float:left;">  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href=" https://blog.awm.jp/2016/07/22/rgba4444/" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+<a href="https://b.hatena.ne.jp/entry/blog.awm.jp/2016/07/22/rgba4444/" class="hatena-bookmark-button" data-hatena-bookmark-title="RGBA4444 変換で劣化しない画像を ImageMagick で作る" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリー
+をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://blog.awm.jp/2016/07/22/rgba4444/" data-lang="ja" data-hashtags="awmtech">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+ </div>
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-07-22">July 22, 2016</time></span>
+
+
+    <span class="key">in</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/categories/imagemagick">ImageMagick</a>
+
+    </span>
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="https://blog.awm.jp/tags/imagemagick">ImageMagick</a>
+
+        <a href="https://blog.awm.jp/tags/rgba4444">RGBA4444</a>
+
+        <a href="https://blog.awm.jp/tags/rgb444">RGB444</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">RGBA4444 変換で劣化しない画像を ImageMagick で作る</h1>
+
+  <section class="body" itemprop="articleBody">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#変換方法-ブログを参考に-rgba4444">変換方法 (ブログを参考に) RGBA4444</a>
+      <ul>
+        <li><a href="#テスト画像">テスト画像</a></li>
+        <li><a href="#パレット画像の準備">パレット画像の準備</a></li>
+        <li><a href="#実行コマンド">実行コマンド</a></li>
+      </ul>
+    </li>
+    <li><a href="#テスト２-rgb444">テスト２ (RGB444)</a></li>
+    <li><a href="#追試">追試</a></li>
+    <li><a href="#参考-url">参考 URL</a></li>
+  </ul>
+</nav>
+    <h1 id="rgba4444-変換で劣化しない画像を-imagemagick-で作る">RGBA4444 変換で劣化しない画像を ImageMagick で作る</h1>
+<ul>
+<li>RGB444 変換で劣化しない画像を ImageMagick で作る
+<ul>
+<li><a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a></li>
+</ul>
+</li>
+</ul>
+<p>前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含むんだ時のディザ処理が苦手のようです。</p>
+<p>以下のサイトで紹介されている、色のチャネル(RGBA)毎に個別にディザをかける方法だとうまくいきます。</p>
+<ul>
+<li>[unity][cg_tools] RGBA4444に変換できるツール
+<ul>
+<li><a href="http://blawat2015.no-ip.com/~mieki256/diary/201402154.html">http://blawat2015.no-ip.com/~mieki256/diary/201402154.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="変換方法-ブログを参考に-rgba4444">変換方法 (ブログを参考に) RGBA4444</h2>
+<h3 id="テスト画像">テスト画像</h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="パレット画像の準備">パレット画像の準備</h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>参照した記事では 0xfff を 0xf0f0f0 と 0xffffff のどちらで表わそうか迷ってますが、最大値の 0xfff は 0xffffff でしか表現出来ないので、後者を採用してます。</p>
+<p>尚、PNG は仕様で後者である事が示されています &gt; <a href="https://www.w3.org/TR/PNG/#12Sample-depth-scaling">https://www.w3.org/TR/PNG/#12Sample-depth-scaling</a></p>
+<h3 id="実行コマンド">実行コマンド</h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>尚、ディザ変換をせずに Unity 等に RGBA4444 指定で渡した場合は、以下のようになるはずです。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>これよりは予め自分でディザをかけた方が良いはずです。</p>
+<h2 id="テスト２-rgb444">テスト２ (RGB444)</h2>
+<p>RGB 画像でも同じ方法で変換できます。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>透明度がない画像は -channel RGB でも同じ結果を得られます。</p>
+<p>尚、今回の方法は原色が強く出すぎる傾向があるので、前回説明した方法( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> )の方が良い結果が得られそうです。</p>
+<h2 id="追試">追試</h2>
+<p>RGB と A で分離して、RGB は前回の方法、A は今回の方法の組み合わせで実験しました。</p>
+<ul>
+<li>RGBA4444 の追加実験
+<ul>
+<li><a href="https://blog.awm.jp/2016/07/22/rgb444a4/">https://blog.awm.jp/2016/07/22/rgb444a4/</a></li>
+</ul>
+</li>
+</ul>
+<p>RGBA をバラバラにする今回の方法と結果が変わらないので、唯の参考です。</p>
+<h2 id="参考-url">参考 URL</h2>
+<ul>
+<li>Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた
+<ul>
+<li><a href="http://design.kayac.com/topics/2014/02/unity-RGBA4444.php">http://design.kayac.com/topics/2014/02/unity-RGBA4444.php</a></li>
+</ul>
+</li>
+<li>Unityで、もっとキレイな16bitカラーテクスチャを使おう！
+<ul>
+<li><a href="http://www.webtech.co.jp/blog/game-develop/unity/2562/">http://www.webtech.co.jp/blog/game-develop/unity/2562/</a></li>
+</ul>
+</li>
+<li>Dither using Pre-Defined Color Maps
+<ul>
+<li><a href="http://www.imagemagick.org/Usage/quantize/#remap">http://www.imagemagick.org/Usage/quantize/#remap</a></li>
+</ul>
+</li>
+<li>Gradients in other Colorspaces
+<ul>
+<li><a href="http://www.imagemagick.org/Usage/canvas/#gradient_colorspace">http://www.imagemagick.org/Usage/canvas/#gradient_colorspace</a></li>
+</ul>
+</li>
+<li>PNG Specification 12.5 Sample depth scaling
+<ul>
+<li><a href="https://www.w3.org/TR/PNG/#12Sample-depth-scaling">https://www.w3.org/TR/PNG/#12Sample-depth-scaling</a></li>
+</ul>
+</li>
+</ul>
+
+  </section>
+</article>
+
+        </main>
+      </div>
+    <footer>
+  <div class="container">
+    <span class="copyright">&copy; 2020 awm-Tech - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+  </body>
+</html>

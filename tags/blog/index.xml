@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on awm-Tech</title>
+    <link>https://blog.awm.jp/tags/blog/</link>
+    <description>Recent content in Blog on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.awm.jp/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog の Deploy で Circle CI</title>
+      <link>https://blog.awm.jp/2016/01/02/circleci/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/02/circleci/</guid>
+      <description>Blog の Deploy で Circle CI 昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、</description>
+    </item>
+    <item>
+      <title>Hugo のサマリーが大きすぎる件</title>
+      <link>https://blog.awm.jp/2016/01/02/hugo/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://blog.awm.jp/2016/01/02/hugo/</guid>
+      <description>はじめに Hugo でブログサイトを作ってみたけれど、サマリーが大きすぎるので行数を減らしたかった。結論は以下の通り。 config.toml の頭に hasCJKLanguage = true を入れる もしくは、</description>
+    </item>
+  </channel>
+</rss>

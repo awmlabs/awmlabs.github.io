@@ -1,0 +1,11 @@
+<html>
+<body bgcolor="#808080">
+<canvas id="canvas" width=600 height=600> </canvas> 
+<br>
+|
+Hue:<span id="hue"> . </span> |
+Salute:<span id="salute"> . </span> |
+Luminant:<span id="luminant"> . </span> |
+<script type="text/javascript" src="./color.js"> </script>
+</body>
+</html>
