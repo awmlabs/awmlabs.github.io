@@ -2,88 +2,88 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2017s on awm-Tech</title>
-    <link>https://blog.awm.jp/2017/</link>
+    <link>https://awmlabs.github.io/2017/</link>
     <description>Recent content in 2017s on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sun, 06 Aug 2017 11:59:20 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/2017/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/2017/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #3 コマンド解説</title>
-      <link>https://blog.awm.jp/2017/08/06/imicc/</link>
+      <link>https://awmlabs.github.io/2017/08/06/imicc/</link>
       <pubDate>Sun, 06 Aug 2017 11:59:20 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/08/06/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/08/06/imicc/</guid>
       <description>はじめに このエントリの続きです。 ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜 JPEG のメタデータ削除 http://blog.awm.jp/2017/06/11/imicc/ ImageMagick で JPEG に埋め込まれた ICC プロファイルを操作する JPEG</description>
     </item>
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除</title>
-      <link>https://blog.awm.jp/2017/06/11/imicc/</link>
+      <link>https://awmlabs.github.io/2017/06/11/imicc/</link>
       <pubDate>Sun, 11 Jun 2017 01:13:05 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/06/11/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/06/11/imicc/</guid>
       <description>はじめに 色域って何？ ICC プロファイルって何？という人は、 前置きのエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #1 前置き http://blog.awm.jp/2017/06/10/imicc/ 本エントリでは、Image</description>
     </item>
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #1 前置き</title>
-      <link>https://blog.awm.jp/2017/06/10/imicc/</link>
+      <link>https://awmlabs.github.io/2017/06/10/imicc/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/06/10/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/06/10/imicc/</guid>
       <description>はじめに 前置きは要らない。ImageMagick コマンドの実行例を知りたいという人は、次のエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #2 コマン</description>
     </item>
     <item>
       <title>Guetzli - Perceptual JPEG encoder</title>
-      <link>https://blog.awm.jp/2017/03/17/guetzli/</link>
+      <link>https://awmlabs.github.io/2017/03/17/guetzli/</link>
       <pubDate>Fri, 17 Mar 2017 17:34:14 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/17/guetzli/</guid>
+      <guid>https://awmlabs.github.io/2017/03/17/guetzli/</guid>
       <description>公式情報 https://github.com/google/guetzli Announcing Guetzli: A New Open Source JPEG Encoder https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html Guetzli: Perceptually Guided JPEG Encoder https://arxiv.org/abs/1703.04421v1 Users prefer Guetzli JPEG over same-sized libjpeg https://arxiv.org/abs/1703.04416v1 はじめに Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで</description>
     </item>
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) おまけ:アルゴリズム改造</title>
-      <link>https://blog.awm.jp/2017/03/11/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/11/fcbi/</link>
       <pubDate>Sat, 11 Mar 2017 21:37:25 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/11/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/11/fcbi/</guid>
       <description>はじめに この記事の続きです。 エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解 https://blog.awm.jp/2017/03/08/fcbi/ 弱点の部分を改造したら、なんとなく良い結果を得ら</description>
     </item>
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解</title>
-      <link>https://blog.awm.jp/2017/03/08/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/08/fcbi/</link>
       <pubDate>Wed, 08 Mar 2017 14:11:00 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/08/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/08/fcbi/</guid>
       <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、分かりにくかった点を補足しつつ、全面的に一から解説し直します。</description>
     </item>
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
-      <link>https://blog.awm.jp/2017/03/07/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/07/fcbi/</link>
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/03/07/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/07/fcbi/</guid>
       <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回は</description>
     </item>
     <item>
       <title>ImageMagick 6.9.7-7 から policy の挙動が変わりました</title>
-      <link>https://blog.awm.jp/2017/02/09/imagemagick/</link>
+      <link>https://awmlabs.github.io/2017/02/09/imagemagick/</link>
       <pubDate>Thu, 09 Feb 2017 20:59:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/02/09/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/2017/02/09/imagemagick/</guid>
       <description>はじめに ImageMagick は組み込みコーデックで100種類以上、外部コマンド利用を含めると200種以上の画像形式をサポートしています。この中の一つでも脆弱性</description>
     </item>
     <item>
       <title>Behavior of policy changed from ImageMagick 6.9.7-7</title>
-      <link>https://blog.awm.jp/2017/02/09/imagemagick-en/</link>
+      <link>https://awmlabs.github.io/2017/02/09/imagemagick-en/</link>
       <pubDate>Thu, 09 Feb 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/02/09/imagemagick-en/</guid>
+      <guid>https://awmlabs.github.io/2017/02/09/imagemagick-en/</guid>
       <description>Introduction ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml 1 in the setting file to instruct permission(OK)/non-permission(NG) for each image format(domain=coder).&#xA;From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.&#xA;ImageMagick 6.9.7-6 NG if there is even one NG (false winning) ImageMagick 6.</description>
     </item>
     <item>
       <title>Go Imagick について</title>
-      <link>https://blog.awm.jp/2017/01/02/goimagick/</link>
+      <link>https://awmlabs.github.io/2017/01/02/goimagick/</link>
       <pubDate>Mon, 02 Jan 2017 14:15:26 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
+      <guid>https://awmlabs.github.io/2017/01/02/goimagick/</guid>
       <description>Go Imagick Go言語で ImageMagick の機能を使えるようにするパッケージです。 https://github.com/gographics/imagick 以前、Go Imagick の紹介スライドを作りました、参考にして下さい。 GoImagick でサムネール作成 https://speakerdeck.com/yoya/goimagickthumbnail ImageMagick の</description>
     </item>
     <item>
       <title>yoya-thumber と go-thumber</title>
-      <link>https://blog.awm.jp/2017/01/01/yoya-thumber/</link>
+      <link>https://awmlabs.github.io/2017/01/01/yoya-thumber/</link>
       <pubDate>Sun, 01 Jan 2017 23:11:14 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/01/yoya-thumber/</guid>
+      <guid>https://awmlabs.github.io/2017/01/01/yoya-thumber/</guid>
       <description>はじめに go-thumber は Pivix さんの公開している画像リサイズプロキシです。 https://github.com/pixiv/go-thumber yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。 Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ</description>
     </item>
   </channel>

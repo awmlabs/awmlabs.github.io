@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSS on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/css/</link>
+    <link>https://awmlabs.github.io/tags/css/</link>
     <description>Recent content in CSS on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blog はじめました</title>
-      <link>https://blog.awm.jp/2016/01/01/blog/</link>
+      <link>https://awmlabs.github.io/2016/01/01/blog/</link>
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2016/01/01/blog/</guid>
+      <guid>https://awmlabs.github.io/2016/01/01/blog/</guid>
       <description>Blog はじめました WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。 https://twitter.com/nobu666/status/680683739534393344 CircleCI 対応は時間かかりそうなので、デプ</description>
     </item>
   </channel>

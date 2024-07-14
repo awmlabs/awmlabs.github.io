@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>YUV on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/yuv/</link>
+    <link>https://awmlabs.github.io/tags/yuv/</link>
     <description>Recent content in YUV on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Wed, 10 Feb 2016 21:53:44 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JPEG のクロマサブサンプリングと YUVabc</title>
-      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <link>https://awmlabs.github.io/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <guid>https://awmlabs.github.io/2016/02/10/yuv/</guid>
       <description>JPEG のクロマサブサンプリングと YUVabc YCbCr については以下のページで紹介しました。 JPEG の YCbCr について https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr のメリットとして説明したクロマサブサンプリングの種類</description>
     </item>
     <item>
       <title>JPEG の YCbCr について</title>
-      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <link>https://awmlabs.github.io/2016/02/06/ycbcr/</link>
       <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <guid>https://awmlabs.github.io/2016/02/06/ycbcr/</guid>
       <description>JPEG の YCbCr について JPEG で保存する色は RGB でなく YCbCr なので、その話。 RGB &amp;lt;=&amp;gt; YCbCr RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式</description>
     </item>
   </channel>

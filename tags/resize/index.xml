@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Resize on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/resize/</link>
+    <link>https://awmlabs.github.io/tags/resize/</link>
     <description>Recent content in Resize on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Fri, 08 Jan 2016 23:40:32 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/resize/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/resize/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JPEG の size hinting について</title>
-      <link>https://blog.awm.jp/2016/01/08/jpeghint/</link>
+      <link>https://awmlabs.github.io/2016/01/08/jpeghint/</link>
       <pubDate>Fri, 08 Jan 2016 23:40:32 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
+      <guid>https://awmlabs.github.io/2016/01/08/jpeghint/</guid>
       <description>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 いつでもつければ良いというものではないので</description>
     </item>
   </channel>

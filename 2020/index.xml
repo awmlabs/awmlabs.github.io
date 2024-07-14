@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2020s on awm-Tech</title>
-    <link>https://blog.awm.jp/2020/</link>
+    <link>https://awmlabs.github.io/2020/</link>
     <description>Recent content in 2020s on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sat, 13 Jun 2020 15:44:39 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/2020/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/2020/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>各種ブラウザーの画像フォーマット対応</title>
-      <link>https://blog.awm.jp/2020/06/13/browsers/</link>
+      <link>https://awmlabs.github.io/2020/06/13/browsers/</link>
       <pubDate>Sat, 13 Jun 2020 15:44:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2020/06/13/browsers/</guid>
+      <guid>https://awmlabs.github.io/2020/06/13/browsers/</guid>
       <description>各種ブラウザーの画像フォーマット対応 はじめに http://yosbits.com/wordpress/?p=1683 画像のブラウザ対応 こちらのテーブルの最新版が欲しかったので、2020年版を作りました。Wiki</description>
     </item>
   </channel>

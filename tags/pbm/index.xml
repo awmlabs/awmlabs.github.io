@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PBM on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/pbm/</link>
+    <link>https://awmlabs.github.io/tags/pbm/</link>
     <description>Recent content in PBM on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Mon, 04 Jan 2016 19:38:39 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/pbm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/pbm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>https://awmlabs.github.io/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>https://awmlabs.github.io/2016/01/04/pnm/</guid>
       <description>PNM と ImageMagick で画像ファイルを手作り生成 何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマット</description>
     </item>
   </channel>

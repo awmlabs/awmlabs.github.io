@@ -2,60 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Graphics on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/graphics/</link>
+    <link>https://awmlabs.github.io/categories/graphics/</link>
     <description>Recent content in Graphics on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sat, 11 Mar 2017 21:37:25 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/categories/graphics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/categories/graphics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) おまけ:アルゴリズム改造</title>
-      <link>https://blog.awm.jp/2017/03/11/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/11/fcbi/</link>
       <pubDate>Sat, 11 Mar 2017 21:37:25 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/11/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/11/fcbi/</guid>
       <description>はじめに この記事の続きです。 エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解 https://blog.awm.jp/2017/03/08/fcbi/ 弱点の部分を改造したら、なんとなく良い結果を得ら</description>
     </item>
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解</title>
-      <link>https://blog.awm.jp/2017/03/08/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/08/fcbi/</link>
       <pubDate>Wed, 08 Mar 2017 14:11:00 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/08/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/08/fcbi/</guid>
       <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、分かりにくかった点を補足しつつ、全面的に一から解説し直します。</description>
     </item>
     <item>
       <title>エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方</title>
-      <link>https://blog.awm.jp/2017/03/07/fcbi/</link>
+      <link>https://awmlabs.github.io/2017/03/07/fcbi/</link>
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/03/07/fcbi/</guid>
+      <guid>https://awmlabs.github.io/2017/03/07/fcbi/</guid>
       <description>はじめに インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回は</description>
     </item>
     <item>
       <title>Go Imagick について</title>
-      <link>https://blog.awm.jp/2017/01/02/goimagick/</link>
+      <link>https://awmlabs.github.io/2017/01/02/goimagick/</link>
       <pubDate>Mon, 02 Jan 2017 14:15:26 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
+      <guid>https://awmlabs.github.io/2017/01/02/goimagick/</guid>
       <description>Go Imagick Go言語で ImageMagick の機能を使えるようにするパッケージです。 https://github.com/gographics/imagick 以前、Go Imagick の紹介スライドを作りました、参考にして下さい。 GoImagick でサムネール作成 https://speakerdeck.com/yoya/goimagickthumbnail ImageMagick の</description>
     </item>
     <item>
       <title>yoya-thumber と go-thumber</title>
-      <link>https://blog.awm.jp/2017/01/01/yoya-thumber/</link>
+      <link>https://awmlabs.github.io/2017/01/01/yoya-thumber/</link>
       <pubDate>Sun, 01 Jan 2017 23:11:14 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/01/yoya-thumber/</guid>
+      <guid>https://awmlabs.github.io/2017/01/01/yoya-thumber/</guid>
       <description>はじめに go-thumber は Pivix さんの公開している画像リサイズプロキシです。 https://github.com/pixiv/go-thumber yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。 Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ</description>
     </item>
     <item>
       <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
+      <link>https://awmlabs.github.io/2016/01/05/thumbnail/</link>
       <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
+      <guid>https://awmlabs.github.io/2016/01/05/thumbnail/</guid>
       <description>ImageMagick でサムネール画像生成 初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。 ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自</description>
     </item>
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>https://awmlabs.github.io/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>https://awmlabs.github.io/2016/01/04/pnm/</guid>
       <description>PNM と ImageMagick で画像ファイルを手作り生成 何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマット</description>
     </item>
   </channel>

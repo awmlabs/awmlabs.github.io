@@ -2,130 +2,130 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ImageMagick on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/imagemagick/</link>
+    <link>https://awmlabs.github.io/tags/imagemagick/</link>
     <description>Recent content in ImageMagick on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Thu, 09 Feb 2017 20:59:11 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/imagemagick/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ImageMagick 6.9.7-7 から policy の挙動が変わりました</title>
-      <link>https://blog.awm.jp/2017/02/09/imagemagick/</link>
+      <link>https://awmlabs.github.io/2017/02/09/imagemagick/</link>
       <pubDate>Thu, 09 Feb 2017 20:59:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/02/09/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/2017/02/09/imagemagick/</guid>
       <description>はじめに ImageMagick は組み込みコーデックで100種類以上、外部コマンド利用を含めると200種以上の画像形式をサポートしています。この中の一つでも脆弱性</description>
     </item>
     <item>
       <title>Behavior of policy changed from ImageMagick 6.9.7-7</title>
-      <link>https://blog.awm.jp/2017/02/09/imagemagick-en/</link>
+      <link>https://awmlabs.github.io/2017/02/09/imagemagick-en/</link>
       <pubDate>Thu, 09 Feb 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/02/09/imagemagick-en/</guid>
+      <guid>https://awmlabs.github.io/2017/02/09/imagemagick-en/</guid>
       <description>Introduction ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml 1 in the setting file to instruct permission(OK)/non-permission(NG) for each image format(domain=coder).&#xA;From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.&#xA;ImageMagick 6.9.7-6 NG if there is even one NG (false winning) ImageMagick 6.</description>
     </item>
     <item>
       <title>Go Imagick について</title>
-      <link>https://blog.awm.jp/2017/01/02/goimagick/</link>
+      <link>https://awmlabs.github.io/2017/01/02/goimagick/</link>
       <pubDate>Mon, 02 Jan 2017 14:15:26 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/02/goimagick/</guid>
+      <guid>https://awmlabs.github.io/2017/01/02/goimagick/</guid>
       <description>Go Imagick Go言語で ImageMagick の機能を使えるようにするパッケージです。 https://github.com/gographics/imagick 以前、Go Imagick の紹介スライドを作りました、参考にして下さい。 GoImagick でサムネール作成 https://speakerdeck.com/yoya/goimagickthumbnail ImageMagick の</description>
     </item>
     <item>
       <title>yoya-thumber と go-thumber</title>
-      <link>https://blog.awm.jp/2017/01/01/yoya-thumber/</link>
+      <link>https://awmlabs.github.io/2017/01/01/yoya-thumber/</link>
       <pubDate>Sun, 01 Jan 2017 23:11:14 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/01/01/yoya-thumber/</guid>
+      <guid>https://awmlabs.github.io/2017/01/01/yoya-thumber/</guid>
       <description>はじめに go-thumber は Pivix さんの公開している画像リサイズプロキシです。 https://github.com/pixiv/go-thumber yoya-thumber は SmartNews さんの公開している画像リサイズプロキシです。 Pixiv さんの go-thumber の画像処理を ImageMagick に繋げ</description>
     </item>
     <item>
       <title>ImageMagick の policy.xml でホワイトリスト？</title>
-      <link>https://blog.awm.jp/2016/11/07/policy/</link>
+      <link>https://awmlabs.github.io/2016/11/07/policy/</link>
       <pubDate>Mon, 07 Nov 2016 23:51:30 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/11/07/policy/</guid>
+      <guid>https://awmlabs.github.io/2016/11/07/policy/</guid>
       <description>追記 (2018/11/20) ImageMagick 6.9.7-7 で policy.xml がホワイトリストに対応しました。 ImageMagick 6.9.7-7 から policy の挙動が変わりました https://blog.awm.jp/2017/02/09/imagemagick/ policy.xml ImageMagick は etc ディレクトリの policy.xml を見て、色んな制御ができます。 $ convert -list configure</description>
     </item>
     <item>
       <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
-      <link>https://blog.awm.jp/2016/07/22/rgba4444/</link>
+      <link>https://awmlabs.github.io/2016/07/22/rgba4444/</link>
       <pubDate>Fri, 22 Jul 2016 09:10:28 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/07/22/rgba4444/</guid>
+      <guid>https://awmlabs.github.io/2016/07/22/rgba4444/</guid>
       <description>RGBA4444 変換で劣化しない画像を ImageMagick で作る RGB444 変換で劣化しない画像を ImageMagick で作る http://blog.awm.jp/2016/07/21/rgb444/ 前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含</description>
     </item>
     <item>
       <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
-      <link>https://blog.awm.jp/2016/07/21/rgb444/</link>
+      <link>https://awmlabs.github.io/2016/07/21/rgb444/</link>
       <pubDate>Thu, 21 Jul 2016 21:28:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
+      <guid>https://awmlabs.github.io/2016/07/21/rgb444/</guid>
       <description>RGB444 変換で劣化しない画像を ImageMagick で作る 詳しい話は以下のサイトに任せるとして、 Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた http://design.kayac.com/topics/2014/02/unity-RGBA4444.php P</description>
     </item>
     <item>
       <title>ImageMagick で PNG の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/png/</link>
+      <link>https://awmlabs.github.io/2016/01/26/png/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:42 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/png/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/png/</guid>
       <description>ImageMagick で PNG の形式を変換 PNG は見た目が同じ画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べて</description>
     </item>
     <item>
       <title>ImageMagick で GIF の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <link>https://awmlabs.github.io/2016/01/26/gif/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/gif/</guid>
       <description>ImageMagick で GIF の形式を変換 GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
     <item>
       <title>ImageMagick で JPEG の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <link>https://awmlabs.github.io/2016/01/26/jpeg/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/jpeg/</guid>
       <description>ImageMagick で JPEG の形式を変換 JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
     <item>
       <title>透明度を含む画像を JPEG に変換する時の背景色</title>
-      <link>https://blog.awm.jp/2016/01/25/flatten/</link>
+      <link>https://awmlabs.github.io/2016/01/25/flatten/</link>
       <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/flatten/</guid>
       <description>透明度を含む画像を JPEG に変換する時の背景色 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 透過画像をそのまま JPEG に変換すると背景色が黒になるので、 白</description>
     </item>
     <item>
       <title>ImageMagick で画像を比較する</title>
-      <link>https://blog.awm.jp/2016/01/25/diff/</link>
+      <link>https://awmlabs.github.io/2016/01/25/diff/</link>
       <pubDate>Mon, 25 Jan 2016 01:51:23 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/diff/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/diff/</guid>
       <description>ImageMagick で画像を比較する もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 サムネイル周りに何か修正を入れたら修正前後の画像を比較しましょう。 機械によるバ</description>
     </item>
     <item>
       <title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</title>
-      <link>https://blog.awm.jp/2016/01/25/imagemagick/</link>
+      <link>https://awmlabs.github.io/2016/01/25/imagemagick/</link>
       <pubDate>Mon, 25 Jan 2016 00:32:35 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/imagemagick/</guid>
       <description>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエ</description>
     </item>
     <item>
       <title>JPEG の size hinting について</title>
-      <link>https://blog.awm.jp/2016/01/08/jpeghint/</link>
+      <link>https://awmlabs.github.io/2016/01/08/jpeghint/</link>
       <pubDate>Fri, 08 Jan 2016 23:40:32 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
+      <guid>https://awmlabs.github.io/2016/01/08/jpeghint/</guid>
       <description>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 いつでもつければ良いというものではないので</description>
     </item>
     <item>
       <title>グレー形式JPEGをPNGに変換すると暗くなる件</title>
-      <link>https://blog.awm.jp/2016/01/06/gray/</link>
+      <link>https://awmlabs.github.io/2016/01/06/gray/</link>
       <pubDate>Wed, 06 Jan 2016 16:27:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/06/gray/</guid>
+      <guid>https://awmlabs.github.io/2016/01/06/gray/</guid>
       <description>グレー形式JPEGをPNGに変換すると暗くなる件 画像サムネール界隈で話題のエントリ もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 -limit memory でのリソー</description>
     </item>
     <item>
       <title>ImageMagick でサムネール画像生成</title>
-      <link>https://blog.awm.jp/2016/01/05/thumbnail/</link>
+      <link>https://awmlabs.github.io/2016/01/05/thumbnail/</link>
       <pubDate>Tue, 05 Jan 2016 22:59:30 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/05/thumbnail/</guid>
+      <guid>https://awmlabs.github.io/2016/01/05/thumbnail/</guid>
       <description>ImageMagick でサムネール画像生成 初めて ImageMagick でサムネール画像を作成する人向けの簡単な紹介です。 ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自</description>
     </item>
     <item>
       <title>PNM と ImageMagick で画像ファイルを手作り生成</title>
-      <link>https://blog.awm.jp/2016/01/04/pnm/</link>
+      <link>https://awmlabs.github.io/2016/01/04/pnm/</link>
       <pubDate>Mon, 04 Jan 2016 19:38:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/04/pnm/</guid>
+      <guid>https://awmlabs.github.io/2016/01/04/pnm/</guid>
       <description>PNM と ImageMagick で画像ファイルを手作り生成 何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマット</description>
     </item>
   </channel>

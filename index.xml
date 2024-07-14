@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>awm-Tech</title>
-    <link>https://blog.awm.jp/</link>
+    <link>https://awmlabs.github.io/</link>
     <description>Recent content on awm-Tech</description>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sat, 13 Jun 2020 15:44:39 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

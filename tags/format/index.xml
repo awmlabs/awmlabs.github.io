@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Format on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/format/</link>
+    <link>https://awmlabs.github.io/tags/format/</link>
     <description>Recent content in Format on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Tue, 26 Jan 2016 14:55:42 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/format/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/format/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ImageMagick で PNG の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/png/</link>
+      <link>https://awmlabs.github.io/2016/01/26/png/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:42 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/png/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/png/</guid>
       <description>ImageMagick で PNG の形式を変換 PNG は見た目が同じ画像でも、バイナリ的に色んな形式で表現できます。ImageMagick でそれらの形式に変換する方法を並べて</description>
     </item>
     <item>
       <title>ImageMagick で GIF の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <link>https://awmlabs.github.io/2016/01/26/gif/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/gif/</guid>
       <description>ImageMagick で GIF の形式を変換 GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
     <item>
       <title>ImageMagick で JPEG の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <link>https://awmlabs.github.io/2016/01/26/jpeg/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/jpeg/</guid>
       <description>ImageMagick で JPEG の形式を変換 JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
   </channel>

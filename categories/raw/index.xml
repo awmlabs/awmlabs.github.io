@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RAW on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/raw/</link>
+    <link>https://awmlabs.github.io/categories/raw/</link>
     <description>Recent content in RAW on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Thu, 03 Nov 2016 21:06:03 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/categories/raw/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/categories/raw/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DNG 画像とは</title>
-      <link>https://blog.awm.jp/2016/11/03/dng/</link>
+      <link>https://awmlabs.github.io/2016/11/03/dng/</link>
       <pubDate>Thu, 03 Nov 2016 21:06:03 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/11/03/dng/</guid>
+      <guid>https://awmlabs.github.io/2016/11/03/dng/</guid>
       <description>DNG 画像とは？ Adobe 社が規格した画像形式で、RAW 画像の一種です。 Photoshop ヘルプ / Digital Negative （DNG） https://helpx.adobe.com/jp/photoshop/digital-negative.html RAW 画像は、カメラメーカーが各々独自の規格を出しています</description>
     </item>
   </channel>

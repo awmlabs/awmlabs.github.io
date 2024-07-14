@@ -2,116 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JPEG on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/jpeg/</link>
+    <link>https://awmlabs.github.io/tags/jpeg/</link>
     <description>Recent content in JPEG on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sun, 06 Aug 2017 11:59:20 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/jpeg/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/jpeg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #3 コマンド解説</title>
-      <link>https://blog.awm.jp/2017/08/06/imicc/</link>
+      <link>https://awmlabs.github.io/2017/08/06/imicc/</link>
       <pubDate>Sun, 06 Aug 2017 11:59:20 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/08/06/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/08/06/imicc/</guid>
       <description>はじめに このエントリの続きです。 ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜 JPEG のメタデータ削除 http://blog.awm.jp/2017/06/11/imicc/ ImageMagick で JPEG に埋め込まれた ICC プロファイルを操作する JPEG</description>
     </item>
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除</title>
-      <link>https://blog.awm.jp/2017/06/11/imicc/</link>
+      <link>https://awmlabs.github.io/2017/06/11/imicc/</link>
       <pubDate>Sun, 11 Jun 2017 01:13:05 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/06/11/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/06/11/imicc/</guid>
       <description>はじめに 色域って何？ ICC プロファイルって何？という人は、 前置きのエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #1 前置き http://blog.awm.jp/2017/06/10/imicc/ 本エントリでは、Image</description>
     </item>
     <item>
       <title>ImageMagick で ICC プロファイルを扱う #1 前置き</title>
-      <link>https://blog.awm.jp/2017/06/10/imicc/</link>
+      <link>https://awmlabs.github.io/2017/06/10/imicc/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2017/06/10/imicc/</guid>
+      <guid>https://awmlabs.github.io/2017/06/10/imicc/</guid>
       <description>はじめに 前置きは要らない。ImageMagick コマンドの実行例を知りたいという人は、次のエントリをどうぞ。 ImageMagick で ICC プロファイルを扱う #2 コマン</description>
     </item>
     <item>
       <title>Guetzli - Perceptual JPEG encoder</title>
-      <link>https://blog.awm.jp/2017/03/17/guetzli/</link>
+      <link>https://awmlabs.github.io/2017/03/17/guetzli/</link>
       <pubDate>Fri, 17 Mar 2017 17:34:14 +0900</pubDate>
-      <guid>https://blog.awm.jp/2017/03/17/guetzli/</guid>
+      <guid>https://awmlabs.github.io/2017/03/17/guetzli/</guid>
       <description>公式情報 https://github.com/google/guetzli Announcing Guetzli: A New Open Source JPEG Encoder https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html Guetzli: Perceptually Guided JPEG Encoder https://arxiv.org/abs/1703.04421v1 Users prefer Guetzli JPEG over same-sized libjpeg https://arxiv.org/abs/1703.04416v1 はじめに Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで</description>
     </item>
     <item>
       <title>TIFF と Exif と JPEG</title>
-      <link>https://blog.awm.jp/2016/11/06/tiff/</link>
+      <link>https://awmlabs.github.io/2016/11/06/tiff/</link>
       <pubDate>Sun, 06 Nov 2016 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2016/11/06/tiff/</guid>
+      <guid>https://awmlabs.github.io/2016/11/06/tiff/</guid>
       <description>JPEG と Exif と TIFF の関係 TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのま</description>
     </item>
     <item>
       <title>DNG から ICC プロファイル付き JPEG 画像を作る</title>
-      <link>https://blog.awm.jp/2016/11/02/dng/</link>
+      <link>https://awmlabs.github.io/2016/11/02/dng/</link>
       <pubDate>Wed, 02 Nov 2016 21:09:00 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/11/02/dng/</guid>
+      <guid>https://awmlabs.github.io/2016/11/02/dng/</guid>
       <description>はじめに 利用するもの PC (MacBook Pro) 以下のどちらか Adobe Lightroom CC Adobe Photoshop CC DNG 画像の入手法 iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめました。 iPhone7 Plus で撮影した DNG 画像を</description>
     </item>
     <item>
       <title>iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法</title>
-      <link>https://blog.awm.jp/2016/11/01/dng/</link>
+      <link>https://awmlabs.github.io/2016/11/01/dng/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2016/11/01/dng/</guid>
+      <guid>https://awmlabs.github.io/2016/11/01/dng/</guid>
       <description>必要なもの 実機 iPhone7 Plus (iPhone7 は試してません。所持してないので) PC (MacBook Pro で確認しました) アカウント Adobe Cloud アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有</description>
     </item>
     <item>
       <title>JPEG と ICC プロファイル</title>
-      <link>https://blog.awm.jp/2016/09/10/jpegicc/</link>
+      <link>https://awmlabs.github.io/2016/09/10/jpegicc/</link>
       <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/09/10/jpegicc/</guid>
+      <guid>https://awmlabs.github.io/2016/09/10/jpegicc/</guid>
       <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 尚</description>
     </item>
     <item>
       <title>JPEG のクロマサブサンプリングと YUVabc</title>
-      <link>https://blog.awm.jp/2016/02/10/yuv/</link>
+      <link>https://awmlabs.github.io/2016/02/10/yuv/</link>
       <pubDate>Wed, 10 Feb 2016 21:53:44 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/02/10/yuv/</guid>
+      <guid>https://awmlabs.github.io/2016/02/10/yuv/</guid>
       <description>JPEG のクロマサブサンプリングと YUVabc YCbCr については以下のページで紹介しました。 JPEG の YCbCr について https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr のメリットとして説明したクロマサブサンプリングの種類</description>
     </item>
     <item>
       <title>JPEG の YCbCr について</title>
-      <link>https://blog.awm.jp/2016/02/06/ycbcr/</link>
+      <link>https://awmlabs.github.io/2016/02/06/ycbcr/</link>
       <pubDate>Sat, 06 Feb 2016 15:58:53 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/02/06/ycbcr/</guid>
+      <guid>https://awmlabs.github.io/2016/02/06/ycbcr/</guid>
       <description>JPEG の YCbCr について JPEG で保存する色は RGB でなく YCbCr なので、その話。 RGB &amp;lt;=&amp;gt; YCbCr RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式</description>
     </item>
     <item>
       <title>ImageMagick で JPEG の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/jpeg/</link>
+      <link>https://awmlabs.github.io/2016/01/26/jpeg/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:39 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/jpeg/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/jpeg/</guid>
       <description>ImageMagick で JPEG の形式を変換 JPEG は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
     <item>
       <title>透明度を含む画像を JPEG に変換する時の背景色</title>
-      <link>https://blog.awm.jp/2016/01/25/flatten/</link>
+      <link>https://awmlabs.github.io/2016/01/25/flatten/</link>
       <pubDate>Mon, 25 Jan 2016 02:01:09 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/flatten/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/flatten/</guid>
       <description>透明度を含む画像を JPEG に変換する時の背景色 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 透過画像をそのまま JPEG に変換すると背景色が黒になるので、 白</description>
     </item>
     <item>
       <title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</title>
-      <link>https://blog.awm.jp/2016/01/25/imagemagick/</link>
+      <link>https://awmlabs.github.io/2016/01/25/imagemagick/</link>
       <pubDate>Mon, 25 Jan 2016 00:32:35 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/imagemagick/</guid>
       <description>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエ</description>
     </item>
     <item>
       <title>JPEG の size hinting について</title>
-      <link>https://blog.awm.jp/2016/01/08/jpeghint/</link>
+      <link>https://awmlabs.github.io/2016/01/08/jpeghint/</link>
       <pubDate>Fri, 08 Jan 2016 23:40:32 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/08/jpeghint/</guid>
+      <guid>https://awmlabs.github.io/2016/01/08/jpeghint/</guid>
       <description>何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 いつでもつければ良いというものではないので</description>
     </item>
     <item>
       <title>JPEG Exif Orientation の操作</title>
-      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <link>https://awmlabs.github.io/2016/01/07/orient/</link>
       <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <guid>https://awmlabs.github.io/2016/01/07/orient/</guid>
       <description>JPEG Exif Orientation の操作 Orientation とは JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。 その中に、画像を表示</description>
     </item>
   </channel>

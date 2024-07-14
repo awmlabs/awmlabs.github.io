@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Orientation on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/orientation/</link>
+    <link>https://awmlabs.github.io/tags/orientation/</link>
     <description>Recent content in Orientation on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Mon, 25 Jan 2016 00:32:35 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/orientation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/orientation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</title>
-      <link>https://blog.awm.jp/2016/01/25/imagemagick/</link>
+      <link>https://awmlabs.github.io/2016/01/25/imagemagick/</link>
       <pubDate>Mon, 25 Jan 2016 00:32:35 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/25/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/2016/01/25/imagemagick/</guid>
       <description>もうサムネイルで泣かないための ImageMagick ノウハウ集に一言 発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエ</description>
     </item>
     <item>
       <title>JPEG Exif Orientation の操作</title>
-      <link>https://blog.awm.jp/2016/01/07/orient/</link>
+      <link>https://awmlabs.github.io/2016/01/07/orient/</link>
       <pubDate>Thu, 07 Jan 2016 00:34:42 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/07/orient/</guid>
+      <guid>https://awmlabs.github.io/2016/01/07/orient/</guid>
       <description>JPEG Exif Orientation の操作 Orientation とは JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。 その中に、画像を表示</description>
     </item>
     <item>
       <title>ImageMagick の -auto-orient でオフセットがズレる件</title>
-      <link>https://blog.awm.jp/2016/01/06/orient/</link>
+      <link>https://awmlabs.github.io/2016/01/06/orient/</link>
       <pubDate>Wed, 06 Jan 2016 19:52:03 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/06/orient/</guid>
+      <guid>https://awmlabs.github.io/2016/01/06/orient/</guid>
       <description>-auto-orient でオフセットがズレる件 例のエントリにもう一件便乗。 もうサムネイルで泣かないための ImageMagick ノウハウ集 http://blog.cybozu.io/entry/2016/01/06/080000 ただ、ImageMagick といえど Orientation 画像の</description>
     </item>
   </channel>

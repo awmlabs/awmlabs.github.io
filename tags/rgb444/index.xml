@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RGB444 on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/rgb444/</link>
+    <link>https://awmlabs.github.io/tags/rgb444/</link>
     <description>Recent content in RGB444 on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Fri, 22 Jul 2016 09:10:28 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/rgb444/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/rgb444/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RGBA4444 変換で劣化しない画像を ImageMagick で作る</title>
-      <link>https://blog.awm.jp/2016/07/22/rgba4444/</link>
+      <link>https://awmlabs.github.io/2016/07/22/rgba4444/</link>
       <pubDate>Fri, 22 Jul 2016 09:10:28 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/07/22/rgba4444/</guid>
+      <guid>https://awmlabs.github.io/2016/07/22/rgba4444/</guid>
       <description>RGBA4444 変換で劣化しない画像を ImageMagick で作る RGB444 変換で劣化しない画像を ImageMagick で作る http://blog.awm.jp/2016/07/21/rgb444/ 前回の記事では RGBA4444 のディザに失敗しました。ImageMagick は透明度を含</description>
     </item>
     <item>
       <title>RGB444 変換で劣化しない画像を ImageMagick で作る</title>
-      <link>https://blog.awm.jp/2016/07/21/rgb444/</link>
+      <link>https://awmlabs.github.io/2016/07/21/rgb444/</link>
       <pubDate>Thu, 21 Jul 2016 21:28:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/07/21/rgb444/</guid>
+      <guid>https://awmlabs.github.io/2016/07/21/rgb444/</guid>
       <description>RGB444 変換で劣化しない画像を ImageMagick で作る 詳しい話は以下のサイトに任せるとして、 Unityやるには必須！RGBA画像減色の基礎をまじめに書いてみた http://design.kayac.com/topics/2014/02/unity-RGBA4444.php P</description>
     </item>
   </channel>

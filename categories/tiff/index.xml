@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TIFF on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/tiff/</link>
+    <link>https://awmlabs.github.io/categories/tiff/</link>
     <description>Recent content in TIFF on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sun, 06 Nov 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/categories/tiff/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/categories/tiff/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TIFF と Exif と JPEG</title>
-      <link>https://blog.awm.jp/2016/11/06/tiff/</link>
+      <link>https://awmlabs.github.io/2016/11/06/tiff/</link>
       <pubDate>Sun, 06 Nov 2016 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/2016/11/06/tiff/</guid>
+      <guid>https://awmlabs.github.io/2016/11/06/tiff/</guid>
       <description>JPEG と Exif と TIFF の関係 TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのま</description>
     </item>
     <item>
       <title>TIFF フォーマットの分解</title>
-      <link>https://blog.awm.jp/2016/11/05/tiff/</link>
+      <link>https://awmlabs.github.io/2016/11/05/tiff/</link>
       <pubDate>Sat, 05 Nov 2016 23:00:11 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/11/05/tiff/</guid>
+      <guid>https://awmlabs.github.io/2016/11/05/tiff/</guid>
       <description>TIFF フォーマットの分解 最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で) https://github.com/yoya/IO_TIFF TIFF フォーマット仕様 仕様はこちらですが</description>
     </item>
   </channel>

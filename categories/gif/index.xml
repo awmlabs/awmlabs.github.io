@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GIF on awm-Tech</title>
-    <link>https://blog.awm.jp/categories/gif/</link>
+    <link>https://awmlabs.github.io/categories/gif/</link>
     <description>Recent content in GIF on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Tue, 26 Jan 2016 14:55:40 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/categories/gif/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/categories/gif/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ImageMagick で GIF の形式を変換</title>
-      <link>https://blog.awm.jp/2016/01/26/gif/</link>
+      <link>https://awmlabs.github.io/2016/01/26/gif/</link>
       <pubDate>Tue, 26 Jan 2016 14:55:40 +0900</pubDate>
-      <guid>https://blog.awm.jp/2016/01/26/gif/</guid>
+      <guid>https://awmlabs.github.io/2016/01/26/gif/</guid>
       <description>ImageMagick で GIF の形式を変換 GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換</description>
     </item>
   </channel>

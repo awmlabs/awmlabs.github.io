@@ -2,319 +2,319 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on awm-Tech</title>
-    <link>https://blog.awm.jp/tags/</link>
+    <link>https://awmlabs.github.io/tags/</link>
     <description>Recent content in Tags on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
     <lastBuildDate>Sat, 13 Jun 2020 15:44:39 +0900</lastBuildDate>
-    <atom:link href="https://blog.awm.jp/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://awmlabs.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Browser</title>
-      <link>https://blog.awm.jp/tags/browser/</link>
+      <link>https://awmlabs.github.io/tags/browser/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/browser/</guid>
+      <guid>https://awmlabs.github.io/tags/browser/</guid>
       <description></description>
     </item>
     <item>
       <title>Image</title>
-      <link>https://blog.awm.jp/tags/image/</link>
+      <link>https://awmlabs.github.io/tags/image/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/image/</guid>
+      <guid>https://awmlabs.github.io/tags/image/</guid>
       <description></description>
     </item>
     <item>
       <title>ICC</title>
-      <link>https://blog.awm.jp/tags/icc/</link>
+      <link>https://awmlabs.github.io/tags/icc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/icc/</guid>
+      <guid>https://awmlabs.github.io/tags/icc/</guid>
       <description></description>
     </item>
     <item>
       <title>JPEG</title>
-      <link>https://blog.awm.jp/tags/jpeg/</link>
+      <link>https://awmlabs.github.io/tags/jpeg/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/jpeg/</guid>
+      <guid>https://awmlabs.github.io/tags/jpeg/</guid>
       <description></description>
     </item>
     <item>
       <title>Graphics</title>
-      <link>https://blog.awm.jp/tags/graphics/</link>
+      <link>https://awmlabs.github.io/tags/graphics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/graphics/</guid>
+      <guid>https://awmlabs.github.io/tags/graphics/</guid>
       <description></description>
     </item>
     <item>
       <title>Guetzli</title>
-      <link>https://blog.awm.jp/tags/guetzli/</link>
+      <link>https://awmlabs.github.io/tags/guetzli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/guetzli/</guid>
+      <guid>https://awmlabs.github.io/tags/guetzli/</guid>
       <description></description>
     </item>
     <item>
       <title>FCBI</title>
-      <link>https://blog.awm.jp/tags/fcbi/</link>
+      <link>https://awmlabs.github.io/tags/fcbi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/fcbi/</guid>
+      <guid>https://awmlabs.github.io/tags/fcbi/</guid>
       <description></description>
     </item>
     <item>
       <title>SuperResolution</title>
-      <link>https://blog.awm.jp/tags/superresolution/</link>
+      <link>https://awmlabs.github.io/tags/superresolution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/superresolution/</guid>
+      <guid>https://awmlabs.github.io/tags/superresolution/</guid>
       <description></description>
     </item>
     <item>
       <title>ImageMagick</title>
-      <link>https://blog.awm.jp/tags/imagemagick/</link>
+      <link>https://awmlabs.github.io/tags/imagemagick/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/imagemagick/</guid>
+      <guid>https://awmlabs.github.io/tags/imagemagick/</guid>
       <description></description>
     </item>
     <item>
       <title>Golang</title>
-      <link>https://blog.awm.jp/tags/golang/</link>
+      <link>https://awmlabs.github.io/tags/golang/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/golang/</guid>
+      <guid>https://awmlabs.github.io/tags/golang/</guid>
       <description></description>
     </item>
     <item>
       <title>Go-Thumber</title>
-      <link>https://blog.awm.jp/tags/go-thumber/</link>
+      <link>https://awmlabs.github.io/tags/go-thumber/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/go-thumber/</guid>
+      <guid>https://awmlabs.github.io/tags/go-thumber/</guid>
       <description></description>
     </item>
     <item>
       <title>Yoya-Thumber</title>
-      <link>https://blog.awm.jp/tags/yoya-thumber/</link>
+      <link>https://awmlabs.github.io/tags/yoya-thumber/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/yoya-thumber/</guid>
+      <guid>https://awmlabs.github.io/tags/yoya-thumber/</guid>
       <description></description>
     </item>
     <item>
       <title>PNG</title>
-      <link>https://blog.awm.jp/tags/png/</link>
+      <link>https://awmlabs.github.io/tags/png/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/png/</guid>
+      <guid>https://awmlabs.github.io/tags/png/</guid>
       <description></description>
     </item>
     <item>
       <title>DriveApp</title>
-      <link>https://blog.awm.jp/tags/driveapp/</link>
+      <link>https://awmlabs.github.io/tags/driveapp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/driveapp/</guid>
+      <guid>https://awmlabs.github.io/tags/driveapp/</guid>
       <description></description>
     </item>
     <item>
       <title>GAS</title>
-      <link>https://blog.awm.jp/tags/gas/</link>
+      <link>https://awmlabs.github.io/tags/gas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/gas/</guid>
+      <guid>https://awmlabs.github.io/tags/gas/</guid>
       <description></description>
     </item>
     <item>
       <title>Exif</title>
-      <link>https://blog.awm.jp/tags/exif/</link>
+      <link>https://awmlabs.github.io/tags/exif/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/exif/</guid>
+      <guid>https://awmlabs.github.io/tags/exif/</guid>
       <description></description>
     </item>
     <item>
       <title>TIFF</title>
-      <link>https://blog.awm.jp/tags/tiff/</link>
+      <link>https://awmlabs.github.io/tags/tiff/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/tiff/</guid>
+      <guid>https://awmlabs.github.io/tags/tiff/</guid>
       <description></description>
     </item>
     <item>
       <title>DNG</title>
-      <link>https://blog.awm.jp/tags/dng/</link>
+      <link>https://awmlabs.github.io/tags/dng/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/dng/</guid>
+      <guid>https://awmlabs.github.io/tags/dng/</guid>
       <description></description>
     </item>
     <item>
       <title>RAW</title>
-      <link>https://blog.awm.jp/tags/raw/</link>
+      <link>https://awmlabs.github.io/tags/raw/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/raw/</guid>
+      <guid>https://awmlabs.github.io/tags/raw/</guid>
       <description></description>
     </item>
     <item>
       <title>IPhone7</title>
-      <link>https://blog.awm.jp/tags/iphone7/</link>
+      <link>https://awmlabs.github.io/tags/iphone7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/iphone7/</guid>
+      <guid>https://awmlabs.github.io/tags/iphone7/</guid>
       <description></description>
     </item>
     <item>
       <title>RGB444</title>
-      <link>https://blog.awm.jp/tags/rgb444/</link>
+      <link>https://awmlabs.github.io/tags/rgb444/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/rgb444/</guid>
+      <guid>https://awmlabs.github.io/tags/rgb444/</guid>
       <description></description>
     </item>
     <item>
       <title>RGBA4444</title>
-      <link>https://blog.awm.jp/tags/rgba4444/</link>
+      <link>https://awmlabs.github.io/tags/rgba4444/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/rgba4444/</guid>
+      <guid>https://awmlabs.github.io/tags/rgba4444/</guid>
       <description></description>
     </item>
     <item>
       <title>SabSampling</title>
-      <link>https://blog.awm.jp/tags/sabsampling/</link>
+      <link>https://awmlabs.github.io/tags/sabsampling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/sabsampling/</guid>
+      <guid>https://awmlabs.github.io/tags/sabsampling/</guid>
       <description></description>
     </item>
     <item>
       <title>YUV</title>
-      <link>https://blog.awm.jp/tags/yuv/</link>
+      <link>https://awmlabs.github.io/tags/yuv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/yuv/</guid>
+      <guid>https://awmlabs.github.io/tags/yuv/</guid>
       <description></description>
     </item>
     <item>
       <title>YCbCr</title>
-      <link>https://blog.awm.jp/tags/ycbcr/</link>
+      <link>https://awmlabs.github.io/tags/ycbcr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/ycbcr/</guid>
+      <guid>https://awmlabs.github.io/tags/ycbcr/</guid>
       <description></description>
     </item>
     <item>
       <title>Format</title>
-      <link>https://blog.awm.jp/tags/format/</link>
+      <link>https://awmlabs.github.io/tags/format/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/format/</guid>
+      <guid>https://awmlabs.github.io/tags/format/</guid>
       <description></description>
     </item>
     <item>
       <title>GIF</title>
-      <link>https://blog.awm.jp/tags/gif/</link>
+      <link>https://awmlabs.github.io/tags/gif/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/gif/</guid>
+      <guid>https://awmlabs.github.io/tags/gif/</guid>
       <description></description>
     </item>
     <item>
       <title>Transparent</title>
-      <link>https://blog.awm.jp/tags/transparent/</link>
+      <link>https://awmlabs.github.io/tags/transparent/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/transparent/</guid>
+      <guid>https://awmlabs.github.io/tags/transparent/</guid>
       <description></description>
     </item>
     <item>
       <title>Orientation</title>
-      <link>https://blog.awm.jp/tags/orientation/</link>
+      <link>https://awmlabs.github.io/tags/orientation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/orientation/</guid>
+      <guid>https://awmlabs.github.io/tags/orientation/</guid>
       <description></description>
     </item>
     <item>
       <title>Resize</title>
-      <link>https://blog.awm.jp/tags/resize/</link>
+      <link>https://awmlabs.github.io/tags/resize/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/resize/</guid>
+      <guid>https://awmlabs.github.io/tags/resize/</guid>
       <description></description>
     </item>
     <item>
       <title>ExifTool</title>
-      <link>https://blog.awm.jp/tags/exiftool/</link>
+      <link>https://awmlabs.github.io/tags/exiftool/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/exiftool/</guid>
+      <guid>https://awmlabs.github.io/tags/exiftool/</guid>
       <description></description>
     </item>
     <item>
       <title>ColorSpace</title>
-      <link>https://blog.awm.jp/tags/colorspace/</link>
+      <link>https://awmlabs.github.io/tags/colorspace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/colorspace/</guid>
+      <guid>https://awmlabs.github.io/tags/colorspace/</guid>
       <description></description>
     </item>
     <item>
       <title>Compose</title>
-      <link>https://blog.awm.jp/tags/compose/</link>
+      <link>https://awmlabs.github.io/tags/compose/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/compose/</guid>
+      <guid>https://awmlabs.github.io/tags/compose/</guid>
       <description></description>
     </item>
     <item>
       <title>Icon</title>
-      <link>https://blog.awm.jp/tags/icon/</link>
+      <link>https://awmlabs.github.io/tags/icon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/icon/</guid>
+      <guid>https://awmlabs.github.io/tags/icon/</guid>
       <description></description>
     </item>
     <item>
       <title>Thumbnail</title>
-      <link>https://blog.awm.jp/tags/thumbnail/</link>
+      <link>https://awmlabs.github.io/tags/thumbnail/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/thumbnail/</guid>
+      <guid>https://awmlabs.github.io/tags/thumbnail/</guid>
       <description></description>
     </item>
     <item>
       <title>PBM</title>
-      <link>https://blog.awm.jp/tags/pbm/</link>
+      <link>https://awmlabs.github.io/tags/pbm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/pbm/</guid>
+      <guid>https://awmlabs.github.io/tags/pbm/</guid>
       <description></description>
     </item>
     <item>
       <title>PGM</title>
-      <link>https://blog.awm.jp/tags/pgm/</link>
+      <link>https://awmlabs.github.io/tags/pgm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/pgm/</guid>
+      <guid>https://awmlabs.github.io/tags/pgm/</guid>
       <description></description>
     </item>
     <item>
       <title>PNM</title>
-      <link>https://blog.awm.jp/tags/pnm/</link>
+      <link>https://awmlabs.github.io/tags/pnm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/pnm/</guid>
+      <guid>https://awmlabs.github.io/tags/pnm/</guid>
       <description></description>
     </item>
     <item>
       <title>PPM</title>
-      <link>https://blog.awm.jp/tags/ppm/</link>
+      <link>https://awmlabs.github.io/tags/ppm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/ppm/</guid>
+      <guid>https://awmlabs.github.io/tags/ppm/</guid>
       <description></description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>https://blog.awm.jp/tags/hugo/</link>
+      <link>https://awmlabs.github.io/tags/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/hugo/</guid>
+      <guid>https://awmlabs.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
       <title>Blog</title>
-      <link>https://blog.awm.jp/tags/blog/</link>
+      <link>https://awmlabs.github.io/tags/blog/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/blog/</guid>
+      <guid>https://awmlabs.github.io/tags/blog/</guid>
       <description></description>
     </item>
     <item>
       <title>CircleCI</title>
-      <link>https://blog.awm.jp/tags/circleci/</link>
+      <link>https://awmlabs.github.io/tags/circleci/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/circleci/</guid>
+      <guid>https://awmlabs.github.io/tags/circleci/</guid>
       <description></description>
     </item>
     <item>
       <title>Github</title>
-      <link>https://blog.awm.jp/tags/github/</link>
+      <link>https://awmlabs.github.io/tags/github/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/github/</guid>
+      <guid>https://awmlabs.github.io/tags/github/</guid>
       <description></description>
     </item>
     <item>
       <title>CSS</title>
-      <link>https://blog.awm.jp/tags/css/</link>
+      <link>https://awmlabs.github.io/tags/css/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://blog.awm.jp/tags/css/</guid>
+      <guid>https://awmlabs.github.io/tags/css/</guid>
       <description></description>
     </item>
   </channel>
