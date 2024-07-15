@@ -143,37 +143,37 @@
 <td>P1</td>
 <td>PBM</td>
 <td>ASCII</td>
-<td>白黒画像 <!-- raw HTML omitted --></td>
+<td>白黒画像 <img src="/2016/01/04/wb.png" /></td>
 </tr>
 <tr>
 <td>P2</td>
 <td>PGM</td>
 <td>ASCII</td>
-<td>グレー画像 <!-- raw HTML omitted --></td>
+<td>グレー画像 <img src="/2016/01/04/gray.png" /></td>
 </tr>
 <tr>
 <td>P3</td>
 <td>PPM</td>
 <td>ASCII</td>
-<td>カラー画像 <!-- raw HTML omitted --></td>
+<td>カラー画像 <img src="/2016/01/04/color.png" /></td>
 </tr>
 <tr>
 <td>P4</td>
 <td>PBM</td>
 <td>Binary</td>
-<td>白黒画像 <!-- raw HTML omitted --></td>
+<td>白黒画像 <img src="/2016/01/04/wb.png" /></td>
 </tr>
 <tr>
 <td>P5</td>
 <td>PGM</td>
 <td>Binary</td>
-<td>グレー画像 <!-- raw HTML omitted --></td>
+<td>グレー画像 <img src="/2016/01/04/gray.png" /></td>
 </tr>
 <tr>
 <td>P6</td>
 <td>PPM</td>
 <td>Binary</td>
-<td>カラー画像 <!-- raw HTML omitted --></td>
+<td>カラー画像 <img src="/2016/01/04/color.png" /></td>
 </tr>
 <tr>
 <td>P7</td>
@@ -220,7 +220,9 @@ P1
 </code></pre><p>ImageMagick の convert で変換します。ついでに8倍に拡大したものも。</p>
 <pre tabindex="0"><code>$ convert batsu.pbm batsu.png
 $ convert -resize 800% -filter point batsu.png batsu_8.png
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="/2016/01/04/batsu.png" title="batsu" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_8.png" title="batsu_8" > </center>
 <h1 id="pgm-portable-graymap-format">PGM (portable graymap format)</h1>
 <p>白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。</p>
 <ul>
@@ -239,7 +241,9 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 </code></pre><p>convert で変換 &amp; 8倍画像</p>
 <pre tabindex="0"><code>$ convert batsu_gray.pgm batsu_gray.png
 $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="/2016/01/04/batsu_gray.png" title="batsu_gray" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_gray_8.png" title="batsu_gray_8" > </center>
 <h1 id="ppm-portable-pixmap-format">PPM (portable pixmap format)</h1>
 <p>RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。</p>
 <ul>
@@ -258,7 +262,9 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 </code></pre><p>convert で変換</p>
 <pre tabindex="0"><code>$ convert batsu_rgb.ppm batsu_rgb.png
 $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="/2016/01/04/batsu_rgb.png" title="batsu_rgb" > </center>
+<center> 8倍に ↓ 拡大 </center>
+<center> <img src="/2016/01/04/batsu_rgb_8.png" title="batsu_rgb_8" > </center>
 <h1 id="さいごに">さいごに</h1>
 <p>エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。</p>
 <h1 id="参考-url">参考 URL</h1>

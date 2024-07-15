@@ -105,7 +105,7 @@
 <p>GIF は同じように見える画像でも、バイナリ的に色んな形式やメタデータで表現できます。ImageMagick でそれらの形式に変換する方法を並べてみます。</p>
 <h1 id="インターレースgif">インターレースGIF</h1>
 <pre tabindex="0"><code>$ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-interlace.gif" /> </center>
 <h3 id="ピクセルの並ぶ順番">ピクセルの並ぶ順番</h3>
 <ul>
 <li>8行ごとに1行</li>
@@ -123,19 +123,19 @@
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-dot1-interlace-1.png" /> <img src="../Opaopa-dot8-interlace-1.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-1-cmpl.png" /> <img src="../Opaopa-dot8-interlace-1-cmpl.png" /></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-dot1-interlace-2.png" /> <img src="../Opaopa-dot8-interlace-2.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-2-cmpl.png" /> <img src="../Opaopa-dot8-interlace-2-cmpl.png" /></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-dot1-interlace-3.png" /> <img src="../Opaopa-dot8-interlace-3.png" /></td>
+<td><img src="../Opaopa-dot1-interlace-3-cmpl.png" /> <img src="../Opaopa-dot8-interlace-3-cmpl.png" /></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-dot1.png" /> <img src="../Opaopa-dot8.png" /></td>
 <td></td>
 </tr>
 </tbody>
@@ -163,17 +163,22 @@ convert Opaopa-dot1.png -filter Point -fx &#34;p{i,j-j%2}&#34; Opaopa-dot1-inter
 <pre tabindex="0"><code>$ convert Opaopa.png -page +50+30 Opaopa-posi.gif
 $ identify Opaopa-posi.gif
 Opaopa-posi.gif GIF 120x72 120x72+50+30 8-bit sRGB 16c 999B 0.000u 0:00.000
-</code></pre><!-- raw HTML omitted -->
+</code></pre><table><tr><td>
+<img src="../Opaopa-posi.gif" style="background-color: black" />
+</td></tr>
+</table>
 <p>上記の画像は table タグの中に入れてますが、(50,30) から描画されます。(ブラウザによって微妙に表示が変わります)</p>
 <h1 id="透明色">透明色</h1>
 <p>インデックスの一つを透明色として扱えます。尚、半透明は扱えません。</p>
 <pre tabindex="0"><code>$ convert Opaopa.png -transparent &#34;#00d342&#34; Opaopa-transparent.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-transparent.gif" /> </center>
 <h1 id="アニメーションgif">アニメーションGIF</h1>
 <p>各コマの画像を作って convert で繋いで作成できます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../Opaopa-anime-dot1-0.png" /> <img src="../Opaopa-anime-dot1-1.png" /> <img src="../Opaopa-anime-dot1-2.png" /> <img src="../Opaopa-anime-dot1-3.png" /> <img src="../Opaopa-anime-dot1-4.png" /> <img src="../Opaopa-anime-dot1-5.png" /> <img src="../Opaopa-anime-dot1-6.png" /> <img src="../Opaopa-anime-dot1-7.png" />  </center>
 <pre tabindex="0"><code>$ convert Opaopa-anime-dot1-[0-7].png Opaopa-anime-dot1.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-anime-dot1.gif" /> </center>
+ついでに拡大バージョン
+<center> <img src="../Opaopa-anime-dot8.gif" /> </center>
 <pre tabindex="0"><code>$ for n in `seq 0 7`
 do convert Opaopa-anime-dot1-$n.png -filter Point -resize 800% -fx &#34;(i%8&gt;0)*(j%8&gt;0)*u&#34; Opaopa-anime-dot8-$n.png
 done
@@ -182,12 +187,13 @@ $ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
 <p>-delay オプションでコマ間の時間を指定できます。1/100 単位なので、例えば -delay 100 を指定すると 1 frame/sec です。</p>
 <pre tabindex="0"><code>$ convert -delay 100  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay100.gif
 $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-anime-dot8-delay100.gif" /> </center>
+<center> <img src="../Opaopa-anime-dot8-delay25.gif" /> </center>
 <p>(-delay を入力画像より前に置かないと反映されない事に注意)</p>
 <h2 id="ループ回数">ループ回数</h2>
 <p>例えば、ループ回数に 1 を指定すると、ループしない GIF アニメが作れます。</p>
 <pre tabindex="0"><code>$ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <a href="../Opaopa-anime-dot8-loop1.gif" target="_blank"/> <img src="../Opaopa-anime-dot8-loop1.gif" /> </a> <br /> ↑ クリックして開けます </center>
 <h2 id="global--localimage-colormap">Global &amp; Local(Image) ColorMap</h2>
 <p>ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <pre tabindex="0"><code>$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
@@ -218,7 +224,8 @@ size=8x7 geom:41x18+6+6
 size=5x3 geom:41x18+5+8
 size=15x3 geom:41x18+4+8
 size=16x5 geom:41x18+3+7
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-anime-dot1-optframe.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-optframe.gif"> </center>
 <p>コマを分解します。</p>
 <pre tabindex="0"><code>$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.png
 </code></pre><table>
@@ -230,24 +237,24 @@ size=16x5 geom:41x18+3+7
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-0.png"></td>
+<td><img src="../Opaopa-anime-dot8-optframe-0.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-1.png"></td>
+<td><img src="../Opaopa-anime-dot8-optframe-1.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-2.png"></td>
+<td><img src="../Opaopa-anime-dot8-optframe-2.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-3.png"></td>
+<td><img src="../Opaopa-anime-dot8-optframe-3.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-4.png"></td>
+<td><img src="../Opaopa-anime-dot8-optframe-4.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
 <td>＜以下 5-7 は省略＞</td>
@@ -257,7 +264,8 @@ size=16x5 geom:41x18+3+7
 </table>
 <h3 id="optimize-transparency">Optimize Transparency</h3>
 <pre tabindex="0"><code>$ convert  Opaopa-anime-dot8.gif  -layers OptimizeTransparency Opaopa-anime-dot8-opttrans.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-anime-dot1-opttrans.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-opttrans.gif"> </center>
 <p>コマを分解します。</p>
 <pre tabindex="0"><code>$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
 </code></pre><table>
@@ -269,24 +277,24 @@ size=16x5 geom:41x18+3+7
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-0.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-0.png" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-1.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-1.png" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-2.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-2.png" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-3.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-3.png" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-4.png"></td>
+<td><img src="../Opaopa-anime-dot8-opttrans-4.png" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
 <td>＜以下 5-7 は省略＞</td>
@@ -315,7 +323,8 @@ size=41x18 geom:41x18+0+0
 </code></pre><h3 id="最強の-optimize">(最強の) Optimize</h3>
 <p>それらが合わさり最強になった Optimize がこちらです。</p>
 <pre tabindex="0"><code>$ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../Opaopa-anime-dot1-optimize.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-optimize.gif"> </center>
 <p>分解します。</p>
 <table>
 <thead>
@@ -326,24 +335,24 @@ size=41x18 geom:41x18+0+0
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-0.png"></td>
+<td><img src="../Opaopa-anime-dot8-optimize-0.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-1.png"></td>
+<td><img src="../Opaopa-anime-dot8-optimize-1.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-2.png"></td>
+<td><img src="../Opaopa-anime-dot8-optimize-2.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-3.png"></td>
+<td><img src="../Opaopa-anime-dot8-optimize-3.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --></td>
+<td><img src="../Opaopa-anime-dot8-4.png"></td>
+<td><img src="../Opaopa-anime-dot8-optimize-4.gif" style="border: 1px #ff0000 solid;"></td>
 </tr>
 <tr>
 <td>＜以下 5-7 は省略＞</td>

@@ -21,7 +21,7 @@
       <link>https://awmlabs.github.io/2016/09/10/jpegicc/</link>
       <pubDate>Sat, 10 Sep 2016 00:11:41 +0900</pubDate>
       <guid>https://awmlabs.github.io/2016/09/10/jpegicc/</guid>
-      <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 尚</description>
+      <description>JPEG と ICC プロファイル JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値1や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。 引</description>
     </item>
     <item>
       <title>JPEG の YCbCr について</title>

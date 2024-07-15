@@ -112,24 +112,47 @@
 </ul>
 <h2 id="変換方法-ブログを参考に-rgba4444">変換方法 (ブログを参考に) RGBA4444</h2>
 <h3 id="テスト画像">テスト画像</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
+	-matte -channel a -fx "u*j/h" \
+	-alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+	-rotate 90 -set colorspace HSB -colorspace RGB \
+	gradient_hue_polar-transparent.png
+<img src="../gradient_hue_polar-transparent.png" />
+</pre>
 <h3 id="パレット画像の準備">パレット画像の準備</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 16x16 gradient:black-white gray16palette.png
+<img src="../gray16palette.png" />
+</pre>
 <p>参照した記事では 0xfff を 0xf0f0f0 と 0xffffff のどちらで表わそうか迷ってますが、最大値の 0xfff は 0xffffff でしか表現出来ないので、後者を採用してます。</p>
 <p>尚、PNG は仕様で後者である事が示されています &gt; <a href="https://www.w3.org/TR/PNG/#12Sample-depth-scaling">https://www.w3.org/TR/PNG/#12Sample-depth-scaling</a></p>
 <h3 id="実行コマンド">実行コマンド</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert gradient_hue_polar-transparent.png -channel RGBA -separate \
+	\( -dither FloydSteinberg -remap gray16palette.png \) \
+	-channel RGBA -combine rgba4444.png
+<img src="../rgba4444.png" />
+</pre>
 <p>尚、ディザ変換をせずに Unity 等に RGBA4444 指定で渡した場合は、以下のようになるはずです。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert gradient_hue_polar-transparent.png -depth 4 depth4.png
+<img src="../depth4.png" />
+</pre>
 <p>これよりは予め自分でディザをかけた方が良いはずです。</p>
 <h2 id="テスト２-rgb444">テスト２ (RGB444)</h2>
 <p>RGB 画像でも同じ方法で変換できます。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
+	-alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+	-rotate 90 -set colorspace HSB -colorspace RGB \
+	gradient_hue_polar.png
+<img src="../gradient_hue_polar.png" />
+$ convert gradient_hue_polar.png -channel RGBA -separate \
+	\( -dither FloydSteinberg -remap gray16palette.png \) \
+	-channel RGBA -combine rgb444.png
+<img src="../rgb444.png" />
+</pre>
 <p>透明度がない画像は -channel RGB でも同じ結果を得られます。</p>
 <p>尚、今回の方法は原色が強く出すぎる傾向があるので、前回説明した方法( <a href="http://blog.awm.jp/2016/07/21/rgb444/">http://blog.awm.jp/2016/07/21/rgb444/</a> )の方が良い結果が得られそうです。</p>
 <h2 id="追試">追試</h2>

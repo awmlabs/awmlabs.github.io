@@ -108,13 +108,13 @@ README.md	mkthumb		test-image	thumbnail
 <li>thumbnail: パラメータに応じた画像リサイズ処理</li>
 </ul>
 <p>このうち jpeg と swscale は Go言語の cgo 機能を用いて libjpeg, libswscale の C言語 API にアクセスします。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../go-thumber.png" />  </center>
 <p>運用を JPEG で統一出来れば go-thumber で良いのですが、PNG や GIF も扱いたいですし、文字入れや画像の重ね合わせもしたいといった要望に応じて、go-thumber を素直に拡張すると、libpng や giflib を繋げて、かつ ffmpeg の libfilter(drawtext) も使えるようにする、大工事が想定されます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../go-thumber-kai.png" />  </center>
 <p>見るからに大変そうです。また go-thumber は jpeg に特化して作られているので png や gif に合わせて抽象化するのも手間がかかります。</p>
 <h1 id="yoya-thumber">yoya-thumber</h1>
 <p>GoImagick を介して画像処理の殆どをImageMagick に丸投げしたのが yoya-thumber です。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../yoya-thumber.png" />  </center>
 <p>まとめると、Go言語の net/http を使った go-thumber のサーバ機能をほぼそのまま、画像処理だけ GoImagick に差し替えて ImageMagick を使うという魔改造が yoya-thumber です。</p>
 <h1 id="あとがき">あとがき</h1>
 <p>続くかもしれません。</p>

@@ -95,7 +95,10 @@
   </ul>
 </nav>
     <h1 id="もうサムネイルで泣かないための-imagemagick-ノウハウ集に一言">もうサムネイルで泣かないための ImageMagick ノウハウ集に一言</h1>
-<!-- raw HTML omitted -->
+<center>
+<iframe allowfullscreen="true" allowtransparency="true" frameborder="0" height="497" mozallowfullscreen="true" src="//speakerdeck.com/player/248da47aa52d48ae8d57e8656f117997" style="border:0; padding:0; margin:0; background:transparent;" webkitallowfullscreen="true" width="578"></iframe>
+https://speakerdeck.com/yoya/imagemagick-knowhow
+</center>
 <p>発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。</p>
 <h1 id="一部界隈で話題">一部界隈で話題</h1>
 <ul>
@@ -105,21 +108,22 @@
 </ul>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../cybozuinsideout.png" /> </center>
 <p>色んなノウハウが詰まっていて素晴らしい記事です。便乗して幾つか勝手に補足してみます。</p>
 <h1 id="良いノウハウ">良いノウハウ</h1>
 <h2 id="リリース大量消費に注意">リリース大量消費に注意</h2>
 <ul>
 <li>limit 大事 (特にユーザ投稿画像を扱う場合)</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
+</pre>
 <p>画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。</p>
 <h2 id="cmyk-画像を考慮しよう">CMYK 画像を考慮しよう</h2>
 <p>画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。</p>
 <p>ちなみに、この&quot;リニア&quot;RGB というのが曲者で、画像は sRGB で入っている事が多くガンマ補正がかかっているので、実は微妙に明るさが期待したものより暗くなる事があります。
 補間の問題なのでドットが疎らに入っている画像で特に暗くなる傾向があります。</p>
-<!-- raw HTML omitted -->
+<!-- 色数少なめでディザをかけた画像で実験すると顕著に差が出ます。 -->
 <p>厳密に処理したい場合は以下のページを参考にすると良いでしょう。
 尚、ImageMagick は sRGB の gamma=1 相当を &ldquo;RGB&rdquo; で指示できます。</p>
 <ul>
@@ -200,7 +204,7 @@
 </li>
 </ul>
 <p>6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。</p>
-<!-- raw HTML omitted -->
+<!-- (もしかして Colorspace を明示的に指定するとうまくいくかも？) -->
 <h2 id="-define-jpegsize-に注意">-define jpeg:size に注意</h2>
 <ul>
 <li>JPEG の size hinting について

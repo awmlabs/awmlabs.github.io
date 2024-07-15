@@ -122,7 +122,10 @@
 <li>Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで JPEG 画像を劣化させるチキンレース技術です。</li>
 <li>人間が見ても。という評価には Butteraugli を用います。 画像処理の論文では MSE, PNSR, SSIM をよく見かけますが結構これらは雑な評価で、Butteraugli は人間の視覚特性(例えば輝度と色味は別指標、色味も反対色説の色差軸)を元に計算します。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center>
+<img src="../opponent-color.jpg" /> <br />
+(c) http://ieeexplore.ieee.org/ieee_pilot/articles/06/ttg2009061291/article.html
+</center>
 <ul>
 <li>JPEG quality を色々変えて画像サイズと画質のトレードオフを探る事はよくありますが、それの全自動版みたいな感じです。更に DQT (周波数成分毎の量子化パラメータ) を細かくいじります。</li>
 <li>良い結果に当たるよう何度も繰り返し JPEG 生成する方式なので、とにかく時間がかかります。libjpeg や mozjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。</li>
@@ -319,7 +322,7 @@ sys	0m0.212s
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 <h2 id="集計結果のグラフ">集計結果のグラフ</h2>
 <h3 id="処理時間">処理時間</h3>
-<!-- raw HTML omitted -->
+<center> <img src="../time-graph-small.png" /> </center>
 <ul>
 <li>横がsqrt(width*height) 。正方形と仮定した場合の一辺の長さ相当</li>
 <li>縦が user 時間の秒数</li>
@@ -329,7 +332,8 @@ sys	0m0.212s
 <h3 id="ファイルサイズ削減">ファイルサイズ削減</h3>
 <p>横軸が元サイズ、縦軸が圧縮後のサイズです。どちらも KB 単位。</p>
 <p>期待以上の異常なレベルでの削減率です。半分以下になることさえあります。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../filesize-graph-small.png" /> </center>
+(ピンクの線がサイズが変わらない場所。黄色はサイズが半分になる場所です)
 <p>削減率の多い画像を目視で確認しても、ぱっと見で違いは分かりませんでした。凄い。。</p>
 <h1 id="所感">所感</h1>
 <p>イラスト画像は線(周波数高)とグラデーション(周波数低)が命だと考えると周波数の中域は荒くて良さそうで、視覚特性以外でも削り易いかもしれません。</p>

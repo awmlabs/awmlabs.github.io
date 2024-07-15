@@ -103,10 +103,13 @@
 <h2 id="orientation-とは">Orientation とは</h2>
 <p>JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation タグがあります。</p>
-<!-- raw HTML omitted -->
+<center>
+<img src="../jpeg-exif-orient.png" /> </br>
+引用: https://speakerdeck.com/yoya/jpegmeta
+ </center>
 <p>例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/07/digicame.png" /> </center>
 <p>ImageMagick の identify コマンドで Orientation の値を参照出来ます。</p>
 <pre tabindex="0"><code>$ identify -verbose orient-6.jpg | grep Orient
   Orientation: RightTop
@@ -125,16 +128,16 @@
 </thead>
 <tbody>
 <tr>
-<td>1: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>2: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>3: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>4: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>1: <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a></td>
+<td>2: <a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a></td>
+<td>3: <a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a></td>
+<td>4: <a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a></td>
 </tr>
 <tr>
-<td>5: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>6: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>7: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>8: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>5: <a href="/2016/01/07/orient-5-strip.jpg"> <img src="/2016/01/07/orient-5-strip.jpg" /> </a></td>
+<td>6: <a href="/2016/01/07/orient-6-strip.jpg"> <img src="/2016/01/07/orient-6-strip.jpg" /> </a></td>
+<td>7: <a href="/2016/01/07/orient-7-strip.jpg"> <img src="/2016/01/07/orient-7-strip.jpg" /> </a></td>
+<td>8: <a href="/2016/01/07/orient-8-strip.jpg"> <img src="/2016/01/07/orient-8-strip.jpg" /> </a></td>
 </tr>
 <tr>
 <td></td>
@@ -167,43 +170,43 @@
 <tbody>
 <tr>
 <td>1</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>2</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>3</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>4</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>5</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-5-strip.jpg"> <img src="/2016/01/07/orient-5-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>6</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-6-strip.jpg"> <img src="/2016/01/07/orient-6-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>7</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-7-strip.jpg"> <img src="/2016/01/07/orient-7-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 <tr>
 <td>8</td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td><!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td><a href="/2016/01/07/orient-8-strip.jpg"> <img src="/2016/01/07/orient-8-strip.jpg" /> </a></td>
+<td><a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /></td>
 </tr>
 </tbody>
 </table>
@@ -293,16 +296,16 @@ $ identify -verbose orient-?.jpg | grep Orient
 </thead>
 <tbody>
 <tr>
-<td>1: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>2: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>3: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>4: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>1: <a href="/2016/01/07/orient-1.jpg"> <img src="/2016/01/07/orient-1.jpg" /> </a></td>
+<td>2: <a href="/2016/01/07/orient-2.jpg"> <img src="/2016/01/07/orient-2.jpg" /> </a></td>
+<td>3: <a href="/2016/01/07/orient-3.jpg"> <img src="/2016/01/07/orient-3.jpg" /> </a></td>
+<td>4: <a href="/2016/01/07/orient-4.jpg"> <img src="/2016/01/07/orient-4.jpg" /> </a></td>
 </tr>
 <tr>
-<td>5: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>6: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>7: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
-<td>8: <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --></td>
+<td>5: <a href="/2016/01/07/orient-5.jpg"> <img src="/2016/01/07/orient-5.jpg" /> </a></td>
+<td>6: <a href="/2016/01/07/orient-6.jpg"> <img src="/2016/01/07/orient-6.jpg" /> </a></td>
+<td>7: <a href="/2016/01/07/orient-7.jpg"> <img src="/2016/01/07/orient-7.jpg" /> </a></td>
+<td>8: <a href="/2016/01/07/orient-8.jpg"> <img src="/2016/01/07/orient-8.jpg" /> </a></td>
 </tr>
 <tr>
 <td></td>

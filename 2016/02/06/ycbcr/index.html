@@ -108,7 +108,7 @@
 <p>RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。</p>
 <p>Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。</p>
 <p>大雑把にはこんなイメージ。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../ycbcrvolume.png" /> </center>
 <ul>
 <li>スライダーで色を調整するデモを作りました。お試し下さい。
 <ul>
@@ -136,13 +136,13 @@
 </tr>
 <tr>
 <td>Cb</td>
-<td>青の色差 <!-- raw HTML omitted --> (B&rsquo;-Y)</td>
+<td>青の色差 <br> (B&rsquo;-Y)</td>
 <td>-0.1687 * R - 0.3313 * G + 0.5    * B + 128</td>
 <td></td>
 </tr>
 <tr>
 <td>Cr</td>
-<td>赤の色差 <!-- raw HTML omitted --> (R&rsquo;-Y)</td>
+<td>赤の色差 <br> (R&rsquo;-Y)</td>
 <td>0.5    * R - 0.4187 * G - 0.0813 * B + 128</td>
 <td></td>
 </tr>
@@ -161,19 +161,19 @@
 <tbody>
 <tr>
 <td>R</td>
-<td>赤 <!-- raw HTML omitted --> (Y       + Cr')</td>
+<td>赤 <br> (Y       + Cr')</td>
 <td>Y                        + 1.402   * (Cr - 128)</td>
 <td></td>
 </tr>
 <tr>
 <td>G</td>
-<td>緑 <!-- raw HTML omitted --> (Y - Cb&rsquo; - Cr')</td>
+<td>緑 <br> (Y - Cb&rsquo; - Cr')</td>
 <td>Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)</td>
 <td></td>
 </tr>
 <tr>
 <td>B</td>
-<td>青 <!-- raw HTML omitted --> (Y + Cb&rsquo;      )</td>
+<td>青 <br> (Y + Cb&rsquo;      )</td>
 <td>Y + 1.772   * (Cb - 128)</td>
 <td></td>
 </tr>
@@ -181,7 +181,16 @@
 </table>
 <h2 id="rgb-との比較">RGB との比較</h2>
 <h3 id="rgb-チャネル分解">RGB チャネル分解</h3>
-<!-- raw HTML omitted -->
+<center> <img src="../logo.png" /> </center>
+```
+$ convert logo.png -colorspace RGB -separate +append tmp.png
+$ convert logo.png +level-colors Red \
+	\( +clone +level-colors Green1 \) \
+	\( +clone +level-colors Blue \) +append \
+	tmp.png -compose Multiply -composite  logo_rgb.png
+```
+注) Green1 を Green にすると緑の明るさが半分になるので注意
+<center> <img src="../logo_rgb.png" /> </center>
 <h3 id="ycbcr-チャネル分解">YCbCr チャネル分解</h3>
 <p>こちらは Golang の image パッケージで変換。</p>
 <ul>
@@ -189,7 +198,8 @@
 </ul>
 <pre tabindex="0"><code>$ go build png_separate_ycbcr.go
 $ ./png_separate_ycbcr logo.png logo_ycbcr.png
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../logo_ycbcr.png" /> </center>
+(YCbCr の残りパラメータを128固定にして擬似的に負の値を表現)
 <h2 id="メリット">メリット</h2>
 <p>輝度信号と色差信号を分けるメリットですが。</p>
 <ul>
@@ -203,11 +213,11 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 <ul>
 <li>YUV444</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv444.png" /> </center>
 <ul>
 <li>YUV422</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv422.png" /> </center>
 <p>より詳しくは以下のエントリをご参考ください。</p>
 <ul>
 <li>JPEG のクロマサブサンプリングと YUVabc について
@@ -221,7 +231,7 @@ $ ./png_separate_ycbcr logo.png logo_ycbcr.png
 <ul>
 <li>大きな立体が YCbCr の空間で、中の小さい立体が RGB の収まる範囲です。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../rgb2ycbcr_half.png" /> </center> (<a href="../RGB2YCbCr.gcx"> Grapher ファイル</a> | <a href="../makeVert.phps"> プロット生成スクリプト  </a>)
 <p>(奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)</p>
 <p>大小２つの立方体の間にある隙間が RGB&lt;=&gt;YCbCr で死ぬ無駄な空間で、YCbCr のビット数を RGB と同じにすると粒度が荒くなり表現できる色数が減ります。色数が1/4ほどまで減るとも言われます。</p>
 <p>詳しくは以下のページを参照下さい。</p>

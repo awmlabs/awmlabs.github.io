@@ -93,7 +93,8 @@
 <h1 id="プログレッシブjpeg">プログレッシブJPEG</h1>
 <p>読みはじめに粗い画像を表示して、読み進めるにつれて画質に更新する表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
 周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で実現します。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../progressive.png"> </center>
+画像元) [ニコニコ大百科(仮) ファンタジーゾーン](http://dic.nicovideo.jp/a/%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%BE%E3%83%BC%E3%83%B3)
 <ul>
 <li>プログレッシブJPEGの作り方</li>
 </ul>
@@ -112,7 +113,7 @@
 </ul>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuvabc.png"> </center>
 <ul>
 <li>クロマサブサンプリングの作り方</li>
 </ul>
@@ -125,12 +126,12 @@ $ convert orig.jpg -sampling-factor &#34;4x4,1x1,1x1&#34; yuv410.jpg # yuv9
 </code></pre><h1 id="exif-exittool-で変換">Exif (Exittool で変換)</h1>
 <h2 id="orientation">Orientation</h2>
 <p>Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)</p>
-<!-- raw HTML omitted -->
+<center> <img src="../exif_orientation.png"> </center>
 <p>Exif Orientation の向きについては以下の記事をどうぞ。</p>
 <ul>
 <li><a href="https://blog.awm.jp/2016/01/07/orient/">https://blog.awm.jp/2016/01/07/orient/</a></li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../orient-38per.png"> </center>
 <p>既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。</p>
 <pre tabindex="0"><code>$ exiftool orig.jpg -Orientation=0 -n -o orient0.jpg
 $ exiftool orig.jpg -Orientation=1 -n -o orient1.jpg
@@ -164,7 +165,7 @@ $ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 </ul>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../craigrevie_13_25per.png">  <img src="../craigrevie_14_25per.png"> <br /> (上記スライドからの引用)</center>
 <p>ImageMagick では -profile オプションで ICC プロファイルを適用できます。変換元の JPEG に ICC プロファイルが入っているか否かによって動作が異なります。</p>
 <ul>
 <li>
@@ -185,16 +186,16 @@ $ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 </ul>
 <pre tabindex="0"><code>$ convert noicc.jpg -profile sRGB.icc srgb.icc # 見た目変わらない
 $ convert noicc.jpg -profile  GBR.icc  gbr.icc # 見た目変わる
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../icc-profile1.png"> </center>
 <ul>
 <li>変換元 JPEG に ICC プロファイルが入っている場合</li>
 </ul>
 <pre tabindex="0"><code>$ convert srgb.jpg -profile sRGB.icc srgb.icc # 見た目変わらない
 $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../icc-profile2.png"> </center>
 <h1 id="グレイjpeg">グレイJPEG</h1>
 <p>JPEG 形式のタイプとして Grayscale が存在しますので、一応作り方を紹介。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../Opaopa.jpg" align="middle"> => <img src="../Opaopa-gray.jpg" align="middle"> </center>
 <pre tabindex="0"><code>$ convert orig.jpg -type grayscale gray.jpg
 </code></pre><h1 id="最後に">最後に</h1>
 <p>他にもこんな形式を知っているという方がいましたら、ご指摘頂けると幸いです。</p>

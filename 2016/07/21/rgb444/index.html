@@ -145,41 +145,78 @@
 </li>
 </ul>
 <p>Unity に RGBA4444 指定で PNG 画像を渡した場合は (b.) 相当の処理が動くようです。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
+	-alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+	-rotate 90 -set colorspace HSB -colorspace RGB \
+	gradient_hue_polar.png
+<img src="../gradient_hue_polar.png" />
+$ convert gradient_hue_polar.png -depth 4 depth4.png
+<img src="../depth4.png" />
+</pre>
 <p>これだと画質劣化が目立つので、(b.) の処理が動いても色が変わらないよう、あらかじめ (c.) の方法で減色をする。というのが今回の手法です。</p>
 <h2 id="変換方法-成功例-rgb444">変換方法 (成功例) RGB444</h2>
 <h3 id="テスト画像">テスト画像</h3>
 <p>先ほど作成した画像 gradient_hue_polar.png を利用します。
-<!-- raw HTML omitted --></p>
+<img src="../gradient_hue_polar.png" /></p>
 <h3 id="変換の準備">変換の準備</h3>
 <p>ディザで残したい色を持つパレット画像を作成します。</p>
 <ul>
 <li>RGB444 パレット作成</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 16x16 gradient:black-red black-red.png
+<img src="../black-red.png" />
+$ convert -size 16x16 gradient:black-green1 -rotate 270 black-green.png
+<img src="../black-green.png" />
+$ composite -compose plus black-red.png black-green.png black-red-green.png
+<img src="../black-red-green.png" />
+$ convert -size 256x16 tile:black-red-green.png black-red-green-tiled.png
+<img src="../black-red-green-tiled.png" />
+$ convert -size 16x16 gradient:black-blue -scale 100%x1600% -rotate 270 black-blue.png
+<img src="../black-blue.png" />
+$ composite black-red-green-tiled.png -compose plus black-blue.png black-red-green-blue.png
+<img src="../black-red-green-blue.png" />
+</pre>
 <p><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <h3 id="実行コマンド">実行コマンド</h3>
 <p>-remap で画像ファイルを渡すと、その画像に含まれる色に限定してディザ処理をします。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert gradient_hue_polar.png \
+	-dither Riemersma -remap black-red-green-blue.png \
+	rgb444.png
+<img src="../rgb444.png" />
+</pre>
 <p>RGB444 だと色数が減るのでどのみち画質の劣化は避けられません。先ほどの変換をかけずに渡した場合よりマシという話です。</p>
-<!-- raw HTML omitted -->
+<img src="../depth4.png" />
 <h2 id="透明度を含む実験-失敗例-rgba4444">透明度を含む実験 (失敗例) RGBA4444</h2>
 <p>失敗例です。透明度を含む場合は減色が綺麗に出来ませんでした。</p>
 <h3 id="テスト画像-1">テスト画像</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 300x900 gradient:'#FFF-#0FF' -rotate 90 \
+	-matte -channel a -fx "u*j/h" \
+	-alpha set -virtual-pixel Transparent +distort Polar 149 +repage \
+	-rotate 90 -set colorspace HSB -colorspace RGB \
+	gradient_hue_polar-transparent.png
+<img src="../gradient_hue_polar-transparent.png" />
+</pre>
 <h3 id="変換の準備-1">変換の準備</h3>
 <ul>
 <li>RGBA4444 パレット作成</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert -size 256x256 tile:black-red-green-blue.png \
+	-matte -channel a -fx "u*floor(j/16)/h*17.1" \
+	black-red-green-blue-transparent.png
+<img src="../black-red-green-blue-transparent.png" />
+</pre>
 <h3 id="実行コマンド-1">実行コマンド</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert gradient_hue_polar-transparent.png \
+	-dither Riemersma -remap black-red-green-blue-transparent.png \
+	rgba4444.png
+<img src="../rgba4444.png" />
+</pre>
 <h2 id="課題">課題</h2>
 <p>Unity でゲームを作る時のキャラ画像は輪郭の周りを透明にしたいでしょうから、RGBA4444 に対応しないと残念ながら実用的では無さそうです。
 ImageMagick は透明度つき減色が苦手ですが、ここまで酷いのは何か理由がありそうなので、もう少し調べてみます。</p>
@@ -193,7 +230,7 @@ ImageMagick は透明度つき減色が苦手ですが、ここまで酷いの�
 <hr>
 <ol>
 <li id="fn:1">
-<p>compose と tile を組み合わせて、&ldquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&rdquo; を実行したらゴミが入りました。<!-- raw HTML omitted --> 多分バグです。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>compose と tile を組み合わせて、&ldquo;composite -size 256x16 -compose plus  black-blue.png tile:black-red-green.png output.png&rdquo; を実行したらゴミが入りました。<img src="../compose_and_tile.png" /> 多分バグです。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>

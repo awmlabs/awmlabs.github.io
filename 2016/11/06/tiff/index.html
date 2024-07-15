@@ -89,7 +89,7 @@
     <h1 id="jpeg-と-exif-と-tiff-の関係">JPEG と Exif と TIFF の関係</h1>
 <p>TIFF は独立した画像フォーマットの一種ですが、メタ構造をタグで扱う形式の使い勝手が良い為か、JPEG の Exif も TIFF フォーマットをそのまま使っています。</p>
 <p>だいたい以下のような関係です。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../figure01.png" /> </center>
 <p>昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。</p>
 <h1 id="実装">実装</h1>
 <ul>

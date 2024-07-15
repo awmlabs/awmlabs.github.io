@@ -77,7 +77,7 @@
   <section class="body" itemprop="articleBody">
     <nav id="TableOfContents"></nav>
     <h1 id="hugo-の記事テンプレート">Hugo の記事テンプレート</h1>
-<p>hugo new <!-- raw HTML omitted --> を実行すると Markdown ファイルが作られます。</p>
+<p>hugo new <path> を実行すると Markdown ファイルが作られます。</p>
 <pre tabindex="0"><code>$ hugo new 2016/01/03/hugo.md
 /yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created
 </code></pre><p>しかしデフォルトの記事テンプレートが</p>
@@ -89,7 +89,7 @@ title = &#34;test&#34;
 </ul>
 <p>何となく、この ContentTypes の archetype が使えそうです。</p>
 <h1 id="archetypes">archetypes</h1>
-<p><!-- raw HTML omitted --> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <!-- raw HTML omitted --> を実行します。<!-- raw HTML omitted --></p>
+<p><del> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</del></p>
 <p>archetypes/default.md に追加したいテンプレートを入れます。</p>
 <pre tabindex="0"><code>$ cat archetypes/default.md
 +++
@@ -161,7 +161,7 @@ $ grep -r &#34;title =&#34; . | head -3
 <ul>
 <li><a href="https://gohugo.io/content/types/">https://gohugo.io/content/types/</a></li>
 </ul>
-<p>が出てきて、hugo new <!-- raw HTML omitted --> は post と呼ばれるので、-k post だなと推測できる訳です。</p>
+<p>が出てきて、hugo new <path> は post と呼ばれるので、-k post だなと推測できる訳です。</p>
 
   </section>
 </article>

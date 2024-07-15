@@ -88,8 +88,14 @@
 </nav>
     <h1 id="jpeg-と-icc-プロファイル">JPEG と ICC プロファイル</h1>
 <p>JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<center>
+<img src="../jpeg-profile-icc.png" /> </br>
+引用: https://speakerdeck.com/yoya/jpegmeta
+ </center>
+<center>
+ sRGB, Adobe RGB 補正の例 </br>
+ <img src="../figure-srgb-adobergb.png" />
+ </center>
 <p>尚、モニタに表示する色は RGB が基本ですが、プリンタは CMYK (インクの色)です。JPEG の色はその両方に対応していて、ICC プロファイルも両方のタイプが存在します。</p>
 <h1 id="rgb-色空間">RGB 色空間</h1>
 <p>例えば赤を表す RGB:(255,0,0) 。
@@ -97,9 +103,17 @@
 <p>一般に知られる RGB 色空間の ICC プロファイルには以下のようなものがあります。</p>
 <pre tabindex="0"><code>sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
 </code></pre><p>これらは主に、色域、特性曲線(RGBだとガンマ補正)、が異なってきます。白色点(光源の色に引きずられて白として感じる色は変わる)は D65 が基本です。</p>
-<!-- raw HTML omitted -->
+<center>
+  Gamut(色域) <br/>
+  <img src="../StandardProfilesGamutCoverage.jpg" aligh="center" /> <br/>
+  ( 引用元: http://wiki.nuaj.net/index.php?title=Color_Profile )
+</center>
+(CMYKの形が怪しいので、後で差し替えるかも)
 <p>又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。</p>
-<!-- raw HTML omitted -->
+<center>
+<img src="../Gamma06_300.png" /> <br />
+引用元: <a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4"> https://ja.wikipedia.org/wiki/ガンマ値 </a>
+ </center>
 <p>あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。</p>
 <h2 id="rgb-のデフォルト">RGB のデフォルト</h2>
 <p>Web の世界では sRGB が標準です。</p>
@@ -111,7 +125,7 @@
 </li>
 </ul>
 <p>ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。(少なくとも Safari では) <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<!-- raw HTML omitted -->
+<center> <img src="../figure-noicc.png" /> </center>
 <p>高演色技術の発達した今の時代に sRGB の色域は物足りない事もありますが、ある意味平和な世界です、CMYK と違って。。</p>
 <h1 id="cmyk-色空間">CMYK 色空間</h1>
 <p>プリンタに出力する色は CMYK で表現します。
@@ -120,7 +134,12 @@ Cyan, Magenta, Yellow, blacK <sup id="fnref:3"><a href="#fn:3" class="footnote-r
 <pre tabindex="0"><code>Japan Color, US SWOP, FOGRA, ...
 </code></pre><p>(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)</p>
 <p>RGB と CMYK は大雑把に以下の関係にあります。</p>
-<!-- raw HTML omitted -->
+<center>
+ <img src="../CMYRGBv3.png" /> <br />
+   (引用元: http://www.iwashi.org/archives/4108 )
+ <img src="../fig14-half.jpg" /> <br />
+   (引用元: [http://graphicartsunit.tumblr.com/post/post/48824825718/紙デザイナーのためのrgbカラー超入門](http://graphicartsunit.tumblr.com/post/48824825718/%E7%B4%99%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AErgb%E3%82%AB%E3%83%A9%E3%83%BC%E8%B6%85%E5%85%A5%E9%96%80) )
+</center>
 <p>なので、リニア RGB, リニア CMYK というものがあるとすれば、以下の計算式になります。</p>
 <ul>
 <li>ImageMagick: magick/colorspace-private.h</li>
@@ -130,7 +149,11 @@ magenta = 1.0 - green;
 yellow  = 1.0 - blue;
 (一番小さな値を black にしてその分補正)
 </code></pre><p>しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。</p>
-<!-- raw HTML omitted -->
+<center>
+ Japan Color 2001 Coated <br />
+ <img src="../10993-04-JapanColor-crop.jpg" /> <br />
+   (引用元: https://www.jagat.or.jp/past_archives/content/view/3083.html )
+</center>
 <p>&ldquo;cyan = 1.0 - red&rdquo; 等で RGB を逆にしただけの CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。</p>
 <h2 id="cmyk-のデフォルト">CMYK のデフォルト(?)</h2>
 <p>RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。</p>

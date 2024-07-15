@@ -110,7 +110,7 @@
 </ul>
 <h1 id="jpeg-メタデータ">JPEG メタデータ</h1>
 <p>JPEG ファイルは画像データ以外にメタデータとして、プライベートな情報を含む事があります。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../fig1.png" /> </center>
 <ul>
 <li>撮影日時</li>
 <li>撮影場所 (GPS情報)</li>
@@ -125,23 +125,39 @@
 <h2 id="お勧めコマンド">お勧めコマンド</h2>
 <p>完璧な方法が無いのは後述しますが、先に結論を言うと、このコマンドがお勧めです。</p>
 <pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig3-final.png" />
+</center>
 <p>ここから先の文章は、このコマンドに至るまでの解説です。</p>
 <h2 id="メタデータを全て削除">メタデータを全て削除</h2>
 <p>ImageMagick は -strip オプションで画像のメタデータを全て削除できます。
 ネットで検索して見つかるのは大体この方法です。</p>
 <pre tabindex="0"><code>$ convert in.jpg -strip out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig4-strip.png" />
+</center>
 <p>しかし、メタデータの中には表示に影響するものがあるので、単純に -strip するだけの方法はお勧めしません。</p>
 <h2 id="exif-orientation">Exif Orientation</h2>
 <p>撮影時にカメラの向きを Exif の Orientation タグに記録して、表示する際に画像を回転させる方式です。画像のメタデータを単純に削除すると、画像を表示する向きが意図しない方向に変わってしまう事があります。</p>
-<!-- raw HTML omitted -->
+<img src="../digicame2.png">
 <p>ImageMagick には Orientationタグに応じて画像データ自体を回転させた上で、このタグを削除するオプションがあります。</p>
 <pre tabindex="0"><code>$ convert in.jpg -auto-orient out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig5.2-auto-orient.png" />
+</center>
 <p>こうしておけば、その後で -strip をしても(向きに関しては)大丈夫です。</p>
 <pre tabindex="0"><code>$ convert in.jpg -auto-orient -strip out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig5-auto-orient.png" />
+</center>
 <p>ただし、-strip をすると ICC プロファイルまで削除してしまう問題があります。</p>
 <h2 id="icc-プロファイル">ICC プロファイル</h2>
 <p>ICC プロファイルを単純に消すと色味が変わる可能性があります。
@@ -153,17 +169,29 @@
 <h3 id="最近の環境">最近の環境</h3>
 <p>今どきの PC 環境や新し目のスマートフォンであれば ICC プロファイルに対応したカラーマネジメントシステムが搭載されているはずなので、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残すと良いです。</p>
 <pre tabindex="0"><code>$ convert in.jpg +profile &#39;!icc,*&#39; out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig3.2-prefinal.png" />
+</center>
 <p>ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除するオプションです。* (ワイルドカード)指定で全て削除しますが、!icc をつける事で ICC プロファイルだけ残せます。</p>
 <p>また、単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、-auto-orient も付けた方が良いでしょう。</p>
 <pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig3-final.png" />
+</center>
 <p>これが冒頭で紹介したお勧めコマンドです。</p>
 <h3 id="古い環境-icc-プロファイルが無視される場合">古い環境 (ICC プロファイルが無視される場合)</h3>
 <p>古い PC やスマートフォンだと、ICC プロファイルで RGB を補正せずそのままモニタに出力する環境があります。具体的にはモニタが sRGB なら sRGBとして、AdobeRGB なら AdobeRGB として RGB の色を表示します。</p>
 <p>このケースへの完璧な対策はありませんが、世の中のディスプレイは sRGB 対応が多い事を考慮すると、画像データを埋め込まれた ICC プロファイルの色空間から sRGB 相当の RGB 値に変換した上で、sRGB の ICC プロファイルを埋め込むのが無難です。</p>
 <pre tabindex="0"><code>$ convert in.jpg -auto-orient +profile &#39;!icc,*&#39; -profile sRGB.icc out.jpg
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig6-auto-orient-srgb.png" />
+</center>
 <p>AdobeRGB  や P3 で撮影した画像だと sRGB の色域に押し込められて犠牲になる色も出ますが、どのみち古い環境だと表示できない事が多いと思って妥協するという状況になります。</p>
 <h1 id="最後に">最後に</h1>
 <p>これら以外にも DCF オプション色空間という規格があり、これでも色空間を指定できるのですが、今回は割愛させて下さい。</p>

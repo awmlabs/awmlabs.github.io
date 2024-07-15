@@ -92,28 +92,39 @@
 白にしたい場合は同じサイズにリサイズしましょう。
 </code></pre><h1 id="実際のところ">実際のところ</h1>
 <p>そのまま JPEG に変換すると背景色は白になります。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png out.jpg <img src="../logowhite_37p.jpg" />
+</pre>
 <p>-resize でサイズが変わった時に黒くなります。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ identify in.png
+awmcorp_logo.png PNG 300x300 300x300+0+0 16-bit sRGB 21.1KB 0.000u 0:00.000
+$ convert in.png -resize 300x300 out.jpg <img src="../logowhite_37p.jpg" />
+$ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
+</pre>
 <p>詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)</p>
 <h1 id="-extent-で背景を白にできる">-extent で背景を白にできる</h1>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
+$ convert in.png -resize 200x200 -extent 200x200 out.jpg <img src="../logowhite_hh.jpg" />
+</pre>
 <p>-extent は描画領域であるスクリーンを拡大する命令です。拡大された白いキャンバスと画像のレイヤーが別なので重ね合わせた結果、背景が白くなります。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png -resize 200x200 –extent 400x400 out.jpg <img src="../logowhiteExtent_hh.jpg" />
+</pre>
 <h1 id="-flatten-レイヤーを重ねる命令が正しい">-flatten (レイヤーを重ねる命令)が正しい</h1>
 <p>-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png -resize 200x200 –flatten out.jpg <img src="../logowhite_hh.jpg" />
+</pre>
 <p>-background も有効です。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png -resize 200x200 <u>-background red</u> –flatten out.jpg <img src="../logored_hh.jpg" />
+</pre>
 <p>尚、引数の順番で挙動が変わるので注意して下さい。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+$ convert in.png -resize 200x200  –flatten <u>-background red</u> out.jpg <img src="../logowhite_hh.jpg" />
+</pre>
 <p>背景色を指定する前にレイヤー統合した結果のようです。</p>
 
   </section>

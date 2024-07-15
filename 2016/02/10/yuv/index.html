@@ -105,7 +105,7 @@
 <p>YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。</p>
 <p>JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。</p>
 <h1 id="はじめに早見表">はじめに早見表</h1>
-<!-- raw HTML omitted -->
+<center> <img src="../yuvyab.png" /> </center>
 <p>※ YUV410 だけ変則的です</p>
 <h2 id="imagemagick-での作り方">ImageMagick での作り方</h2>
 <pre tabindex="0"><code>$ convert orig.jpg -sampling-factor &#34;1x1,1x1,1x1&#34; yuv444.jpg
@@ -129,40 +129,40 @@ popu-unity-410.jpg 4x2,1x1,1x1
 <p>よく見る表現として、YUV444 、YUV422 の２つがあります。</p>
 <h2 id="yuv444-の-ycbcr-の並び">YUV444 の Y,Cb,Cr の並び</h2>
 <p>YUVabc と見立てると a, b, c の番号は以下のように対応します。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv444.png" /> </center>
 <h2 id="yuv422-の-ycbcr-の並び">YUV422 の Y,Cb,Cr の並び</h2>
 <p>YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv422-onaji.png" /> </center>
 <p>間引く分の偶数番目の Cb, Cr はデータから省略できます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv422.png" /> </center>
 <h1 id="色々な-yuvabc">色々な YUVabc</h1>
 <p>実際に表記を見たことのある YUVabc を列挙します。(他に実例あればご指摘下さい)</p>
 <ul>
 <li>YUV444 (再掲) : 間引かない</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv444.png" /> </center>
 <ul>
 <li>YUV422 (再掲) : 横方向に 1/2 間引く。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv422.png" /> </center>
 <ul>
 <li>YUV440 : 縦方向に 1/2 間引く。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv440.png" /> </center>
 <ul>
 <li>YUV420 : 横方向に 1/2 、縦方向も 1/2 間引く。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv420.png" /> </center>
 <ul>
 <li>YUV411 : 横方向に 1/4 になるよう間引く。</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv411.png" /> </center>
 <ul>
 <li>YUV410 : 横方向に 1/4 、縦方向は 1/2 間引く。(？)</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv410.png" /> </center>
 <p>と言いたい所ですが、実際には 4x4 として使われるようです。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../yuv410-4x4.png" /> </center>
 <h1 id="まとめ">まとめ</h1>
 <ul>
 <li>YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ

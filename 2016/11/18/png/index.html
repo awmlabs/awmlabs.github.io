@@ -82,7 +82,7 @@
 </nav>
     <h1 id="はじめに">はじめに</h1>
 <p>Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内包されている絵文字の PNG 画像データを抽出する事が目的です。</p>
-<!-- raw HTML omitted -->
+<center> <img src="../figure-ttf.png" /> </center>
 <h1 id="カラー絵文字">カラー絵文字</h1>
 <p>カラー絵文字フォントには以下のような種類があります。</p>
 <ul>
@@ -107,7 +107,7 @@
 <p>上記仕様書に従って分解するのが面倒なので、PNG の先頭シグネチャを目印に抜き出す、フォント以外でも利用出来る汎用的なツールを作りました。
 絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。</p>
 <h1 id="png-の構造">PNG の構造</h1>
-<!-- raw HTML omitted -->
+<center> <img src="../figure-png.png" /> </center>
 <h1 id="ツール処理概要">ツール処理概要</h1>
 <ul>
 <li>
@@ -174,7 +174,7 @@ notoemoji002385.png
 notoemoji002386.png
 OK
 $
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../notoemoji-ss.png" /> </center>
 <ul>
 <li>Apple Color Emoji</li>
 </ul>
@@ -188,7 +188,7 @@ appleemoji009539.png
 appleemoji009540.png
 OK
 $
-</code></pre><!-- raw HTML omitted -->
+</code></pre><center> <img src="../appleemoji-ss.png" /> </center>
 <p>Apple の方が PNG ファイルの数(5974 &gt; 2387)が多いけれど、Google の方が画像サイズが大きい(136x128 &gt; 20x20)という違いがありますね。</p>
 <h1 id="ツール-take2-ストリーム方式">ツール take2 (ストリーム方式)</h1>
 <p>上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性が出てきます。</p>

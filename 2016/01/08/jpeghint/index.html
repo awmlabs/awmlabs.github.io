@@ -111,11 +111,12 @@
 <h2 id="jpeg-のデータの持ち方">JPEG のデータの持ち方</h2>
 <p>JPEG はマクロブロック(8x8)毎に画像の周波数成分のデータを保持していて、JPEG の Decode では波を合成する事でビットマップ画像に戻します。</p>
 <p>(参考イメージ)</p>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
+引用) https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
 <p>左上の方が低周波、右下の方が高周波成分です。</p>
 <h2 id="scaling-指定で-decode">scaling 指定で decode</h2>
 <p>左上の低周波数成分だけ参照する事で、直接 1/2, 1/4, 1/8 サイズの画像にデコードするのが JPEG の scaling decode で、そのサイズを指示するのが size hinting です。高周波成分を無視出来る上に decode 直後の画像サイズが小さい事から、パフォーマンス向上が見込めます。</p>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/dct8x8-4-1-600.png" /> </center>
 <p>(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)</p>
 <h2 id="やりたい事">やりたい事</h2>
 <p>リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を decode し。そこからリサイズする事で、メモリやCPUを節約したい。</p>
@@ -129,26 +130,26 @@
 <ul>
 <li>普通にリサイズ (-define jpeg:size 無し)</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/resize1.png" /> </center>
 <ul>
 <li>小さいサイズでデコードしてリサイズ (-define jpeg:size 有り)</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/resize2.png" /> </center>
 <p>処理は減るしメモリも少ないし、パフォーマンス的には良い事づくめ。</p>
 <h2 id="大きくリサイズする場合-予想">大きくリサイズする場合 (予想)</h2>
 <p>問題にしているケースです。</p>
 <ul>
 <li>普通にリサイズ (-define jpeg:size 無し)</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/resize3.png" /> </center>
 <ul>
 <li>大きなサイズでデコードしてリサイズ (-define jpeg:size 有り)</li>
 </ul>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/resize4.png" /> </center>
 <p>という動作が予想できます。1.5倍のメモリを使うという話も 2, 4, 8 倍で丁度良いサイズになる事はあまりないので、そこそこ話が合います。</p>
 <h3 id="実際の動き">実際の動き</h3>
 <p>jpeg_info の output_width, output_height を表示させて確認したところ、拡大する時には最大でも2倍指定で decode するようです。どんなに元画像とのサイズの差をつけても 4, 8 倍にはなりませんでした。</p>
-<!-- raw HTML omitted -->
+<center> <img src="/2016/01/08/resize5.png" /> </center>
 <ul>
 <li>fprintf で表示させる</li>
 </ul>
