@@ -2,10 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://awmlabs.github.io/2020/</loc>
-    <lastmod>2020-06-13T15:44:39+09:00</lastmod>
+    <loc>https://awmlabs.github.io/2024/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://awmlabs.github.io/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/categories/blog/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/2024/07/14/blog/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/categories/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/tags/fuse/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/tags/github/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/tags/hugo/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/tags/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://awmlabs.github.io/2020/</loc>
     <lastmod>2020-06-13T15:44:39+09:00</lastmod>
   </url><url>
     <loc>https://awmlabs.github.io/tags/browser/</loc>
@@ -14,13 +38,7 @@
     <loc>https://awmlabs.github.io/categories/browser/</loc>
     <lastmod>2020-06-13T15:44:39+09:00</lastmod>
   </url><url>
-    <loc>https://awmlabs.github.io/categories/</loc>
-    <lastmod>2020-06-13T15:44:39+09:00</lastmod>
-  </url><url>
     <loc>https://awmlabs.github.io/tags/image/</loc>
-    <lastmod>2020-06-13T15:44:39+09:00</lastmod>
-  </url><url>
-    <loc>https://awmlabs.github.io/tags/</loc>
     <lastmod>2020-06-13T15:44:39+09:00</lastmod>
   </url><url>
     <loc>https://awmlabs.github.io/2020/06/13/browsers/</loc>
@@ -302,9 +320,6 @@
     <loc>https://awmlabs.github.io/tags/ppm/</loc>
     <lastmod>2016-01-04T19:38:39+09:00</lastmod>
   </url><url>
-    <loc>https://awmlabs.github.io/tags/hugo/</loc>
-    <lastmod>2016-01-03T22:03:24+09:00</lastmod>
-  </url><url>
     <loc>https://awmlabs.github.io/categories/hugo/</loc>
     <lastmod>2016-01-03T22:03:24+09:00</lastmod>
   </url><url>
@@ -323,14 +338,8 @@
     <loc>https://awmlabs.github.io/categories/circleci/</loc>
     <lastmod>2016-01-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://awmlabs.github.io/tags/github/</loc>
-    <lastmod>2016-01-02T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://awmlabs.github.io/2016/01/02/hugo/</loc>
     <lastmod>2016-01-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://awmlabs.github.io/categories/blog/</loc>
-    <lastmod>2016-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://awmlabs.github.io/2016/01/01/blog/</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>

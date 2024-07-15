@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 13 Jun 2020 15:44:39 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://awmlabs.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog</title>
+      <link>https://awmlabs.github.io/categories/blog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://awmlabs.github.io/categories/blog/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Browser</title>
       <link>https://awmlabs.github.io/categories/browser/</link>
@@ -105,13 +112,6 @@
       <link>https://awmlabs.github.io/categories/circleci/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://awmlabs.github.io/categories/circleci/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Blog</title>
-      <link>https://awmlabs.github.io/categories/blog/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://awmlabs.github.io/categories/blog/</guid>
       <description></description>
     </item>
   </channel>

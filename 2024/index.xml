@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2024s on awm-Tech</title>
+    <link>https://awmlabs.github.io/2024/</link>
+    <description>Recent content in 2024s on awm-Tech</description>
+    <generator>Hugo</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; awm.jp</copyright>
+    <lastBuildDate>Sun, 14 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://awmlabs.github.io/2024/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog 再開しました</title>
+      <link>https://awmlabs.github.io/2024/07/14/blog/</link>
+      <pubDate>Sun, 14 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://awmlabs.github.io/2024/07/14/blog/</guid>
+      <description>Blog 再開しました。 色々と罠にハマって Blog の記事が追加できなくなっていました。 以下にその罠の説明をします。 github.io の更新が反映されない https://github.com/awmlabs/awmlabs.github.io/ に push すると、 https://awmlabs.github.io/ に</description>
+    </item>
+  </channel>
+</rss>

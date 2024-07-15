@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Github on awm-Tech</title>
+    <title>GitHub on awm-Tech</title>
     <link>https://awmlabs.github.io/tags/github/</link>
-    <description>Recent content in Github on awm-Tech</description>
+    <description>Recent content in GitHub on awm-Tech</description>
     <generator>Hugo</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; awm.jp</copyright>
-    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://awmlabs.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog 再開しました</title>
+      <link>https://awmlabs.github.io/2024/07/14/blog/</link>
+      <pubDate>Sun, 14 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://awmlabs.github.io/2024/07/14/blog/</guid>
+      <description>Blog 再開しました。 色々と罠にハマって Blog の記事が追加できなくなっていました。 以下にその罠の説明をします。 github.io の更新が反映されない https://github.com/awmlabs/awmlabs.github.io/ に push すると、 https://awmlabs.github.io/ に</description>
+    </item>
     <item>
       <title>Blog の Deploy で Circle CI</title>
       <link>https://awmlabs.github.io/2016/01/02/circleci/</link>
